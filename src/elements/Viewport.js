@@ -18,7 +18,7 @@ export const ViewportSpacer = styled(Base)`
 ViewportSpacer.propTypes = {}
 ViewportSpacer.defaultProps = {}
 
-export const ViewportScrollable = styled(Flex)`
+export const ViewportScrollable = styled(Base)`
   overflow: scroll;
   flex: auto;
 `

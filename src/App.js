@@ -30,7 +30,11 @@ class App extends Component {
       <Provider>
         <Viewport>
           <ViewportItem padding="1rem">Header</ViewportItem>
-          <ViewportScrollable padding="1rem">Content</ViewportScrollable>
+          <ViewportScrollable padding="1rem">
+            {this.state.tasks.map(task => (
+              <div key={task.id}>{`${task.title}`}</div>
+            ))}
+          </ViewportScrollable>
           <ViewportItem padding="1rem">Footer</ViewportItem>
         </Viewport>
       </Provider>
