@@ -23,6 +23,7 @@ class App extends Component {
       createTask(),
       createTask(),
     ],
+    output: ['command: add a, list ls'],
   }
 
   componentDidMount() {
@@ -34,11 +35,26 @@ class App extends Component {
     switch (cmd) {
       case 'add':
       case 'a':
-        log.cmd(`executing `,'add')
+        log.cmd(`executing `, 'add')
+        const task = createTask()
+        const outputLine = `added new task : ${task.title}`
+        this.setState({ tasks: [task, ...this.state.tasks] }, () =>
+          this.setState({
+            output: [...this.state.output, outputLine],
+          }),
+        )
         break
       case 'list':
       case 'ls':
         log.cmd(`executing `, 'list')
+        this.setState({
+          output: [
+            ...this.state.output,
+            this.state.tasks.map(
+              (task, index) => `${`${index}`.padStart(2, '0')}: ${task.title}`,
+            ),
+          ],
+        })
         break
       default:
         log.cmd(`invalid`, cmd)
@@ -55,6 +71,11 @@ class App extends Component {
       <Provider>
         <ViewportFlexColumn>
           <Spacer />
+          <div>
+            {this.state.output.map((line, idx) => {
+              return <div key={idx}>{`${line}`}</div>
+            })}
+          </div>
           <CmdInputWrapper>
             <CmdInput onKeyPress={this.handleInputKeyPress} />
           </CmdInputWrapper>
