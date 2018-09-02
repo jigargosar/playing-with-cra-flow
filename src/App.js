@@ -46,7 +46,7 @@ class App extends Component {
       <Provider>
         <Viewport>
           <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
-          <Flex row flex="1 1 auto" height={'100%'}>
+          <Flex row flex="auto" height={'100%'}>
             <Base overflow="scroll" padding="1rem">
               {this.renderCategories()}
             </Base>
