@@ -85,7 +85,7 @@ class App extends Component {
 
   renderCategories = () => {
     return categories.map(category => {
-      let selected = this.state.currentCategory === category
+      let selected = this.isCategorySelected(category)
       return (
         <Fragment key={category}>
           <CategorySidebarItem
@@ -98,6 +98,11 @@ class App extends Component {
         </Fragment>
       )
     })
+  }
+
+  isCategorySelected(_category) {
+    const { type, category } = this.state.filter
+    return type === 'category' && category === _category
   }
 
   setCurrentCategory = category => () => {
