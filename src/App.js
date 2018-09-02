@@ -61,11 +61,6 @@ class App extends Component {
 
 
 
-
-
-
-
-
   renderCurrentTasksTasks = () => {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
