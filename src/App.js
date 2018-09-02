@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import * as debug from 'debug'
 import {ViewportFlexColumn} from './elements/ViewportFlexColumn'
 import {Spacer} from './elements/Spacer'
+import {Input} from 'reakit'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -33,7 +34,7 @@ class App extends Component {
     return (
       <ViewportFlexColumn>
         <Spacer />
-        <input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
+        <Input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
       </ViewportFlexColumn>
     )
   }
