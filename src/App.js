@@ -64,10 +64,29 @@ class App extends Component {
   renderSidebar() {
     return (
       <Fragment>
-        <div>All Tasks</div>
-        {this.renderCategories()}
+        <AllSidebarItem selected={this.isAllSidebarItemSelected()}>
+          ALL
+        </AllSidebarItem>
+        {categories.map(category => {
+          const selected = this.isCategorySidebarItemSelected(category)
+          return (
+            <CategorySidebarItem
+              key={category}
+              selected={selected}
+              onClick={this.setCurrentCategory(category)}
+              tabIndex={selected ? 0 : null}
+            >
+              {`${category}`}
+            </CategorySidebarItem>
+          )
+        })}
       </Fragment>
     )
+  }
+
+  isAllSidebarItemSelected() {
+    const { type } = this.state.filter
+    return type === 'all'
   }
 
   renderHeader() {
@@ -92,24 +111,7 @@ class App extends Component {
     ))
   }
 
-  renderCategories = () => {
-    return categories.map(category => {
-      let selected = this.isCategorySelected(category)
-      return (
-        <Fragment key={category}>
-          <CategorySidebarItem
-            selected={selected}
-            onClick={this.setCurrentCategory(category)}
-            tabIndex={selected ? 0 : null}
-          >
-            {`${category}`}
-          </CategorySidebarItem>
-        </Fragment>
-      )
-    })
-  }
-
-  isCategorySelected(_category) {
+  isCategorySidebarItemSelected(_category) {
     const { type, category } = this.state.filter
     return type === 'category' && category === _category
   }
@@ -121,7 +123,7 @@ class App extends Component {
 
 export default App
 
-const CategorySidebarItem = styled(Base)`
+const SidebarItem = styled(Base)`
   ${ifProp(
     'selected',
     css`
@@ -132,6 +134,8 @@ const CategorySidebarItem = styled(Base)`
   min-width: 8rem;
   cursor: pointer;
 `
+const AllSidebarItem = styled(SidebarItem)``
+const CategorySidebarItem = styled(SidebarItem)``
 
 const PageHeader = styled(Base)`
   padding: 1rem;
