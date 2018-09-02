@@ -41,6 +41,9 @@ class App extends Component {
         <Viewport>
           <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
           <Flex row flex="1 1 auto" height={'100%'}>
+            <Base overflow="scroll" padding="1rem">
+              {this.renderCategories()}
+            </Base>
             <Base flex="auto" overflow="scroll" padding="1rem">
               {this.renderCurrentTasksTasks()}
             </Base>
@@ -68,6 +71,16 @@ class App extends Component {
           <Base fontSize="0.7rem" textTransform="uppercase">{`${
             task.category
           }`}</Base>
+        </Base>
+      </Fragment>
+    ))
+  }
+
+  renderCategories = () => {
+    return categories.map(category => (
+      <Fragment key={category}>
+        <Base margin="1rem" marginTop={0}>
+          <div>{`${category}`}</div>
         </Base>
       </Fragment>
     ))
