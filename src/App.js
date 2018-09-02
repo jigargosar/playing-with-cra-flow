@@ -37,9 +37,7 @@ class App extends Component {
         <ViewportFlexColumn>
           <Spacer />
           <CmdInputWrapper>
-            <CmdInput
-              onKeyPress={this.handleInputKeyPress}
-            />
+            <CmdInput onKeyPress={this.handleInputKeyPress} />
           </CmdInputWrapper>
         </ViewportFlexColumn>
       </Provider>
