@@ -54,7 +54,7 @@ class App extends Component {
           <PageHeader>{this.renderHeader()}</PageHeader>
           <PageContentWrapper>
             <PageSidebar>{this.renderSidebar()}</PageSidebar>
-            <PageContent>{this.renderCurrentTasksTasks()}</PageContent>
+            <PageContent>{this.renderCurrentTasks()}</PageContent>
           </PageContentWrapper>
         </Viewport>
       </Provider>
@@ -111,7 +111,7 @@ class App extends Component {
     this.setState({ filter: { type: 'all' } })
   }
 
-  renderCurrentTasksTasks = () => {
+  renderCurrentTasks = () => {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
