@@ -23,12 +23,11 @@ const getCategoryIndexOfTask = ({ category }) => indexOf(category)(categories)
 class App extends Component {
   state = {
     tasks: createTaskList(),
-    output: ['command: add a, list ls'],
   }
 
   get currentTasks() {
-    const comparators = [ascend(task => indexOf(task.category)(categories))]
-    return sortWith(comparators)
+    const comparators = [ascend(getCategoryIndexOfTask)]
+    return sortWith(comparators)(this.state.tasks)
   }
 
   render() {
@@ -55,7 +54,7 @@ class App extends Component {
   }
 
   renderAllTasks() {
-    return this.state.tasks.map(task => (
+    return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
