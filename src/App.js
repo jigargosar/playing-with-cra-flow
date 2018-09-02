@@ -100,8 +100,8 @@ class App extends Component {
     })
   }
 
-  setCurrentCategory = currentCategory => () => {
-    this.setState({ currentCategory })
+  setCurrentCategory = category => () => {
+    this.setState({ filter: { type: 'category', category } })
   }
 }
 
