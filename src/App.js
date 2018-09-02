@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
 import {Base, Provider} from 'reakit'
 import * as faker from 'faker'
+import {times} from 'ramda'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -13,15 +14,13 @@ function createTask() {
   }
 }
 
+function createTaskList() {
+  return times(createTask, 10)
+}
+
 class App extends Component {
   state = {
-    tasks: [
-      //
-      createTask(),
-      createTask(),
-      createTask(),
-      createTask(),
-    ],
+    tasks: createTaskList(),
     output: ['command: add a, list ls'],
   }
 
@@ -47,7 +46,7 @@ class App extends Component {
           <small>{`${task.category}`}</small>
         </Base>
       </Fragment>
-    ));
+    ))
   }
 }
 
