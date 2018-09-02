@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import { Viewport, ViewportItem, ViewportScrollable } from './elements/Viewport'
-import { Base, Button, Group, Provider } from 'reakit'
+import { Viewport, ViewportItem } from './elements/Viewport'
+import { Base, Button, Flex, Group, Provider } from 'reakit'
 import * as faker from 'faker'
 import { ascend, indexOf, sortWith, times } from 'ramda'
 
@@ -14,7 +14,7 @@ function createTask() {
   }
 }
 
-function createTaskList(count = 10) {
+function createTaskList(count = 20) {
   return times(createTask, count)
 }
 
@@ -40,9 +40,11 @@ class App extends Component {
       <Provider>
         <Viewport>
           <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
-          <ViewportScrollable padding="1rem">
-            {this.renderCurrentTasksTasks()}
-          </ViewportScrollable>
+          <Flex row flex="1 1 auto" height={'100%'}>
+            <Base flex="auto" overflow="scroll" padding="1rem">
+              {this.renderCurrentTasksTasks()}
+            </Base>
+          </Flex>
           {/*<ViewportItem padding="1rem">Footer</ViewportItem>*/}
         </Viewport>
       </Provider>
