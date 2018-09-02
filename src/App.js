@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
-import {Base, Provider} from 'reakit'
+import {Base, Button, Group, Provider} from 'reakit'
 import * as faker from 'faker'
 import {times} from 'ramda'
 
@@ -28,13 +28,22 @@ class App extends Component {
     return (
       <Provider>
         <Viewport>
-          <ViewportItem padding="1rem">Header</ViewportItem>
+          <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
           <ViewportScrollable padding="1rem">
             {this.renderAllTasks()}
           </ViewportScrollable>
           {/*<ViewportItem padding="1rem">Footer</ViewportItem>*/}
         </Viewport>
       </Provider>
+    )
+  }
+
+  renderHeader() {
+    return (
+      <Group>
+        <Button>Add More</Button>
+        <Button>Delete All</Button>
+      </Group>
     )
   }
 
