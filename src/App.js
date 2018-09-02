@@ -1,8 +1,9 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import * as debug from 'debug'
+import {FullViewport} from './elements/FullViewport'
 
 const log = {
-  cmd: debug('app:cmd')
+  cmd: debug('app:cmd'),
 }
 
 class App extends Component {
@@ -29,9 +30,9 @@ class App extends Component {
   }
   render() {
     return (
-      <Fragment>
+      <FullViewport>
         <input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
-      </Fragment>
+      </FullViewport>
     )
   }
 }
