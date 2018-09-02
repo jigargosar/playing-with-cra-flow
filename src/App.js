@@ -27,6 +27,7 @@ class App extends Component {
 
   addMoreTasks = () =>
     this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
+
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
