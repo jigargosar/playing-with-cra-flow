@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Viewport, ViewportItem } from './elements/Viewport'
+import { Viewport } from './elements/Viewport'
 import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { filter, indexOf, times } from 'ramda'
@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <Provider>
         <Viewport>
-          <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
+          <PageHeader>{this.renderHeader()}</PageHeader>
           <Flex row flex="auto" height={'100%'}>
             <Base overflow="scroll" padding="1rem">
               {this.renderCategories()}
@@ -54,7 +54,6 @@ class App extends Component {
               {this.renderCurrentTasksTasks()}
             </Base>
           </Flex>
-          {/*<ViewportItem padding="1rem">Footer</ViewportItem>*/}
         </Viewport>
       </Provider>
     )
@@ -110,4 +109,8 @@ const CategoryItem = styled(Base)`
   padding: 0.5rem 0;
   min-width: 8rem;
   cursor: pointer;
+`
+
+const PageHeader = styled(Base)`
+  padding: 1rem;
 `
