@@ -7,6 +7,6 @@ CmdInput.defaultProps = {
   autoFocus: true,
 }
 
-export const CmdWrapper = styled(Base)`
+export const CmdInputWrapper = styled(Base)`
   padding: 1rem;
 `
