@@ -52,7 +52,9 @@ class App extends Component {
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
-          <small>{`${task.category}`}</small>
+          <Base fontSize='0.7rem' textTransform="uppercase">{`${
+            task.category
+          }`}</Base>
         </Base>
       </Fragment>
     ))
