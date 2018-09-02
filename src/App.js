@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import * as debug from 'debug'
 import {ViewportFlexColumn} from './elements/ViewportFlexColumn'
 import {Spacer} from './elements/Spacer'
-import {Input} from 'reakit'
+import {Input, Provider} from 'reakit'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -32,10 +32,12 @@ class App extends Component {
   }
   render() {
     return (
-      <ViewportFlexColumn>
-        <Spacer />
-        <Input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
-      </ViewportFlexColumn>
+      <Provider>
+        <ViewportFlexColumn>
+          <Spacer />
+          <Input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
+        </ViewportFlexColumn>
+      </Provider>
     )
   }
 }
