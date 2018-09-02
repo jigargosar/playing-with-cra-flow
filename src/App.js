@@ -37,7 +37,11 @@ class App extends Component {
         <ViewportFlexColumn>
           <Spacer />
           <CmdWrapper>
-            <CmdInput autoFocus onKeyPress={this.handleInputKeyPress} />
+            <CmdInput
+              placeholder="Enter Command"
+              autoFocus
+              onKeyPress={this.handleInputKeyPress}
+            />
           </CmdWrapper>
         </ViewportFlexColumn>
       </Provider>
