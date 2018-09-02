@@ -1,8 +1,8 @@
-import React, {Component, Fragment} from 'react'
-import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
-import {Base, Button, Group, Provider} from 'reakit'
+import React, { Component, Fragment } from 'react'
+import { Viewport, ViewportItem, ViewportScrollable } from './elements/Viewport'
+import { Base, Button, Group, Provider } from 'reakit'
 import * as faker from 'faker'
-import {ascend, indexOf, sortWith, times} from 'ramda'
+import { ascend, indexOf, sortWith, times } from 'ramda'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -57,6 +57,14 @@ class App extends Component {
       </Group>
     )
   }
+
+
+
+
+
+
+
+
 
   renderCurrentTasksTasks = () => {
     return this.currentTasks.map(task => (
