@@ -58,7 +58,7 @@ class App extends Component {
     )
   }
 
-  renderCurrentTasksTasks() {
+  renderCurrentTasksTasks=()=> {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
