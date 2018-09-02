@@ -1,5 +1,6 @@
-import {Input, styled} from 'reakit'
+import {Base, Input, styled} from 'reakit'
 
-export const CmdInput = styled(Input)`
-  margin: 1rem;
+export const CmdInput = styled(Input)``
+export const CmdWrapper = styled(Base)`
+  padding: 1rem;
 `

@@ -3,7 +3,7 @@ import * as debug from 'debug'
 import {ViewportFlexColumn} from './elements/ViewportFlexColumn'
 import {Spacer} from './elements/Spacer'
 import {Provider} from 'reakit'
-import {CmdInput} from './elements/CmdInput'
+import {CmdInput, CmdWrapper} from './elements/CmdInput'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -36,9 +36,9 @@ class App extends Component {
       <Provider>
         <ViewportFlexColumn>
           <Spacer />
-          <div>
+          <CmdWrapper>
             <CmdInput autoFocus onKeyPress={this.handleInputKeyPress} />
-          </div>
+          </CmdWrapper>
         </ViewportFlexColumn>
       </Provider>
     )
