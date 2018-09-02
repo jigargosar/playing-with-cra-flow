@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
 import {Provider} from 'reakit'
 import * as faker from 'faker'
@@ -32,7 +32,12 @@ class App extends Component {
           <ViewportItem padding="1rem">Header</ViewportItem>
           <ViewportScrollable padding="1rem">
             {this.state.tasks.map(task => (
-              <div key={task.id}>{`${task.title}`}</div>
+              <Fragment key={task.id}>
+                <div>
+                  <div>{`${task.title}`}</div>
+                  <small>{`${task.category}`}</small>
+                </div>
+              </Fragment>
             ))}
           </ViewportScrollable>
           <ViewportItem padding="1rem">Footer</ViewportItem>
