@@ -50,7 +50,7 @@ class App extends Component {
   renderAllTasks() {
     return this.state.tasks.map(task => (
       <Fragment key={task.id}>
-        <Base margin="1rem">
+        <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
           <small>{`${task.category}`}</small>
         </Base>
