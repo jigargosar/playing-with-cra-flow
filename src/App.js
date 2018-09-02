@@ -46,10 +46,10 @@ class App extends Component {
       <Provider>
         <Viewport>
           <PageHeader>{this.renderHeader()}</PageHeader>
-          <PageContent>
+          <PageContentWrapper>
             <PageSidebar>{this.renderCategories()}</PageSidebar>
-            <PageMain>{this.renderCurrentTasksTasks()}</PageMain>
-          </PageContent>
+            <PageContent>{this.renderCurrentTasksTasks()}</PageContent>
+          </PageContentWrapper>
         </Viewport>
       </Provider>
     )
@@ -115,12 +115,12 @@ const PageSidebar = styled(Base)`
   overflow: scroll;
   padding: 1rem;
 `
-const PageMain = styled(Base)`
+const PageContent = styled(Base)`
   flex: auto;
   overflow: scroll;
   padding: 1rem;
 `
-const PageContent = styled(Flex)`
+const PageContentWrapper = styled(Flex)`
   height: 100%;
   flex: auto;
   flex-direction: row;
