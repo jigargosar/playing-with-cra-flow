@@ -41,7 +41,7 @@ class App extends Component {
         <Viewport>
           <ViewportItem padding="1rem">{this.renderHeader()}</ViewportItem>
           <ViewportScrollable padding="1rem">
-            {this.renderAllTasks()}
+            {this.renderCurrentTasksTasks()}
           </ViewportScrollable>
           {/*<ViewportItem padding="1rem">Footer</ViewportItem>*/}
         </Viewport>
@@ -58,7 +58,7 @@ class App extends Component {
     )
   }
 
-  renderAllTasks() {
+  renderCurrentTasksTasks() {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
