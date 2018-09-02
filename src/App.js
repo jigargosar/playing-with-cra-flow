@@ -57,6 +57,13 @@ class App extends Component {
           ],
         })
         break
+      case 'clear':
+      case 'cls':
+        log.cmd(`executing `, 'clear')
+        this.setState({
+          output: [],
+        })
+        break
       default:
         log.cmd(`invalid`, cmd)
         break

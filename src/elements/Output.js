@@ -2,6 +2,7 @@ import {Base, styled} from 'reakit'
 
 export const OutputWrapper = styled(Base)`
   margin: 0 1rem;
+  overflow: scroll;
 `
 
 export const Output = styled(Base)`
