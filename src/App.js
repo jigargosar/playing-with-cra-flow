@@ -18,7 +18,8 @@ function createTaskList(count = 20) {
   return times(createTask, count)
 }
 
-const getCategoryIndexOfTask = ({ category }) => indexOf(category)(categories)
+export const getCategoryIndexOfTask = ({ category }) =>
+  indexOf(category)(categories)
 
 class App extends Component {
   state = {
