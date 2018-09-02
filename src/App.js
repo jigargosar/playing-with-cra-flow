@@ -46,14 +46,14 @@ class App extends Component {
       <Provider>
         <Viewport>
           <PageHeader>{this.renderHeader()}</PageHeader>
-          <Flex row flex="auto" height={'100%'}>
+          <PageContent>
             <Base overflow="scroll" padding="1rem">
               {this.renderCategories()}
             </Base>
             <Base flex="auto" overflow="scroll" padding="1rem">
               {this.renderCurrentTasksTasks()}
             </Base>
-          </Flex>
+          </PageContent>
         </Viewport>
       </Provider>
     )
@@ -112,5 +112,11 @@ const CategoryItem = styled(Base)`
 `
 
 const PageHeader = styled(Base)`
+  padding: 1rem;
+`
+const PageContent = styled(Flex)`
+  height: 100%;
+  flex: auto;
+  flex-direction: row;
   padding: 1rem;
 `
