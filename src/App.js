@@ -23,6 +23,7 @@ const getCategoryIndexOfTask = ({ category }) => indexOf(category)(categories)
 class App extends Component {
   state = {
     tasks: createTaskList(),
+    currentCategory: 'InBasket',
   }
 
   addMoreTasks = () =>
@@ -79,9 +80,15 @@ class App extends Component {
   renderCategories = () => {
     return categories.map(category => (
       <Fragment key={category}>
-        <CategoryItem>{`${category}`}</CategoryItem>
+        <CategoryItem
+          onClick={this.setCurrentCategory(category)}
+        >{`${category}`}</CategoryItem>
       </Fragment>
     ))
+  }
+
+  setCurrentCategory = currentCategory => () => {
+    this.setState({ currentCategory })
   }
 }
 
