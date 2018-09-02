@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Viewport, ViewportItem } from './elements/Viewport'
 import { Base, Button, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
-import { ascend, indexOf, sortWith, times } from 'ramda'
+import { filter, indexOf, times } from 'ramda'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -32,8 +32,11 @@ class App extends Component {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
-    const comparators = [ascend(getCategoryIndexOfTask)]
-    return sortWith(comparators)(this.state.tasks)
+    // const comparators = [ascend(getCategoryIndexOfTask)]
+    // return sortWith(comparators)(this.state.tasks)
+    return filter(task => task.category === this.state.currentCategory)(
+      this.state.tasks,
+    )
   }
 
   render() {
