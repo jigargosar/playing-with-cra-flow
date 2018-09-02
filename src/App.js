@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
 import {Base, Button, Group, Provider} from 'reakit'
 import * as faker from 'faker'
-import {times} from 'ramda'
+import {ascend, indexOf, sortWith, times} from 'ramda'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -18,10 +18,17 @@ function createTaskList() {
   return times(createTask, 10)
 }
 
+const getCategoryIndexOfTask = ({ category }) => indexOf(category)(categories)
+
 class App extends Component {
   state = {
     tasks: createTaskList(),
     output: ['command: add a, list ls'],
+  }
+
+  get currentTasks() {
+    const comparators = [ascend(task => indexOf(task.category)(categories))]
+    return sortWith(comparators)
   }
 
   render() {
@@ -52,7 +59,7 @@ class App extends Component {
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
-          <Base fontSize='0.7rem' textTransform="uppercase">{`${
+          <Base fontSize="0.7rem" textTransform="uppercase">{`${
             task.category
           }`}</Base>
         </Base>
