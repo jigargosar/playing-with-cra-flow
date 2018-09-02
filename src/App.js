@@ -5,6 +5,7 @@ import {Spacer} from './elements/Spacer'
 import {Provider} from 'reakit'
 import {CmdInput, CmdInputWrapper} from './elements/CmdInput'
 import * as faker from 'faker'
+import {Output} from './elements/Output'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -50,7 +51,7 @@ class App extends Component {
         this.setState({
           output: [
             ...this.state.output,
-            this.state.tasks.map(
+            ...this.state.tasks.map(
               (task, index) => `${`${index}`.padStart(2, '0')}: ${task.title}`,
             ),
           ],
@@ -71,11 +72,11 @@ class App extends Component {
       <Provider>
         <ViewportFlexColumn>
           <Spacer />
-          <div>
+          <Output>
             {this.state.output.map((line, idx) => {
               return <div key={idx}>{`${line}`}</div>
             })}
-          </div>
+          </Output>
           <CmdInputWrapper>
             <CmdInput onKeyPress={this.handleInputKeyPress} />
           </CmdInputWrapper>
