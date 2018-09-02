@@ -32,7 +32,7 @@ class App extends Component {
           <ViewportScrollable padding="1rem">
             {this.renderAllTasks()}
           </ViewportScrollable>
-          <ViewportItem padding="1rem">Footer</ViewportItem>
+          {/*<ViewportItem padding="1rem">Footer</ViewportItem>*/}
         </Viewport>
       </Provider>
     )
