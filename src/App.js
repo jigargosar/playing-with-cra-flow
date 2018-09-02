@@ -108,7 +108,7 @@ const CategorySidebarItem = styled(Base)`
       color: tomato;
     `,
   )};
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   min-width: 8rem;
   cursor: pointer;
 `
@@ -131,5 +131,4 @@ const PageContentWrapper = styled(Flex)`
   height: 100%;
   flex: auto;
   flex-direction: row;
-  padding: 1rem;
 `
