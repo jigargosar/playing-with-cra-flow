@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import * as debug from 'debug'
 import {FullViewport} from './elements/FullViewport'
+import {Flex} from 'reakit'
+import {Spacer} from './elements/Spacer'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -30,7 +32,8 @@ class App extends Component {
   }
   render() {
     return (
-      <FullViewport>
+      <FullViewport as={[Flex]} column>
+        <Spacer />
         <input autoFocus type="text" onKeyPress={this.handleInputKeyPress} />
       </FullViewport>
     )
