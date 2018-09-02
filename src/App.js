@@ -34,7 +34,11 @@ class App extends Component {
     switch (cmd) {
       case 'add':
       case 'a':
-        log.cmd(`executing add`)
+        log.cmd(`executing `,'add')
+        break
+      case 'list':
+      case 'ls':
+        log.cmd(`executing `, 'list')
         break
       default:
         log.cmd(`invalid`, cmd)
