@@ -31,19 +31,23 @@ class App extends Component {
         <Viewport>
           <ViewportItem padding="1rem">Header</ViewportItem>
           <ViewportScrollable padding="1rem">
-            {this.state.tasks.map(task => (
-              <Fragment key={task.id}>
-                <Base margin="1rem">
-                  <div>{`${task.title}`}</div>
-                  <small>{`${task.category}`}</small>
-                </Base>
-              </Fragment>
-            ))}
+            {this.renderTasks()}
           </ViewportScrollable>
           <ViewportItem padding="1rem">Footer</ViewportItem>
         </Viewport>
       </Provider>
     )
+  }
+
+  renderTasks() {
+    return this.state.tasks.map(task => (
+      <Fragment key={task.id}>
+        <Base margin="1rem">
+          <div>{`${task.title}`}</div>
+          <small>{`${task.category}`}</small>
+        </Base>
+      </Fragment>
+    ));
   }
 }
 
