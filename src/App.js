@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Viewport } from './elements/Viewport'
 import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
-import { filter, indexOf, times } from 'ramda'
+import { ascend, filter, indexOf, sortWith, times } from 'ramda'
 import { ifProp } from 'styled-tools'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
@@ -39,11 +39,12 @@ class App extends Component {
 
   get currentTasks() {
     const filterType = this.state.filter.type
-    if (filterType === 'category') {
-      const { category } = this.state.filter
-      return filter(task => task.category === category)(this.state.tasks)
-    } else {
-      return this.state.tasks
+    switch (filterType) {
+      case 'category':
+        const { category } = this.state.filter
+        return filter(task => task.category === category)(this.state.tasks)
+      default:
+        return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
     }
   }
 
