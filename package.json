@@ -1,0 +1,49 @@
+{
+  "name": "playing-with-cra-flow",
+  "version": "0.1.0",
+  "private": true,
+  "runjs": {
+    "requires": [
+      "./node_modules/babel-register"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "semi": false,
+    "printWidth": 80
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index -g"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --config package.json --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2"
+  }
+}
