@@ -61,10 +61,24 @@ class App extends Component {
     )
   }
 
+  renderHeader() {
+    return (
+      <Group>
+        <Button onClick={this.addMoreTasks}>Add More</Button>
+        <Button onClick={this.deleteAllTasks}>Delete All</Button>
+      </Group>
+    )
+  }
+
   renderSidebar() {
+    let selected = this.isAllSidebarItemSelected()
     return (
       <Fragment>
-        <AllSidebarItem selected={this.isAllSidebarItemSelected()}>
+        <AllSidebarItem
+          selected={selected}
+          onClick={this.setAllFilter}
+          tabIndex={selected ? 0 : null}
+        >
           ALL
         </AllSidebarItem>
         {categories.map(category => {
@@ -73,7 +87,7 @@ class App extends Component {
             <CategorySidebarItem
               key={category}
               selected={selected}
-              onClick={this.setCurrentCategory(category)}
+              onClick={this.setCategoryFilter(category)}
               tabIndex={selected ? 0 : null}
             >
               {`${category}`}
@@ -84,18 +98,21 @@ class App extends Component {
     )
   }
 
+  isCategorySidebarItemSelected(_category) {
+    const { type, category } = this.state.filter
+    return type === 'category' && category === _category
+  }
+
+  setCategoryFilter = category => () => {
+    this.setState({ filter: { type: 'category', category } })
+  }
   isAllSidebarItemSelected() {
     const { type } = this.state.filter
     return type === 'all'
   }
 
-  renderHeader() {
-    return (
-      <Group>
-        <Button onClick={this.addMoreTasks}>Add More</Button>
-        <Button onClick={this.deleteAllTasks}>Delete All</Button>
-      </Group>
-    )
+  setAllFilter = () => {
+    this.setState({ filter: { type: 'all' } })
   }
 
   renderCurrentTasksTasks = () => {
@@ -109,15 +126,6 @@ class App extends Component {
         </Base>
       </Fragment>
     ))
-  }
-
-  isCategorySidebarItemSelected(_category) {
-    const { type, category } = this.state.filter
-    return type === 'category' && category === _category
-  }
-
-  setCurrentCategory = category => () => {
-    this.setState({ filter: { type: 'category', category } })
   }
 }
 
