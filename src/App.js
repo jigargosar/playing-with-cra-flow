@@ -53,11 +53,20 @@ class App extends Component {
         <Viewport>
           <PageHeader>{this.renderHeader()}</PageHeader>
           <PageContentWrapper>
-            <PageSidebar>{this.renderCategories()}</PageSidebar>
+            <PageSidebar>{this.renderSidebar()}</PageSidebar>
             <PageContent>{this.renderCurrentTasksTasks()}</PageContent>
           </PageContentWrapper>
         </Viewport>
       </Provider>
+    )
+  }
+
+  renderSidebar() {
+    return (
+      <Fragment>
+        <div>All Tasks</div>
+        {this.renderCategories()}
+      </Fragment>
     )
   }
 
