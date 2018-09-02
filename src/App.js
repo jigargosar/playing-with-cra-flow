@@ -5,7 +5,7 @@ import {Spacer} from './elements/Spacer'
 import {Provider} from 'reakit'
 import {CmdInput, CmdInputWrapper} from './elements/CmdInput'
 import * as faker from 'faker'
-import {Output} from './elements/Output'
+import {Output, OutputWrapper} from './elements/Output'
 
 const log = {
   cmd: debug('app:cmd'),
@@ -72,11 +72,13 @@ class App extends Component {
       <Provider>
         <ViewportFlexColumn>
           <Spacer />
-          <Output>
-            {this.state.output.map((line, idx) => {
-              return <div key={idx}>{`${line}`}</div>
-            })}
-          </Output>
+          <OutputWrapper>
+            <Output>
+              {this.state.output.map((line, idx) => {
+                return <div key={idx}>{`${line}`}</div>
+              })}
+            </Output>
+          </OutputWrapper>
           <CmdInputWrapper>
             <CmdInput onKeyPress={this.handleInputKeyPress} />
           </CmdInputWrapper>
