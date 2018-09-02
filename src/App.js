@@ -71,29 +71,25 @@ class App extends Component {
   }
 
   renderSidebar() {
-    let selected = this.isAllSidebarItemSelected()
     return (
       <Fragment>
         <AllSidebarItem
-          selected={selected}
+          selected={this.isAllSidebarItemSelected()}
           onClick={this.setAllFilter}
-          tabIndex={selected ? 0 : null}
+          tabIndex={this.isAllSidebarItemSelected() ? 0 : null}
         >
           ALL
         </AllSidebarItem>
-        {categories.map(category => {
-          const selected = this.isCategorySidebarItemSelected(category)
-          return (
-            <CategorySidebarItem
-              key={category}
-              selected={selected}
-              onClick={this.setCategoryFilter(category)}
-              tabIndex={selected ? 0 : null}
-            >
-              {`${category}`}
-            </CategorySidebarItem>
-          )
-        })}
+        {categories.map(category => (
+          <CategorySidebarItem
+            key={category}
+            selected={this.isCategorySidebarItemSelected(category)}
+            onClick={this.setCategoryFilter(category)}
+            tabIndex={this.isCategorySidebarItemSelected(category) ? 0 : null}
+          >
+            {`${category}`}
+          </CategorySidebarItem>
+        ))}
       </Fragment>
     )
   }
