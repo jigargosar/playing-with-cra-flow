@@ -78,14 +78,20 @@ class App extends Component {
   }
 
   renderCategories = () => {
-    return categories.map(category => (
-      <Fragment key={category}>
-        <CategoryItem
-          selected={this.state.currentCategory === category}
-          onClick={this.setCurrentCategory(category)}
-        >{`${category}`}</CategoryItem>
-      </Fragment>
-    ))
+    return categories.map(category => {
+      let selected = this.state.currentCategory === category
+      return (
+        <Fragment key={category}>
+          <CategorySidebarItem
+            selected={selected}
+            onClick={this.setCurrentCategory(category)}
+            tabIndex={selected ? 0 : null}
+          >
+            {`${category}`}
+          </CategorySidebarItem>
+        </Fragment>
+      )
+    })
   }
 
   setCurrentCategory = currentCategory => () => {
@@ -95,7 +101,7 @@ class App extends Component {
 
 export default App
 
-const CategoryItem = styled(Base)`
+const CategorySidebarItem = styled(Base)`
   ${ifProp(
     'selected',
     css`
