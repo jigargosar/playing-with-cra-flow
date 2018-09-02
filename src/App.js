@@ -14,8 +14,8 @@ function createTask() {
   }
 }
 
-function createTaskList() {
-  return times(createTask, 10)
+function createTaskList(count = 10) {
+  return times(createTask, count)
 }
 
 const getCategoryIndexOfTask = ({ category }) => indexOf(category)(categories)
@@ -24,6 +24,10 @@ class App extends Component {
   state = {
     tasks: createTaskList(),
   }
+
+  addMoreTasks = () =>
+    this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
+  deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
     const comparators = [ascend(getCategoryIndexOfTask)]
@@ -47,8 +51,8 @@ class App extends Component {
   renderHeader() {
     return (
       <Group>
-        <Button>Add More</Button>
-        <Button>Delete All</Button>
+        <Button onClick={this.addMoreTasks}>Add More</Button>
+        <Button onClick={this.deleteAllTasks}>Delete All</Button>
       </Group>
     )
   }
