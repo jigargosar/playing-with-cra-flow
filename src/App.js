@@ -79,9 +79,7 @@ class App extends Component {
   renderCategories = () => {
     return categories.map(category => (
       <Fragment key={category}>
-        <CategoryItem margin="1rem 0" minWidth="8rem">
-          {`${category}`}
-        </CategoryItem>
+        <CategoryItem>{`${category}`}</CategoryItem>
       </Fragment>
     ))
   }
