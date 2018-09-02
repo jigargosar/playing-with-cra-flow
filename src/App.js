@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
-import {Provider} from 'reakit'
+import {Base, Provider} from 'reakit'
 import * as faker from 'faker'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
@@ -33,10 +33,10 @@ class App extends Component {
           <ViewportScrollable padding="1rem">
             {this.state.tasks.map(task => (
               <Fragment key={task.id}>
-                <div>
+                <Base margin="1rem">
                   <div>{`${task.title}`}</div>
                   <small>{`${task.category}`}</small>
-                </div>
+                </Base>
               </Fragment>
             ))}
           </ViewportScrollable>
