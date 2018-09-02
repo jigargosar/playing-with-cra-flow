@@ -38,8 +38,6 @@ class App extends Component {
           <Spacer />
           <CmdWrapper>
             <CmdInput
-              placeholder="Enter Command"
-              autoFocus
               onKeyPress={this.handleInputKeyPress}
             />
           </CmdWrapper>
