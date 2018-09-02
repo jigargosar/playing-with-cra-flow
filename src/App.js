@@ -114,6 +114,7 @@ const PageHeader = styled(Base)`
 const PageSidebar = styled(Base)`
   overflow: scroll;
   padding: 1rem;
+  border-right: 1px solid #ddd;
 `
 const PageContent = styled(Base)`
   flex: auto;
