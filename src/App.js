@@ -11,8 +11,14 @@ const log = {
   cmd: debug('app:cmd'),
 }
 
+const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
+
 function createTask() {
-  return { id: faker.random.alphaNumeric(4), title: faker.random.words() }
+  return {
+    id: faker.random.alphaNumeric(4),
+    title: faker.random.words(),
+    category: faker.random.arrayElement(categories),
+  }
 }
 
 class App extends Component {
