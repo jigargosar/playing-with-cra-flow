@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport, ViewportItem } from './elements/Viewport'
-import { Base, Button, Flex, Group, Provider } from 'reakit'
+import { Base, Button, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { ascend, indexOf, sortWith, times } from 'ramda'
 
@@ -79,12 +79,18 @@ class App extends Component {
   renderCategories = () => {
     return categories.map(category => (
       <Fragment key={category}>
-        <Base margin="1rem 0" minWidth="8rem">
-          <div>{`${category}`}</div>
-        </Base>
+        <CategoryItem margin="1rem 0" minWidth="8rem">
+          {`${category}`}
+        </CategoryItem>
       </Fragment>
     ))
   }
 }
 
 export default App
+
+const CategoryItem = styled(Base)`
+  margin: 1rem 0;
+  min-width: 8rem;
+  cursor: pointer;
+`
