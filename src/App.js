@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport, ViewportItem } from './elements/Viewport'
-import { Base, Button, Flex, Group, Provider, styled } from 'reakit'
+import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { filter, indexOf, times } from 'ramda'
+import { ifProp } from 'styled-tools'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -85,6 +86,7 @@ class App extends Component {
     return categories.map(category => (
       <Fragment key={category}>
         <CategoryItem
+          selected={this.state.currentCategory === category}
           onClick={this.setCurrentCategory(category)}
         >{`${category}`}</CategoryItem>
       </Fragment>
@@ -99,6 +101,12 @@ class App extends Component {
 export default App
 
 const CategoryItem = styled(Base)`
+  ${ifProp(
+    'selected',
+    css`
+      color: tomato;
+    `,
+  )};
   padding: 0.5rem 0;
   min-width: 8rem;
   cursor: pointer;
