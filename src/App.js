@@ -4,12 +4,27 @@ import {ViewportFlexColumn} from './elements/ViewportFlexColumn'
 import {Spacer} from './elements/Spacer'
 import {Provider} from 'reakit'
 import {CmdInput, CmdInputWrapper} from './elements/CmdInput'
+import * as faker from 'faker'
 
 const log = {
   cmd: debug('app:cmd'),
 }
 
+function createTask() {
+  return { id: faker.random.alphaNumeric(4), title: faker.random.words() }
+}
+
 class App extends Component {
+  state = {
+    tasks: [
+      //
+      createTask(),
+      createTask(),
+      createTask(),
+      createTask(),
+    ],
+  }
+
   componentDidMount() {
     this.executeCommand('a')
   }
