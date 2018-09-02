@@ -47,12 +47,8 @@ class App extends Component {
         <Viewport>
           <PageHeader>{this.renderHeader()}</PageHeader>
           <PageContent>
-            <Base overflow="scroll" padding="1rem">
-              {this.renderCategories()}
-            </Base>
-            <Base flex="auto" overflow="scroll" padding="1rem">
-              {this.renderCurrentTasksTasks()}
-            </Base>
+            <PageSidebar>{this.renderCategories()}</PageSidebar>
+            <PageMain>{this.renderCurrentTasksTasks()}</PageMain>
           </PageContent>
         </Viewport>
       </Provider>
@@ -112,6 +108,16 @@ const CategoryItem = styled(Base)`
 `
 
 const PageHeader = styled(Base)`
+  padding: 1rem;
+`
+
+const PageSidebar = styled(Base)`
+  overflow: scroll;
+  padding: 1rem;
+`
+const PageMain = styled(Base)`
+  flex: auto;
+  overflow: scroll;
   padding: 1rem;
 `
 const PageContent = styled(Flex)`
