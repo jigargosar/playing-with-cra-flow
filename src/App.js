@@ -38,10 +38,10 @@ class App extends Component {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
-    if (this.state.filter.type === 'category') {
-      return filter(task => task.category === this.state.currentCategory)(
-        this.state.tasks,
-      )
+    const filterType = this.state.filter.type
+    if (filterType === 'category') {
+      const { category } = this.state.filter
+      return filter(task => task.category === category)(this.state.tasks)
     } else {
       return this.state.tasks
     }
