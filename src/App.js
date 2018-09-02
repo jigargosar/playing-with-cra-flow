@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Viewport, ViewportItem} from './elements/Viewport'
+import {Viewport, ViewportItem, ViewportScrollable} from './elements/Viewport'
 import {Spacer} from './elements/Spacer'
 import {Provider} from 'reakit'
 import * as faker from 'faker'
@@ -31,8 +31,9 @@ class App extends Component {
       <Provider>
         <Viewport>
           <ViewportItem padding="1rem">Header</ViewportItem>
-          <ViewportItem padding="1rem">Header</ViewportItem>
+          <ViewportScrollable padding="1rem">Content</ViewportScrollable>
           <Spacer />
+          <ViewportItem padding="1rem">Footer</ViewportItem>
         </Viewport>
       </Provider>
     )
