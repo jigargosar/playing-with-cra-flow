@@ -116,12 +116,18 @@ class App extends Component {
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
-          <Base fontSize="0.7rem" textTransform="uppercase">{`${
-            task.category
-          }`}</Base>
+          {this.shouldDisplayTaskCategory() && (
+            <Base fontSize="0.7rem" textTransform="uppercase">{`${
+              task.category
+            }`}</Base>
+          )}
         </Base>
       </Fragment>
     ))
+  }
+
+  shouldDisplayTaskCategory() {
+    return this.state.filter.type !== 'category'
   }
 }
 
