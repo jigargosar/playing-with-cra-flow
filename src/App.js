@@ -49,6 +49,10 @@ function isAllFilter({ type }) {
   return type === 'all'
 }
 
+function isCategoryFilter({type}) {
+  return type === 'category'
+}
+
 class App extends Component {
   state = {
     tasks: createTaskList(),
@@ -131,7 +135,7 @@ class App extends Component {
   }
 
   renderCurrentTasks = () => {
-    let shouldDisplayTaskCategory = this.state.filter.type !== 'category'
+    let shouldDisplayTaskCategory = !isCategoryFilter(this.state.filter)
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
