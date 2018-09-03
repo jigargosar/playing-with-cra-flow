@@ -7,12 +7,12 @@ import { ifProp } from 'styled-tools'
  */
 export const TaskTitle = styled(Base)`
   ${ifProp(
-  'done',
-  css`
+    'done',
+    css`
       color: gray;
       text-decoration: line-through;
     `,
-)};
+  )};
 `
 /**
  * General component description in JSDoc format. Markdown is *supported*.
@@ -20,11 +20,11 @@ export const TaskTitle = styled(Base)`
  */
 export const SidebarItem = styled(Base)`
   ${ifProp(
-  'selected',
-  css`
+    'selected',
+    css`
       color: tomato;
     `,
-)};
+  )};
   padding: 0.5rem;
   min-width: 8rem;
   cursor: pointer;
