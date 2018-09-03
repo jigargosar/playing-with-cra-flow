@@ -19,10 +19,7 @@ function createTaskList(count = 20) {
 }
 
 function createCategoryFilter(category) {
-  return {
-    type: 'category',
-    category,
-  }
+  return { type: 'category', category }
 }
 function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
