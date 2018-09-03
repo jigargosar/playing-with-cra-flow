@@ -38,7 +38,7 @@ function getFilterCategory(filter) {
   return filter.category
 }
 
-function isCategoryFilterOf(_category, {type, category}) {
+function isCategoryFilterOf(_category, { type, category }) {
   return type === 'category' && category === _category
 }
 
@@ -101,24 +101,22 @@ class App extends Component {
         >
           All
         </AllSidebarItem>
-        {categories.map(category => (
-          <CategorySidebarItem
-            key={category}
-            selected={this.isCategorySidebarItemSelected(category)}
-            onClick={this.setCategoryFilter(category)}
-            tabIndex={this.isCategorySidebarItemSelected(category) ? 0 : null}
-          >
-            {`${category}`}
-          </CategorySidebarItem>
-        ))}
+        {categories.map(category => {
+          let selected = isCategoryFilterOf(category, this.state.filter)
+          return (
+            <CategorySidebarItem
+              key={category}
+              selected={selected}
+              onClick={this.setCategoryFilter(category)}
+              tabIndex={selected ? 0 : null}
+            >
+              {`${category}`}
+            </CategorySidebarItem>
+          )
+        })}
       </Fragment>
     )
   }
-
-  isCategorySidebarItemSelected(_category) {
-    return isCategoryFilterOf(_category, this.state.filter)
-  }
-
   setCategoryFilter = category => () => {
     this.setState({ filter: createCategoryFilter(category) })
   }
