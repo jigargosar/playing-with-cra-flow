@@ -111,13 +111,25 @@ class App extends Component {
     let renderAllSidebarItem = () => {
       let selected = isAllFilter(this.state.filter)
       return (
-        <AllSidebarItem
+        <SidebarItem
           selected={selected}
           onClick={this.setFilter(createAllFilter())}
           tabIndex={selected ? 0 : null}
         >
           All
-        </AllSidebarItem>
+        </SidebarItem>
+      )
+    }
+    let renderDoneSidebarItem = () => {
+      let selected = isDoneFilter(this.state.filter)
+      return (
+        <SidebarItem
+          selected={selected}
+          onClick={this.setFilter(createDoneFilter())}
+          tabIndex={selected ? 0 : null}
+        >
+          Done
+        </SidebarItem>
       )
     }
 
@@ -139,6 +151,7 @@ class App extends Component {
       <Fragment>
         {renderAllSidebarItem()}
         {categories.map(renderCategorySideBarItem)}
+        {renderDoneSidebarItem()}
       </Fragment>
     )
   }
