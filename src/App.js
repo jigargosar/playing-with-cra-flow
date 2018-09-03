@@ -49,7 +49,7 @@ function isAllFilter({ type }) {
   return type === 'all'
 }
 
-function isCategoryFilter({type}) {
+function isCategoryFilter({ type }) {
   return type === 'category'
 }
 
@@ -77,6 +77,10 @@ class App extends Component {
         console.assert(false, 'invalid filter type', filterType)
         return []
     }
+  }
+
+  setFilter = filter => () => {
+    this.setState({ filter })
   }
 
   render() {
@@ -128,10 +132,6 @@ class App extends Component {
         })}
       </Fragment>
     )
-  }
-
-  setFilter = filter => () => {
-    this.setState({ filter })
   }
 
   renderCurrentTasks = () => {
