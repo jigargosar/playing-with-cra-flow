@@ -102,7 +102,7 @@ class App extends Component {
   }
 
   setCategoryFilter = category => () => {
-    this.setState({ filter: { type: 'category', category } })
+    this.setState({ filter: createCategoryFilter(category) })
   }
   isAllSidebarItemSelected() {
     const { type } = this.state.filter
