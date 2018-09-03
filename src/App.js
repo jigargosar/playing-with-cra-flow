@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Viewport } from './elements/Viewport'
 import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
-import { ascend, filter, indexOf, prop, sortWith, times } from 'ramda'
+import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { ifProp } from 'styled-tools'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
@@ -11,6 +11,7 @@ function createTask() {
   return {
     id: faker.random.alphaNumeric(4),
     title: faker.random.words(),
+    done: faker.random.boolean(),
     category: faker.random.arrayElement(categories),
   }
 }
@@ -67,16 +68,17 @@ class App extends Component {
 
   get currentTasks() {
     let filterType = getFilterType(this.state.filter)
+    let activeTasks = reject(prop('done'))(this.state.tasks)
     switch (filterType) {
       case 'category':
         return filter(
           task => task.category === getFilterCategory(this.state.filter),
-        )(this.state.tasks)
+        )(activeTasks)
       case 'all':
-        return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
+        return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
       case 'done':
-        let tasks = filter(prop('done'))(this.state.tasks)
-        return sortWith([ascend(getCategoryIndexOfTask)])(tasks)
+        let doneTasks = filter(prop('done'))(this.state.tasks)
+        return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
       default:
         console.assert(false, 'invalid filter type', filterType)
         return []
