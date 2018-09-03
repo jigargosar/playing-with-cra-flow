@@ -50,14 +50,17 @@ class App extends Component {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
-    switch (getFilterType(this.state.filter)) {
+    let filterType = getFilterType(this.state.filter)
+    switch (filterType) {
       case 'category':
         return filter(
           task => task.category === getFilterCategory(this.state.filter),
         )(this.state.tasks)
       case 'all':
-      default:
         return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
+      default:
+        console.assert(false, 'invalid filter type', filterType)
+        return []
     }
   }
 
