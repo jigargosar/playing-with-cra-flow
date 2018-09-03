@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Viewport } from './elements/Viewport'
+import { Viewport } from './components/Viewport'
 import { Base, Button, css, Flex, Group, InlineBlock, Popover, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
@@ -176,7 +176,7 @@ class App extends Component {
                 </Button>
                 <Popover fade slide expand hideOnClickOutside {...popover}>
                   <Popover.Arrow />
-                  Click outside to hide
+                  qwerasdfgqwerfaqweqweqweqweqweqweqwesdClick outside to hide
                 </Popover>
               </InlineBlock>
             )}

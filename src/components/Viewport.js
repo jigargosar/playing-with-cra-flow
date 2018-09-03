@@ -1,4 +1,4 @@
-import {Base, Flex, styled} from 'reakit'
+import { Base, Flex, styled } from 'reakit'
 
 export const Viewport = styled(Flex)`
   flex-direction: column;
