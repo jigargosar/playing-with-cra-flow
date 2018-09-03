@@ -27,30 +27,31 @@ function createAllFilter() {
 function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
 }
-
 export const getCategoryIndexOfTask = ({ category }) =>
   indexOf(category)(categories)
 
 function getFilterType({ type }) {
   return type
 }
-
 function getFilterCategory(filter) {
   console.assert(filter.type === 'category')
   console.assert(categories.includes(filter.category))
   return filter.category
 }
-
 function isCategoryFilterOf(_category, { type, category }) {
   return type === 'category' && category === _category
 }
-
 function isAllFilter({ type }) {
   return type === 'all'
 }
-
 function isCategoryFilter({ type }) {
   return type === 'category'
+}
+function createDoneFilter() {
+  return { type: 'done' }
+}
+function isDoneFilter({ type }) {
+  return type === 'done'
 }
 
 class App extends Component {
