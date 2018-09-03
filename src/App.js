@@ -125,9 +125,11 @@ class App extends Component {
       </Fragment>
     )
   }
+
   setFilter = filter => () => {
     this.setState({ filter })
   }
+
   renderCurrentTasks = () => {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
