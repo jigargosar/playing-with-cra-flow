@@ -4,6 +4,7 @@ import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { ifProp } from 'styled-tools'
+import { FaEllipsisH } from 'react-icons/all'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -167,6 +168,7 @@ class App extends Component {
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
+          <FaEllipsisH />
           {shouldDisplayTaskCategory && (
             <Base fontSize="0.7rem" textTransform="uppercase">{`${
               task.category
