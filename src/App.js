@@ -166,7 +166,7 @@ class App extends Component {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
-          <div>{`${task.title}`}</div>
+          <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
           {shouldDisplayTaskCategory && (
             <Base fontSize="0.7rem" textTransform="uppercase">{`${
               task.category
@@ -180,6 +180,14 @@ class App extends Component {
 
 export default App
 
+const TaskTitle = styled(Base)`
+  ${ifProp(
+    'done',
+    css`
+      text-decoration: #ddd line-through;
+    `,
+  )};
+`
 const SidebarItem = styled(Base)`
   ${ifProp(
     'selected',
