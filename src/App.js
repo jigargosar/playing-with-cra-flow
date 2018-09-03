@@ -99,12 +99,12 @@ class App extends Component {
   }
 
   renderSidebar() {
-    let selected = this.isAllSidebarItemSelected()
+    let selected = isAllFilter(this.state.filter)
     return (
       <Fragment>
         <AllSidebarItem
           selected={selected}
-          onClick={this.setAllFilter}
+          onClick={this.setFilter(createAllFilter())}
           tabIndex={selected ? 0 : null}
         >
           All
@@ -115,7 +115,7 @@ class App extends Component {
             <CategorySidebarItem
               key={category}
               selected={selected}
-              onClick={this.setCategoryFilter(category)}
+              onClick={this.setFilter(createCategoryFilter(category))}
               tabIndex={selected ? 0 : null}
             >
               {`${category}`}
@@ -125,17 +125,9 @@ class App extends Component {
       </Fragment>
     )
   }
-  setCategoryFilter = category => () => {
-    this.setState({ filter: createCategoryFilter(category) })
+  setFilter = filter => () => {
+    this.setState({ filter })
   }
-  setAllFilter = () => {
-    this.setState({ filter: createAllFilter() })
-  }
-
-  isAllSidebarItemSelected() {
-    return isAllFilter(this.state.filter)
-  }
-
   renderCurrentTasks = () => {
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
