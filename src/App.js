@@ -58,7 +58,7 @@ function isDoneFilter({ type }) {
 class App extends Component {
   state = {
     tasks: createTaskList(),
-    filter: createDefaultCategoryFilter(),
+    filter: createDoneFilter(),
   }
 
   addMoreTasks = () =>
@@ -184,7 +184,8 @@ const TaskTitle = styled(Base)`
   ${ifProp(
     'done',
     css`
-      text-decoration: #ddd line-through;
+      color: #ddd;
+      text-decoration: line-through;
     `,
   )};
 `
