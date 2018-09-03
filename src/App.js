@@ -186,7 +186,6 @@ const SidebarItem = styled(Base)`
   min-width: 8rem;
   cursor: pointer;
 `
-const AllSidebarItem = styled(SidebarItem)``
 const CategorySidebarItem = styled(SidebarItem)``
 
 const PageHeader = styled(Base)`
