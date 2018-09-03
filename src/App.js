@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Viewport } from './elements/Viewport'
 import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
 import * as faker from 'faker'
-import { ascend, filter, indexOf, sortWith, times } from 'ramda'
+import { ascend, filter, indexOf, prop, sortWith, times } from 'ramda'
 import { ifProp } from 'styled-tools'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
@@ -74,6 +74,9 @@ class App extends Component {
         )(this.state.tasks)
       case 'all':
         return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
+      case 'done':
+        let tasks = filter(prop('done'))(this.state.tasks)
+        return sortWith([ascend(getCategoryIndexOfTask)])(tasks)
       default:
         console.assert(false, 'invalid filter type', filterType)
         return []
