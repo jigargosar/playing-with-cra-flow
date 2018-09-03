@@ -52,8 +52,10 @@ class App extends Component {
   get currentTasks() {
     switch (getFilterType(this.state.filter)) {
       case 'category':
-        getFilterCategory(this.state.filter)
-        return filter(task => task.category === category)(this.state.tasks)
+        return filter(
+          task => task.category === getFilterCategory(this.state.filter),
+        )(this.state.tasks)
+      case 'all':
       default:
         return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
     }
