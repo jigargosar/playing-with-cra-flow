@@ -14,10 +14,10 @@ function createTask() {
     category: faker.random.arrayElement(categories),
   }
 }
-
 function createTaskList(count = 20) {
   return times(createTask, count)
 }
+
 function createCategoryFilter(category) {
   return {
     type: 'category',
