@@ -28,6 +28,16 @@ function createDefaultCategoryFilter() {
 export const getCategoryIndexOfTask = ({ category }) =>
   indexOf(category)(categories)
 
+function getFilterType({ type }) {
+  return type
+}
+
+function getFilterCategory(filter) {
+  console.assert(filter.type === 'category')
+  console.assert(categories.includes(filter.category))
+  return filter.category
+}
+
 class App extends Component {
   state = {
     tasks: createTaskList(),
@@ -40,9 +50,9 @@ class App extends Component {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   get currentTasks() {
-    switch (this.state.filter.type) {
+    switch (getFilterType(this.state.filter)) {
       case 'category':
-        const { category } = this.state.filter
+        getFilterCategory(this.state.filter)
         return filter(task => task.category === category)(this.state.tasks)
       default:
         return sortWith([ascend(getCategoryIndexOfTask)])(this.state.tasks)
