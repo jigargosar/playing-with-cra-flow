@@ -6,6 +6,7 @@ import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
+  MenuItem,
   PageContent,
   PageContentWrapper,
   PageHeader,
@@ -186,7 +187,7 @@ class App extends Component {
                   <Popover.Arrow />
                   <List>
                     {categories.map(category => (
-                      <li key={category}>{category}</li>
+                      <MenuItem key={category}>{category}</MenuItem>
                     ))}
                   </List>
                 </Popover>

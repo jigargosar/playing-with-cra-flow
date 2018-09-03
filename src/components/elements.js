@@ -68,3 +68,20 @@ export const PageContentWrapper = styled(Flex)`
   flex: auto;
   flex-direction: row;
 `
+
+
+/**
+ * General component description in JSDoc format. Markdown is *supported*.
+ * @component
+ */
+export const MenuItem = styled(Base)`
+  ${ifProp(
+  'selected',
+  css`
+      color: tomato;
+    `,
+)};
+  padding: 0.5rem;
+  min-width: 8rem;
+  cursor: pointer;
+`
