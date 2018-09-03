@@ -95,7 +95,7 @@ class App extends Component {
           onClick={this.setAllFilter}
           tabIndex={this.isAllSidebarItemSelected() ? 0 : null}
         >
-          ALL
+          All
         </AllSidebarItem>
         {categories.map(category => (
           <CategorySidebarItem
