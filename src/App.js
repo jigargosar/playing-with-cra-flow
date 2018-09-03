@@ -21,6 +21,9 @@ function createTaskList(count = 20) {
 function createCategoryFilter(category) {
   return { type: 'category', category }
 }
+function createAllFilter() {
+  return { type: 'all'}
+}
 function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
 }
@@ -126,7 +129,7 @@ class App extends Component {
   }
 
   setAllFilter = () => {
-    this.setState({ filter: { type: 'all' } })
+    this.setState({ filter: createAllFilter() })
   }
 
   renderCurrentTasks = () => {
