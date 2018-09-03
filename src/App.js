@@ -22,7 +22,7 @@ function createCategoryFilter(category) {
   return { type: 'category', category }
 }
 function createAllFilter() {
-  return { type: 'all'}
+  return { type: 'all' }
 }
 function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
@@ -43,6 +43,10 @@ function getFilterCategory(filter) {
 
 function isCategoryFilterOf(_category, { type, category }) {
   return type === 'category' && category === _category
+}
+
+function isAllFilter({ type }) {
+  return type === 'all'
 }
 
 class App extends Component {
@@ -123,13 +127,12 @@ class App extends Component {
   setCategoryFilter = category => () => {
     this.setState({ filter: createCategoryFilter(category) })
   }
-  isAllSidebarItemSelected() {
-    const { type } = this.state.filter
-    return type === 'all'
-  }
-
   setAllFilter = () => {
     this.setState({ filter: createAllFilter() })
+  }
+
+  isAllSidebarItemSelected() {
+    return isAllFilter(this.state.filter)
   }
 
   renderCurrentTasks = () => {
