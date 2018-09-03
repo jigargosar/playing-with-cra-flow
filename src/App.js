@@ -99,12 +99,13 @@ class App extends Component {
   }
 
   renderSidebar() {
+    let selected = this.isAllSidebarItemSelected()
     return (
       <Fragment>
         <AllSidebarItem
-          selected={this.isAllSidebarItemSelected()}
+          selected={selected}
           onClick={this.setAllFilter}
-          tabIndex={this.isAllSidebarItemSelected() ? 0 : null}
+          tabIndex={selected ? 0 : null}
         >
           All
         </AllSidebarItem>
