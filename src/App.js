@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
-import { Base, Button, Group, InlineBlock, List, Popover, Provider } from 'reakit'
+import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
 import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
@@ -192,20 +192,18 @@ class App extends Component {
                 </Button>
                 <Popover fade slide expand hideOnClickOutside {...popover}>
                   <Popover.Arrow />
-                  <List>
-                    {categories.map(category => {
-                      let selected = task.category === category
-                      return (
-                        <MenuItem
-                          key={category}
-                          selected={selected}
-                          onClick={this.updateTaskCategory(category, task)}
-                        >
-                          {category}
-                        </MenuItem>
-                      )
-                    })}
-                  </List>
+                  {categories.map(category => {
+                    let selected = task.category === category
+                    return (
+                      <MenuItem
+                        key={category}
+                        selected={selected}
+                        onClick={this.updateTaskCategory(category, task)}
+                      >
+                        {category}
+                      </MenuItem>
+                    )
+                  })}
                 </Popover>
               </InlineBlock>
             )}
