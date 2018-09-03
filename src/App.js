@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './elements/Viewport'
-import { Base, Button, css, Flex, Group, Provider, styled } from 'reakit'
+import { Base, Button, css, Flex, Group, InlineBlock, Popover, Provider, styled } from 'reakit'
 import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { ifProp } from 'styled-tools'
@@ -168,7 +168,20 @@ class App extends Component {
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-          <FaEllipsisH />
+          <Popover.Container>
+            {popover => (
+              <InlineBlock relative>
+                <Button as={Popover.Toggle} {...popover}>
+                  <FaEllipsisH />
+                </Button>
+                <Popover fade slide expand hideOnClickOutside {...popover}>
+                  <Popover.Arrow />
+                  Click outside to hide
+                </Popover>
+              </InlineBlock>
+            )}
+          </Popover.Container>
+
           {shouldDisplayTaskCategory && (
             <Base fontSize="0.7rem" textTransform="uppercase">{`${
               task.category
