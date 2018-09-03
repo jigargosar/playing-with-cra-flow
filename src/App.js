@@ -18,6 +18,15 @@ function createTask() {
 function createTaskList(count = 20) {
   return times(createTask, count)
 }
+function createCategoryFilter(category) {
+  return {
+    type: 'category',
+    category,
+  }
+}
+function createDefaultCategoryFilter() {
+  return createCategoryFilter('InBasket')
+}
 
 export const getCategoryIndexOfTask = ({ category }) =>
   indexOf(category)(categories)
@@ -25,11 +34,7 @@ export const getCategoryIndexOfTask = ({ category }) =>
 class App extends Component {
   state = {
     tasks: createTaskList(),
-    currentCategory: 'InBasket',
-    filter: {
-      type: 'category',
-      category: 'InBasket',
-    },
+    filter: createDefaultCategoryFilter(),
   }
 
   addMoreTasks = () =>
