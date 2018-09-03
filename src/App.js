@@ -38,6 +38,10 @@ function getFilterCategory(filter) {
   return filter.category
 }
 
+function isCategoryFilterOf(_category, {type, category}) {
+  return type === 'category' && category === _category
+}
+
 class App extends Component {
   state = {
     tasks: createTaskList(),
@@ -112,8 +116,7 @@ class App extends Component {
   }
 
   isCategorySidebarItemSelected(_category) {
-    const { type, category } = this.state.filter
-    return type === 'category' && category === _category
+    return isCategoryFilterOf(_category, this.state.filter)
   }
 
   setCategoryFilter = category => () => {
