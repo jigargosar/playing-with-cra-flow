@@ -99,6 +99,13 @@ class App extends Component {
     this.setState({ filter })
   }
 
+  updateTaskCategory = (category, task) => () => {
+    const updatedTask = { ...task, category }
+    return this.setState({
+      tasks: this.state.tasks.map(t => (t === task ? updatedTask : t)),
+    })
+  }
+
   render() {
     return (
       <Provider>
@@ -186,9 +193,18 @@ class App extends Component {
                 <Popover fade slide expand hideOnClickOutside {...popover}>
                   <Popover.Arrow />
                   <List>
-                    {categories.map(category => (
-                      <MenuItem key={category}>{category}</MenuItem>
-                    ))}
+                    {categories.map(category => {
+                      let selected = task.category === category
+                      return (
+                        <MenuItem
+                          key={category}
+                          selected={selected}
+                          onClick={this.updateTaskCategory(category, task)}
+                        >
+                          {category}
+                        </MenuItem>
+                      )
+                    })}
                   </List>
                 </Popover>
               </InlineBlock>
