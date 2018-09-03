@@ -131,11 +131,12 @@ class App extends Component {
   }
 
   renderCurrentTasks = () => {
+    let shouldDisplayTaskCategory = this.state.filter.type !== 'category'
     return this.currentTasks.map(task => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <div>{`${task.title}`}</div>
-          {this.shouldDisplayTaskCategory() && (
+          {shouldDisplayTaskCategory && (
             <Base fontSize="0.7rem" textTransform="uppercase">{`${
               task.category
             }`}</Base>
@@ -143,10 +144,6 @@ class App extends Component {
         </Base>
       </Fragment>
     ))
-  }
-
-  shouldDisplayTaskCategory() {
-    return this.state.filter.type !== 'category'
   }
 }
 
