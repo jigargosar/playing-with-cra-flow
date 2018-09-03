@@ -25,7 +25,7 @@ function createCategoryFilter(category) {
 function createAllFilter() {
   return { type: 'all' }
 }
-function createDefaultCategoryFilter() {
+export function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
 }
 export const getCategoryIndexOfTask = ({ category }) =>
@@ -184,7 +184,7 @@ const TaskTitle = styled(Base)`
   ${ifProp(
     'done',
     css`
-      color: #ddd;
+      color: gray;
       text-decoration: line-through;
     `,
   )};
