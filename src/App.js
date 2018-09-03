@@ -1,10 +1,18 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
-import { Base, Button, css, Flex, Group, InlineBlock, Popover, Provider, styled } from 'reakit'
+import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
 import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
-import { ifProp } from 'styled-tools'
 import { FaEllipsisH } from 'react-icons/all'
+import {
+  CategorySidebarItem,
+  PageContent,
+  PageContentWrapper,
+  PageHeader,
+  PageSidebar,
+  SidebarItem,
+  TaskTitle,
+} from './components/elements'
 
 const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
@@ -195,44 +203,3 @@ class App extends Component {
 
 export default App
 
-const TaskTitle = styled(Base)`
-  ${ifProp(
-    'done',
-    css`
-      color: gray;
-      text-decoration: line-through;
-    `,
-  )};
-`
-const SidebarItem = styled(Base)`
-  ${ifProp(
-    'selected',
-    css`
-      color: tomato;
-    `,
-  )};
-  padding: 0.5rem;
-  min-width: 8rem;
-  cursor: pointer;
-`
-const CategorySidebarItem = styled(SidebarItem)``
-
-const PageHeader = styled(Base)`
-  padding: 1rem;
-`
-
-const PageSidebar = styled(Base)`
-  overflow: scroll;
-  padding: 1rem;
-  border-right: 1px solid #ddd;
-`
-const PageContent = styled(Base)`
-  flex: auto;
-  overflow: scroll;
-  padding: 1rem;
-`
-const PageContentWrapper = styled(Flex)`
-  height: 100%;
-  flex: auto;
-  flex-direction: row;
-`
