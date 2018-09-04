@@ -64,8 +64,9 @@ class App extends Component<{}, AppState> {
         return []
     }
   }
-  addMoreTasks = () =>
-    this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
+  addMoreTasks = () => {
+    return this.setState({tasks: [...createTaskList(), ...this.state.tasks]});
+  }
 
   deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {

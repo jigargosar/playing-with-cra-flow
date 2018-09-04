@@ -5,7 +5,7 @@ import Chance from 'chance'
 import type {Category} from './Category'
 import {categories} from './Category'
 import {indexOf, times} from 'ramda'
-import type {TagId} from './Tag'
+import type {Tag, TagId} from './Tag'
 
 const chance = Chance()
 
@@ -36,4 +36,12 @@ export const getCategoryIndexOfTask = ({ category }: Task): number =>
 
 export const setTaskCategory = (category: Category, task: Task): Task => {
   return { ...task, category }
+}
+
+export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
+  const someTags: Tag[] = chance.pickset(
+    tags,
+    chance.integer({ min: 0, max: 3 }),
+  )
+  return { ...task, tagIds: someTags.map(tag => tag.id) }
 }
