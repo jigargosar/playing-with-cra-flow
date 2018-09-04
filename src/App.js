@@ -144,7 +144,7 @@ class App extends Component<{}, AppState> {
         {category}
       </MenuItem>
     )
-    const renderMenuContainer = task => (
+    const renderMenu = menuItems => (
       <Popover.Container>
         {popover => (
           <InlineBlock relative>
@@ -153,7 +153,7 @@ class App extends Component<{}, AppState> {
             </Button>
             <Popover fade slide expand hideOnClickOutside {...popover}>
               <Popover.Arrow />
-              {categories.map(renderMenuItem(task))}
+              {menuItems}
             </Popover>
           </InlineBlock>
         )}
@@ -163,7 +163,7 @@ class App extends Component<{}, AppState> {
     const renderTask = (task: Task): React.Node => (
       <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-        {renderMenuContainer(task)}
+        {renderMenu(categories.map(renderMenuItem(task)))}
 
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
