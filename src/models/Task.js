@@ -1,9 +1,12 @@
 // @flow
 
 import * as faker from 'faker'
+import Chance from 'chance'
 import type {Category} from './Category'
 import {categories} from './Category'
 import {indexOf, times} from 'ramda'
+
+const chance = Chance()
 
 export type Task = {|
   id: string,
@@ -16,7 +19,7 @@ export function createTask(): Task {
   return {
     id: faker.random.alphaNumeric(4),
     title: faker.random.words(),
-    done: faker.random.boolean(),
+    done: chance.weighted([true, false], [20, 80]),
     category: faker.random.arrayElement(categories),
   }
 }
