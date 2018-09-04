@@ -144,7 +144,7 @@ class App extends Component<{}, AppState> {
         {category}
       </MenuItem>
     )
-    const renderMenuIcon = (icon, menuItems) => (
+    const renderIconPopupMenu = (icon, menuItems) => (
       <Popover.Container>
         {popover => (
           <InlineBlock relative>
@@ -163,7 +163,7 @@ class App extends Component<{}, AppState> {
     const renderTask = (task: Task): React.Node => (
       <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-        {renderMenuIcon(<FaEllipsisH />, categories.map(renderMenuItem(task)))}
+        {renderIconPopupMenu(<FaEllipsisH />, categories.map(renderMenuItem(task)))}
 
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
