@@ -3,7 +3,7 @@
 import * as faker from 'faker'
 import type { Category } from './Category'
 import { categories } from './Category'
-import { times } from 'ramda'
+import { indexOf, times } from 'ramda'
 
 type Task = {
   id: string,
@@ -21,6 +21,9 @@ export function createTask(): Task {
   }
 }
 
-export function createTaskList(count: number = 20) {
+export function createTaskList(count: number = 20): Task[] {
   return times(createTask, count)
 }
+
+export const getCategoryIndexOfTask = ({ category }: Task): number =>
+  indexOf(category)(categories)

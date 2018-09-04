@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import { ascend, filter, indexOf, prop, reject, sortWith } from 'ramda'
+import { ascend, filter, prop, reject, sortWith } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
@@ -14,7 +14,7 @@ import {
   TaskTitle,
 } from './components/elements'
 import { categories } from './models/Category'
-import { createTaskList } from './models/Task'
+import { createTaskList, getCategoryIndexOfTask } from './models/Task'
 
 function createCategoryFilter(category) {
   return { type: 'category', category }
@@ -25,8 +25,6 @@ function createAllFilter() {
 export function createDefaultCategoryFilter() {
   return createCategoryFilter('InBasket')
 }
-export const getCategoryIndexOfTask = ({ category }) =>
-  indexOf(category)(categories)
 
 function getFilterType({ type }) {
   return type
