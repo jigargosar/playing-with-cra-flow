@@ -15,6 +15,7 @@ export type Task = {|
   done: boolean,
   category: Category,
   tagIds: TagId[],
+  createdAt: number,
 |}
 
 export function createTask(): Task {
@@ -24,6 +25,7 @@ export function createTask(): Task {
     done: chance.weighted([true, false], [20, 80]),
     category: chance.pickone(categories),
     tagIds: [],
+    createdAt: Date.now(),
   }
 }
 
