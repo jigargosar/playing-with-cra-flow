@@ -21,7 +21,7 @@ import {
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task} from './models/Task'
-import {createTaskList, getCategoryIndexOfTask, setTaskCategory,} from './models/Task'
+import {createTaskList, getCategoryIndexOfTask, setSomeTaskTags, setTaskCategory,} from './models/Task'
 import {
   createAllFilter,
   createCategoryFilter,
@@ -65,7 +65,12 @@ class App extends Component<{}, AppState> {
     }
   }
   addMoreTasks = () => {
-    return this.setState({tasks: [...createTaskList(), ...this.state.tasks]});
+    return this.setState({
+      tasks: [
+        ...createTaskList().map(setSomeTaskTags(this.state.tags)),
+        ...this.state.tasks,
+      ],
+    })
   }
 
   deleteAllTasks = () => this.setState({ tasks: [] })
