@@ -144,26 +144,14 @@ class App extends Component<{}, AppState> {
         {category}
       </MenuItem>
     )
-    const renderIconPopupMenu = (icon, menuItems) => (
-      <Popover.Container>
-        {popover => (
-          <InlineBlock relative>
-            <Button as={Popover.Toggle} {...popover}>
-              {icon}
-            </Button>
-            <Popover fade slide expand hideOnClickOutside {...popover}>
-              <Popover.Arrow />
-              {menuItems}
-            </Popover>
-          </InlineBlock>
-        )}
-      </Popover.Container>
-    )
 
     const renderTask = (task: Task): React.Node => (
       <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-        {renderIconPopupMenu(<FaEllipsisH />, categories.map(renderMenuItem(task)))}
+        {renderIconPopupMenu(
+          <FaEllipsisH />,
+          categories.map(renderMenuItem(task)),
+        )}
 
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
@@ -177,3 +165,21 @@ class App extends Component<{}, AppState> {
 }
 
 export default App
+
+function renderIconPopupMenu(icon, menuItems) {
+  return (
+    <Popover.Container>
+      {popover => (
+        <InlineBlock relative>
+          <Button as={Popover.Toggle} {...popover}>
+            {icon}
+          </Button>
+          <Popover fade slide expand hideOnClickOutside {...popover}>
+            <Popover.Arrow />
+            {menuItems}
+          </Popover>
+        </InlineBlock>
+      )}
+    </Popover.Container>
+  )
+}
