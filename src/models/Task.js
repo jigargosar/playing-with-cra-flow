@@ -5,7 +5,7 @@ import type { Category } from './Category'
 import { categories } from './Category'
 import { indexOf, times } from 'ramda'
 
-opaque type Task = {|
+export opaque type Task = {|
   id: string,
   title: string,
   done: boolean,

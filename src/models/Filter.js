@@ -3,12 +3,12 @@
 import type { Category } from './Category'
 import { CategoryInBasket } from './Category'
 
-type AllFilter = {| type: 'all' |}
-type DoneFilter = {| type: 'done'|}
+export opaque type AllFilter = {| type: 'all' |}
+export opaque type DoneFilter = {| type: 'done'|}
 
-type CategoryFilter = {| type: 'category', category: Category |}
+export opaque type CategoryFilter = {| type: 'category', category: Category |}
 
-type Filter = AllFilter | CategoryFilter | DoneFilter
+export opaque type Filter = AllFilter | CategoryFilter | DoneFilter
 
 export function createCategoryFilter(category: Category): CategoryFilter {
   return { type: 'category', category }

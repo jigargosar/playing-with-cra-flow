@@ -1,7 +1,9 @@
+// @flow
+
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import { ascend, filter, prop, reject, sortWith } from 'ramda'
+import { ascend, Filter, filter, prop, reject, sortWith } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
@@ -14,6 +16,7 @@ import {
   TaskTitle,
 } from './components/elements'
 import { categories } from './models/Category'
+import type { Task } from './models/Task'
 import { createTaskList, getCategoryIndexOfTask } from './models/Task'
 import {
   createAllFilter,
@@ -27,7 +30,7 @@ import {
   isDoneFilter,
 } from './models/Filter'
 
-class App extends Component {
+class App extends Component<any, { tasks: Task[], filter: Filter }> {
   state = {
     tasks: createTaskList(),
     filter: createDoneFilter(),
