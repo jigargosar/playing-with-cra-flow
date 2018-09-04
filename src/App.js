@@ -135,6 +135,15 @@ class App extends Component<{}, AppState> {
     )
   }
   renderCurrentTasks = () => {
+    const renderMenuItem = task => category => (
+      <MenuItem
+        key={category}
+        selected={task.category === category}
+        onClick={this.updateTaskCategory(category, task)}
+      >
+        {category}
+      </MenuItem>
+    )
     const renderMenu = task => (
       <Popover.Container>
         {popover => (
@@ -144,15 +153,7 @@ class App extends Component<{}, AppState> {
             </Button>
             <Popover fade slide expand hideOnClickOutside {...popover}>
               <Popover.Arrow />
-              {categories.map(category => (
-                <MenuItem
-                  key={category}
-                  selected={task.category === category}
-                  onClick={this.updateTaskCategory(category, task)}
-                >
-                  {category}
-                </MenuItem>
-              ))}
+              {categories.map(renderMenuItem(task))}
             </Popover>
           </InlineBlock>
         )}
