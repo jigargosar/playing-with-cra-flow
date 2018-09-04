@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
+import { ascend, filter, indexOf, prop, reject, sortWith } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
@@ -14,11 +14,7 @@ import {
   TaskTitle,
 } from './components/elements'
 import { categories } from './models/Category'
-import { createTask } from './models/Task'
-
-function createTaskList(count = 20) {
-  return times(createTask, count)
-}
+import { createTaskList } from './models/Task'
 
 function createCategoryFilter(category) {
   return { type: 'category', category }

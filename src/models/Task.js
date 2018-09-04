@@ -3,12 +3,13 @@
 import * as faker from 'faker'
 import type { Category } from './Category'
 import { categories } from './Category'
+import { times } from 'ramda'
 
 type Task = {
-  category: Category,
-  done: boolean,
   id: string,
   title: string,
+  done: boolean,
+  category: Category,
 }
 
 export function createTask(): Task {
@@ -18,4 +19,8 @@ export function createTask(): Task {
     done: faker.random.boolean(),
     category: faker.random.arrayElement(categories),
   }
+}
+
+export function createTaskList(count: number = 20) {
+  return times(createTask, count)
 }

@@ -1,4 +1,8 @@
+[declarations]
+;.*/test/.*\.json
+
 [ignore]
+.*/test/.*\.json
 
 [include]
 
@@ -9,3 +13,4 @@
 [options]
 
 [strict]
+
