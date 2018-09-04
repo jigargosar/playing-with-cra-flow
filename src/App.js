@@ -1,10 +1,10 @@
 // @flow
 
 import * as React from 'react'
-import { Component, Fragment } from 'react'
-import { Viewport } from './components/Viewport'
-import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import { ascend, Filter, filter, prop, propEq, reject, sortWith } from 'ramda'
+import {Component, Fragment} from 'react'
+import {Viewport} from './components/Viewport'
+import {Base, Button, Group, InlineBlock, Popover, Provider} from 'reakit'
+import {ascend, Filter, filter, prop, propEq, reject, sortWith} from 'ramda'
 import {
   CategorySidebarItem,
   MenuItem,
@@ -15,10 +15,11 @@ import {
   SidebarItem,
   TaskTitle,
 } from './components/elements'
-import type { Category } from './models/Category'
-import { categories } from './models/Category'
-import type { Task } from './models/Task'
-import { createTaskList, getCategoryIndexOfTask, setTaskCategory } from './models/Task'
+
+import type {Category} from './models/Category'
+import {categories} from './models/Category'
+import type {Task} from './models/Task'
+import {createTaskList, getCategoryIndexOfTask, setTaskCategory} from './models/Task'
 import {
   createAllFilter,
   createCategoryFilter,
@@ -28,7 +29,7 @@ import {
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/Filter'
-import { FaEllipsisH } from 'react-icons/fa'
+import {FaEllipsisH} from 'react-icons/fa'
 
 type AppState = { tasks: Task[], filter: Filter }
 
