@@ -19,7 +19,7 @@ export type Task = {|
 
 export function createTask(): Task {
   return {
-    id: faker.random.alphaNumeric(4),
+    id: chance.n(chance.character, 4, { alpha: true }),
     title: faker.random.words(),
     done: chance.weighted([true, false], [20, 80]),
     category: chance.pickone(categories),
