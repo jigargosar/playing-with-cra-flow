@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith} from 'ramda'
+import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith,} from 'ramda'
 import {
   CategorySidebarItem,
   MenuItem,
@@ -172,7 +172,9 @@ class App extends Component<{}, AppState> {
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
         )}
         {task.tagIds.map(tagId => (
-          <TaskItemCategory>{`${this.getTagById()}`}</TaskItemCategory>
+          <TaskItemCategory key={tagId}>{`${
+            this.getTagById(tagId).title
+          }`}</TaskItemCategory>
         ))}
       </TaskItem>
     )
@@ -181,8 +183,8 @@ class App extends Component<{}, AppState> {
     // return this.getCurrentTasks().map(renderTask)
   }
 
-  getTagById(id:TagId):Tag {
-    return find(propEq('id',id))(this.state.tags)
+  getTagById(id: TagId): Tag {
+    return find(propEq('id', id))(this.state.tags)
   }
 }
 

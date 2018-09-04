@@ -3,7 +3,7 @@
 import * as faker from 'faker'
 import {times} from 'ramda'
 
-export opaque type TagId = string
+export type TagId = string
 
 export type Tag = {|
   id: TagId,
