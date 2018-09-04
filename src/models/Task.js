@@ -5,7 +5,7 @@ import type { Category } from './Category'
 import { categories } from './Category'
 import { indexOf, times } from 'ramda'
 
-export opaque type Task = {|
+export type Task = {|
   id: string,
   title: string,
   done: boolean,
@@ -27,3 +27,7 @@ export function createTaskList(count: number = 20): Task[] {
 
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
   indexOf(category)(categories)
+
+export const setTaskCategory = (category: Category, task: Task): Task => {
+  return { ...task, category }
+}

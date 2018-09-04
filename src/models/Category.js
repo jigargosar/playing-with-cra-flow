@@ -1,6 +1,8 @@
 // @flow
 
-export opaque type Category = 'InBasket' | 'NextAction' | 'Project' | 'Someday'
+import { identity } from 'ramda'
+
+export type Category = 'InBasket' | 'NextAction' | 'Project' | 'Someday'
 
 export const categories: Array<Category> = [
   'InBasket',
@@ -10,3 +12,5 @@ export const categories: Array<Category> = [
 ]
 
 export const CategoryInBasket: Category = 'InBasket'
+
+export const categoryToString: Category => string = identity
