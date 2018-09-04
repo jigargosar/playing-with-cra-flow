@@ -9,4 +9,5 @@ export const categories: Array<Category> = [
   'Someday',
 ]
 
-export const CategoryInBasket: Category = 'InBasket'
+
+

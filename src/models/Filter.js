@@ -1,7 +1,6 @@
 // @flow
 
 import type { Category } from './Category'
-import { CategoryInBasket } from './Category'
 
 export opaque type AllFilter = {| type: 'all' |}
 export opaque type DoneFilter = {| type: 'done'|}
@@ -19,7 +18,7 @@ export function createAllFilter(): AllFilter {
 }
 
 export function createDefaultCategoryFilter(): CategoryFilter {
-  return createCategoryFilter(CategoryInBasket)
+  return createCategoryFilter('InBasket')
 }
 
 export function isCategoryFilter(filter: Filter): boolean {
