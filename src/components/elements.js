@@ -10,6 +10,7 @@ export const TaskItemCategory = styled(Block)`
   font-size: 0.7rem;
   text-transform: uppercase;
   cursor: pointer;
+  margin: ${spacing1} 0;
 `
 export const TaskItemTags = styled(Block)`
   margin: ${spacing1} -${spacing1};
