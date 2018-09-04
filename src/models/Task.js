@@ -5,12 +5,12 @@ import type { Category } from './Category'
 import { categories } from './Category'
 import { indexOf, times } from 'ramda'
 
-type Task = {
+type Task = {|
   id: string,
   title: string,
   done: boolean,
   category: Category,
-}
+|}
 
 export function createTask(): Task {
   return {

@@ -2,10 +2,10 @@
 
 import type { Category } from './Category'
 
-type AllFilter = { type: 'all' }
-type DoneFilter = { type: 'done' }
+type AllFilter = {| type: 'all' |}
+type DoneFilter = {| type: 'done'|}
 
-type CategoryFilter = { type: 'category', category: Category }
+type CategoryFilter = {| type: 'category', category: Category |}
 
 type Filter = AllFilter | CategoryFilter | DoneFilter
 
