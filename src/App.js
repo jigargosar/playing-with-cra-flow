@@ -33,13 +33,16 @@ import {
   isDoneFilter,
 } from './models/Filter'
 import {FaEllipsisH} from 'react-icons/fa'
+import type {Tag} from './models/Tag'
+import {createTagList} from './models/Tag'
 
-type AppState = { tasks: Task[], filter: Filter }
+type AppState = { tasks: Task[], filter: Filter, tags: Tag[] }
 
 class App extends Component<{}, AppState> {
   state: AppState = {
     tasks: [],
     filter: createDefaultCategoryFilter(),
+    tags: createTagList(),
   }
 
   componentDidMount() {
