@@ -172,9 +172,9 @@ class App extends Component<{}, AppState> {
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
         )}
         {task.tagIds.map(tagId => (
-          <TaskItemCategory key={tagId}>{`${
-            this.getTagById(tagId).title
-          }`}</TaskItemCategory>
+          <TaskItemCategory key={tagId}>
+            {`#${this.getTagById(tagId).title}`}
+          </TaskItemCategory>
         ))}
       </TaskItem>
     )
