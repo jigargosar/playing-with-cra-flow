@@ -22,14 +22,6 @@ export function createDefaultCategoryFilter(): CategoryFilter {
   return createCategoryFilter(CategoryInBasket)
 }
 
-export function getFilterType(filter: Filter): string {
-  return filter.type
-}
-
-export function getFilterCategory(filter: CategoryFilter): Category {
-  return filter.category
-}
-
 export function isCategoryFilter(filter: Filter): boolean {
   return filter.type === 'category'
 }

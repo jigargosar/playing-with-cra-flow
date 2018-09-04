@@ -1,9 +1,10 @@
 // @flow
 
-import React, { Component, Fragment } from 'react'
+import * as React from 'react'
+import { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import { ascend, Filter, filter, prop, reject, sortWith } from 'ramda'
+import { ascend, Filter, filter, prop, propEq, reject, sortWith } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
@@ -16,15 +17,13 @@ import {
   TaskTitle,
 } from './components/elements'
 import type { Category } from './models/Category'
-import { categories, categoryToString } from './models/Category'
+import { categories } from './models/Category'
 import type { Task } from './models/Task'
 import { createTaskList, getCategoryIndexOfTask, setTaskCategory } from './models/Task'
 import {
   createAllFilter,
   createCategoryFilter,
   createDoneFilter,
-  getFilterCategory,
-  getFilterType,
   isAllFilter,
   isCategoryFilter,
   isCategoryFilterOf,
@@ -45,20 +44,17 @@ class App extends Component<{}, AppState> {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   getCurrentTasks(): Task[] {
-    let filterType = getFilterType(this.state.filter)
     let activeTasks = reject(prop('done'))(this.state.tasks)
-    switch (filterType) {
+    switch (this.state.filter.type) {
       case 'category':
-        return filter(
-          task => task.category === getFilterCategory(this.state.filter),
-        )(activeTasks)
+        return filter(propEq('category', this.state.filter))(activeTasks)
       case 'all':
         return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
       case 'done':
         let doneTasks = filter(prop('done'))(this.state.tasks)
         return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
       default:
-        console.assert(false, 'invalid filter type', filterType)
+        console.assert(false, 'invalid filter type', this.state.filter)
         return []
     }
   }
@@ -127,12 +123,12 @@ class App extends Component<{}, AppState> {
       let selected = isCategoryFilterOf(category, this.state.filter)
       return (
         <CategorySidebarItem
-          key={categoryToString(category)}
+          key={category}
           selected={selected}
           onClick={this.setFilter(createCategoryFilter(category))}
           tabIndex={selected ? 0 : null}
         >
-          {`${categoryToString(category)}`}
+          {`${category}`}
         </CategorySidebarItem>
       )
     }
@@ -148,7 +144,7 @@ class App extends Component<{}, AppState> {
 
   renderCurrentTasks = () => {
     let shouldDisplayTaskCategory = !isCategoryFilter(this.state.filter)
-    let renderTask: (task: Task) => React$Node = (task: Task): React$Node => (
+    let renderTask = (task: Task): React.Node => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
@@ -178,10 +174,9 @@ class App extends Component<{}, AppState> {
           </Popover.Container>
 
           {shouldDisplayTaskCategory && (
-            <Base
-              fontSize="0.7rem"
-              textTransform="uppercase"
-            >{`${categoryToString(task.category)}`}</Base>
+            <Base fontSize="0.7rem" textTransform="uppercase">{`${
+              task.category
+            }`}</Base>
           )}
         </Base>
       </Fragment>
