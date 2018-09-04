@@ -169,18 +169,16 @@ class App extends Component<{}, AppState> {
     )
 
     const renderTask = (task: Task): React.Node => (
-      <Fragment key={task.id}>
-        <Base margin="1rem" marginTop={0}>
-          <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-          {renderMenu(task)}
+      <Base key={task.id} margin="1rem" marginTop={0}>
+        <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
+        {renderMenu(task)}
 
-          {!isCategoryFilter(this.state.filter) && (
-            <Base fontSize="0.7rem" textTransform="uppercase">{`${
-              task.category
-            }`}</Base>
-          )}
-        </Base>
-      </Fragment>
+        {!isCategoryFilter(this.state.filter) && (
+          <Base fontSize="0.7rem" textTransform="uppercase">{`${
+            task.category
+          }`}</Base>
+        )}
+      </Base>
     )
 
     return (this.getCurrentTasks().map(renderTask): React$Node[])
