@@ -1,7 +1,7 @@
 // @flow
 
 import * as faker from 'faker'
-import {times} from 'ramda'
+import {head, times} from 'ramda'
 
 export type TagId = string
 
@@ -13,7 +13,7 @@ export type Tag = {|
 export function createTag(): Tag {
   return {
     id: faker.random.alphaNumeric(4),
-    title: faker.random.word(),
+    title: head(faker.random.word().split(/[ -]/)),
   }
 }
 
