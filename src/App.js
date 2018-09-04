@@ -37,9 +37,14 @@ type AppState = { tasks: Task[], filter: Filter }
 
 class App extends Component<{}, AppState> {
   state: AppState = {
-    tasks: createTaskList(),
+    tasks: [],
     filter: createDoneFilter(),
   }
+
+  componentDidMount() {
+    this.addMoreTasks()
+  }
+
   getCurrentTasks(): Task[] {
     const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
@@ -57,6 +62,7 @@ class App extends Component<{}, AppState> {
   }
   addMoreTasks = () =>
     this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
+
   deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {
     this.setState({ filter })
