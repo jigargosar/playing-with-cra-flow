@@ -170,7 +170,7 @@ class App extends Component<{}, AppState> {
       </TaskItem>
     )
 
-    return (this.getCurrentTasks().map(renderTask): React$Node[])
+    return (this.getCurrentTasks().map(renderTask): React.Node[])
     // return this.getCurrentTasks().map(renderTask)
   }
 }
