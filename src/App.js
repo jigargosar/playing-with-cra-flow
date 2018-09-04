@@ -13,6 +13,7 @@ import {
   PageHeader,
   PageSidebar,
   SidebarItem,
+  TaskItem,
   TaskTitle,
 } from './components/elements'
 
@@ -169,7 +170,7 @@ class App extends Component<{}, AppState> {
     )
 
     const renderTask = (task: Task): React.Node => (
-      <Base key={task.id} margin="1rem" marginTop={0}>
+      <TaskItem key={task.id} margin="1rem" marginTop={0}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
         {renderMenu(task)}
 
@@ -178,7 +179,7 @@ class App extends Component<{}, AppState> {
             task.category
           }`}</Base>
         )}
-      </Base>
+      </TaskItem>
     )
 
     return (this.getCurrentTasks().map(renderTask): React$Node[])
