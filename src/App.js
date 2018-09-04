@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Button, Flex, Group, InlineBlock, Popover, Provider} from 'reakit'
+import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
 import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith,} from 'ramda'
 import {
   CategorySidebarItem,
@@ -16,6 +16,7 @@ import {
   TaskItem,
   TaskItemCategory,
   TaskItemTag,
+  TaskItemTags,
   TaskTitle,
 } from './components/elements'
 
@@ -172,13 +173,13 @@ class App extends Component<{}, AppState> {
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
         )}
-        <Flex>
+        <TaskItemTags>
           {task.tagIds.map(tagId => (
             <TaskItemTag key={tagId}>
               {`#${this.getTagById(tagId).title}`}
             </TaskItemTag>
           ))}
-        </Flex>
+        </TaskItemTags>
       </TaskItem>
     )
 
