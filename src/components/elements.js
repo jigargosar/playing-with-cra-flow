@@ -12,7 +12,7 @@ export const TaskItemCategory = styled(Block)`
   cursor: pointer;
 `
 export const TaskItemTags = styled(Block)`
-  margin: 0.5rem -${spacing1};
+  margin: ${spacing1} -${spacing1};
 `
 export const TaskItemTag = styled(InlineBlock)`
   font-size: 0.7rem;
