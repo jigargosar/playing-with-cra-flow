@@ -171,7 +171,9 @@ class App extends Component<{}, AppState> {
         )}
 
         {!isCategoryFilter(this.state.filter) && (
-          <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
+          <TaskItemCategory
+            onClick={this.setFilter(createCategoryFilter(task.category))}
+          >{`${task.category}`}</TaskItemCategory>
         )}
         <TaskItemTags>
           {task.tagIds.map(tagId => (
