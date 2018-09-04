@@ -41,11 +41,6 @@ class App extends Component<{}, AppState> {
     filter: createDoneFilter(),
   }
 
-  addMoreTasks = () =>
-    this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
-
-  deleteAllTasks = () => this.setState({ tasks: [] })
-
   getCurrentTasks(): Task[] {
     const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
@@ -62,10 +57,12 @@ class App extends Component<{}, AppState> {
     }
   }
 
+  addMoreTasks = () =>
+    this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
+  deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {
     this.setState({ filter })
   }
-
   updateTaskCategory = (category: Category, task: Task) => () => {
     const updatedTask = setTaskCategory(category, task)
     return this.setState({
