@@ -44,14 +44,14 @@ class App extends Component<{}, AppState> {
   deleteAllTasks = () => this.setState({ tasks: [] })
 
   getCurrentTasks(): Task[] {
-    let activeTasks = reject(prop('done'))(this.state.tasks)
+    const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
       case 'category':
         return filter(propEq('category', this.state.filter))(activeTasks)
       case 'all':
         return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
       case 'done':
-        let doneTasks = filter(prop('done'))(this.state.tasks)
+        const doneTasks = filter(prop('done'))(this.state.tasks)
         return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
       default:
         console.assert(false, 'Invalid Filter', this.state.filter)
@@ -94,8 +94,8 @@ class App extends Component<{}, AppState> {
   }
 
   renderSidebar() {
-    let renderAllSidebarItem = () => {
-      let selected = isAllFilter(this.state.filter)
+    const renderAllSidebarItem = () => {
+      const selected = isAllFilter(this.state.filter)
       return (
         <SidebarItem
           selected={selected}
@@ -106,8 +106,8 @@ class App extends Component<{}, AppState> {
         </SidebarItem>
       )
     }
-    let renderDoneSidebarItem = () => {
-      let selected = isDoneFilter(this.state.filter)
+    const renderDoneSidebarItem = () => {
+      const selected = isDoneFilter(this.state.filter)
       return (
         <SidebarItem
           selected={selected}
@@ -119,8 +119,8 @@ class App extends Component<{}, AppState> {
       )
     }
 
-    let renderCategorySideBarItem = category => {
-      let selected = isCategoryFilterOf(category, this.state.filter)
+    const renderCategorySideBarItem = category => {
+      const selected = isCategoryFilterOf(category, this.state.filter)
       return (
         <CategorySidebarItem
           key={category}
@@ -143,8 +143,8 @@ class App extends Component<{}, AppState> {
   }
 
   renderCurrentTasks = () => {
-    let shouldDisplayTaskCategory = !isCategoryFilter(this.state.filter)
-    let renderTask = (task: Task): React.Node => (
+    const shouldDisplayTaskCategory = !isCategoryFilter(this.state.filter)
+    const renderTask = (task: Task): React.Node => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
@@ -157,7 +157,7 @@ class App extends Component<{}, AppState> {
                 <Popover fade slide expand hideOnClickOutside {...popover}>
                   <Popover.Arrow />
                   {categories.map(category => {
-                    let selected = task.category === category
+                    const selected = task.category === category
                     return (
                       <MenuItem
                         key={category}
