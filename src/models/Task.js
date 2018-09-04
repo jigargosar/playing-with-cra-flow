@@ -22,7 +22,7 @@ export function createTask(): Task {
     id: faker.random.alphaNumeric(4),
     title: faker.random.words(),
     done: chance.weighted([true, false], [20, 80]),
-    category: faker.random.arrayElement(categories),
+    category: chance.pickone(categories),
     tagIds: [],
   }
 }
