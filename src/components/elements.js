@@ -1,12 +1,17 @@
-import {Base, css, Flex, styled} from 'reakit'
+import {Base, Block, css, Flex, styled} from 'reakit'
 import {ifProp} from 'styled-tools'
 
 export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
-export const TaskItemCategory = styled(Base)`
+export const TaskItemCategory = styled(Block)`
   font-size: 0.7rem;
   text-transform: uppercase;
+`
+export const TaskItemTag = styled(Block)`
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin: 0 0.5rem;
 `
 export const TaskTitle = styled(Base)`
   ${ifProp(

@@ -41,7 +41,7 @@ export const setTaskCategory = (category: Category, task: Task): Task => {
 export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
   const someTags: Tag[] = chance.pickset(
     tags,
-    chance.integer({ min: 0, max: 3 }),
+    chance.weighted([0, 1, 2, 3], [10, 20, 50, 50]),
   )
   return { ...task, tagIds: someTags.map(tag => tag.id) }
 }
