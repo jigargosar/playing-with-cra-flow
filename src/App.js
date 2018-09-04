@@ -156,18 +156,15 @@ class App extends Component<{}, AppState> {
                 </Button>
                 <Popover fade slide expand hideOnClickOutside {...popover}>
                   <Popover.Arrow />
-                  {categories.map(category => {
-                    const selected = task.category === category
-                    return (
-                      <MenuItem
-                        key={category}
-                        selected={selected}
-                        onClick={this.updateTaskCategory(category, task)}
-                      >
-                        {category}
-                      </MenuItem>
-                    )
-                  })}
+                  {categories.map(category => (
+                    <MenuItem
+                      key={category}
+                      selected={task.category === category}
+                      onClick={this.updateTaskCategory(category, task)}
+                    >
+                      {category}
+                    </MenuItem>
+                  ))}
                 </Popover>
               </InlineBlock>
             )}
