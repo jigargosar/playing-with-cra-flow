@@ -144,7 +144,7 @@ class App extends Component<{}, AppState> {
         {category}
       </MenuItem>
     )
-    const renderMenu = task => (
+    const renderMenuContainer = task => (
       <Popover.Container>
         {popover => (
           <InlineBlock relative>
@@ -163,7 +163,7 @@ class App extends Component<{}, AppState> {
     const renderTask = (task: Task): React.Node => (
       <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-        {renderMenu(task)}
+        {renderMenuContainer(task)}
 
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
