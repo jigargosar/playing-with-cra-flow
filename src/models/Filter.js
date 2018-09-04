@@ -1,6 +1,7 @@
 // @flow
 
 import type { Category } from './Category'
+import { CategoryInBasket } from './Category'
 
 type AllFilter = {| type: 'all' |}
 type DoneFilter = {| type: 'done'|}
@@ -18,7 +19,7 @@ export function createAllFilter(): AllFilter {
 }
 
 export function createDefaultCategoryFilter(): CategoryFilter {
-  return createCategoryFilter('InBasket')
+  return createCategoryFilter(CategoryInBasket)
 }
 
 export function getFilterType(filter: Filter): string {
