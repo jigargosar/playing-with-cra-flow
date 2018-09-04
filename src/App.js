@@ -25,6 +25,7 @@ import {createTaskList, getCategoryIndexOfTask, setTaskCategory,} from './models
 import {
   createAllFilter,
   createCategoryFilter,
+  createDefaultCategoryFilter,
   createDoneFilter,
   isAllFilter,
   isCategoryFilter,
@@ -38,7 +39,7 @@ type AppState = { tasks: Task[], filter: Filter }
 class App extends Component<{}, AppState> {
   state: AppState = {
     tasks: [],
-    filter: createDoneFilter(),
+    filter: createDefaultCategoryFilter(),
   }
 
   componentDidMount() {
