@@ -40,7 +40,6 @@ class App extends Component<{}, AppState> {
     tasks: createTaskList(),
     filter: createDoneFilter(),
   }
-
   getCurrentTasks(): Task[] {
     const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
@@ -56,7 +55,6 @@ class App extends Component<{}, AppState> {
         return []
     }
   }
-
   addMoreTasks = () =>
     this.setState({ tasks: [...createTaskList(), ...this.state.tasks] })
   deleteAllTasks = () => this.setState({ tasks: [] })
@@ -69,7 +67,6 @@ class App extends Component<{}, AppState> {
       tasks: this.state.tasks.map(t => (t === task ? updatedTask : t)),
     })
   }
-
   render() {
     return (
       <Provider>
@@ -83,7 +80,6 @@ class App extends Component<{}, AppState> {
       </Provider>
     )
   }
-
   renderHeader() {
     return (
       <Group>
@@ -92,7 +88,6 @@ class App extends Component<{}, AppState> {
       </Group>
     )
   }
-
   renderSidebar() {
     const renderAllSidebarItem = () => {
       const selected = isAllFilter(this.state.filter)
@@ -118,7 +113,6 @@ class App extends Component<{}, AppState> {
         </SidebarItem>
       )
     }
-
     const renderCategorySideBarItem = category => {
       const selected = isCategoryFilterOf(category, this.state.filter)
       return (
@@ -132,7 +126,6 @@ class App extends Component<{}, AppState> {
         </CategorySidebarItem>
       )
     }
-
     return (
       <Fragment>
         {renderAllSidebarItem()}
@@ -141,7 +134,6 @@ class App extends Component<{}, AppState> {
       </Fragment>
     )
   }
-
   renderCurrentTasks = () => {
     const renderMenu = task => (
       <Popover.Container>
