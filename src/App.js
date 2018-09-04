@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, Filter, filter, prop, propEq, reject, sortWith} from 'ramda'
+import {ascend, eqProps, filter, Filter, prop, reject, sortWith} from 'ramda'
 import {
   CategorySidebarItem,
   MenuItem,
@@ -44,7 +44,7 @@ class App extends Component<{}, AppState> {
     const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
       case 'category':
-        return filter(propEq('category', this.state.filter))(activeTasks)
+        return filter(eqProps('category', this.state.filter))(activeTasks)
       case 'all':
         return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
       case 'done':

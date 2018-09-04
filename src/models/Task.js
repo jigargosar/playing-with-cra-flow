@@ -1,9 +1,9 @@
 // @flow
 
 import * as faker from 'faker'
-import type { Category } from './Category'
-import { categories } from './Category'
-import { indexOf, times } from 'ramda'
+import type {Category} from './Category'
+import {categories} from './Category'
+import {indexOf, times} from 'ramda'
 
 export type Task = {|
   id: string,
@@ -21,7 +21,7 @@ export function createTask(): Task {
   }
 }
 
-export function createTaskList(count: number = 20): Task[] {
+export function createTaskList(count: number = 50): Task[] {
   return times(createTask, count)
 }
 
