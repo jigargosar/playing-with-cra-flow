@@ -14,8 +14,8 @@ import {
   SidebarItem,
   TaskTitle,
 } from './components/elements'
+import { categories } from './models/category'
 
-const categories = ['InBasket', 'NextAction', 'Project', 'Someday']
 
 function createTask() {
   return {
