@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
-import * as faker from 'faker'
 import { ascend, filter, indexOf, prop, reject, sortWith, times } from 'ramda'
 import { FaEllipsisH } from 'react-icons/all'
 import {
@@ -14,17 +13,9 @@ import {
   SidebarItem,
   TaskTitle,
 } from './components/elements'
-import { categories } from './models/category'
+import { categories } from './models/Category'
+import { createTask } from './models/Task'
 
-
-function createTask() {
-  return {
-    id: faker.random.alphaNumeric(4),
-    title: faker.random.words(),
-    done: faker.random.boolean(),
-    category: faker.random.arrayElement(categories),
-  }
-}
 function createTaskList(count = 20) {
   return times(createTask, count)
 }
