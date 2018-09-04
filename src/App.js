@@ -54,7 +54,7 @@ class App extends Component<{}, AppState> {
         let doneTasks = filter(prop('done'))(this.state.tasks)
         return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
       default:
-        console.assert(false, 'invalid filter type', this.state.filter)
+        console.assert(false, 'Invalid Filter', this.state.filter)
         return []
     }
   }
