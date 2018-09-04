@@ -1,6 +1,8 @@
 import {Base, Block, css, Flex, InlineBlock, styled} from 'reakit'
 import {ifProp} from 'styled-tools'
 
+const spacing1 = ['0.3rem']
+
 export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
@@ -9,14 +11,14 @@ export const TaskItemCategory = styled(Block)`
   text-transform: uppercase;
   cursor: pointer;
 `
+export const TaskItemTags = styled(Block)`
+  margin: 0.5rem -${spacing1};
+`
 export const TaskItemTag = styled(InlineBlock)`
   font-size: 0.7rem;
   text-transform: uppercase;
-  margin: 0 0.5rem;
+  margin: 0 ${spacing1};
   cursor: pointer;
-`
-export const TaskItemTags = styled(Block)`
-  margin: 0.5rem -0.5rem;
 `
 export const TaskTitle = styled(Base)`
   ${ifProp(
