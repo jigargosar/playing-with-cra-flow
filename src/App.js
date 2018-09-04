@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, eqProps, filter, Filter, prop, reject, sortWith} from 'ramda'
+import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith} from 'ramda'
 import {
   CategorySidebarItem,
   MenuItem,
@@ -25,7 +25,6 @@ import {createTaskList, getCategoryIndexOfTask, setSomeTaskTags, setTaskCategory
 import {
   createAllFilter,
   createCategoryFilter,
-  createDefaultCategoryFilter,
   createDoneFilter,
   isAllFilter,
   isCategoryFilter,
@@ -33,7 +32,7 @@ import {
   isDoneFilter,
 } from './models/Filter'
 import {FaEllipsisH} from 'react-icons/fa'
-import type {Tag} from './models/Tag'
+import type {Tag, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
 type AppState = { tasks: Task[], filter: Filter, tags: Tag[] }
@@ -41,7 +40,7 @@ type AppState = { tasks: Task[], filter: Filter, tags: Tag[] }
 class App extends Component<{}, AppState> {
   state: AppState = {
     tasks: [],
-    filter: createDefaultCategoryFilter(),
+    filter: createAllFilter(),
     tags: createTagList(),
   }
 
@@ -172,11 +171,18 @@ class App extends Component<{}, AppState> {
         {!isCategoryFilter(this.state.filter) && (
           <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
         )}
+        {task.tagIds.map(tagId => (
+          <TaskItemCategory>{`${this.getTagById()}`}</TaskItemCategory>
+        ))}
       </TaskItem>
     )
 
     return (this.getCurrentTasks().map(renderTask): React.Node[])
     // return this.getCurrentTasks().map(renderTask)
+  }
+
+  getTagById(id:TagId):Tag {
+    return find(propEq('id',id))(this.state.tags)
   }
 }
 
