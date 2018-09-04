@@ -7,6 +7,7 @@ export const TaskItem = styled(Base)`
 export const TaskItemCategory = styled(Block)`
   font-size: 0.7rem;
   text-transform: uppercase;
+  cursor: pointer;
 `
 export const TaskItemTag = styled(InlineBlock)`
   font-size: 0.7rem;
