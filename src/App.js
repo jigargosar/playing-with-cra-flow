@@ -5,7 +5,6 @@ import { Component, Fragment } from 'react'
 import { Viewport } from './components/Viewport'
 import { Base, Button, Group, InlineBlock, Popover, Provider } from 'reakit'
 import { ascend, Filter, filter, prop, propEq, reject, sortWith } from 'ramda'
-import { FaEllipsisH } from 'react-icons/all'
 import {
   CategorySidebarItem,
   MenuItem,
@@ -29,6 +28,7 @@ import {
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/Filter'
+import { FaEllipsisH } from 'react-icons/fa'
 
 type AppState = { tasks: Task[], filter: Filter }
 
@@ -143,34 +143,37 @@ class App extends Component<{}, AppState> {
   }
 
   renderCurrentTasks = () => {
-    const shouldDisplayTaskCategory = !isCategoryFilter(this.state.filter)
+    const renderMenu = task => (
+      <Popover.Container>
+        {popover => (
+          <InlineBlock relative>
+            <Button as={Popover.Toggle} {...popover}>
+              <FaEllipsisH />
+            </Button>
+            <Popover fade slide expand hideOnClickOutside {...popover}>
+              <Popover.Arrow />
+              {categories.map(category => (
+                <MenuItem
+                  key={category}
+                  selected={task.category === category}
+                  onClick={this.updateTaskCategory(category, task)}
+                >
+                  {category}
+                </MenuItem>
+              ))}
+            </Popover>
+          </InlineBlock>
+        )}
+      </Popover.Container>
+    )
+
     const renderTask = (task: Task): React.Node => (
       <Fragment key={task.id}>
         <Base margin="1rem" marginTop={0}>
           <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-          <Popover.Container>
-            {popover => (
-              <InlineBlock relative>
-                <Button as={Popover.Toggle} {...popover}>
-                  <FaEllipsisH />
-                </Button>
-                <Popover fade slide expand hideOnClickOutside {...popover}>
-                  <Popover.Arrow />
-                  {categories.map(category => (
-                    <MenuItem
-                      key={category}
-                      selected={task.category === category}
-                      onClick={this.updateTaskCategory(category, task)}
-                    >
-                      {category}
-                    </MenuItem>
-                  ))}
-                </Popover>
-              </InlineBlock>
-            )}
-          </Popover.Container>
+          {renderMenu(task)}
 
-          {shouldDisplayTaskCategory && (
+          {!isCategoryFilter(this.state.filter) && (
             <Base fontSize="0.7rem" textTransform="uppercase">{`${
               task.category
             }`}</Base>
@@ -178,6 +181,7 @@ class App extends Component<{}, AppState> {
         </Base>
       </Fragment>
     )
+
     return (this.getCurrentTasks().map(renderTask): React$Node[])
     // return this.getCurrentTasks().map(renderTask)
   }
