@@ -5,6 +5,7 @@ import Chance from 'chance'
 import type {Category} from './Category'
 import {categories} from './Category'
 import {indexOf, times} from 'ramda'
+import type {TagId} from './Tag'
 
 const chance = Chance()
 
@@ -13,6 +14,7 @@ export type Task = {|
   title: string,
   done: boolean,
   category: Category,
+  tagIds: TagId[],
 |}
 
 export function createTask(): Task {
@@ -21,6 +23,7 @@ export function createTask(): Task {
     title: faker.random.words(),
     done: chance.weighted([true, false], [20, 80]),
     category: faker.random.arrayElement(categories),
+    tagIds: [],
   }
 }
 
