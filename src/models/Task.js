@@ -11,7 +11,7 @@ type Task = {
   title: string,
 }
 
-export function createTask():Task{
+export function createTask(): Task {
   return {
     id: faker.random.alphaNumeric(4),
     title: faker.random.words(),
