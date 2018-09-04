@@ -12,6 +12,7 @@ export const TaskItemTag = styled(InlineBlock)`
   font-size: 0.7rem;
   text-transform: uppercase;
   margin: 0 0.5rem;
+  cursor: pointer;
 `
 export const TaskItemTags = styled(Block)`
   margin: 0.5rem -0.5rem;
