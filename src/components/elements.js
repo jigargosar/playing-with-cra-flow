@@ -4,6 +4,10 @@ import {ifProp} from 'styled-tools'
 export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
+export const TaskItemCategory = styled(Base)`
+  font-size: 0.7rem;
+  text-transform: uppercase;
+`
 export const TaskTitle = styled(Base)`
   ${ifProp(
     'done',

@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Base, Button, Group, InlineBlock, Popover, Provider} from 'reakit'
+import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
 import {ascend, Filter, filter, prop, propEq, reject, sortWith} from 'ramda'
 import {
   CategorySidebarItem,
@@ -14,13 +14,14 @@ import {
   PageSidebar,
   SidebarItem,
   TaskItem,
+  TaskItemCategory,
   TaskTitle,
 } from './components/elements'
 
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task} from './models/Task'
-import {createTaskList, getCategoryIndexOfTask, setTaskCategory} from './models/Task'
+import {createTaskList, getCategoryIndexOfTask, setTaskCategory,} from './models/Task'
 import {
   createAllFilter,
   createCategoryFilter,
@@ -170,14 +171,12 @@ class App extends Component<{}, AppState> {
     )
 
     const renderTask = (task: Task): React.Node => (
-      <TaskItem key={task.id} margin="1rem" marginTop={0}>
+      <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
         {renderMenu(task)}
 
         {!isCategoryFilter(this.state.filter) && (
-          <Base fontSize="0.7rem" textTransform="uppercase">{`${
-            task.category
-          }`}</Base>
+          <TaskItemCategory>{`${task.category}`}</TaskItemCategory>
         )}
       </TaskItem>
     )
