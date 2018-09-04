@@ -15,6 +15,7 @@ import {
   SidebarItem,
   TaskItem,
   TaskItemCategory,
+  TaskItemTag,
   TaskTitle,
 } from './components/elements'
 
@@ -173,9 +174,9 @@ class App extends Component<{}, AppState> {
         )}
         <Flex>
           {task.tagIds.map(tagId => (
-            <TaskItemCategory key={tagId}>
+            <TaskItemTag key={tagId}>
               {`#${this.getTagById(tagId).title}`}
-            </TaskItemCategory>
+            </TaskItemTag>
           ))}
         </Flex>
       </TaskItem>
