@@ -44,3 +44,4 @@ export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
   const someTags: Tag[] = chance.pickset(tags, 5)
   return { ...task, tagIds: someTags.map(tag => tag.id) }
 }
+export type TaskCollection = Task[]

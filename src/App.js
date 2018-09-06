@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, contains, eqProps, filter, Filter, find, prop, propEq, reject, sortWith} from 'ramda'
+import {ascend, contains, eqProps, filter, find, prop, propEq, reject, sortWith,} from 'ramda'
 import {
   MenuItem,
   PageContent,
@@ -23,8 +23,9 @@ import {
 
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
-import type {Task} from './models/Task'
+import type {Task, TaskCollection} from './models/Task'
 import {createTaskList, getCategoryIndexOfTask, setSomeTaskTags, setTaskCategory,} from './models/Task'
+import type {TaskFilter} from "./models/TaskFilter";
 import {
   createAllFilter,
   createCategoryFilter,
@@ -34,16 +35,39 @@ import {
   isCategoryFilter,
   isCategoryFilterOf,
   isDoneFilter,
-} from './models/Filter'
+} from './models/TaskFilter'
 import {FaEllipsisH} from 'react-icons/fa'
 import type {Tag, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
 type AppState = {
   tasks: Task[],
-  filter: Filter,
+  filter: TaskFilter,
   tags: Tag[],
   isTagsPage: boolean,
+}
+
+function getTasksByFilter(
+  taskFilter: TaskFilter,
+  tasksCollection: TaskCollection,
+) {
+  const activeTasks = reject(prop('done'))(tasksCollection)
+  switch (taskFilter.type) {
+    case 'category':
+      return filter(eqProps('category', taskFilter))(activeTasks)
+    case 'tag':
+      return filter(task => contains(taskFilter.tagId)(task.tagIds))(
+        activeTasks,
+      )
+    case 'all':
+      return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
+    case 'done':
+      const doneTasks = filter(prop('done'))(tasksCollection)
+      return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
+    default:
+      console.assert(false, 'Invalid TaskFilter', taskFilter)
+      return []
+  }
 }
 
 class App extends Component<{}, AppState> {
@@ -58,21 +82,9 @@ class App extends Component<{}, AppState> {
     this.addMoreTasks()
   }
   getCurrentTasks(): Task[] {
-    const activeTasks = reject(prop('done'))(this.state.tasks)
-    switch (this.state.filter.type) {
-      case 'category':
-        return filter(eqProps('category', this.state.filter))(activeTasks)
-      case 'tag':
-        return filter(task=>contains(this.state.filter.tagId)(task.tagIds))(activeTasks)
-      case 'all':
-        return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
-      case 'done':
-        const doneTasks = filter(prop('done'))(this.state.tasks)
-        return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
-      default:
-        console.assert(false, 'Invalid Filter', this.state.filter)
-        return []
-    }
+    const tasksCollection = this.state.tasks
+    const taskFilter = this.state.filter
+    return getTasksByFilter(taskFilter, tasksCollection)
   }
   addMoreTasks = () => {
     return this.setState({
@@ -83,7 +95,7 @@ class App extends Component<{}, AppState> {
     })
   }
   deleteAllTasks = () => this.setState({ tasks: [] })
-  setFilter = (filter: Filter) => () => {
+  setFilter = (filter: TaskFilter) => () => {
     this.setState({ filter, isTagsPage: false })
   }
   setTagsPage = (bool: boolean) => () => {

@@ -9,7 +9,7 @@ export opaque type DoneFilter = {| type: 'done' |}
 export opaque type CategoryFilter = {| type: 'category', category: Category |}
 export opaque type TagFilter = {| type: 'tag', tagId: TagId |}
 
-export opaque type Filter = AllFilter | CategoryFilter | DoneFilter | TagFilter
+export opaque type TaskFilter = AllFilter | CategoryFilter | DoneFilter | TagFilter
 
 export function createCategoryFilter(category: Category): CategoryFilter {
   return { type: 'category', category }
@@ -27,18 +27,18 @@ export function createDefaultCategoryFilter(): CategoryFilter {
   return createCategoryFilter('InBasket')
 }
 
-export function isCategoryFilter(filter: Filter): boolean {
+export function isCategoryFilter(filter: TaskFilter): boolean {
   return filter.type === 'category'
 }
 
 export function isCategoryFilterOf(
   category: Category,
-  filter: Filter,
+  filter: TaskFilter,
 ): boolean {
   return filter.type === 'category' && filter.category === category
 }
 
-export function isAllFilter(filter: Filter): boolean {
+export function isAllFilter(filter: TaskFilter): boolean {
   return filter.type === 'all'
 }
 
@@ -46,6 +46,6 @@ export function createDoneFilter() {
   return { type: 'done' }
 }
 
-export function isDoneFilter(filter: Filter): boolean {
+export function isDoneFilter(filter: TaskFilter): boolean {
   return filter.type === 'done'
 }
