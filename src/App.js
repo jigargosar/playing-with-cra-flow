@@ -37,13 +37,19 @@ import {FaEllipsisH} from 'react-icons/fa'
 import type {Tag, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
-type AppState = { tasks: Task[], filter: Filter, tags: Tag[] }
+type AppState = {
+  tasks: Task[],
+  filter: Filter,
+  tags: Tag[],
+  isLabelsPage: boolean,
+}
 
 class App extends Component<{}, AppState> {
   state: AppState = {
     tasks: [],
     filter: createAllFilter(),
     tags: createTagList(),
+    isLabelsPage: false,
   }
 
   componentDidMount() {
@@ -76,7 +82,10 @@ class App extends Component<{}, AppState> {
 
   deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {
-    this.setState({ filter })
+    this.setState({ filter, isLabelsPage: false })
+  }
+  setLabelsPage = (bool: boolean) => () => {
+    this.setState({ isLabelsPage: bool })
   }
   updateTaskCategory = (category: Category, task: Task) => () => {
     const updatedTask = setTaskCategory(category, task)
@@ -130,6 +139,18 @@ class App extends Component<{}, AppState> {
         </SidebarItem>
       )
     }
+    const renderLabelsSidebarItem = () => {
+      const selected = this.state.isLabelsPage
+      return (
+        <SidebarItem
+          selected={selected}
+          onClick={this.setLabelsPage(true)}
+          tabIndex={selected ? 0 : null}
+        >
+          Labels
+        </SidebarItem>
+      )
+    }
     const renderCategorySideBarItem = category => {
       const selected = isCategoryFilterOf(category, this.state.filter)
       return (
@@ -145,8 +166,9 @@ class App extends Component<{}, AppState> {
     }
     return (
       <Fragment>
-        {renderAllSidebarItem()}
         {categories.map(renderCategorySideBarItem)}
+        {renderLabelsSidebarItem()}
+        {renderAllSidebarItem()}
         {renderDoneSidebarItem()}
       </Fragment>
     )
