@@ -12,28 +12,28 @@ export const Layout = styled(Grid).attrs({
   width: 100vw;
 `
 
+Layout.Header = styled(Grid.Item).attrs({ area: 'a' })`
+  background-color: red;
+`
+
+Layout.Sidebar = styled(Grid.Item).attrs({ area: 'b' })`
+  background-color: green;
+`
+Layout.Content = styled(Grid.Item).attrs({ area: 'c' })`
+  background-color: blue;
+`
+Layout.Footer = styled(Grid.Item).attrs({ area: 'd' })`
+  background-color: yellow;
+`
+
 export class LayoutC extends React.Component<{}> {
   render() {
-    const template = `
-      "a a a" 
-      "b c c" minmax(200px, 1fr)
-      "d d d"
-    `
-
     return (
       <Layout>
-        <Grid.Item area="a" backgroundColor="red">
-          Header
-        </Grid.Item>
-        <Grid.Item area="b" backgroundColor="green">
-          Sidebar
-        </Grid.Item>
-        <Grid.Item area="c" backgroundColor="blue">
-          Content
-        </Grid.Item>
-        <Grid.Item area="d" backgroundColor="yellow">
-          Footer
-        </Grid.Item>
+        <Layout.Header>Header</Layout.Header>
+        <Layout.Sidebar>Sidebar</Layout.Sidebar>
+        <Layout.Content>Content</Layout.Content>
+        <Layout.Footer>Footer</Layout.Footer>
       </Layout>
     )
   }
