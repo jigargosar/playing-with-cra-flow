@@ -170,6 +170,21 @@ class App extends Component<{}, AppState> {
               defaultValue={task.title}
             />
           </Field>
+          <Heading as={'h5'}>Is it Actionable?</Heading>
+          <Group>
+            <Button>YES</Button>
+            <Button disabled={true}>NO</Button>
+          </Group>
+          <Heading as={'h5'}>Is it Project?</Heading>
+          <Group>
+            <Button disabled={true}>YES</Button>
+            <Button>NO</Button>
+          </Group>
+          <Heading as={'h5'}>Can It be completed under 2 minutes?</Heading>
+          <Group>
+            <Button>YES</Button>
+            <Button>NO</Button>
+          </Group>
         </Overlay>
       </Block>
     )
