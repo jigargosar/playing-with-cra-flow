@@ -12,31 +12,42 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 type AppState = {}
 
+class Layout extends React.Component<{}> {
+  render() {
+    const template = `
+      "a a a" 
+      "b c c" minmax(200px, 1fr)
+      "d d d"
+    `
+
+    return (
+      <Grid template={template} height={'100vh'}>
+        <Grid.Item area="a" backgroundColor="red">
+          Header
+        </Grid.Item>
+        <Grid.Item area="b" backgroundColor="green">
+          Sidebar
+        </Grid.Item>
+        <Grid.Item area="c" backgroundColor="blue">
+          Content
+        </Grid.Item>
+        <Grid.Item area="d" backgroundColor="yellow">
+          Footer
+        </Grid.Item>
+      </Grid>
+    )
+  }
+}
+
 class App extends Component<{}, AppState> {
   state: AppState = {}
 
   render() {
-    const template = `
-    "a a a" 
-    "b c c" minmax(200px, 1fr)
-    "d d d"
-`
-    return <Provider theme={theme}>
-        <Grid template={template} height={'100vh'}>
-          <Grid.Item area="a" backgroundColor="red">
-            Header
-          </Grid.Item>
-          <Grid.Item area="b" backgroundColor="green">
-            Sidebar
-          </Grid.Item>
-          <Grid.Item area="c" backgroundColor="blue">
-            Content
-          </Grid.Item>
-          <Grid.Item area="d" backgroundColor="yellow">
-            Footer
-          </Grid.Item>
-        </Grid>
+    return (
+      <Provider theme={theme}>
+        <Layout />
       </Provider>
+    )
   }
 }
 
