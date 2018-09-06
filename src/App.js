@@ -195,7 +195,6 @@ class App extends Component<{}, AppState> {
           <FaEllipsisH />,
           categories.map(renderMenuItem(task)),
         )}
-
         <TaskItemCategory
           onClick={this.setFilter(createCategoryFilter(task.category))}
         >{`${task.category}`}</TaskItemCategory>
