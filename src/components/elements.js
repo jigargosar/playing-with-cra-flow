@@ -1,5 +1,5 @@
-import {Base, Block, Button, css, Flex, InlineBlock, styled} from 'reakit'
-import {ifProp} from 'styled-tools'
+import { Base, Block, Button, css, Flex, InlineBlock, styled } from 'reakit'
+import { ifProp } from 'styled-tools'
 
 export const spacing1 = ['0.3rem']
 export const spacing1e = ['0.3em']
@@ -89,5 +89,10 @@ export const MenuItem = styled(Base)`
   cursor: pointer;
 `
 export const IconButton = styled(Button)`
-  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  & > svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
 `

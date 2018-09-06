@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "runjs": {
-    "requires": [
-      "./node_modules/babel-register"
-    ]
+    "requires": ["./node_modules/babel-register"]
   },
   "prettier": {
     "trailingComma": "all",
@@ -24,10 +22,7 @@
     "extends": "react-app"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --config package.json --write",
-      "git add"
-    ]
+    "*.{js,json,css,md}": ["prettier --config package.json --write", "git add"]
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,6 +39,7 @@
     "constate": "^0.8.1",
     "debug": "^3.1.0",
     "faker": "^4.1.0",
+    "mdi-react": "^4.3.0",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.9.0",
     "react": "^16.4.2",
