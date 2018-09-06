@@ -120,7 +120,7 @@ class App extends Component<{}, AppState> {
   }
   renderSidebar() {
     const renderAllSidebarItem = () => {
-      const selected = isAllFilter(this.state.filter)
+      const selected = isAllFilter(this.state.filter) && !this.state.isTagsPage
       return (
         <SidebarItem
           selected={selected}
@@ -132,7 +132,7 @@ class App extends Component<{}, AppState> {
       )
     }
     const renderDoneSidebarItem = () => {
-      const selected = isDoneFilter(this.state.filter)
+      const selected = isDoneFilter(this.state.filter) && !this.state.isTagsPage
       return (
         <SidebarItem
           selected={selected}
@@ -156,7 +156,9 @@ class App extends Component<{}, AppState> {
       )
     }
     const renderCategorySideBarItem = category => {
-      const selected = isCategoryFilterOf(category, this.state.filter)
+      const selected =
+        isCategoryFilterOf(category, this.state.filter) &&
+        !this.state.isTagsPage
       return (
         <CategorySidebarItem
           key={category}
