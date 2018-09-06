@@ -6,7 +6,6 @@ import {Viewport} from './components/Viewport'
 import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
 import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith,} from 'ramda'
 import {
-  CategorySidebarItem,
   MenuItem,
   PageContent,
   PageContentWrapper,
@@ -160,14 +159,14 @@ class App extends Component<{}, AppState> {
         isCategoryFilterOf(category, this.state.filter) &&
         !this.state.isTagsPage
       return (
-        <CategorySidebarItem
+        <SidebarItem
           key={category}
           selected={selected}
           onClick={this.setFilter(createCategoryFilter(category))}
           tabIndex={selected ? 0 : null}
         >
           {`${category}`}
-        </CategorySidebarItem>
+        </SidebarItem>
       )
     }
     return (
