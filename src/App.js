@@ -13,6 +13,7 @@ import {
   PageHeader,
   PageSidebar,
   SidebarItem,
+  spacing1e,
   TagList,
   TagListItem,
   TaskItem,
@@ -236,7 +237,7 @@ function renderIconPopupMenu(icon, menuItems) {
   return (
     <Popover.Container>
       {popover => (
-        <InlineBlock relative>
+        <InlineBlock relative margin={`0 ${spacing1e}`}>
           <IconButton as={Popover.Toggle} {...popover}>
             {icon}
           </IconButton>
