@@ -7,7 +7,7 @@ import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
 import { theme } from './components/theme'
-import { LayoutC } from './components/Layout'
+import { Layout } from './components/Layout'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -20,11 +20,15 @@ class App extends Component<{}, AppState> {
   render() {
     return (
       <Provider theme={theme}>
-        <LayoutC />
+        <Layout>
+          <Layout.Header>Header</Layout.Header>
+          <Layout.Sidebar>Sidebar</Layout.Sidebar>
+          <Layout.Content>Content</Layout.Content>
+          <Layout.Footer>Footer</Layout.Footer>
+        </Layout>
       </Provider>
     )
   }
 }
 
 export default App
-

@@ -26,15 +26,3 @@ Layout.Footer = styled(Grid.Item).attrs({ area: 'd' })`
   background-color: yellow;
 `
 
-export class LayoutC extends React.Component<{}> {
-  render() {
-    return (
-      <Layout>
-        <Layout.Header>Header</Layout.Header>
-        <Layout.Sidebar>Sidebar</Layout.Sidebar>
-        <Layout.Content>Content</Layout.Content>
-        <Layout.Footer>Footer</Layout.Footer>
-      </Layout>
-    )
-  }
-}
