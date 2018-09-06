@@ -75,6 +75,7 @@ class App extends Component<{}, AppState> {
     })
   }
   deleteAllTasks = () => this.setState({ tasks: [] })
+  startProcessingInBasket = () => {}
   setFilter = (filter: TaskFilter) => () => {
     this.setState({ filter, isTagsPage: false })
   }
@@ -114,6 +115,7 @@ class App extends Component<{}, AppState> {
       <Group>
         <Button onClick={this.addMoreTasks}>Add More</Button>
         <Button onClick={this.deleteAllTasks}>Delete All</Button>
+        <Button onClick={this.startProcessingInBasket}>Process In Basket</Button>
       </Group>
     )
   }

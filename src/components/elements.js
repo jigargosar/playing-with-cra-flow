@@ -15,6 +15,9 @@ export const TaskItemCategory = styled(Block)`
 export const TaskItemCategoryTitle = styled(InlineBlock)`
   cursor: pointer;
   margin: 0 ${spacing1e};
+  &:hover {
+    text-decoration: underline deepskyblue;
+  }
 `
 export const TaskItemTags = styled(Block)`
   font-size: 0.8rem;
@@ -24,6 +27,9 @@ export const TaskItemTags = styled(Block)`
 export const TaskItemTag = styled(InlineBlock)`
   margin: 0 ${spacing1e};
   cursor: pointer;
+  &:hover {
+    text-decoration: underline deepskyblue;
+  }
 `
 export const TagList = styled(Block)``
 export const TagListItem = styled(Block)`
