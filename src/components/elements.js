@@ -8,16 +8,16 @@ export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
 export const TaskItemCategory = styled(Block)`
-  font-size: 0.7rem;
   margin: ${spacing1} -${spacing1};
 `
 export const TaskItemCategoryTitle = styled(InlineBlock)`
+  font-size: 0.8rem;
   text-transform: uppercase;
   cursor: pointer;
   margin: 0 ${spacing1e};
 `
 export const TaskItemTags = styled(Block)`
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   margin: ${spacing1} -${spacing1};
 `
