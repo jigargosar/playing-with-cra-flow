@@ -4,7 +4,7 @@ import * as faker from 'faker'
 import Chance from 'chance'
 import type {Category} from './Category'
 import {categories} from './Category'
-import {indexOf, times} from 'ramda'
+import {ascend, indexOf, sortWith, times} from 'ramda'
 import type {Tag, TagId} from './Tag'
 
 const chance = Chance()
@@ -45,3 +45,13 @@ export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
   return { ...task, tagIds: someTags.map(tag => tag.id) }
 }
 export type TaskCollection = Task[]
+
+export function getAllTasks(tasksCollection: TaskCollection): Task[] {
+  return sortWith([ascend(getCategoryIndexOfTask)])(
+    tasksCollection,
+  )
+}
+
+export function getActiveTasks(tasksCollection: TaskCollection): Task[] {
+  return getAllTasks(tasksCollection).filter(task => !task.done)
+}

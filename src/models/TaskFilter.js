@@ -3,8 +3,7 @@
 import type {Category} from './Category'
 import type {TagId} from './Tag'
 import type {TaskCollection} from './Task'
-import {getCategoryIndexOfTask} from './Task'
-import {ascend, sortWith} from 'ramda'
+import {getActiveTasks, getAllTasks} from './Task'
 
 export opaque type AllFilter = {| type: 'all' |}
 export opaque type DoneFilter = {| type: 'done' |}
@@ -51,18 +50,6 @@ export function createDoneFilter(): DoneFilter {
 
 export function isDoneFilter(filter: TaskFilter): boolean {
   return filter.type === 'done'
-}
-
-function getAllTasks(tasksCollection) {
-  const sortedTasks = sortWith([ascend(getCategoryIndexOfTask)])(
-    tasksCollection,
-  )
-  return sortedTasks;
-}
-
-function getActiveTasks(tasksCollection) {
-  const activeTasks = getAllTasks(tasksCollection).filter(task => !task.done)
-  return activeTasks;
 }
 
 export function filterTasksCollection(
