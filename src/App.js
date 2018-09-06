@@ -12,6 +12,7 @@ import {
   PageHeader,
   PageSidebar,
   SidebarItem,
+  TagList,
   TaskItem,
   TaskItemCategory,
   TaskItemTag,
@@ -214,11 +215,11 @@ class App extends Component<{}, AppState> {
       </TaskItem>
     )
 
-    return (this.getCurrentTasks().map(renderTask): React.Node[])
+    return <Fragment>{this.getCurrentTasks().map(renderTask)}</Fragment>
   }
   renderTags = () => {
     const renderTag = tag => <div key={tag.id}>{tag.title}</div>
-    return (this.state.tags.map(renderTag): React.Node[])
+    return <TagList>{this.state.tags.map(renderTag)}</TagList>
   }
 
   getTagById(id: TagId): Tag {
