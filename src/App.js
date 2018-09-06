@@ -72,7 +72,7 @@ class App extends Component<{}, AppState> {
     filter: createAllFilter(),
     tags: createTagList(),
     isTagsPage: false,
-    isProcessingInBasket: false,
+    isProcessingInBasket: true,
   }
   componentDidMount() {
     this.addMoreTasks()
@@ -133,7 +133,10 @@ class App extends Component<{}, AppState> {
       <Group>
         <Button onClick={this.addMoreTasks}>Add More</Button>
         <Button onClick={this.deleteAllTasks}>Delete All</Button>
-        <Overlay.Container>
+        <Overlay.Container
+          onUpdate={console.log}
+          initialState={{ visible: this.state.isProcessingInBasket }}
+        >
           {overlay => (
             <Fragment>
               <Button as={Overlay.Show} {...overlay}>
