@@ -89,10 +89,15 @@ export const MenuItem = styled(Base)`
   cursor: pointer;
 `
 export const IconButton = styled(Button)`
+  border: 0;
   padding: 0;
   margin: 0;
-  & > svg {
-    width: 1.5em;
-    height: 1.5em;
+  min-width: 1em;
+  min-height: 1em;
+  widows: auto;
+  height: auto;
+  &>svg{
+    width: 1em;
+    height: 1em;
   }
 `

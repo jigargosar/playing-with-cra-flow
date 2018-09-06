@@ -1,8 +1,8 @@
 // @flow
 
 import * as React from 'react'
-import {Component, Fragment} from 'react'
-import {Viewport} from './components/Viewport'
+import { Component, Fragment } from 'react'
+import { Viewport } from './components/Viewport'
 import {
   Backdrop,
   Block,
@@ -20,7 +20,7 @@ import {
   Portal,
   Provider,
 } from 'reakit'
-import {find, propEq} from 'ramda'
+import { find, propEq } from 'ramda'
 import {
   IconButton,
   MenuItem,
@@ -40,11 +40,11 @@ import {
   TaskTitle,
 } from './components/elements'
 
-import type {Category} from './models/Category'
-import {categories} from './models/Category'
-import type {Task, TaskCollection} from './models/Task'
-import {createTaskList, getActiveTasks, setSomeTaskTags, setTaskCategory,} from './models/Task'
-import type {TaskFilter} from './models/TaskFilter'
+import type { Category } from './models/Category'
+import { categories } from './models/Category'
+import type { Task, TaskCollection } from './models/Task'
+import { createTaskList, getActiveTasks, setSomeTaskTags, setTaskCategory } from './models/Task'
+import type { TaskFilter } from './models/TaskFilter'
 import {
   createAllFilter,
   createCategoryFilter,
@@ -55,9 +55,14 @@ import {
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/TaskFilter'
-import {FaChevronDown} from 'react-icons/all'
-import type {Tag, TagCollection, TagId} from './models/Tag'
-import {createTagList} from './models/Tag'
+import { FaChevronDown } from 'react-icons/all'
+import type { Tag, TagCollection, TagId } from './models/Tag'
+import { createTagList } from './models/Tag'
+import { Icon } from 'react-icons-kit'
+import { home } from 'react-icons-kit/icomoon/home'
+
+export const IconHome = () => <Icon icon={home} />
+
 
 type AppState = {
   tasks: TaskCollection,
@@ -313,7 +318,7 @@ function renderIconPopupMenu(icon, menuItems) {
       {popover => (
         <InlineBlock relative margin={`0 ${spacing1e}`}>
           <IconButton as={Popover.Toggle} {...popover}>
-            {icon}
+            <IconHome/>
           </IconButton>
           <Popover fade slide expand hideOnClickOutside {...popover}>
             <Popover.Arrow />
