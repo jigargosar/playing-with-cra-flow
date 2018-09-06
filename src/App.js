@@ -41,7 +41,7 @@ import {
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task, TaskCollection} from './models/Task'
-import {createTaskList, setSomeTaskTags, setTaskCategory} from './models/Task'
+import {createTaskList, getActiveTasks, setSomeTaskTags, setTaskCategory,} from './models/Task'
 import type {TaskFilter} from './models/TaskFilter'
 import {
   createAllFilter,
@@ -146,7 +146,9 @@ class App extends Component<{}, AppState> {
   }
 
   renderProcessInBasketOverlay(overlayState: any) {
-    
+    const task: ?Task = getActiveTasks(this.state.tasks)[0]
+    if (!task) return null
+
     return (
       <Block>
         <Backdrop as={[Portal, Overlay.Hide]} {...overlayState} />
@@ -158,8 +160,12 @@ class App extends Component<{}, AppState> {
           padding={'1rem'}
         >
           <Field>
-            <Label htmlFor="task-input">Task</Label>
-            <Input id="task-input" placeholder="Processing Task" />
+            <Label htmlFor="task-input">Task:{`${task.title}`}</Label>
+            <Input
+              id="task-input"
+              placeholder="Processing Task"
+              defaultValue={task.title}
+            />
           </Field>
         </Overlay>
       </Block>
