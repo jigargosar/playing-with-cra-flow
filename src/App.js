@@ -48,7 +48,7 @@ class App extends Component<{}, AppState> {
     tasks: [],
     filter: createAllFilter(),
     tags: createTagList(),
-    isTagsPage: false,
+    isTagsPage: true,
   }
 
   componentDidMount() {
@@ -215,12 +215,10 @@ class App extends Component<{}, AppState> {
     )
 
     return (this.getCurrentTasks().map(renderTask): React.Node[])
-    // return this.getCurrentTasks().map(renderTask)
   }
   renderTags = () => {
     const renderTag = tag => <div key={tag.id}>{tag.title}</div>
     return (this.state.tags.map(renderTag): React.Node[])
-    // return this.getCurrentTasks().map(renderTask)
   }
 
   getTagById(id: TagId): Tag {

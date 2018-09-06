@@ -21,6 +21,13 @@ export const TaskItemTag = styled(InlineBlock)`
   margin: 0 ${spacing1};
   cursor: pointer;
 `
+export const TagList = styled(Block)`
+`
+export const TagListItem = styled(Block)`
+  text-transform: uppercase;
+  margin: ${spacing1};
+  cursor: pointer;
+`
 export const TaskTitle = styled(Base)`
   ${ifProp(
     'done',
