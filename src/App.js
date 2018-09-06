@@ -10,6 +10,7 @@ import {
   Divider,
   Field,
   Group,
+  Heading,
   InlineBlock,
   Input,
   Label,
@@ -159,8 +160,10 @@ class App extends Component<{}, AppState> {
           minHeight={'80%'}
           padding={'1rem'}
         >
-          <Field>
-            <Label htmlFor="task-input">Task:{`${task.title}`}</Label>
+          <Heading as={'h3'}>{`Processing InBasket Task`}</Heading>
+          <Heading as={'h4'}>{`${task.title}`}</Heading>
+          <Field margin={'1rem'}>
+            <Label htmlFor="task-input">{`title`}</Label>
             <Input
               id="task-input"
               placeholder="Processing Task"
