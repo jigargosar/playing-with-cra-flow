@@ -61,10 +61,10 @@ export function filterTasksCollection(
   switch (taskFilter.type) {
     case 'category':
       const category = taskFilter.category
-      return filter(task => task.category === category)(activeTasks)
+      return activeTasks.filter(task => task.category === category)
     case 'tag':
       const tagId = taskFilter.tagId
-      return filter(task => contains(tagId)(task.tagIds))(activeTasks)
+      return activeTasks.filter(task => contains(tagId)(task.tagIds))
     case 'all':
       return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
     case 'done':
