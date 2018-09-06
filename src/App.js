@@ -47,17 +47,16 @@ type AppState = {
 }
 
 class App extends Component<{}, AppState> {
+  //<editor-fold desc="state">
   state: AppState = {
     tasks: [],
     filter: createAllFilter(),
     tags: createTagList(),
     isTagsPage: true,
   }
-
   componentDidMount() {
     this.addMoreTasks()
   }
-
   getCurrentTasks(): Task[] {
     const activeTasks = reject(prop('done'))(this.state.tasks)
     switch (this.state.filter.type) {
@@ -83,7 +82,6 @@ class App extends Component<{}, AppState> {
       ],
     })
   }
-
   deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {
     this.setState({ filter, isTagsPage: false })
@@ -91,12 +89,17 @@ class App extends Component<{}, AppState> {
   setTagsPage = (bool: boolean) => () => {
     this.setState({ isTagsPage: bool })
   }
+  getTagById(id: TagId): Tag {
+    return find(propEq('id', id))(this.state.tags)
+  }
   updateTaskCategory = (category: Category, task: Task) => () => {
     const updatedTask = setTaskCategory(category, task)
     return this.setState({
       tasks: this.state.tasks.map(t => (t === task ? updatedTask : t)),
     })
   }
+  //</editor-fold>
+  //<editor-fold desc="render">
   render() {
     return (
       <Provider>
@@ -233,10 +236,7 @@ class App extends Component<{}, AppState> {
     )
     return <TagList>{this.state.tags.map(renderTag)}</TagList>
   }
-
-  getTagById(id: TagId): Tag {
-    return find(propEq('id', id))(this.state.tags)
-  }
+  //</editor-fold>
 }
 
 export default App
