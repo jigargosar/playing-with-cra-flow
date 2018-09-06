@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith,} from 'ramda'
+import {ascend, contains, eqProps, filter, Filter, find, prop, propEq, reject, sortWith} from 'ramda'
 import {
   MenuItem,
   PageContent,
@@ -63,6 +63,8 @@ class App extends Component<{}, AppState> {
     switch (this.state.filter.type) {
       case 'category':
         return filter(eqProps('category', this.state.filter))(activeTasks)
+      case 'tag':
+        return filter(task=>contains(this.state.filter.tagId)(task.tagIds))(activeTasks)
       case 'all':
         return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
       case 'done':
