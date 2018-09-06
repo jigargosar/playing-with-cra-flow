@@ -4,7 +4,7 @@ import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
 import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {ascend, contains, eqProps, filter, find, prop, propEq, reject, sortWith,} from 'ramda'
+import {find, propEq,} from 'ramda'
 import {
   MenuItem,
   PageContent,
@@ -24,50 +24,28 @@ import {
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task, TaskCollection} from './models/Task'
-import {createTaskList, getCategoryIndexOfTask, setSomeTaskTags, setTaskCategory,} from './models/Task'
+import {createTaskList, setSomeTaskTags, setTaskCategory,} from './models/Task'
 import type {TaskFilter} from './models/TaskFilter'
 import {
   createAllFilter,
   createCategoryFilter,
   createDoneFilter,
   createTagFilter,
+  getTasksByFilter,
   isAllFilter,
   isCategoryFilter,
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/TaskFilter'
 import {FaEllipsisH} from 'react-icons/fa'
-import type {Tag, TagId} from './models/Tag'
+import type {Tag, TagCollection, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
 type AppState = {
   tasks: TaskCollection,
   filter: TaskFilter,
-  tags: Tag[],
+  tags: TagCollection,
   isTagsPage: boolean,
-}
-
-function getTasksByFilter(
-  taskFilter: TaskFilter,
-  tasksCollection: TaskCollection,
-) {
-  const activeTasks = reject(prop('done'))(tasksCollection)
-  switch (taskFilter.type) {
-    case 'category':
-      return filter(eqProps('category', taskFilter))(activeTasks)
-    case 'tag':
-      return filter(task => contains(taskFilter.tagId)(task.tagIds))(
-        activeTasks,
-      )
-    case 'all':
-      return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
-    case 'done':
-      const doneTasks = filter(prop('done'))(tasksCollection)
-      return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
-    default:
-      console.assert(false, 'Invalid TaskFilter', taskFilter)
-      return []
-  }
 }
 
 class App extends Component<{}, AppState> {
