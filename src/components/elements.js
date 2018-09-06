@@ -76,7 +76,6 @@ export const PageContentWrapper = styled(Flex)`
   flex: auto;
   flex-direction: row;
 `
-
 export const MenuItem = styled(Base)`
   ${ifProp(
     'selected',
