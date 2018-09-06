@@ -48,6 +48,7 @@ type AppState = {
   filter: TaskFilter,
   tags: TagCollection,
   isTagsPage: boolean,
+  isProcessingInBasket: boolean,
 }
 
 class App extends Component<{}, AppState> {
@@ -57,6 +58,7 @@ class App extends Component<{}, AppState> {
     filter: createAllFilter(),
     tags: createTagList(),
     isTagsPage: false,
+    isProcessingInBasket: false,
   }
   componentDidMount() {
     this.addMoreTasks()
@@ -115,7 +117,9 @@ class App extends Component<{}, AppState> {
       <Group>
         <Button onClick={this.addMoreTasks}>Add More</Button>
         <Button onClick={this.deleteAllTasks}>Delete All</Button>
-        <Button onClick={this.startProcessingInBasket}>Process In Basket</Button>
+        <Button onClick={this.startProcessingInBasket}>
+          Process In Basket
+        </Button>
       </Group>
     )
   }
