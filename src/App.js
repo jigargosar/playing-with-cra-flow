@@ -41,7 +41,7 @@ type AppState = {
   tasks: Task[],
   filter: Filter,
   tags: Tag[],
-  isLabelsPage: boolean,
+  isTagsPage: boolean,
 }
 
 class App extends Component<{}, AppState> {
@@ -49,7 +49,7 @@ class App extends Component<{}, AppState> {
     tasks: [],
     filter: createAllFilter(),
     tags: createTagList(),
-    isLabelsPage: false,
+    isTagsPage: false,
   }
 
   componentDidMount() {
@@ -82,10 +82,10 @@ class App extends Component<{}, AppState> {
 
   deleteAllTasks = () => this.setState({ tasks: [] })
   setFilter = (filter: Filter) => () => {
-    this.setState({ filter, isLabelsPage: false })
+    this.setState({ filter, isTagsPage: false })
   }
-  setLabelsPage = (bool: boolean) => () => {
-    this.setState({ isLabelsPage: bool })
+  setTagsPage = (bool: boolean) => () => {
+    this.setState({ isTagsPage: bool })
   }
   updateTaskCategory = (category: Category, task: Task) => () => {
     const updatedTask = setTaskCategory(category, task)
@@ -100,7 +100,11 @@ class App extends Component<{}, AppState> {
           <PageHeader>{this.renderHeader()}</PageHeader>
           <PageContentWrapper>
             <PageSidebar>{this.renderSidebar()}</PageSidebar>
-            <PageContent>{this.renderCurrentTasks()}</PageContent>
+            <PageContent>
+              {this.state.isTagsPage
+                ? this.renderTags()
+                : this.renderCurrentTasks()}
+            </PageContent>
           </PageContentWrapper>
         </Viewport>
       </Provider>
@@ -139,15 +143,15 @@ class App extends Component<{}, AppState> {
         </SidebarItem>
       )
     }
-    const renderLabelsSidebarItem = () => {
-      const selected = this.state.isLabelsPage
+    const renderTagsSidebarItem = () => {
+      const selected = this.state.isTagsPage
       return (
         <SidebarItem
           selected={selected}
-          onClick={this.setLabelsPage(true)}
+          onClick={this.setTagsPage(true)}
           tabIndex={selected ? 0 : null}
         >
-          Labels
+          Tags
         </SidebarItem>
       )
     }
@@ -167,7 +171,7 @@ class App extends Component<{}, AppState> {
     return (
       <Fragment>
         {categories.map(renderCategorySideBarItem)}
-        {renderLabelsSidebarItem()}
+        {renderTagsSidebarItem()}
         {renderAllSidebarItem()}
         {renderDoneSidebarItem()}
       </Fragment>
@@ -208,6 +212,11 @@ class App extends Component<{}, AppState> {
     )
 
     return (this.getCurrentTasks().map(renderTask): React.Node[])
+    // return this.getCurrentTasks().map(renderTask)
+  }
+  renderTags = () => {
+    const renderTag = tag => <div key={tag.id}>{tag.title}</div>
+    return (this.state.tags.map(renderTag): React.Node[])
     // return this.getCurrentTasks().map(renderTask)
   }
 
