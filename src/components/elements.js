@@ -1,12 +1,13 @@
-import {Base, Block, css, Flex, InlineBlock, styled} from 'reakit'
+import {Base, Block, css, Flex, InlineBlock, InlineFlex, styled} from 'reakit'
 import {ifProp} from 'styled-tools'
 
 const spacing1 = ['0.3rem']
+const spacing1e = ['0.3em']
 
 export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
-export const TaskItemCategory = styled(Block)`
+export const TaskItemCategory = styled(InlineFlex)`
   font-size: 0.7rem;
   text-transform: uppercase;
   cursor: pointer;
@@ -21,8 +22,7 @@ export const TaskItemTag = styled(InlineBlock)`
   margin: 0 ${spacing1};
   cursor: pointer;
 `
-export const TagList = styled(Block)`
-`
+export const TagList = styled(Block)``
 export const TagListItem = styled(Block)`
   text-transform: uppercase;
   margin: 1rem;
@@ -77,5 +77,9 @@ export const MenuItem = styled(Base)`
   )};
   padding: 0.5rem;
   min-width: 8rem;
+  cursor: pointer;
+`
+export const IconButton = styled(Flex)`
+  margin: 0 ${spacing1e};
   cursor: pointer;
 `

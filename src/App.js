@@ -3,9 +3,10 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
-import {find, propEq,} from 'ramda'
+import {Button, Divider, Group, InlineFlex, Popover, Provider} from 'reakit'
+import {find, propEq} from 'ramda'
 import {
+  IconButton,
   MenuItem,
   PageContent,
   PageContentWrapper,
@@ -24,7 +25,7 @@ import {
 import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task, TaskCollection} from './models/Task'
-import {createTaskList, setSomeTaskTags, setTaskCategory,} from './models/Task'
+import {createTaskList, setSomeTaskTags, setTaskCategory} from './models/Task'
 import type {TaskFilter} from './models/TaskFilter'
 import {
   createAllFilter,
@@ -36,7 +37,7 @@ import {
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/TaskFilter'
-import {FaEllipsisH} from 'react-icons/fa'
+import {FaChevronDown} from 'react-icons/all'
 import type {Tag, TagCollection, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
@@ -53,7 +54,7 @@ class App extends Component<{}, AppState> {
     tasks: [],
     filter: createAllFilter(),
     tags: createTagList(),
-    isTagsPage: true,
+    isTagsPage: false,
   }
   componentDidMount() {
     this.addMoreTasks()
@@ -191,13 +192,16 @@ class App extends Component<{}, AppState> {
     const renderTask = (task: Task): React.Node => (
       <TaskItem key={task.id}>
         <TaskTitle done={task.done}>{`${task.title}`}</TaskTitle>
-        {renderIconPopupMenu(
-          <FaEllipsisH />,
-          categories.map(renderMenuItem(task)),
-        )}
+
         <TaskItemCategory
           onClick={this.setFilter(createCategoryFilter(task.category))}
-        >{`${task.category}`}</TaskItemCategory>
+        >
+          {`${task.category}`}
+          {renderIconPopupMenu(
+            <FaChevronDown />,
+            categories.map(renderMenuItem(task)),
+          )}
+        </TaskItemCategory>
         <TaskItemTags>
           {task.tagIds.map(tagId => (
             <TaskItemTag
@@ -231,15 +235,15 @@ function renderIconPopupMenu(icon, menuItems) {
   return (
     <Popover.Container>
       {popover => (
-        <InlineBlock relative>
-          <Button as={Popover.Toggle} {...popover}>
+        <InlineFlex relative>
+          <IconButton as={Popover.Toggle} {...popover}>
             {icon}
-          </Button>
+          </IconButton>
           <Popover fade slide expand hideOnClickOutside {...popover}>
             <Popover.Arrow />
             {menuItems}
           </Popover>
-        </InlineBlock>
+        </InlineFlex>
       )}
     </Popover.Container>
   )
