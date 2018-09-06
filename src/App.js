@@ -219,7 +219,7 @@ class App extends Component<{}, AppState> {
     return <Fragment>{this.getCurrentTasks().map(renderTask)}</Fragment>
   }
   renderTags = () => {
-    const renderTag = tag => <TagListItem key={tag.id}>{tag.title}</TagListItem>
+    const renderTag = tag => <TagListItem key={tag.id}>{`#${tag.title}`}</TagListItem>
     return <TagList>{this.state.tags.map(renderTag)}</TagList>
   }
 
