@@ -4,7 +4,7 @@ import type {Category} from './Category'
 import type {TagId} from './Tag'
 import type {TaskCollection} from './Task'
 import {getCategoryIndexOfTask} from './Task'
-import {ascend, prop, reject, sortWith} from 'ramda'
+import {ascend, sortWith} from 'ramda'
 
 export opaque type AllFilter = {| type: 'all' |}
 export opaque type DoneFilter = {| type: 'done' |}
@@ -57,7 +57,10 @@ export function filterTasksCollection(
   taskFilter: TaskFilter,
   tasksCollection: TaskCollection,
 ): TaskCollection {
-  const activeTasks = reject(prop('done'))(tasksCollection)
+  const sortedTasks = sortWith([ascend(getCategoryIndexOfTask)])(
+    tasksCollection,
+  )
+  const activeTasks = sortedTasks.filter(task => !task.done)
   switch (taskFilter.type) {
     case 'category':
       const category = taskFilter.category
@@ -66,10 +69,9 @@ export function filterTasksCollection(
       const tagId = taskFilter.tagId
       return activeTasks.filter(task => task.tagIds.includes(tagId))
     case 'all':
-      return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
+      return activeTasks
     case 'done':
-      const doneTasks = tasksCollection.filter(prop('done'))
-      return sortWith([ascend(getCategoryIndexOfTask)])(doneTasks)
+      return sortedTasks.filter(task => task.done)
     default:
       console.assert(false, 'Invalid TaskFilter', taskFilter)
       return []
