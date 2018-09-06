@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Button, Group, InlineBlock, Popover, Provider} from 'reakit'
+import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
 import {ascend, eqProps, filter, Filter, find, prop, propEq, reject, sortWith,} from 'ramda'
 import {
   CategorySidebarItem,
@@ -173,6 +173,7 @@ class App extends Component<{}, AppState> {
     return (
       <Fragment>
         {categories.map(renderCategorySideBarItem)}
+        <Divider />
         {renderTagsSidebarItem()}
         {renderAllSidebarItem()}
         {renderDoneSidebarItem()}
