@@ -1,13 +1,15 @@
 // @flow
 
-import type { Category } from './Category'
+import type {Category} from './Category'
+import type {TagId} from './Tag'
 
 export opaque type AllFilter = {| type: 'all' |}
-export opaque type DoneFilter = {| type: 'done'|}
+export opaque type DoneFilter = {| type: 'done' |}
 
 export opaque type CategoryFilter = {| type: 'category', category: Category |}
+export opaque type TagFilter = {| type: 'tag', tagId: TagId |}
 
-export opaque type Filter = AllFilter | CategoryFilter | DoneFilter
+export opaque type Filter = AllFilter | CategoryFilter | DoneFilter | TagFilter
 
 export function createCategoryFilter(category: Category): CategoryFilter {
   return { type: 'category', category }
