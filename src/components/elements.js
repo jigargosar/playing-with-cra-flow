@@ -1,4 +1,4 @@
-import {Base, Block, css, Flex, InlineBlock, InlineFlex, styled} from 'reakit'
+import {Base, Block, css, Flex, InlineBlock, styled} from 'reakit'
 import {ifProp} from 'styled-tools'
 
 const spacing1 = ['0.3rem']
@@ -7,11 +7,14 @@ const spacing1e = ['0.3em']
 export const TaskItem = styled(Base)`
   margin: 0 1rem 1rem;
 `
-export const TaskItemCategory = styled(InlineFlex)`
+export const TaskItemCategory = styled(InlineBlock)`
   font-size: 0.7rem;
+  margin: ${spacing1} -${spacing1};
+`
+export const TaskItemCategoryTitle = styled(InlineBlock)`
   text-transform: uppercase;
   cursor: pointer;
-  margin: ${spacing1} 0;
+  margin: 0 ${spacing1};
 `
 export const TaskItemTags = styled(Block)`
   margin: ${spacing1} -${spacing1};
@@ -80,6 +83,5 @@ export const MenuItem = styled(Base)`
   cursor: pointer;
 `
 export const IconButton = styled(Flex)`
-  margin: 0 ${spacing1e};
   cursor: pointer;
 `

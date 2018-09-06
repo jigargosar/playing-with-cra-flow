@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Button, Divider, Group, InlineFlex, Popover, Provider} from 'reakit'
+import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
 import {find, propEq} from 'ramda'
 import {
   IconButton,
@@ -17,6 +17,7 @@ import {
   TagListItem,
   TaskItem,
   TaskItemCategory,
+  TaskItemCategoryTitle,
   TaskItemTag,
   TaskItemTags,
   TaskTitle,
@@ -196,7 +197,7 @@ class App extends Component<{}, AppState> {
         <TaskItemCategory
           onClick={this.setFilter(createCategoryFilter(task.category))}
         >
-          {`${task.category}`}
+          <TaskItemCategoryTitle>{`${task.category}`}</TaskItemCategoryTitle>
           {renderIconPopupMenu(
             <FaChevronDown />,
             categories.map(renderMenuItem(task)),
@@ -235,7 +236,7 @@ function renderIconPopupMenu(icon, menuItems) {
   return (
     <Popover.Container>
       {popover => (
-        <InlineFlex relative>
+        <InlineBlock relative>
           <IconButton as={Popover.Toggle} {...popover}>
             {icon}
           </IconButton>
@@ -243,7 +244,7 @@ function renderIconPopupMenu(icon, menuItems) {
             <Popover.Arrow />
             {menuItems}
           </Popover>
-        </InlineFlex>
+        </InlineBlock>
       )}
     </Popover.Container>
   )
