@@ -127,23 +127,23 @@ class App extends Component<{}, AppState> {
   }
   renderHeader() {
     return (
-      <Group>
-        <Button onClick={this.addMoreTasks}>Add More</Button>
-        <Button onClick={this.deleteAllTasks}>Delete All</Button>
-        <Overlay.Container
-          onUpdate={console.log}
-          initialState={{ visible: true }}
-        >
-          {overlay => (
-            <Fragment>
-              <Button as={Overlay.Show} {...overlay}>
+      <Overlay.Container
+        onUpdate={console.log}
+        initialState={{ visible: true }}
+      >
+        {overlay => (
+          <Fragment>
+            <Group>
+              <Button onClick={this.addMoreTasks}>Add More</Button>
+              <Button onClick={this.deleteAllTasks}>Delete All</Button>
+              <Button as={[Overlay.Show]} {...overlay}>
                 Process In Basket
               </Button>
-              {this.renderProcessInBasketOverlay(overlay)}
-            </Fragment>
-          )}
-        </Overlay.Container>
-      </Group>
+            </Group>
+            {this.renderProcessInBasketOverlay(overlay)}
+          </Fragment>
+        )}
+      </Overlay.Container>
     )
   }
 
@@ -327,7 +327,9 @@ function renderIconPopupMenu(icon, menuItems) {
 
 const theme = {
   Button: css`
+    font-size: 14px;
     height: 2em;
+    text-transform: uppercase;
   `,
   Group: css`
     > ${Button}, > * ${Button} {
