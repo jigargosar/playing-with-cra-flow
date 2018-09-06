@@ -14,9 +14,9 @@ export const categories: Array<Category> = [
   'Calendar',
   'InBasket',
   'WaitingFor',
-  'NextAction',
   'Project',
+  'NextAction',
+  'Reference',
   'Incubator',
   'Someday',
-  'Reference',
 ]
