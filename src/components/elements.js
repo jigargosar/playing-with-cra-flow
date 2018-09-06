@@ -25,7 +25,7 @@ export const TagList = styled(Block)`
 `
 export const TagListItem = styled(Block)`
   text-transform: uppercase;
-  margin: ${spacing1};
+  margin: 1rem;
   cursor: pointer;
 `
 export const TaskTitle = styled(Base)`
