@@ -33,7 +33,6 @@ import {
   createTagFilter,
   filterTasksCollection,
   isAllFilter,
-  isCategoryFilter,
   isCategoryFilterOf,
   isDoneFilter,
 } from './models/TaskFilter'
@@ -197,11 +196,9 @@ class App extends Component<{}, AppState> {
           categories.map(renderMenuItem(task)),
         )}
 
-        {!isCategoryFilter(this.state.filter) && (
-          <TaskItemCategory
-            onClick={this.setFilter(createCategoryFilter(task.category))}
-          >{`${task.category}`}</TaskItemCategory>
-        )}
+        <TaskItemCategory
+          onClick={this.setFilter(createCategoryFilter(task.category))}
+        >{`${task.category}`}</TaskItemCategory>
         <TaskItemTags>
           {task.tagIds.map(tagId => (
             <TaskItemTag
