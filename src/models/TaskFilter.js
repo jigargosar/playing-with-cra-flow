@@ -53,25 +53,33 @@ export function isDoneFilter(filter: TaskFilter): boolean {
   return filter.type === 'done'
 }
 
+function getAllTasks(tasksCollection) {
+  const sortedTasks = sortWith([ascend(getCategoryIndexOfTask)])(
+    tasksCollection,
+  )
+  return sortedTasks;
+}
+
+function getActiveTasks(tasksCollection) {
+  const activeTasks = getAllTasks(tasksCollection).filter(task => !task.done)
+  return activeTasks;
+}
+
 export function filterTasksCollection(
   taskFilter: TaskFilter,
   tasksCollection: TaskCollection,
 ): TaskCollection {
-  const sortedTasks = sortWith([ascend(getCategoryIndexOfTask)])(
-    tasksCollection,
-  )
-  const activeTasks = sortedTasks.filter(task => !task.done)
   switch (taskFilter.type) {
     case 'category':
       const category = taskFilter.category
-      return activeTasks.filter(task => task.category === category)
+      return getActiveTasks(tasksCollection).filter(task => task.category === category)
     case 'tag':
       const tagId = taskFilter.tagId
-      return activeTasks.filter(task => task.tagIds.includes(tagId))
+      return getActiveTasks(tasksCollection).filter(task => task.tagIds.includes(tagId))
     case 'all':
-      return activeTasks
+      return getActiveTasks(tasksCollection)
     case 'done':
-      return sortedTasks.filter(task => task.done)
+      return getAllTasks(tasksCollection).filter(task => task.done)
     default:
       console.assert(false, 'Invalid TaskFilter', taskFilter)
       return []
