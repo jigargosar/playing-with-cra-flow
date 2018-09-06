@@ -13,6 +13,7 @@ import {
   PageSidebar,
   SidebarItem,
   TagList,
+  TagListItem,
   TaskItem,
   TaskItemCategory,
   TaskItemTag,
@@ -218,7 +219,7 @@ class App extends Component<{}, AppState> {
     return <Fragment>{this.getCurrentTasks().map(renderTask)}</Fragment>
   }
   renderTags = () => {
-    const renderTag = tag => <div key={tag.id}>{tag.title}</div>
+    const renderTag = tag => <TagListItem key={tag.id}>{tag.title}</TagListItem>
     return <TagList>{this.state.tags.map(renderTag)}</TagList>
   }
 
