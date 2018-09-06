@@ -89,7 +89,6 @@ export const MenuItem = styled(Base)`
   cursor: pointer;
 `
 export const IconButton = styled(Button)`
-  font-size: inherit;
   border: 0;
   padding: 0;
   margin: 0;
