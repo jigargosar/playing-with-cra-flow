@@ -11,8 +11,8 @@ export type Category =
   | 'Incubator'
 
 export const categories: Array<Category> = [
-  'InBasket',
   'Calendar',
+  'InBasket',
   'WaitingFor',
   'NextAction',
   'Project',
