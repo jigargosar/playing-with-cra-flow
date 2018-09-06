@@ -7,6 +7,7 @@ import {
   Backdrop,
   Block,
   Button,
+  css,
   Divider,
   Field,
   Group,
@@ -109,7 +110,7 @@ class App extends Component<{}, AppState> {
   //<editor-fold desc="render">
   render() {
     return (
-      <Provider>
+      <Provider theme={theme}>
         <Viewport>
           <PageHeader>{this.renderHeader()}</PageHeader>
           <PageContentWrapper>
@@ -322,4 +323,16 @@ function renderIconPopupMenu(icon, menuItems) {
       )}
     </Popover.Container>
   )
+}
+
+const theme = {
+  Button: css`
+    height: 2em;
+  `,
+  Group: css`
+    > ${Button}, > * ${Button} {
+      min-height: 2em;
+      height: auto;
+    }
+  `,
 }
