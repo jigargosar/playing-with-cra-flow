@@ -25,7 +25,7 @@ import type {Category} from './models/Category'
 import {categories} from './models/Category'
 import type {Task, TaskCollection} from './models/Task'
 import {createTaskList, getCategoryIndexOfTask, setSomeTaskTags, setTaskCategory,} from './models/Task'
-import type {TaskFilter} from "./models/TaskFilter";
+import type {TaskFilter} from './models/TaskFilter'
 import {
   createAllFilter,
   createCategoryFilter,
@@ -41,7 +41,7 @@ import type {Tag, TagId} from './models/Tag'
 import {createTagList} from './models/Tag'
 
 type AppState = {
-  tasks: Task[],
+  tasks: TaskCollection,
   filter: TaskFilter,
   tags: Tag[],
   isTagsPage: boolean,
