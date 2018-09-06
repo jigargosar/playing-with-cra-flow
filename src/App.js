@@ -77,7 +77,9 @@ class App extends Component<{}, AppState> {
     })
   }
   deleteAllTasks = () => this.setState({ tasks: [] })
-  startProcessingInBasket = () => {}
+  startProcessingInBasket = () => {
+    this.setState({ isProcessingInBasket: true })
+  }
   setFilter = (filter: TaskFilter) => () => {
     this.setState({ filter, isTagsPage: false })
   }
