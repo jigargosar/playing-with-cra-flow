@@ -3,7 +3,21 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Backdrop, Block, Button, Divider, Group, InlineBlock, Overlay, Popover, Portal, Provider,} from 'reakit'
+import {
+  Backdrop,
+  Block,
+  Button,
+  Divider,
+  Field,
+  Group,
+  InlineBlock,
+  Input,
+  Label,
+  Overlay,
+  Popover,
+  Portal,
+  Provider,
+} from 'reakit'
 import {find, propEq} from 'ramda'
 import {
   IconButton,
@@ -127,8 +141,24 @@ class App extends Component<{}, AppState> {
               </Button>
               <Block>
                 <Backdrop as={[Portal, Overlay.Hide]} {...overlay} />
-                <Overlay as={Portal} {...overlay}>
-                  Overlay
+                <Overlay
+                  as={[Portal]}
+                  {...overlay}
+                  minWidth={'80%'}
+                  minHeight={'80%'}
+                  padding={'1rem'}
+                >
+                  <Field>
+                    <Label htmlFor="input2">Organize</Label>
+                    <Group>
+                      <Button>Left</Button>
+                      <Input
+                        id="input2"
+                        placeholder="Please type a piece of clothing"
+                      />
+                      <Button>Right</Button>
+                    </Group>
+                  </Field>
                 </Overlay>
               </Block>
             </Fragment>
