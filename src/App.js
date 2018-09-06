@@ -332,7 +332,7 @@ const theme = {
     text-transform: uppercase;
   `,
   Group: css`
-    > ${Button}, > * ${Button} {
+    > ${Button} {
       min-height: 2em;
       height: auto;
     }
