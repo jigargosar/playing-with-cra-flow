@@ -62,7 +62,6 @@ type AppState = {
   filter: TaskFilter,
   tags: TagCollection,
   isTagsPage: boolean,
-  isProcessingInBasket: boolean,
 }
 
 class App extends Component<{}, AppState> {
@@ -72,7 +71,6 @@ class App extends Component<{}, AppState> {
     filter: createAllFilter(),
     tags: createTagList(),
     isTagsPage: false,
-    isProcessingInBasket: true,
   }
   componentDidMount() {
     this.addMoreTasks()
@@ -91,9 +89,6 @@ class App extends Component<{}, AppState> {
     })
   }
   deleteAllTasks = () => this.setState({ tasks: [] })
-  startProcessingInBasket = () => {
-    this.setState({ isProcessingInBasket: true })
-  }
   setFilter = (filter: TaskFilter) => () => {
     this.setState({ filter, isTagsPage: false })
   }
@@ -135,7 +130,7 @@ class App extends Component<{}, AppState> {
         <Button onClick={this.deleteAllTasks}>Delete All</Button>
         <Overlay.Container
           onUpdate={console.log}
-          initialState={{ visible: this.state.isProcessingInBasket }}
+          initialState={{ visible: true }}
         >
           {overlay => (
             <Fragment>
