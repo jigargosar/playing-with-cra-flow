@@ -20,3 +20,5 @@ export function createTag(): Tag {
 export function createTagList(count: number = 50): Tag[] {
   return times(createTag, count)
 }
+
+export type TagCollection = Tag[]
