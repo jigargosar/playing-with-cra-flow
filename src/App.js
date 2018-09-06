@@ -147,15 +147,11 @@ class App extends Component<{}, AppState> {
                   padding={'1rem'}
                 >
                   <Field>
-                    <Label htmlFor="input2">Organize</Label>
-                    <Group>
-                      <Button>Left</Button>
-                      <Input
-                        id="input2"
-                        placeholder="Please type a piece of clothing"
-                      />
-                      <Button>Right</Button>
-                    </Group>
+                    <Label htmlFor="task-input">Task</Label>
+                    <Input
+                      id="task-input"
+                      placeholder="Please type a piece of clothing"
+                    />
                   </Field>
                 </Overlay>
               </Block>
