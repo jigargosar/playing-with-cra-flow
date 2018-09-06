@@ -209,7 +209,10 @@ class App extends Component<{}, AppState> {
         )}
         <TaskItemTags>
           {task.tagIds.map(tagId => (
-            <TaskItemTag key={tagId}>
+            <TaskItemTag
+              key={tagId}
+              onClick={this.setFilter(createTagFilter(tagId))}
+            >
               {`#${this.getTagById(tagId).title}`}
             </TaskItemTag>
           ))}
