@@ -22,7 +22,7 @@ export const TaskItemTags = styled(Block)`
   margin: ${spacing1} -${spacing1};
 `
 export const TaskItemTag = styled(InlineBlock)`
-  margin: 0 ${spacing1};
+  margin: 0 ${spacing1e};
   cursor: pointer;
 `
 export const TagList = styled(Block)``
