@@ -137,30 +137,34 @@ class App extends Component<{}, AppState> {
               <Button as={Overlay.Show} {...overlay}>
                 Process In Basket
               </Button>
-              <Block>
-                <Backdrop as={[Portal, Overlay.Hide]} {...overlay} />
-                <Overlay
-                  as={[Portal]}
-                  {...overlay}
-                  minWidth={'80%'}
-                  minHeight={'80%'}
-                  padding={'1rem'}
-                >
-                  <Field>
-                    <Label htmlFor="task-input">Task</Label>
-                    <Input
-                      id="task-input"
-                      placeholder="Please type a piece of clothing"
-                    />
-                  </Field>
-                </Overlay>
-              </Block>
+              {this.renderProcessInBasketOverlay(overlay)}
             </Fragment>
           )}
         </Overlay.Container>
       </Group>
     )
   }
+
+  renderProcessInBasketOverlay(overlayState: any) {
+    return (
+      <Block>
+        <Backdrop as={[Portal, Overlay.Hide]} {...overlayState} />
+        <Overlay
+          as={[Portal]}
+          {...overlayState}
+          minWidth={'80%'}
+          minHeight={'80%'}
+          padding={'1rem'}
+        >
+          <Field>
+            <Label htmlFor="task-input">Task</Label>
+            <Input id="task-input" placeholder="Processing Task" />
+          </Field>
+        </Overlay>
+      </Block>
+    )
+  }
+
   renderSidebar() {
     const renderAllSidebarItem = () => {
       const selected = isAllFilter(this.state.filter) && !this.state.isTagsPage
