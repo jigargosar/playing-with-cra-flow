@@ -29,6 +29,7 @@ import {
   createAllFilter,
   createCategoryFilter,
   createDoneFilter,
+  createTagFilter,
   isAllFilter,
   isCategoryFilter,
   isCategoryFilterOf,
@@ -220,7 +221,10 @@ class App extends Component<{}, AppState> {
   }
   renderTags = () => {
     const renderTag = tag => (
-      <TagListItem key={tag.id}>{`#${tag.title}`}</TagListItem>
+      <TagListItem
+        key={tag.id}
+        onClick={this.setFilter(createTagFilter(tag.id))}
+      >{`#${tag.title}`}</TagListItem>
     )
     return <TagList>{this.state.tags.map(renderTag)}</TagList>
   }

@@ -15,6 +15,10 @@ export function createCategoryFilter(category: Category): CategoryFilter {
   return { type: 'category', category }
 }
 
+export function createTagFilter(tagId: TagId): TagFilter {
+  return { type: 'tag', tagId }
+}
+
 export function createAllFilter(): AllFilter {
   return { type: 'all' }
 }
