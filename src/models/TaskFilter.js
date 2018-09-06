@@ -4,7 +4,7 @@ import type {Category} from './Category'
 import type {TagId} from './Tag'
 import type {TaskCollection} from './Task'
 import {getCategoryIndexOfTask} from './Task'
-import {ascend, contains, prop, reject, sortWith} from 'ramda'
+import {ascend, prop, reject, sortWith} from 'ramda'
 
 export opaque type AllFilter = {| type: 'all' |}
 export opaque type DoneFilter = {| type: 'done' |}
@@ -64,7 +64,7 @@ export function filterTasksCollection(
       return activeTasks.filter(task => task.category === category)
     case 'tag':
       const tagId = taskFilter.tagId
-      return activeTasks.filter(task => contains(tagId)(task.tagIds))
+      return activeTasks.filter(task => task.tagIds.includes(tagId))
     case 'all':
       return sortWith([ascend(getCategoryIndexOfTask)])(activeTasks)
     case 'done':
