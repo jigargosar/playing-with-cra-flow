@@ -53,7 +53,7 @@ export function isDoneFilter(filter: TaskFilter): boolean {
   return filter.type === 'done'
 }
 
-export function getTasksByFilter(
+export function filterTasksCollection(
   taskFilter: TaskFilter,
   tasksCollection: TaskCollection,
 ) {

@@ -31,7 +31,7 @@ import {
   createCategoryFilter,
   createDoneFilter,
   createTagFilter,
-  getTasksByFilter,
+  filterTasksCollection,
   isAllFilter,
   isCategoryFilter,
   isCategoryFilterOf,
@@ -62,7 +62,7 @@ class App extends Component<{}, AppState> {
   getCurrentTasks(): Task[] {
     const tasksCollection = this.state.tasks
     const taskFilter = this.state.filter
-    return getTasksByFilter(taskFilter, tasksCollection)
+    return filterTasksCollection(taskFilter, tasksCollection)
   }
   addMoreTasks = () => {
     return this.setState({
