@@ -129,7 +129,7 @@ class App extends Component<{}, AppState> {
     return (
       <Overlay.Container
         onUpdate={console.log}
-        initialState={{ visible: true }}
+        initialState={{ visible: false }}
       >
         {overlay => (
           <Fragment>

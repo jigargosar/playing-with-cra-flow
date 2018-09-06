@@ -1,4 +1,4 @@
-import {Base, Block, css, Flex, InlineBlock, styled} from 'reakit'
+import {Base, Block, Button, css, Flex, InlineBlock, styled} from 'reakit'
 import {ifProp} from 'styled-tools'
 
 export const spacing1 = ['0.3rem']
@@ -88,6 +88,6 @@ export const MenuItem = styled(Base)`
   min-width: 8rem;
   cursor: pointer;
 `
-export const IconButton = styled(Flex)`
-  cursor: pointer;
+export const IconButton = styled(Button)`
+  font-size: inherit;
 `
