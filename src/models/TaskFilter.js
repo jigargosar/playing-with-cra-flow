@@ -56,7 +56,7 @@ export function isDoneFilter(filter: TaskFilter): boolean {
 export function filterTasksCollection(
   taskFilter: TaskFilter,
   tasksCollection: TaskCollection,
-) {
+): TaskCollection {
   const activeTasks = reject(prop('done'))(tasksCollection)
   switch (taskFilter.type) {
     case 'category':
