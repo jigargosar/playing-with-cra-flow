@@ -60,8 +60,10 @@ import type { Tag, TagCollection, TagId } from './models/Tag'
 import { createTagList } from './models/Tag'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
+import { chevronDown } from 'react-icons-kit/feather'
 
-export const IconHome = () => <Icon icon={home} />
+export const IconHome = () => <Icon size={'100%'} icon={home} />
+export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 
 type AppState = {
@@ -318,7 +320,7 @@ function renderIconPopupMenu(icon, menuItems) {
       {popover => (
         <InlineBlock relative margin={`0 ${spacing1e}`}>
           <IconButton as={Popover.Toggle} {...popover}>
-            <IconHome/>
+            <ChevronDown/>
           </IconButton>
           <Popover fade slide expand hideOnClickOutside {...popover}>
             <Popover.Arrow />
