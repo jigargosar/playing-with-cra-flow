@@ -3,7 +3,7 @@
 import * as React from 'react'
 import {Component, Fragment} from 'react'
 import {Viewport} from './components/Viewport'
-import {Button, Divider, Group, InlineBlock, Popover, Provider} from 'reakit'
+import {Backdrop, Block, Button, Divider, Group, InlineBlock, Overlay, Popover, Portal, Provider,} from 'reakit'
 import {find, propEq} from 'ramda'
 import {
   IconButton,
@@ -119,9 +119,21 @@ class App extends Component<{}, AppState> {
       <Group>
         <Button onClick={this.addMoreTasks}>Add More</Button>
         <Button onClick={this.deleteAllTasks}>Delete All</Button>
-        <Button onClick={this.startProcessingInBasket}>
-          Process In Basket
-        </Button>
+        <Overlay.Container>
+          {overlay => (
+            <Fragment>
+              <Button as={Overlay.Show} {...overlay}>
+                Process In Basket
+              </Button>
+              <Block>
+                <Backdrop as={[Portal, Overlay.Hide]} {...overlay} />
+                <Overlay as={Portal} {...overlay}>
+                  Overlay
+                </Overlay>
+              </Block>
+            </Fragment>
+          )}
+        </Overlay.Container>
       </Group>
     )
   }
