@@ -175,7 +175,6 @@ class App extends Component<{}, AppState> {
         {categories.map(renderCategorySideBarItem)}
         <Divider />
         {renderTagsSidebarItem()}
-
         <Divider />
         {renderAllSidebarItem()}
         {renderDoneSidebarItem()}
