@@ -1,7 +1,18 @@
 import * as React from 'react'
-import { Grid } from 'reakit'
+import { Grid, styled } from 'reakit'
 
-export class Layout extends React.Component<{}> {
+export const Layout = styled(Grid).attrs({
+  template: `
+      "a a a" 
+      "b c c" minmax(200px, 1fr)
+      "d d d"
+    `,
+})`
+  height: 100vh;
+  width: 100vw;
+`
+
+export class LayoutC extends React.Component<{}> {
   render() {
     const template = `
       "a a a" 
@@ -10,7 +21,7 @@ export class Layout extends React.Component<{}> {
     `
 
     return (
-      <Grid template={template} height={'100vh'}>
+      <Layout>
         <Grid.Item area="a" backgroundColor="red">
           Header
         </Grid.Item>
@@ -23,7 +34,7 @@ export class Layout extends React.Component<{}> {
         <Grid.Item area="d" backgroundColor="yellow">
           Footer
         </Grid.Item>
-      </Grid>
+      </Layout>
     )
   }
 }
