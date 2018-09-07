@@ -3,15 +3,14 @@
 import * as React from 'react'
 import type { Task } from '../models/Task'
 import { styled } from 'reakit'
-import type { Tag, TagId } from '../models/Tag'
+import type { Tag } from '../models/Tag'
 
 type Props = {
   tasks: Task[],
-  findTagById: TagId => Tag,
   getTaskTags: Task => Tag[],
 }
 
-export function TaskList({ tasks, findTagById, getTaskTags }: Props) {
+export function TaskList({ tasks, getTaskTags }: Props) {
   return (
     <TaskItemsLayout>
       {tasks.map(task => (

@@ -43,8 +43,9 @@ class App extends Component<{}, AppState> {
             <AppLayout.Main>
               <TaskList
                 tasks={tasks}
-                getTaskTags={task=>task.tagIds.map(tid=>findById(tid)(tags))}
-                findTagById={id=>findById(id)(tags)}
+                getTaskTags={task =>
+                  task.tagIds.map(tid => findById(tid)(tags))
+                }
               />
             </AppLayout.Main>
           </AppLayout.Middle>
