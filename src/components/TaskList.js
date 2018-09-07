@@ -15,7 +15,7 @@ export function TaskList({ tasks }: Props) {
         <Item key={task.id}>
           <Title>{task.title}</Title>
           <Category>{task.category}</Category>
-          <Tags>{task.tagIds.map(tid => <Tag key={tid}>${tid}</Tag>)}</Tags>
+          <Tags>{task.tagIds.map(tid => <Tag key={tid}>{tid}</Tag>)}</Tags>
         </Item>
       ))}
     </Items>
