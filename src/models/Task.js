@@ -8,7 +8,7 @@ import { ascend, indexOf, sortWith, times } from 'ramda'
 import type { Tag, TagId } from './Tag'
 
 export const chance = Chance(123)
-
+faker.seed(123)
 export type Task = {|
   id: string,
   title: string,
