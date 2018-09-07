@@ -15,13 +15,15 @@ Layout.Header = styled(Grid.Item).attrs({ area: 'a' })``
 // Layout.Header.displayName='Layout.Header'
 Layout.Sidebar = styled(Grid.Item).attrs({ area: 'b' })`
   > * {
-    min-height: 100%;
+    height: 100%;
+    overflow: scroll;
   }
 `
 // Layout.Sidebar.displayName='Layout.Sidebar'
 Layout.Content = styled(Grid.Item).attrs({ area: 'c' })`
   > * {
-    min-height: 100%;
+    height: 100%;
+    overflow: scroll;
   }
 `
 // Layout.Content.displayName='Layout.Content'
