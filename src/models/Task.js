@@ -18,17 +18,17 @@ export type Task = {|
   createdAt: number,
 |}
 
-export const generateTask = (ch: Chance) => (): Task => ({
-  id: ch.n(ch.character, 4, { alpha: true }).join(''),
+export const generateTask = (): Task => ({
+  id: chance.n(chance.character, 4, { alpha: true }).join(''),
   title: faker.random.words(),
-  done: ch.weighted([true, false], [20, 80]),
-  category: ch.pickone(categories),
+  done: chance.weighted([true, false], [20, 80]),
+  category: chance.pickone(categories),
   tagIds: [],
   createdAt: Date.now(),
 })
 
 export function generateTaskList(count: number = 50): Task[] {
-  return times(generateTask(chance), count)
+  return times(generateTask, count)
 }
 
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
