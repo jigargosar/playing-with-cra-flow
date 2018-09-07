@@ -12,34 +12,36 @@ type Props = {
 
 export function TaskList({ tasks }: Props) {
   return (
-    <Items>
+    <TaskItemsLayout>
       {tasks.map(task => (
-        <Item key={task.id}>
-          <Title>{task.title}</Title>
+        <TaskItem key={task.id}>
+          <TaskTitle>{task.title}</TaskTitle>
           <Category>{task.category}</Category>
-          <TagItems>
-            {task.tagIds.map(tid => <TagItem key={tid}>{tid}</TagItem>)}
-          </TagItems>
-        </Item>
+          <TagItemsLayout>
+            {task.tagIds.map(tid => <TagItem key={tid}>{`#${tid}`}</TagItem>)}
+          </TagItemsLayout>
+        </TaskItem>
       ))}
-    </Items>
+    </TaskItemsLayout>
   )
 }
 
-const Title = styled.div``
+const TaskTitle = styled.div``
 const Category = styled.div`
   text-transform: uppercase;
   font-size: 14px;
 `
-const Item = styled.div``
-const Items = styled.div`
-  > ${Item} {
+const TaskItem = styled.div``
+const TaskItemsLayout = styled.div`
+  > ${TaskItem} {
     margin: 1rem 0;
   }
 `
-const TagItem = styled.div``
-const TagItems = styled.div`
+const TagItem = styled.span``
+const TagItemsLayout = styled.div`
+  display: inline-flex;
+  margin: 0 -0.5rem;
   > ${TagItem} {
-    margin: 1rem 0;
+    margin: 0 0.5rem;
   }
 `
