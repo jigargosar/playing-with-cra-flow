@@ -8,9 +8,10 @@ import type { Tag, TagId } from '../models/Tag'
 type Props = {
   tasks: Task[],
   findTagById: TagId => Tag,
+  getTaskTags: Task => Tag[],
 }
 
-export function TaskList({ tasks }: Props) {
+export function TaskList({ tasks, findTagById, getTaskTags }: Props) {
   return (
     <TaskItemsLayout>
       {tasks.map(task => (
@@ -18,7 +19,9 @@ export function TaskList({ tasks }: Props) {
           <TaskTitle>{task.title}</TaskTitle>
           <TaskCategory>{task.category}</TaskCategory>
           <TagItemsLayout>
-            {task.tagIds.map(tid => <TagItem key={tid}>{`#${tid}`}</TagItem>)}
+            {getTaskTags(task).map(tag => (
+              <TagItem key={tag.id}>{`#${tag.title}`}</TagItem>
+            ))}
           </TagItemsLayout>
         </TaskItem>
       ))}

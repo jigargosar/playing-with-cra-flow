@@ -14,6 +14,7 @@ import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
 import type { TagCollection } from './models/Tag'
 import { generateTagList } from './models/Tag'
+import { findById } from './models/Collection'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -30,6 +31,8 @@ class App extends Component<{}, AppState> {
   }
 
   render() {
+    const tags = this.state.tags
+    const tasks = this.state.tasks
     return (
       <Provider theme={theme}>
         <AppLayout>
@@ -38,7 +41,11 @@ class App extends Component<{}, AppState> {
               <Sidebar />
             </AppLayout.Sidebar>
             <AppLayout.Main>
-              <TaskList tasks={this.state.tasks} />
+              <TaskList
+                tasks={tasks}
+                getTaskTags={task=>task.tagIds.map(tid=>findById(tid)(tags))}
+                findTagById={id=>findById(id)(tags)}
+              />
             </AppLayout.Main>
           </AppLayout.Middle>
         </AppLayout>
