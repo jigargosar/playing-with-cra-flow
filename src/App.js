@@ -17,6 +17,7 @@ import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
 import { CategoryTaskList, DoneTaskList } from './TaskListRoutes'
+import { TagsList } from './components/TagsList'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -56,6 +57,7 @@ class App extends Component<{}, AppState> {
                   tasks={tasks}
                   getTaskTags={getTaskTags}
                 />
+                <TagsList path={'Tags'} tags={this.state.tags} />
                 <CategoryTaskList
                   path={'/:category'}
                   tasks={tasks}
