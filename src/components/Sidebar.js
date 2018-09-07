@@ -13,17 +13,20 @@ export class Sidebar extends Component<Props> {
     return (
       <Fragment>
         <Title as={'h3'}>Categories</Title>
-        <CategoriesLayout>
+        <ItemsLayout>
           {categories.map(category => (
-            <Category key={category}>
+            <Item key={category}>
               <RouterLink to={category}>{category}</RouterLink>
-            </Category>
+            </Item>
           ))}
           <Divider margin={'1rem'} />
-          <Category>
+          <Item>
             <RouterLink to={'/All'}>All</RouterLink>
-          </Category>
-        </CategoriesLayout>
+          </Item>
+          <Item>
+            <RouterLink to={'/Done'}>Done</RouterLink>
+          </Item>
+        </ItemsLayout>
       </Fragment>
     )
   }
@@ -32,11 +35,11 @@ export class Sidebar extends Component<Props> {
 const Title = styled(Heading)`
   margin: 1rem;
 `
-const Category = styled.div`
+const Item = styled.div`
   text-transform: uppercase;
 `
-const CategoriesLayout = styled.div`
-  > ${Category} {
+const ItemsLayout = styled.div`
+  > ${Item} {
     margin: 0.5rem 1.5rem;
   }
 `
