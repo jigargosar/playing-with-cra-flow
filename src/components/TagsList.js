@@ -16,7 +16,7 @@ export function TagsList({ tags }: Props) {
       <TagItemsLayout>
         {tags.map(tag => (
           <TagItem key={tag.id}>
-            <TagTitle>{tag.title}</TagTitle>
+            <TagTitle>{`#${tag.title}`}</TagTitle>
           </TagItem>
         ))}
       </TagItemsLayout>
@@ -25,7 +25,9 @@ export function TagsList({ tags }: Props) {
 }
 
 const TagTitle = styled.div``
-const TagItem = styled.div``
+const TagItem = styled.div`
+  text-transform: uppercase;
+`
 const TagItemsLayout = styled.div`
   > ${TagItem} {
     margin: 0.5rem;
