@@ -5,8 +5,12 @@ import { styled } from 'reakit'
 import { Link as ReachRouterLink } from '@reach/router'
 import cn from 'classnames'
 
-type Props = {}
+type Props = { to: string }
 
+/**
+ *  @link https://reach.tech/router/api/Link
+ *
+ * */
 export function RouterLink({ ...other }: Props) {
   return (
     <RouterLinkWrapper>
