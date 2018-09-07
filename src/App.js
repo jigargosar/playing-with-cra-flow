@@ -34,6 +34,7 @@ class App extends Component<{}, AppState> {
   render() {
     const tags = this.state.tags
     const tasks = this.state.tasks
+    const getTaskTags = task => task.tagIds.map(tid => findById(tid)(tags))
     return (
       <Provider theme={theme}>
         <AppLayout>
@@ -43,19 +44,11 @@ class App extends Component<{}, AppState> {
             </AppLayout.Sidebar>
             <AppLayout.Main>
               <Router>
-                <TaskList
-                  path={'/'}
-                  tasks={tasks}
-                  getTaskTags={task =>
-                    task.tagIds.map(tid => findById(tid)(tags))
-                  }
-                />
+                <TaskList path={'/'} tasks={tasks} getTaskTags={getTaskTags} />
                 <TaskList
                   path={'/:category'}
                   tasks={tasks}
-                  getTaskTags={task =>
-                    task.tagIds.map(tid => findById(tid)(tags))
-                  }
+                  getTaskTags={getTaskTags}
                 />
               </Router>
             </AppLayout.Main>
