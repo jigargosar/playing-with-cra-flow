@@ -1,6 +1,10 @@
-import { css } from 'styled-components'
-import { Button } from 'reakit'
+import { Button, css, injectGlobal } from 'reakit'
 
+injectGlobal(css`
+  body {
+    font-size: 20px;
+  }
+`)
 export const theme = {
   Button: css`
     font-size: 14px;
