@@ -5,8 +5,15 @@ import { Block } from 'reakit'
 
 export default [
   {
-    name: 'Empty',
+    name: 'Only Content',
     component: Layout,
+    props: {
+      children: (
+        <Layout.Content>
+          <Block backgroundColor={'blue'}>Content</Block>
+        </Layout.Content>
+      ),
+    },
   },
   {
     name: 'Holy Grail',
