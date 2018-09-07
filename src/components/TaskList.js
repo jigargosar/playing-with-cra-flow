@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import type { Task } from '../models/Task'
+import { styled } from 'reakit'
 
 type Props = {
   tasks: Task[],
@@ -11,16 +12,26 @@ export function TaskList({ tasks }: Props) {
   return (
     <div>
       <h1>TaskList</h1>
-      {tasks.map(task => {
-        return (
-          <div key={task.id} style={{ margin: '1rem' }}>
-            <div>{task.title}</div>
-            <div style={{ fontSize: '14px', textTransform: 'uppercase' }}>
-              {task.category}
-            </div>
-          </div>
-        )
-      })}
+      <Items>
+        {tasks.map(task => (
+          <Item key={task.id}>
+            <Title>{task.title}</Title>
+            <Category>{task.category}</Category>
+          </Item>
+        ))}
+      </Items>
     </div>
   )
 }
+
+const Title = styled.div``
+const Category = styled.div`
+  text-transform: uppercase;
+  font-size: 14px;
+`
+const Item = styled.div``
+const Items = styled.div`
+  > ${Item} {
+    margin: 1rem 0;
+  }
+`
