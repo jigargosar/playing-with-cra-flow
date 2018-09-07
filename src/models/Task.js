@@ -7,7 +7,7 @@ import { categories } from './Category'
 import { ascend, indexOf, sortWith, times } from 'ramda'
 import type { Tag, TagId } from './Tag'
 
-const chance = Chance()
+export const chance = Chance(123)
 
 export type Task = {|
   id: string,
@@ -28,7 +28,7 @@ export const generateTask = (ch: Chance) => (): Task => ({
 })
 
 export function generateTaskList(count: number = 50): Task[] {
-  return times(generateTask(Chance(123)), count)
+  return times(generateTask(chance), count)
 }
 
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
