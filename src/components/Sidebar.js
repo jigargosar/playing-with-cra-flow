@@ -4,8 +4,7 @@ import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { styled } from 'reakit'
 import { categories } from '../models/Category'
-import { Link as RouterLink } from '@reach/router'
-import cn from 'classnames'
+import { RouterLink } from './RouterLink'
 
 type Props = {}
 
@@ -17,19 +16,7 @@ export class Sidebar extends Component<Props> {
         <CategoriesLayout>
           {categories.map(category => (
             <Category key={category}>
-              <RouterLinkWrapper>
-                <RouterLink
-                  to={category}
-                  getProps={({ isCurrent, isPartiallyCurrent }) => ({
-                    className: cn({
-                      current: isCurrent,
-                      partiallyCurrent: isPartiallyCurrent,
-                    }),
-                  })}
-                >
-                  {category}
-                </RouterLink>
-              </RouterLinkWrapper>
+              <RouterLink to={category}>{category}</RouterLink>
             </Category>
           ))}
         </CategoriesLayout>
@@ -44,24 +31,5 @@ const Category = styled.div`
 const CategoriesLayout = styled.div`
   > ${Category} {
     margin: 0.5rem 1rem;
-  }
-`
-
-const RouterLinkWrapper = styled.span`
-  > a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  > a.partiallyCurrent {
-    color: rgba(255, 99, 71, 0.3);
-  }
-
-  > a.current {
-    color: rgba(255, 99, 71, 1);
-  }
-
-  > a:hover {
-    text-decoration: underline;
   }
 `
