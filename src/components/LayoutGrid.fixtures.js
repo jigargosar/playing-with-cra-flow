@@ -1,38 +1,38 @@
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Layout } from './LayoutGrid'
+import { LayoutGrid } from './LayoutGrid'
 import { Block } from 'reakit'
 
 export default [
   {
     name: 'Only Content',
-    component: Layout,
+    component: LayoutGrid,
     props: {
       children: (
-        <Layout.Content>
+        <LayoutGrid.Content>
           <Block backgroundColor={'blue'}>Content</Block>
-        </Layout.Content>
+        </LayoutGrid.Content>
       ),
     },
   },
   {
     name: 'Holy Grail',
-    component: Layout,
+    component: LayoutGrid,
     props: {
       children: (
         <Fragment>
-          <Layout.Header>
+          <LayoutGrid.Header>
             <Block backgroundColor={'red'}>Header</Block>
-          </Layout.Header>
-          <Layout.Sidebar>
+          </LayoutGrid.Header>
+          <LayoutGrid.Sidebar>
             <Block backgroundColor={'green'}>Sidebar</Block>
-          </Layout.Sidebar>
-          <Layout.Content>
+          </LayoutGrid.Sidebar>
+          <LayoutGrid.Content>
             <Block backgroundColor={'blue'}>Content</Block>
-          </Layout.Content>
-          <Layout.Footer>
+          </LayoutGrid.Content>
+          <LayoutGrid.Footer>
             <Block backgroundColor={'yellow'}>Footer</Block>
-          </Layout.Footer>
+          </LayoutGrid.Footer>
         </Fragment>
       ),
     },

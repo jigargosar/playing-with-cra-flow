@@ -1,20 +1,20 @@
 import { styled } from 'reakit'
 
-export const Layout = styled.div`
+export const AppLayout = styled.div`
   display: flex;    
   flex-direction: column;
   height: 100vh;  
 `
 
-Layout.Middle = styled.div`
+AppLayout.Middle = styled.div`
   display: flex;    
   overflow: hidden;  
 `
 
-Layout.Sidebar = styled.div`
+AppLayout.Sidebar = styled.div`
   overflow: scroll;
   width: 250px;  
 `
-Layout.Main = styled.div`
+AppLayout.Main = styled.div`
   overflow: scroll;  
 `

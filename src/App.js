@@ -11,7 +11,7 @@ import { generateTaskList } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
-import { Layout } from './components/LayoutFlex'
+import { AppLayout } from './components/AppLayout'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -24,16 +24,16 @@ class App extends Component<{}, AppState> {
   render() {
     return (
       <Provider theme={theme}>
-        <Layout>
-          <Layout.Middle>
-            <Layout.Sidebar>
+        <AppLayout>
+          <AppLayout.Middle>
+            <AppLayout.Sidebar>
               <Sidebar />
-            </Layout.Sidebar>
-            <Layout.Main>
+            </AppLayout.Sidebar>
+            <AppLayout.Main>
               <TaskList tasks={this.state.tasks} />
-            </Layout.Main>
-          </Layout.Middle>
-        </Layout>
+            </AppLayout.Main>
+          </AppLayout.Middle>
+        </AppLayout>
       </Provider>
     )
   }
