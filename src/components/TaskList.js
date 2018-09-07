@@ -16,7 +16,7 @@ export function TaskList({ tasks }: Props) {
       {tasks.map(task => (
         <TaskItem key={task.id}>
           <TaskTitle>{task.title}</TaskTitle>
-          <Category>{task.category}</Category>
+          <TaskCategory>{task.category}</TaskCategory>
           <TagItemsLayout>
             {task.tagIds.map(tid => <TagItem key={tid}>{`#${tid}`}</TagItem>)}
           </TagItemsLayout>
@@ -27,7 +27,7 @@ export function TaskList({ tasks }: Props) {
 }
 
 const TaskTitle = styled.div``
-const Category = styled.div`
+const TaskCategory = styled.div`
   text-transform: uppercase;
   font-size: 14px;
 `
