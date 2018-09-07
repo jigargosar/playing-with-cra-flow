@@ -11,8 +11,7 @@ export const Layout = styled(Grid).attrs({
   width: 100vw;
 `
 // Layout.displayName='Layout'
-Layout.Header = styled(Grid.Item).attrs({ area: 'a' })`
-`
+Layout.Header = styled(Grid.Item).attrs({ area: 'a' })``
 // Layout.Header.displayName='Layout.Header'
 Layout.Sidebar = styled(Grid.Item).attrs({ area: 'b' })`
   > * {
@@ -26,6 +25,5 @@ Layout.Content = styled(Grid.Item).attrs({ area: 'c' })`
   }
 `
 // Layout.Content.displayName='Layout.Content'
-Layout.Footer = styled(Grid.Item).attrs({ area: 'd' })`
-`
+Layout.Footer = styled(Grid.Item).attrs({ area: 'd' })``
 // Layout.Footer.displayName='Layout.Footer'
