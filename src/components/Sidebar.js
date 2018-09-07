@@ -21,7 +21,7 @@ export class Sidebar extends Component<Props> {
           ))}
           <Divider margin={'1rem'} />
           <Category>
-            <RouterLink to={'/'}>All</RouterLink>
+            <RouterLink to={'/All'}>All</RouterLink>
           </Category>
         </CategoriesLayout>
       </Fragment>

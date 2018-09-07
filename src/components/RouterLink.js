@@ -35,7 +35,7 @@ const RouterLinkWrapper = styled.span`
   }
 
   > a.partiallyCurrent {
-    color: rgba(255, 99, 71, 0.3);
+    color: rgba(255, 99, 71, 0.8);
   }
 
   > a.current {
