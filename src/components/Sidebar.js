@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Component, Fragment } from 'react'
-import { Heading, styled } from 'reakit'
+import { Divider, Heading, styled } from 'reakit'
 import { categories } from '../models/Category'
 import { RouterLink } from './RouterLink'
 
@@ -19,6 +19,10 @@ export class Sidebar extends Component<Props> {
               <RouterLink to={category}>{category}</RouterLink>
             </Category>
           ))}
+          <Divider />
+          <Category>
+            <RouterLink to={'/'}>All</RouterLink>
+          </Category>
         </CategoriesLayout>
       </Fragment>
     )
