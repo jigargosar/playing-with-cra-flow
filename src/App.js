@@ -22,7 +22,8 @@ class App extends Component<{}, AppState> {
   state: AppState = { tasks: generateTaskList() }
 
   render() {
-    return <Provider theme={theme}>
+    return (
+      <Provider theme={theme}>
         <Layout>
           <Layout.Sidebar>
             <Sidebar />
@@ -32,6 +33,7 @@ class App extends Component<{}, AppState> {
           </Layout.Content>
         </Layout>
       </Provider>
+    )
   }
 }
 

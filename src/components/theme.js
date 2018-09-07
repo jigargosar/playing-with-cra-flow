@@ -1,15 +1,16 @@
 import { Button, css, injectGlobal } from 'reakit'
 
 injectGlobal(css`
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-family: Roboto, 'Source Code Pro', Monaco, Menlo, Consolas,
-      'Courier New', monospace;
-  }
-`)
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-family: Roboto, 'Source Code Pro', Monaco, Menlo, Consolas,
+        'Courier New', monospace;
+    }
+  `)
+
 export const theme = {
   Button: css`
     font-size: 14px;
