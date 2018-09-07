@@ -2,10 +2,10 @@
 
 import * as faker from 'faker'
 import Chance from 'chance'
-import type {Category} from './Category'
-import {categories} from './Category'
-import {ascend, indexOf, sortWith, times} from 'ramda'
-import type {Tag, TagId} from './Tag'
+import type { Category } from './Category'
+import { categories } from './Category'
+import { ascend, indexOf, sortWith, times } from 'ramda'
+import type { Tag, TagId } from './Tag'
 
 const chance = Chance()
 
@@ -20,7 +20,7 @@ export type Task = {|
 
 export function createTask(): Task {
   return {
-    id: chance.n(chance.character, 4, { alpha: true }),
+    id: chance.n(chance.character, 4, { alpha: true }).join(""),
     title: faker.random.words(),
     done: chance.weighted([true, false], [20, 80]),
     category: chance.pickone(categories),
