@@ -8,7 +8,7 @@ import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
 import { Layout } from './components/Layout'
 import type { TaskCollection } from './models/Task'
-import { createTaskList } from './models/Task'
+import { generateTaskList } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
@@ -19,7 +19,7 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 type AppState = { tasks: TaskCollection }
 
 class App extends Component<{}, AppState> {
-  state: AppState = { tasks: createTaskList() }
+  state: AppState = { tasks: generateTaskList() }
 
   render() {
     return <Provider theme={theme}>

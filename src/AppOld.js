@@ -43,7 +43,7 @@ import {
 import type { Category } from './models/Category'
 import { categories } from './models/Category'
 import type { Task, TaskCollection } from './models/Task'
-import { createTaskList, getActiveTasks, setSomeTaskTags, setTaskCategory } from './models/Task'
+import { generateTaskList, getActiveTasks, setSomeTaskTags, setTaskCategory } from './models/Task'
 import type { TaskFilter } from './models/TaskFilter'
 import {
   createAllFilter,
@@ -91,7 +91,7 @@ class App extends Component<{}, AppState> {
   addMoreTasks = () => {
     return this.setState({
       tasks: [
-        ...createTaskList().map(setSomeTaskTags(this.state.tags)),
+        ...generateTaskList().map(setSomeTaskTags(this.state.tags)),
         ...this.state.tasks,
       ],
     })

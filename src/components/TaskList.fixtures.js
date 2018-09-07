@@ -1,6 +1,6 @@
 // import * as React from 'react'
 import { TaskList } from './TaskList'
-import { createTaskList } from '../models/Task'
+import { generateTaskList } from '../models/Task'
 import { theme } from './theme'
 
 export default [
@@ -8,7 +8,7 @@ export default [
     component: TaskList,
     props: {
       theme,
-      tasks: createTaskList(),
+      tasks: generateTaskList(),
     },
   },
 ]
