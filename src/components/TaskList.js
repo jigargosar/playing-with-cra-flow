@@ -15,6 +15,7 @@ export function TaskList({ tasks }: Props) {
         return (
           <div key={task.id}>
             <div>{task.title}</div>
+            <div>{task.category}</div>
           </div>
         )
       })}
