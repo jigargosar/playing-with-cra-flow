@@ -9,9 +9,7 @@ injectGlobal(css`
     line-height: 1.5em;
     font-family: Roboto, 'Source Code Pro', Monaco, Menlo, Consolas,
       'Courier New', monospace;
-    -webkit-font-kerning: normal;
     -webkit-font-smoothing: antialiased;
-    
   }
 `)
 

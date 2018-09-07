@@ -29,6 +29,7 @@ export const generateTask = (): Task => ({
 })
 
 export function generateTaskList(count: number = 50): Task[] {
+  faker.seed(123)
   return times(generateTask, count)
 }
 
