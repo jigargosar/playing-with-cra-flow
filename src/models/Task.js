@@ -18,7 +18,7 @@ export type Task = {|
   createdAt: number,
 |}
 
-export const createRandomTask = (ch: Chance = chance) => (): Task => ({
+export const createRandomTask = (ch: Chance) => (): Task => ({
   id: ch.n(ch.character, 4, { alpha: true }).join(''),
   title: faker.random.words(),
   done: ch.weighted([true, false], [20, 80]),
@@ -28,7 +28,7 @@ export const createRandomTask = (ch: Chance = chance) => (): Task => ({
 })
 
 export function createTaskList(count: number = 50): Task[] {
-  return times(createRandomTask(), count)
+  return times(createRandomTask(chance), count)
 }
 
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
