@@ -4,18 +4,13 @@ import * as React from 'react'
 import type { Task } from '../models/Task'
 import { styled } from 'reakit'
 import type { Tag } from '../models/Tag'
-import type { Category } from '../models/Category'
 
 type Props = {
   tasks: Task[],
   getTaskTags: Task => Tag[],
-  category: ?Category,
 }
 
-export function TaskList({ tasks, getTaskTags, category }: Props) {
-  if (category) {
-    tasks = tasks.filter(t => t.category === category)
-  }
+export function TaskList({ tasks, getTaskTags }: Props) {
   return (
     <TaskItemsLayout>
       {tasks.map(task => (

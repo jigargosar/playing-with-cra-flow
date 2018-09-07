@@ -15,7 +15,8 @@ import { AppLayout } from './components/AppLayout'
 import type { TagCollection } from './models/Tag'
 import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
-import { Router } from '@reach/router'
+import { Redirect, Router } from '@reach/router'
+import { CategoryTaskList } from './CategoryTaskList'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -44,8 +45,13 @@ class App extends Component<{}, AppState> {
             </AppLayout.Sidebar>
             <AppLayout.Main>
               <Router>
-                <TaskList path={'/'} tasks={tasks} getTaskTags={getTaskTags} />
+                <Redirect from={'/'} to={'All'} />
                 <TaskList
+                  path={'All'}
+                  tasks={tasks}
+                  getTaskTags={getTaskTags}
+                />
+                <CategoryTaskList
                   path={'/:category'}
                   tasks={tasks}
                   getTaskTags={getTaskTags}
@@ -60,3 +66,4 @@ class App extends Component<{}, AppState> {
 }
 
 export default App
+
