@@ -10,17 +10,14 @@ type Props = {
 
 export function TaskList({ tasks }: Props) {
   return (
-    <div>
-      <h1>TaskList</h1>
-      <Items>
-        {tasks.map(task => (
-          <Item key={task.id}>
-            <Title>{task.title}</Title>
-            <Category>{task.category}</Category>
-          </Item>
-        ))}
-      </Items>
-    </div>
+    <Items>
+      {tasks.map(task => (
+        <Item key={task.id}>
+          <Title>{task.title}</Title>
+          <Category>{task.category}</Category>
+        </Item>
+      ))}
+    </Items>
   )
 }
 
