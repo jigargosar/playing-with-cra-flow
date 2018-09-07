@@ -4,13 +4,18 @@ import * as React from 'react'
 import type { Task } from '../models/Task'
 import { styled } from 'reakit'
 import type { Tag } from '../models/Tag'
+import type { Category } from '../models/Category'
 
 type Props = {
   tasks: Task[],
   getTaskTags: Task => Tag[],
+  category: ?Category,
 }
 
-export function TaskList({ tasks, getTaskTags }: Props) {
+export function TaskList({ tasks, getTaskTags, category }: Props) {
+  if (category) {
+    tasks = tasks.filter(t => t.category === category)
+  }
   return (
     <TaskItemsLayout>
       {tasks.map(task => (
@@ -28,6 +33,10 @@ export function TaskList({ tasks, getTaskTags }: Props) {
   )
 }
 
+TaskList.defaultProps = {
+  category: null,
+}
+
 const TaskTitle = styled.div``
 const TaskCategory = styled.div`
   text-transform: uppercase;
@@ -43,6 +52,7 @@ const TagItem = styled.span`
 `
 const TagItemsLayout = styled.div`
   display: inline-flex;
+  flex-wrap: wrap;
   margin: 0 -0.5rem;
   > ${TagItem} {
     margin: 0 0.5rem;

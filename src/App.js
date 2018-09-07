@@ -15,6 +15,7 @@ import { AppLayout } from './components/AppLayout'
 import type { TagCollection } from './models/Tag'
 import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
+import { Router } from '@reach/router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -41,12 +42,22 @@ class App extends Component<{}, AppState> {
               <Sidebar />
             </AppLayout.Sidebar>
             <AppLayout.Main>
-              <TaskList
-                tasks={tasks}
-                getTaskTags={task =>
-                  task.tagIds.map(tid => findById(tid)(tags))
-                }
-              />
+              <Router>
+                <TaskList
+                  path={'/'}
+                  tasks={tasks}
+                  getTaskTags={task =>
+                    task.tagIds.map(tid => findById(tid)(tags))
+                  }
+                />
+                <TaskList
+                  path={'/:category'}
+                  tasks={tasks}
+                  getTaskTags={task =>
+                    task.tagIds.map(tid => findById(tid)(tags))
+                  }
+                />
+              </Router>
             </AppLayout.Main>
           </AppLayout.Middle>
         </AppLayout>

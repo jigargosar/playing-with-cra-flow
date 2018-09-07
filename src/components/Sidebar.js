@@ -4,6 +4,8 @@ import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { styled } from 'reakit'
 import { categories } from '../models/Category'
+import { Link } from '@reach/router'
+import cn from 'classnames'
 
 type Props = {}
 
@@ -13,7 +15,18 @@ export class Sidebar extends Component<Props> {
       <Fragment>
         <h2>Categories</h2>
         <CategoriesLayout>
-          {categories.map(c => <Category key={c}>{c}</Category>)}
+          {categories.map(c => (
+            <Category key={c}>
+              <Link
+                to={c}
+                getProps={({ isCurrent, isPartiallyCurrent }) => ({
+                  className: cn({ current: isPartiallyCurrent }),
+                })}
+              >
+                {c}
+              </Link>
+            </Category>
+          ))}
         </CategoriesLayout>
       </Fragment>
     )
