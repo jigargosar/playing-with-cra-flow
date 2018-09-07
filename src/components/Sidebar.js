@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { styled } from 'reakit'
 import { categories } from '../models/Category'
-import { Link } from '@reach/router'
+import { Link as RouterLink } from '@reach/router'
 import cn from 'classnames'
 
 type Props = {}
@@ -18,7 +18,7 @@ export class Sidebar extends Component<Props> {
           {categories.map(category => (
             <Category key={category}>
               <RouterLinkWrapper>
-                <Link
+                <RouterLink
                   to={category}
                   getProps={({ isCurrent, isPartiallyCurrent }) => ({
                     className: cn({
@@ -28,7 +28,7 @@ export class Sidebar extends Component<Props> {
                   })}
                 >
                   {category}
-                </Link>
+                </RouterLink>
               </RouterLinkWrapper>
             </Category>
           ))}
