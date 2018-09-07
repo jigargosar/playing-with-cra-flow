@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Grid, styled } from 'reakit'
 
 export const Layout = styled(Grid).attrs({
@@ -13,16 +12,17 @@ export const Layout = styled(Grid).attrs({
 `
 
 Layout.Header = styled(Grid.Item).attrs({ area: 'a' })`
-  background-color: red;
 `
 
 Layout.Sidebar = styled(Grid.Item).attrs({ area: 'b' })`
-  background-color: green;
+  > * {
+    min-height: 100%;
+  }
 `
 Layout.Content = styled(Grid.Item).attrs({ area: 'c' })`
-  background-color: blue;
+  > * {
+    min-height: 100%;
+  }
 `
 Layout.Footer = styled(Grid.Item).attrs({ area: 'd' })`
-  background-color: yellow;
 `
-
