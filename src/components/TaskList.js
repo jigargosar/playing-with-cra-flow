@@ -3,9 +3,11 @@
 import * as React from 'react'
 import type { Task } from '../models/Task'
 import { styled } from 'reakit'
+import type { Tag, TagId } from '../models/Tag'
 
 type Props = {
   tasks: Task[],
+  findTagById: TagId => Tag,
 }
 
 export function TaskList({ tasks }: Props) {
@@ -15,7 +17,9 @@ export function TaskList({ tasks }: Props) {
         <Item key={task.id}>
           <Title>{task.title}</Title>
           <Category>{task.category}</Category>
-          <Tags>{task.tagIds.map(tid => <Tag key={tid}>{tid}</Tag>)}</Tags>
+          <TagItems>
+            {task.tagIds.map(tid => <TagItem key={tid}>{tid}</TagItem>)}
+          </TagItems>
         </Item>
       ))}
     </Items>
@@ -33,9 +37,9 @@ const Items = styled.div`
     margin: 1rem 0;
   }
 `
-const Tag = styled.div``
-const Tags = styled.div`
-  > ${Tag} {
+const TagItem = styled.div``
+const TagItems = styled.div`
+  > ${TagItem} {
     margin: 1rem 0;
   }
 `
