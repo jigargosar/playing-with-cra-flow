@@ -12,6 +12,7 @@ import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
+import { generateTagList } from './models/Tag'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -19,7 +20,13 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 type AppState = { tasks: TaskCollection }
 
 class App extends Component<{}, AppState> {
-  state: AppState = { tasks: generateTaskList() }
+  state: AppState = { tasks: [] }
+
+  componentDidMount() {
+    const tags = generateTagList()
+    const tasks = generateTaskList()
+    this.setState({ tasks: tasks })
+  }
 
   render() {
     return (

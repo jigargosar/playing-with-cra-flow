@@ -19,7 +19,8 @@ export type Task = {|
 |}
 
 export const generateTask = (): Task => ({
-  id: chance.n(chance.character, 4, { alpha: true }).join(''),
+  // id: chance.n(chance.character, 4, { alpha: true }).join(''),
+  id: faker.random.alphaNumeric(4),
   title: faker.random.words(),
   done: chance.weighted([true, false], [20, 80]),
   category: chance.pickone(categories),
@@ -28,7 +29,6 @@ export const generateTask = (): Task => ({
 })
 
 export function generateTaskList(count: number = 50): Task[] {
-  // faker.seed(123)
   return times(generateTask, count)
 }
 

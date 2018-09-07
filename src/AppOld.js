@@ -57,7 +57,7 @@ import {
 } from './models/TaskFilter'
 import { FaChevronDown } from 'react-icons/all'
 import type { Tag, TagCollection, TagId } from './models/Tag'
-import { createTagList } from './models/Tag'
+import { generateTagList } from './models/Tag'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
@@ -77,7 +77,7 @@ class App extends Component<{}, AppState> {
   state: AppState = {
     tasks: [],
     filter: createAllFilter(),
-    tags: createTagList(),
+    tags: generateTagList(),
     isTagsPage: false,
   }
   componentDidMount() {
