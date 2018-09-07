@@ -20,7 +20,7 @@ export class Sidebar extends Component<Props> {
               <Link
                 to={c}
                 getProps={({ isCurrent, isPartiallyCurrent }) => ({
-                  className: cn({ current: isPartiallyCurrent }),
+                  className: cn({ current: isCurrent }),
                 })}
               >
                 {c}
