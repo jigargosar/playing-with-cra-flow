@@ -29,7 +29,6 @@ export function TaskList({ tasks }: Props) {
 const TaskTitle = styled.div``
 const TaskCategory = styled.div`
   text-transform: uppercase;
-  font-size: 14px;
 `
 const TaskItem = styled.div``
 const TaskItemsLayout = styled.div`
@@ -37,7 +36,9 @@ const TaskItemsLayout = styled.div`
     margin: 1rem 0;
   }
 `
-const TagItem = styled.span``
+const TagItem = styled.span`
+  text-transform: uppercase;
+`
 const TagItemsLayout = styled.div`
   display: inline-flex;
   margin: 0 -0.5rem;
