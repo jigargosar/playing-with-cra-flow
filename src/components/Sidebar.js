@@ -15,15 +15,18 @@ export class Sidebar extends Component<Props> {
       <Fragment>
         <h2>Categories</h2>
         <CategoriesLayout>
-          {categories.map(c => (
-            <Category key={c}>
+          {categories.map(category => (
+            <Category key={category}>
               <Link
-                to={c}
+                to={category}
                 getProps={({ isCurrent, isPartiallyCurrent }) => ({
-                  className: cn({ current: isCurrent }),
+                  className: cn({
+                    current: isCurrent,
+                    partiallyCurrent: isPartiallyCurrent,
+                  }),
                 })}
               >
-                {c}
+                {category}
               </Link>
             </Category>
           ))}
