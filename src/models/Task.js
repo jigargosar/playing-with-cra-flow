@@ -18,19 +18,17 @@ export type Task = {|
   createdAt: number,
 |}
 
-export function createTask(): Task {
-  return {
-    id: chance.n(chance.character, 4, { alpha: true }).join(""),
-    title: faker.random.words(),
-    done: chance.weighted([true, false], [20, 80]),
-    category: chance.pickone(categories),
-    tagIds: [],
-    createdAt: Date.now(),
-  }
-}
+export const createRandomTask = (ch: Chance = chance) => (): Task => ({
+  id: ch.n(ch.character, 4, { alpha: true }).join(''),
+  title: faker.random.words(),
+  done: ch.weighted([true, false], [20, 80]),
+  category: ch.pickone(categories),
+  tagIds: [],
+  createdAt: Date.now(),
+})
 
 export function createTaskList(count: number = 50): Task[] {
-  return times(createTask, count)
+  return times(createRandomTask(), count)
 }
 
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
@@ -47,9 +45,7 @@ export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
 export type TaskCollection = Task[]
 
 export function getAllTasks(tasksCollection: TaskCollection): Task[] {
-  return sortWith([ascend(getCategoryIndexOfTask)])(
-    tasksCollection,
-  )
+  return sortWith([ascend(getCategoryIndexOfTask)])(tasksCollection)
 }
 
 export function getActiveTasks(tasksCollection: TaskCollection): Task[] {

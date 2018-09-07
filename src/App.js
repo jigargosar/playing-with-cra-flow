@@ -11,6 +11,7 @@ import type { TaskCollection } from './models/Task'
 import { createTaskList } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
+import { Sidebar } from './components/Sidebar'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -21,18 +22,16 @@ class App extends Component<{}, AppState> {
   state: AppState = { tasks: createTaskList() }
 
   render() {
-    return (
-      <Provider theme={theme}>
+    return <Provider theme={theme}>
         <Layout>
           <Layout.Sidebar>
-            <TaskList tasks={this.state.tasks} />
+            <Sidebar />
           </Layout.Sidebar>
           <Layout.Content>
             <TaskList tasks={this.state.tasks} />
           </Layout.Content>
         </Layout>
       </Provider>
-    )
   }
 }
 
