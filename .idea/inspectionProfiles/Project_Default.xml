@@ -256,6 +256,7 @@
     <inspection_tool class="JSRedeclarationOfBlockScope" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="JSReferencingArgumentsOutsideOfFunction" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="JSReferencingMutableVariableFromClosure" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="JSRemoveUnnecessaryParentheses" enabled="false" level="INFORMATION" enabled_by_default="false" />
     <inspection_tool class="JSSuspiciousNameCombination" enabled="true" level="INFORMATION" enabled_by_default="true">
       <group names="x,width,left,right" />
       <group names="y,height,top,bottom" />
