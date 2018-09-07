@@ -11,7 +11,7 @@ import { generateTaskList } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
-import { Layout } from './components/Layout2'
+import { Layout } from './components/LayoutFlex'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />

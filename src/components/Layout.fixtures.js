@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Layout } from './Layout'
+import { Layout } from './LayoutGrid'
 import { Block } from 'reakit'
 
 export default [
