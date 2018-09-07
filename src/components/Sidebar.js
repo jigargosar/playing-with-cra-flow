@@ -8,7 +8,7 @@ type Props = {}
 export class Sidebar extends Component<Props> {
   render() {
     return (
-      <div>
+      <div style={{width:200}}>
         <h1>Sidebar</h1>
         <h2>Categories</h2>
       </div>

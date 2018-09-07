@@ -7,7 +7,7 @@ injectGlobal(css`
     padding: 0;
     font-size: 16px;
     line-height: 1.5em;
-    font-family: Roboto, 'Source Code Pro', Monaco, Menlo, Consolas,
+    font-family: Roboto, 'Source Code Pro', Menlo, Monaco, Consolas,
       'Courier New', monospace;
     -webkit-font-smoothing: antialiased;
   }
