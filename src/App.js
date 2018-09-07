@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Component } from 'react'
-import { Block, Provider } from 'reakit'
+import { Provider } from 'reakit'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
@@ -21,18 +21,7 @@ class App extends Component<{}, AppState> {
     return (
       <Provider theme={theme}>
         <Layout>
-          <Layout.Header>
-            <Block backgroundColor={'red'}>Header</Block>
-          </Layout.Header>
-          <Layout.Sidebar>
-            <Block backgroundColor={'green'}>Sidebar</Block>
-          </Layout.Sidebar>
-          <Layout.Content>
-            <Block backgroundColor={'blue'}>Content</Block>
-          </Layout.Content>
-          <Layout.Footer>
-            <Block backgroundColor={'yellow'}>Footer</Block>
-          </Layout.Footer>
+          <Layout.Content />
         </Layout>
       </Provider>
     )

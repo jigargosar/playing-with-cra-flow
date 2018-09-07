@@ -46,15 +46,14 @@
     "faker": "^4.1.0",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.9.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-icons": "^3.0.5",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
     "react-icons-kit": "^1.1.7",
     "react-scripts": "1.1.5",
     "reakit": "^0.14.5",
     "recompose": "^0.30.0",
     "styled-components": "^3.4.5",
-    "styled-tools": "^1.4.3",
+    "styled-tools": "^1.5.1",
     "xstate": "^3.3.3"
   },
   "devDependencies": {
@@ -62,11 +61,10 @@
     "@types/ramda": "^0.25.37",
     "@types/react-dom": "^16.0.7",
     "@types/recompose": "^0.26.4",
-    "docz": "^0.11.0",
     "flow-bin": "^0.80.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "prettier": "^1.14.2",
-    "react-styleguidist": "^7.3.4"
+    "react-cosmos": "^4.6.4"
   }
 }
