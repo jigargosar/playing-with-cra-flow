@@ -1,15 +1,12 @@
 import { Grid, styled } from 'reakit'
 
-export const Layout = styled(Grid).attrs({
-  template: `
-      "a a a" 
-      "b c c" minmax(200px, 1fr)
-      "d d d"
-    `,
-})`
-  height: 100vh;
-  width: 100vw;
-`
+export const Layout = styled(Grid).attrs({ template: `
+      'a a a' 
+      'b c c' minmax(200px, 1fr)
+      'd d d'
+    ` })`
+         height: 100vh;
+         width: 100vw;`
 // Layout.displayName='Layout'
 Layout.Header = styled(Grid.Item).attrs({ area: 'a' })``
 // Layout.Header.displayName='Layout.Header'
