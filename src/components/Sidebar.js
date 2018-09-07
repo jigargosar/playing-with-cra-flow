@@ -21,6 +21,11 @@ export class Sidebar extends Component<Props> {
           ))}
           <Divider margin={'1rem'} />
           <Item>
+            <RouterLink to={'/Tags'}>Tags</RouterLink>
+          </Item>
+
+          <Divider margin={'1rem'} />
+          <Item>
             <RouterLink to={'/All'}>All</RouterLink>
           </Item>
           <Item>
