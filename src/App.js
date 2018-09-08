@@ -18,6 +18,7 @@ import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
 import { CategoryTaskList, DoneTaskList } from './TaskListRoutes'
 import { TagsList } from './components/TagsList'
+import { AppComponent } from './components/App'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -72,4 +73,7 @@ class App extends Component<{}, AppState> {
   }
 }
 
-export default App
+export {App}
+export default AppComponent
+
+
