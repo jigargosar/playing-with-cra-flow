@@ -6,3 +6,8 @@ export const LinkToCategory = ({ category, ...otherProps }) => (
     {category}
   </LinkTo>
 )
+export const LinkToTag = ({ tag, ...otherProps }) => (
+  <LinkTo to={`/${tag}`} {...otherProps}>
+    {tag}
+  </LinkTo>
+)

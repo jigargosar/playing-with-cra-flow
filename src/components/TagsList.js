@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Fragment } from 'react'
 import { styled } from 'reakit'
 import type { Tag } from '../models/Tag'
+import { LinkToTag } from './Links'
 
 type Props = {
   tags: Tag[],
@@ -16,7 +17,9 @@ export function TagsList({ tags }: Props) {
       <TagItemsLayout>
         {tags.map(tag => (
           <TagItem key={tag.id}>
-            <TagTitle>{`#${tag.title}`}</TagTitle>
+            <TagTitle>
+              <LinkToTag tag={tag} />
+            </TagTitle>
           </TagItem>
         ))}
       </TagItemsLayout>
