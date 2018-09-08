@@ -1,9 +1,10 @@
 // @flow
 
 import * as React from 'react'
+import { Fragment } from 'react'
 import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
-import { styled } from 'reakit'
+import { Divider, styled } from 'reakit'
 import { CollectionContext } from '../App'
 
 type Props = {
@@ -14,19 +15,22 @@ export function TaskList({ tasks }: Props) {
   return (
     <Tasks>
       {tasks.map(task => (
-        <Task key={task.id}>
-          <Title done={task.done}>{task.title}</Title>
-          <Category>{task.category}</Category>
-          <Tags>
-            <CollectionContext.Consumer
-              children={({ tags }) =>
-                getTaskTags(task, tags).map(tag => (
-                  <Tag key={tag.id}>{`#${tag.title}`}</Tag>
-                ))
-              }
-            />
-          </Tags>
-        </Task>
+        <Fragment key={task.id}>
+          <Task key={task.id}>
+            <Title done={task.done}>{task.title}</Title>
+            <Category>{task.category}</Category>
+            <Tags>
+              <CollectionContext.Consumer
+                children={({ tags }) =>
+                  getTaskTags(task, tags).map(tag => (
+                    <Tag key={tag.id}>{`#${tag.title}`}</Tag>
+                  ))
+                }
+              />
+            </Tags>
+          </Task>
+          <Divider />
+        </Fragment>
       ))}
     </Tasks>
   )
