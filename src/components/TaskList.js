@@ -17,11 +17,11 @@ export function TaskList({ tasks, getTaskTags }: Props) {
         <TaskItem key={task.id}>
           <TaskTitle done={task.done}>{task.title}</TaskTitle>
           <TaskCategory>{task.category}</TaskCategory>
-          <TagItemsLayout>
+          <TagItems>
             {getTaskTags(task).map(tag => (
               <TagItem key={tag.id}>{`#${tag.title}`}</TagItem>
             ))}
-          </TagItemsLayout>
+          </TagItems>
         </TaskItem>
       ))}
     </TaskItemsLayout>
@@ -48,7 +48,7 @@ const TagItem = styled.span`
   text-transform: uppercase;
   margin-right: 0.5rem;
 `
-const TagItemsLayout = styled.div`
+const TagItems = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
 `
