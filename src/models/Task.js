@@ -52,3 +52,14 @@ export function getAllTasks(tasksCollection: TaskCollection): Task[] {
 export function getActiveTasks(tasksCollection: TaskCollection): Task[] {
   return getAllTasks(tasksCollection).filter(task => !task.done)
 }
+
+export function getPendingCategoryTasks(
+  category: Category,
+  tasks: TaskCollection,
+) {
+  return getActiveTasks(tasks).filter(t => t.category === category)
+}
+
+export function getDoneTasks(tasks: TaskCollection) {
+  return getAllTasks(tasks).filter(t => t.done)
+}

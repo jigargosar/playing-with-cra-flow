@@ -5,7 +5,7 @@ import { Provider } from 'reakit'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import { generateTaskList, setSomeTaskTags } from './models/Task'
+import { generateTaskList, getDoneTasks, setSomeTaskTags } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
@@ -13,7 +13,7 @@ import { AppLayout } from './components/AppLayout'
 import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
-import { CategoryTaskList, DoneTaskList } from './TaskListRoutes'
+import { CategoryTaskList } from './TaskListRoutes'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
 
@@ -51,10 +51,14 @@ const App = () => (
                       <TaskList tasks={tasks} getTaskTags={getTaskTags} />
                     )}
                   />
-                  <DoneTaskList
+                  <RenderPath
                     path={'Done'}
-                    tasks={tasks}
-                    getTaskTags={getTaskTags}
+                    render={() => (
+                      <TaskList
+                        tasks={getDoneTasks(tasks)}
+                        getTaskTags={getTaskTags}
+                      />
+                    )}
                   />
                   <TagsList path={'Tags'} tags={tags} />
                   <CategoryTaskList

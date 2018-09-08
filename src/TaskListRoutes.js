@@ -1,11 +1,11 @@
 import { withProps } from 'recompose'
 import { TaskList } from './components/TaskList'
-import { getActiveTasks, getAllTasks } from './models/Task'
+import { getDoneTasks, getPendingCategoryTasks } from './models/Task'
 
 export const CategoryTaskList = withProps(({ tasks, category }) => ({
-  tasks: getActiveTasks(tasks).filter(t => t.category === category),
+  tasks: getPendingCategoryTasks(category, tasks),
 }))(TaskList)
 
 export const DoneTaskList = withProps(({ tasks }) => ({
-  tasks: getAllTasks(tasks).filter(t => t.done),
+  tasks: getDoneTasks(tasks),
 }))(TaskList)
