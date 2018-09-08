@@ -61,9 +61,13 @@ export function getPendingCategoryTasks(
   return getActiveTasks(tasks).filter(t => t.category === category)
 }
 
+export function getPendingTagTasks(tid: TagId, tasks: TaskCollection) {
+  return getActiveTasks(tasks).filter(t => t.tagIds.includes(tid))
+}
+
 export function getDoneTasks(tasks: TaskCollection) {
   return getAllTasks(tasks).filter(t => t.done)
 }
 
-export const getTaskTags = (task: Task, tags: TagCollection):Tag[] =>
+export const getTaskTags = (task: Task, tags: TagCollection): Tag[] =>
   task.tagIds.map(tid => findById(tid)(tags))

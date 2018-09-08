@@ -3,7 +3,7 @@ import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import { CollectionContext } from '../App'
 import * as React from 'react'
-import { LinkToCategory } from './Links'
+import { LinkToCategory, LinkToTag } from './Links'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Task>
@@ -15,7 +15,9 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       <CollectionContext.Consumer
         children={({ tags }) =>
           getTaskTags(task, tags).map(tag => (
-            <Tag key={tag.id}>{`#${tag.title}`}</Tag>
+            <Tag key={tag.id}>
+              <LinkToTag tag={tag} />
+            </Tag>
           ))
         }
       />
