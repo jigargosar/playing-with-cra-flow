@@ -11,7 +11,6 @@ import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
 import { generateTagList } from './models/Tag'
-import { findById } from './models/Collection'
 import { Redirect } from '@reach/router'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
@@ -19,6 +18,8 @@ import { Route, Router } from './components/Router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
+
+export const CollectionContext = React.createContext({ tasks: [], tags: [] })
 
 const App = () => (
   <Component
@@ -29,50 +30,40 @@ const App = () => (
     }}
   >
     {({ state: { tasks, tags }, setState, refs }) => {
-      const getTaskTags = task => task.tagIds.map(tid => findById(tid)(tags))
       return (
-        <Provider theme={theme}>
-          <AppLayout>
-            <AppLayout.Middle>
-              <AppLayout.Sidebar>
-                <Sidebar />
-              </AppLayout.Sidebar>
-              <AppLayout.Main>
-                <Router>
-                  <Redirect from={'/'} to={'All'} />
-                  <Route
-                    path={'All'}
-                    render={() => (
-                      <TaskList
-                        tasks={getAllTasks(tasks)}
-                        getTaskTags={getTaskTags}
-                      />
-                    )}
-                  />
-                  <Route
-                    path={'Done'}
-                    render={() => (
-                      <TaskList
-                        tasks={getDoneTasks(tasks)}
-                        getTaskTags={getTaskTags}
-                      />
-                    )}
-                  />
-                  <TagsList path={'Tags'} tags={tags} />
-                  <Route
-                    path={'/:category'}
-                    render={({ category }) => (
-                      <TaskList
-                        tasks={getPendingCategoryTasks(category, tasks)}
-                        getTaskTags={getTaskTags}
-                      />
-                    )}
-                  />
-                </Router>
-              </AppLayout.Main>
-            </AppLayout.Middle>
-          </AppLayout>
-        </Provider>
+        <CollectionContext.Provider value={{ tasks, tags }}>
+          <Provider theme={theme}>
+            <AppLayout>
+              <AppLayout.Middle>
+                <AppLayout.Sidebar>
+                  <Sidebar />
+                </AppLayout.Sidebar>
+                <AppLayout.Main>
+                  <Router>
+                    <Redirect from={'/'} to={'All'} />
+                    <Route
+                      path={'All'}
+                      render={() => <TaskList tasks={getAllTasks(tasks)} />}
+                    />
+                    <Route
+                      path={'Done'}
+                      render={() => <TaskList tasks={getDoneTasks(tasks)} />}
+                    />
+                    <TagsList path={'Tags'} tags={tags} />
+                    <Route
+                      path={'/:category'}
+                      render={({ category }) => (
+                        <TaskList
+                          tasks={getPendingCategoryTasks(category, tasks)}
+                        />
+                      )}
+                    />
+                  </Router>
+                </AppLayout.Main>
+              </AppLayout.Middle>
+            </AppLayout>
+          </Provider>
+        </CollectionContext.Provider>
       )
     }}
   </Component>

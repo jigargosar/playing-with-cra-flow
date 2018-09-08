@@ -3,14 +3,15 @@
 import * as React from 'react'
 import type { Task as TaskModel } from '../models/Task'
 import { styled } from 'reakit'
-import type { Tag as TagModel } from '../models/Tag'
+import { CollectionContext } from '../App'
+import { findById } from '../models/Collection'
 
 type Props = {
   tasks: TaskModel[],
-  getTaskTags: TaskModel => TagModel[],
 }
 
-export function TaskList({ tasks, getTaskTags }: Props) {
+const getTaskTags = task => tags => task.tagIds.map(tid => findById(tid)(tags))
+export function TaskList({ tasks }: Props) {
   return (
     <Tasks>
       {tasks.map(task => (
@@ -18,9 +19,13 @@ export function TaskList({ tasks, getTaskTags }: Props) {
           <Title done={task.done}>{task.title}</Title>
           <Category>{task.category}</Category>
           <Tags>
-            {getTaskTags(task).map(tag => (
-              <Tag key={tag.id}>{`#${tag.title}`}</Tag>
-            ))}
+            <CollectionContext.Consumer
+              children={({ tags }) =>
+                getTaskTags(task)(tags).map(tag => (
+                  <Tag key={tag.id}>{`#${tag.title}`}</Tag>
+                ))
+              }
+            />
           </Tags>
         </Task>
       ))}
