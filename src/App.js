@@ -5,7 +5,7 @@ import { Provider } from 'reakit'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import { generateTaskList, getDoneTasks, setSomeTaskTags } from './models/Task'
+import { generateTaskList, getDoneTasks, getPendingCategoryTasks, setSomeTaskTags } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
@@ -65,6 +65,15 @@ const App = () => (
                     path={'/:category'}
                     tasks={tasks}
                     getTaskTags={getTaskTags}
+                  />
+                  <RenderPath
+                    path={'/:category'}
+                    render={({ category }) => (
+                      <TaskList
+                        tasks={getPendingCategoryTasks(category, tasks)}
+                        getTaskTags={getTaskTags}
+                      />
+                    )}
                   />
                 </Router>
               </AppLayout.Main>
