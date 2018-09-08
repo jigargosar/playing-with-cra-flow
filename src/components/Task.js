@@ -3,7 +3,11 @@ import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import { CollectionContext } from '../App'
 import * as React from 'react'
+import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
+import { Dialog } from '@reach/dialog'
+import Component from '@reach/component-component'
+import '@reach/dialog/styles.css'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Layout>
@@ -25,7 +29,24 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       </Tags>
     </Layout.Left>
     <Layout.Right>
-      <button onClick={() => alert(task.title)}>Edit</button>
+      <Component initialState={{ showDialog: true }}>
+        {({ state, setState }) => (
+          <Fragment>
+            <button onClick={() => setState({ showDialog: true })}>Edit</button>
+            {state.showDialog && (
+              <Dialog onDismiss={() => setState({ showDialog: false })}>
+                <p>
+                  It is your job to close this with state when the user clicks
+                  outside or presses escape.
+                </p>
+                <button onClick={() => setState({ showDialog: false })}>
+                  Ok
+                </button>
+              </Dialog>
+            )}
+          </Fragment>
+        )}
+      </Component>
     </Layout.Right>
   </Layout>
 )
