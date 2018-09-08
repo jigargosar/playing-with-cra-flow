@@ -12,10 +12,10 @@ import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
 import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
-import { Redirect, Router } from '@reach/router'
+import { Redirect } from '@reach/router'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
-import { Route } from './components/Router'
+import { Route, Router } from './components/Router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -80,5 +80,3 @@ const App = () => (
   </Component>
 )
 export default App
-
-

@@ -1,10 +1,12 @@
-import { Link as ReachRouterLink } from '@reach/router'
 import * as React from 'react'
+import { Link as RouterLink, Router as ReachRouter } from '@reach/router'
 import { styled } from 'reakit'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
-export const LinkTo = styled(ReachRouterLink)`
+export const Router = styled(ReachRouter)``
+
+export const LinkTo = styled(RouterLink)`
   color: inherit;
   text-decoration: none;
 
