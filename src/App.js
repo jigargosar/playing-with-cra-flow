@@ -43,11 +43,21 @@ const App = () => (
                     <Redirect from={'/'} to={'All'} />
                     <Route
                       path={'All'}
-                      render={() => <TaskList tasks={getAllTasks(tasks)} />}
+                      render={() => (
+                        <TaskList
+                          tasks={getAllTasks(tasks)}
+                          title={'All Tasks'}
+                        />
+                      )}
                     />
                     <Route
                       path={'Done'}
-                      render={() => <TaskList tasks={getDoneTasks(tasks)} />}
+                      render={() => (
+                        <TaskList
+                          tasks={getDoneTasks(tasks)}
+                          title={'Done Tasks'}
+                        />
+                      )}
                     />
                     <TagsList path={'Tags'} tags={tags} />
                     <Route
@@ -55,6 +65,7 @@ const App = () => (
                       render={({ category }) => (
                         <TaskList
                           tasks={getPendingCategoryTasks(category, tasks)}
+                          title={`${category} Tasks`}
                         />
                       )}
                     />
