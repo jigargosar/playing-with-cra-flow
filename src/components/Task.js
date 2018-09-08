@@ -24,16 +24,20 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
         />
       </Tags>
     </Layout.Left>
-    <div>
+    <Layout.Right>
       <button>Edit</button>
-    </div>
+    </Layout.Right>
   </Layout>
 )
 const Layout = styled.div`
   display: flex;
 `
 Layout.Left = styled.div`
-  flex: 1 1auto;
+  flex: 1 1 auto;
+`
+Layout.Right = styled.div`
+  flex: none;
+  margin-right: 1rem;
 `
 const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
