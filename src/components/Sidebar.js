@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { Divider, Heading, styled } from 'reakit'
 import { categories } from '../models/Category'
-import { RouterLink } from './RouterLink'
+import { RouterLink } from './Router'
 
 type Props = {}
 
