@@ -5,6 +5,7 @@ import { Component, Fragment } from 'react'
 import { Divider, Heading, styled } from 'reakit'
 import { categories } from '../models/Category'
 import { LinkTo } from './Router'
+import { LinkToCategory } from './Links'
 
 type Props = {}
 
@@ -16,7 +17,7 @@ export class Sidebar extends Component<Props> {
         <ItemsLayout>
           {categories.map(category => (
             <Item key={category}>
-              <LinkTo to={category}>{category}</LinkTo>
+              <LinkToCategory category={category} />
             </Item>
           ))}
           <Divider margin={'1rem'} />
