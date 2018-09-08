@@ -3,12 +3,12 @@
 export type Category =
   | 'Calendar'
   | 'InBasket'
-  | 'NextAction'
-  | 'Project'
-  | 'Someday'
-  | 'Reference'
   | 'WaitingFor'
+  | 'Project'
+  | 'NextAction'
+  | 'Reference'
   | 'Incubator'
+  | 'Someday'
 
 export const categories: Array<Category> = [
   'Calendar',

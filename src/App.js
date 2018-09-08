@@ -40,11 +40,6 @@ const App = () => (
               <AppLayout.Main>
                 <Router>
                   <Redirect from={'/'} to={'All'} />
-                  <TaskList
-                    path={'All'}
-                    tasks={tasks}
-                    getTaskTags={getTaskTags}
-                  />
                   <Route
                     path={'All'}
                     render={() => (
