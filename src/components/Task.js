@@ -25,7 +25,7 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       </Tags>
     </Layout.Left>
     <Layout.Right>
-      <button>Edit</button>
+      <button onClick={() => alert(task.title)}>Edit</button>
     </Layout.Right>
   </Layout>
 )
