@@ -34,6 +34,7 @@ const Layout = styled.div`
 `
 Layout.Left = styled.div`
   flex: 1 1 auto;
+  margin-left: 1rem;
 `
 Layout.Right = styled.div`
   flex: none;
