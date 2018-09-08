@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Link as RouterLink, Router as ReachRouter } from '@reach/router'
 import { styled } from 'reakit'
 
