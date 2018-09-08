@@ -9,14 +9,15 @@ import { TaskList } from './TaskList'
 import { CategoryTaskList, DoneTaskList } from '../TaskListRoutes'
 import { TagsList } from './TagsList'
 import { findById } from '../models/Collection'
+import { generateTagList } from '../models/Tag'
+import { generateTaskList, setSomeTaskTags } from '../models/Task'
 
 export const AppComponent = () => (
   <Component
     getInitialState={() => {
-      return {
-        tasks: [],
-        tags: [],
-      }
+      const tags = generateTagList()
+      const tasks = generateTaskList().map(setSomeTaskTags(tags))
+      return { tasks, tags }
     }}
   >
     {({ state: { tasks, tags }, setState, refs }) => {
