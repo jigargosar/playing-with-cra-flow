@@ -13,7 +13,7 @@ type Props = {
 
 export function TaskList({ tasks, title }: Props) {
   return (
-    <div style={{ paddingTop: 1 }}>
+    <Fragment>
       <h2>{title}</h2>
       <Tasks>
         {tasks.map(task => (
@@ -23,6 +23,6 @@ export function TaskList({ tasks, title }: Props) {
           </Fragment>
         ))}
       </Tasks>
-    </div>
+    </Fragment>
   )
 }

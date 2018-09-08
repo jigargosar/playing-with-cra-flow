@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Heading, styled } from 'reakit'
+import { styled } from 'reakit'
 import type { Tag } from '../models/Tag'
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 export function TagsList({ tags }: Props) {
   return (
     <Fragment>
-      <Heading as={'h4'}>Tags</Heading>
+      <h2>Tags</h2>
       <TagItemsLayout>
         {tags.map(tag => (
           <TagItem key={tag.id}>

@@ -167,7 +167,7 @@ class App extends Component<{}, AppState> {
           minHeight={'80%'}
           padding={'1rem'}
         >
-          <Heading as={'h3'}>{`Processing InBasket Task`}</Heading>
+          <h2>{`Processing InBasket Task`}</h2>
           <Heading as={'h4'}>{`${task.title}`}</Heading>
           <Field margin={'1rem'}>
             <Label htmlFor="task-input">{`title`}</Label>
