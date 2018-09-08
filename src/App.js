@@ -15,7 +15,7 @@ import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
-import { RenderPath } from './components/RenderPath'
+import { RenderPath } from './components/Router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
