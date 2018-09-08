@@ -5,7 +5,8 @@ import Chance from 'chance'
 import type { Category } from './Category'
 import { categories } from './Category'
 import { ascend, indexOf, sortWith, times } from 'ramda'
-import type { Tag, TagId } from './Tag'
+import type { Tag, TagCollection, TagId } from './Tag'
+import { findById } from './Collection'
 
 export const chance = Chance()
 
@@ -63,3 +64,6 @@ export function getPendingCategoryTasks(
 export function getDoneTasks(tasks: TaskCollection) {
   return getAllTasks(tasks).filter(t => t.done)
 }
+
+export const getTaskTags = (task: Task, tags: TagCollection):Tag[] =>
+  task.tagIds.map(tid => findById(tid)(tags))
