@@ -11,24 +11,27 @@ type Props = {
   tasks: TaskModel[],
 }
 
+const TaskItem = ({ task }: { task: TaskModel }) => (
+  <Task>
+    <Title done={task.done}>{task.title}</Title>
+    <Category>{task.category}</Category>
+    <Tags>
+      <CollectionContext.Consumer
+        children={({ tags }) =>
+          getTaskTags(task, tags).map(tag => (
+            <Tag key={tag.id}>{`#${tag.title}`}</Tag>
+          ))
+        }
+      />
+    </Tags>
+  </Task>
+)
 export function TaskList({ tasks }: Props) {
   return (
     <Tasks>
       {tasks.map(task => (
         <Fragment key={task.id}>
-          <Task key={task.id}>
-            <Title done={task.done}>{task.title}</Title>
-            <Category>{task.category}</Category>
-            <Tags>
-              <CollectionContext.Consumer
-                children={({ tags }) =>
-                  getTaskTags(task, tags).map(tag => (
-                    <Tag key={tag.id}>{`#${tag.title}`}</Tag>
-                  ))
-                }
-              />
-            </Tags>
-          </Task>
+          <TaskItem task={task} />
           <Divider />
         </Fragment>
       ))}
