@@ -5,7 +5,7 @@ import { styled } from 'reakit'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
-export function LinkTo({ ...other }) {
+export function LinkTo2({ ...other }) {
   return (
     <RouterLinkWrapper>
       <ReachRouterLink getProps={propsToCN} {...other} />
@@ -40,3 +40,20 @@ const RouterLinkWrapper = styled.span`
     text-decoration: underline;
   }
 `
+
+export const LinkTo = styled(ReachRouterLink)`
+  color: inherit;
+  text-decoration: none;
+
+  &[data-is-current='true'] {
+    color: rgba(255, 99, 71, 1);
+  }
+
+  :hover {
+    text-decoration: underline;
+  }
+`
+
+LinkTo.defaultProps = {
+  getProps: ({ isCurrent }) => ({ 'data-is-current': isCurrent }),
+}
