@@ -36,6 +36,7 @@ const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
 `
 const Category = styled.div`
+  font-size: 0.8rem;
   text-transform: uppercase;
 `
 const Task = styled.div``
@@ -45,6 +46,7 @@ const Tasks = styled.div`
   }
 `
 const Tag = styled.span`
+  font-size: 0.8rem;
   text-transform: uppercase;
   margin-right: 0.5rem;
 `
