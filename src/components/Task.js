@@ -29,16 +29,22 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       </Tags>
     </Layout.Left>
     <Layout.Right>
-      <Component initialState={{ showDialog: true }}>
+      <Component initialState={{ showDialog: true, task }}>
         {({ state, setState }) => (
           <Fragment>
             <button onClick={() => setState({ showDialog: true })}>Edit</button>
             {state.showDialog && (
               <Dialog onDismiss={() => setState({ showDialog: false })}>
-                <p>
-                  It is your job to close this with state when the user clicks
-                  outside or presses escape.
-                </p>
+                <h2 style={{ marginTop: 0 }}>Edit Task</h2>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  <input type={'text'} defaultValue={task.title} />
+                </div>
                 <button onClick={() => setState({ showDialog: false })}>
                   Ok
                 </button>

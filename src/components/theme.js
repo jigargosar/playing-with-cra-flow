@@ -20,6 +20,15 @@ injectGlobal(css`
     font-family: inherit;
     text-transform: uppercase;
   }
+
+  input[type='text'] {
+    font-size: 16px;
+    min-height: 1.5rem;
+    font-family: inherit;
+  }
+  form {
+    margin-bottom: 1rem;
+  }
 `)
 
 export const theme = {
