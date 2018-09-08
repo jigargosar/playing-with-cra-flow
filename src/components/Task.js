@@ -3,28 +3,38 @@ import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import { CollectionContext } from '../App'
 import * as React from 'react'
-import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
-  <Fragment>
-    <Title done={task.done}>{task.title}</Title>
-    <Category>
-      <LinkToCategory category={task.category} />
-    </Category>
-    <Tags>
-      <CollectionContext.Consumer
-        children={({ tags }) =>
-          getTaskTags(task, tags).map(tag => (
-            <Tag key={tag.id}>
-              <LinkToTag tag={tag} />
-            </Tag>
-          ))
-        }
-      />
-    </Tags>
-  </Fragment>
+  <Layout>
+    <Layout.Left>
+      <Title done={task.done}>{task.title}</Title>
+      <Category>
+        <LinkToCategory category={task.category} />
+      </Category>
+      <Tags>
+        <CollectionContext.Consumer
+          children={({ tags }) =>
+            getTaskTags(task, tags).map(tag => (
+              <Tag key={tag.id}>
+                <LinkToTag tag={tag} />
+              </Tag>
+            ))
+          }
+        />
+      </Tags>
+    </Layout.Left>
+    <div>
+      <button>Edit</button>
+    </div>
+  </Layout>
 )
+const Layout = styled.div`
+  display: flex;
+`
+Layout.Left = styled.div`
+  flex: 1 1auto;
+`
 const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
 `
