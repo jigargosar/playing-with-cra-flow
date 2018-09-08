@@ -11,6 +11,15 @@ injectGlobal(css`
       'Courier New', monospace;
     -webkit-font-smoothing: antialiased;
   }
+  button {
+    font-size: 12px;
+    background: none;
+    min-width: 3rem;
+    min-height: 1.5rem;
+    text-align: center;
+    font-family: inherit;
+    text-transform: uppercase;
+  }
 `)
 
 export const theme = {
