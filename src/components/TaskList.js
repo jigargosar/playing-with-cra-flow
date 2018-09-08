@@ -46,12 +46,9 @@ const TaskItemsLayout = styled.div`
 `
 const TagItem = styled.span`
   text-transform: uppercase;
+  margin-right: 0.5rem;
 `
 const TagItemsLayout = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
-  margin: 0 -0.5rem;
-  > ${TagItem} {
-    margin: 0 0.5rem;
-  }
 `
