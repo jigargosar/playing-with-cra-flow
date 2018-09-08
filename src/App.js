@@ -45,6 +45,12 @@ const App = () => (
                     tasks={tasks}
                     getTaskTags={getTaskTags}
                   />
+                  <RenderPath
+                    path={'All'}
+                    render={() => (
+                      <TaskList tasks={tasks} getTaskTags={getTaskTags} />
+                    )}
+                  />
                   <DoneTaskList
                     path={'Done'}
                     tasks={tasks}
@@ -66,3 +72,5 @@ const App = () => (
   </Component>
 )
 export default App
+
+const RenderPath = ({ render }) => render()
