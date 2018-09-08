@@ -3,10 +3,11 @@ import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import { CollectionContext } from '../App'
 import * as React from 'react'
+import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
-  <Task>
+  <Fragment>
     <Title done={task.done}>{task.title}</Title>
     <Category>
       <LinkToCategory category={task.category} />
@@ -22,7 +23,7 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
         }
       />
     </Tags>
-  </Task>
+  </Fragment>
 )
 const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
@@ -30,12 +31,6 @@ const Title = styled.div`
 const Category = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
-`
-const Task = styled.div``
-export const Tasks = styled.div`
-  > ${Task} {
-    margin: 1rem 0;
-  }
 `
 const Tag = styled.span`
   font-size: 0.8rem;
