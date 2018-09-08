@@ -8,7 +8,9 @@ export const AppLayout = styled.div`
 
 AppLayout.Middle = styled.div`
   display: flex;
+  flex-direction: row;
   overflow: hidden;
+  height:100%;
 `
 
 AppLayout.Sidebar = styled.div`
