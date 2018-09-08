@@ -10,7 +10,7 @@ type Props = {
   tags: Tag[],
 }
 
-export function TagsList({ tags }: Props) {
+export function TagList({ tags }: Props) {
   return (
     <Fragment>
       <h2>Tags</h2>

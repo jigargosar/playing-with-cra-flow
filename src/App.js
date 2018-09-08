@@ -19,7 +19,7 @@ import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
 import { generateTagList } from './models/Tag'
 import { Redirect } from '@reach/router'
-import { TagsList } from './components/TagsList'
+import { TagList } from './components/TagList'
 import Component from '@reach/component-component'
 import { Route, Router } from './components/Router'
 
@@ -66,7 +66,7 @@ const App = () => (
                         />
                       )}
                     />
-                    <TagsList path={'Tags'} tags={tags} />
+                    <TagList path={'Tags'} tags={tags} />
                     <Route
                       path={'/:category'}
                       render={({ category }) => (
