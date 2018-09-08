@@ -1,30 +1,30 @@
 // @flow
 
 import * as React from 'react'
-import type { Task } from '../models/Task'
+import type { Task as TaskModel } from '../models/Task'
 import { styled } from 'reakit'
-import type { Tag } from '../models/Tag'
+import type { Tag as TagModel } from '../models/Tag'
 
 type Props = {
-  tasks: Task[],
-  getTaskTags: Task => Tag[],
+  tasks: TaskModel[],
+  getTaskTags: TaskModel => TagModel[],
 }
 
 export function TaskList({ tasks, getTaskTags }: Props) {
   return (
-    <TaskItemsLayout>
+    <Tasks>
       {tasks.map(task => (
-        <TaskItem key={task.id}>
-          <TaskTitle done={task.done}>{task.title}</TaskTitle>
-          <TaskCategory>{task.category}</TaskCategory>
-          <TagItems>
+        <Task key={task.id}>
+          <Title done={task.done}>{task.title}</Title>
+          <Category>{task.category}</Category>
+          <Tags>
             {getTaskTags(task).map(tag => (
-              <TagItem key={tag.id}>{`#${tag.title}`}</TagItem>
+              <Tag key={tag.id}>{`#${tag.title}`}</Tag>
             ))}
-          </TagItems>
-        </TaskItem>
+          </Tags>
+        </Task>
       ))}
-    </TaskItemsLayout>
+    </Tasks>
   )
 }
 
@@ -32,23 +32,23 @@ TaskList.defaultProps = {
   category: null,
 }
 
-const TaskTitle = styled.div`
+const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
 `
-const TaskCategory = styled.div`
+const Category = styled.div`
   text-transform: uppercase;
 `
-const TaskItem = styled.div``
-const TaskItemsLayout = styled.div`
-  > ${TaskItem} {
+const Task = styled.div``
+const Tasks = styled.div`
+  > ${Task} {
     margin: 1rem 0;
   }
 `
-const TagItem = styled.span`
+const Tag = styled.span`
   text-transform: uppercase;
   margin-right: 0.5rem;
 `
-const TagItems = styled.div`
+const Tags = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
 `
