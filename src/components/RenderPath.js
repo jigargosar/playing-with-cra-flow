@@ -1,0 +1,1 @@
+export const RenderPath = ({ render, ...otherProps }) => render(otherProps)

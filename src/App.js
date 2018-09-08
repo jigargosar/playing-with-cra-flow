@@ -13,9 +13,9 @@ import { AppLayout } from './components/AppLayout'
 import { generateTagList } from './models/Tag'
 import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
-import { CategoryTaskList } from './TaskListRoutes'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
+import { RenderPath } from './components/RenderPath'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -61,11 +61,6 @@ const App = () => (
                     )}
                   />
                   <TagsList path={'Tags'} tags={tags} />
-                  <CategoryTaskList
-                    path={'/:category'}
-                    tasks={tasks}
-                    getTaskTags={getTaskTags}
-                  />
                   <RenderPath
                     path={'/:category'}
                     render={({ category }) => (
@@ -86,4 +81,4 @@ const App = () => (
 )
 export default App
 
-const RenderPath = ({ render }) => render()
+
