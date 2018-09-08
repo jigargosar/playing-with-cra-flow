@@ -15,7 +15,7 @@ export function TaskList({ tasks, getTaskTags }: Props) {
     <TaskItemsLayout>
       {tasks.map(task => (
         <TaskItem key={task.id}>
-          <TaskTitle>{task.title}</TaskTitle>
+          <TaskTitle done={task.done}>{task.title}</TaskTitle>
           <TaskCategory>{task.category}</TaskCategory>
           <TagItemsLayout>
             {getTaskTags(task).map(tag => (
@@ -32,7 +32,9 @@ TaskList.defaultProps = {
   category: null,
 }
 
-const TaskTitle = styled.div``
+const TaskTitle = styled.div`
+  text-decoration: ${p => (p.done ? 'line-through' : null)};
+`
 const TaskCategory = styled.div`
   text-transform: uppercase;
 `
