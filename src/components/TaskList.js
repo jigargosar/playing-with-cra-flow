@@ -8,20 +8,21 @@ import { TaskItem, Tasks } from './Task'
 
 type Props = {
   tasks: TaskModel[],
-  title: string
+  title: string,
 }
 
-export function TaskList({ tasks , title}: Props) {
+export function TaskList({ tasks, title }: Props) {
   return (
-    <Fragment>
+    <div style={{ paddingTop: 1 }}>
       <h2>{title}</h2>
       <Tasks>
-      {tasks.map(task => (
-        <Fragment key={task.id}>
-          <TaskItem task={task} />
-          <Divider />
-        </Fragment>
-      ))}
-    </Tasks></Fragment>
+        {tasks.map(task => (
+          <Fragment key={task.id}>
+            <TaskItem task={task} />
+            <Divider />
+          </Fragment>
+        ))}
+      </Tasks>
+    </div>
   )
 }

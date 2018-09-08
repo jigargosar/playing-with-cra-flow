@@ -14,6 +14,7 @@ AppLayout.Middle = styled.div`
 `
 
 AppLayout.Sidebar = styled.div`
+  flex:none;
   overflow-y: scroll;
   width: 250px;
 `
