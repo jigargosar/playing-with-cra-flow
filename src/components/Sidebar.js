@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { Divider, Heading, styled } from 'reakit'
 import { categories } from '../models/Category'
-import { RouterLink } from './Router'
+import { LinkTo } from './Router'
 
 type Props = {}
 
@@ -16,20 +16,20 @@ export class Sidebar extends Component<Props> {
         <ItemsLayout>
           {categories.map(category => (
             <Item key={category}>
-              <RouterLink to={category}>{category}</RouterLink>
+              <LinkTo to={category}>{category}</LinkTo>
             </Item>
           ))}
           <Divider margin={'1rem'} />
           <Item>
-            <RouterLink to={'/Tags'}>Tags</RouterLink>
+            <LinkTo to={'/Tags'}>Tags</LinkTo>
           </Item>
 
           <Divider margin={'1rem'} />
           <Item>
-            <RouterLink to={'/All'}>All</RouterLink>
+            <LinkTo to={'/All'}>All</LinkTo>
           </Item>
           <Item>
-            <RouterLink to={'/Done'}>Done</RouterLink>
+            <LinkTo to={'/Done'}>Done</LinkTo>
           </Item>
         </ItemsLayout>
       </Fragment>

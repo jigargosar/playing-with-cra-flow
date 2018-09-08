@@ -3,10 +3,9 @@ import { Link as ReachRouterLink } from '@reach/router'
 import * as React from 'react'
 import { styled } from 'reakit'
 
-export const RenderPath = ({ render, ...otherProps }) => render(otherProps)
-type Props = { to: string }
+export const Route = ({ render, ...otherProps }) => render(otherProps)
 
-export function RouterLink({ ...other }: Props) {
+export function LinkTo({ ...other }) {
   return (
     <RouterLinkWrapper>
       <ReachRouterLink getProps={propsToCN} {...other} />

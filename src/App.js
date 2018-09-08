@@ -15,7 +15,7 @@ import { findById } from './models/Collection'
 import { Redirect, Router } from '@reach/router'
 import { TagsList } from './components/TagsList'
 import Component from '@reach/component-component'
-import { RenderPath } from './components/Router'
+import { Route } from './components/Router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -45,13 +45,13 @@ const App = () => (
                     tasks={tasks}
                     getTaskTags={getTaskTags}
                   />
-                  <RenderPath
+                  <Route
                     path={'All'}
                     render={() => (
                       <TaskList tasks={tasks} getTaskTags={getTaskTags} />
                     )}
                   />
-                  <RenderPath
+                  <Route
                     path={'Done'}
                     render={() => (
                       <TaskList
@@ -61,7 +61,7 @@ const App = () => (
                     )}
                   />
                   <TagsList path={'Tags'} tags={tags} />
-                  <RenderPath
+                  <Route
                     path={'/:category'}
                     render={({ category }) => (
                       <TaskList
