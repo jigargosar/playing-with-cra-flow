@@ -8,6 +8,6 @@ export const LinkToCategory = ({ category, ...otherProps }) => (
 )
 export const LinkToTag = ({ tag, ...otherProps }) => (
   <LinkTo to={`/${tag}`} {...otherProps}>
-    {tag}
+    {tag.title}
   </LinkTo>
 )
