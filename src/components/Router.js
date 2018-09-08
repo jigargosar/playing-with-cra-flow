@@ -4,7 +4,9 @@ import { styled } from 'reakit'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
-export const Router = styled(ReachRouter)``
+export const Router = styled(ReachRouter)`
+  display: flex;
+`
 
 export const LinkTo = styled(RouterLink)`
   color: inherit;
