@@ -31,9 +31,21 @@ export const CollectionContext = React.createContext({ tasks: [], tags: [] })
 const App = () => (
   <Component
     getInitialState={() => {
-      const tags = generateTagList()
-      const tasks = generateTaskList().map(setSomeTaskTags(tags))
-      return { tasks, tags }
+      // localStorage.removeItem('collections')
+      const state = localStorage.getItem('collections')
+      if (state) {
+        return JSON.parse(state)
+      } else {
+        const tags = generateTagList()
+        const tasks = generateTaskList().map(setSomeTaskTags(tags))
+        return { tasks, tags }
+      }
+    }}
+    didUpdate={({state}) => {
+      localStorage.setItem('collections', JSON.stringify(state))
+    }}
+    didMount={({state}) => {
+      localStorage.setItem('collections', JSON.stringify(state))
     }}
   >
     {({ state: { tasks, tags }, setState, refs }) => {
