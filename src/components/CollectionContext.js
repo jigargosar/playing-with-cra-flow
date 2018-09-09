@@ -4,7 +4,9 @@ import { generateTagList } from '../models/Tag'
 import { generateTaskList, setSomeTaskTags } from '../models/Task'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
-export const CollectionProvider = ({ children }) => (
+export const CollectionConsumer = CollectionContext.Consumer
+
+const Collections = ({ children }) => (
   <Component
     getInitialState={() => {
       // localStorage.removeItem('collections')
@@ -24,14 +26,18 @@ export const CollectionProvider = ({ children }) => (
       localStorage.setItem('collections', JSON.stringify(state))
     }}
   >
-    {({ state: { tasks, tags } }) => {
-      return (
-        <CollectionContext.Provider value={{ tasks, tags }}>
-          {children}
-        </CollectionContext.Provider>
-      )
+    {({ state }) => {
+      return children(state)
     }}
   </Component>
 )
 
-export const CollectionConsumer = CollectionContext.Consumer
+export const CollectionProvider = ({ children }) => (
+  <Collections>
+    {value => (
+      <CollectionContext.Provider value={value}>
+        {children}
+      </CollectionContext.Provider>
+    )}
+  </Collections>
+)
