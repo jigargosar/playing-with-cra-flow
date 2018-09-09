@@ -27,11 +27,12 @@ export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 export const CollectionContext = React.createContext({ tasks: [], tags: [] })
+export const CollectionsConsumer = CollectionContext.Consumer
 
 const App = () => (
   <Provider theme={theme}>
     <CollectionsProvider>
-      <CollectionContext.Consumer>
+      <CollectionsConsumer>
         {({ tasks, tags }) => (
           <AppLayout>
             <AppLayout.Middle>
@@ -83,7 +84,7 @@ const App = () => (
             </AppLayout.Middle>
           </AppLayout>
         )}
-      </CollectionContext.Consumer>
+      </CollectionsConsumer>
     </CollectionsProvider>
   </Provider>
 )
