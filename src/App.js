@@ -28,11 +28,11 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 export const CollectionContext = React.createContext({ tasks: [], tags: [] })
 
-function AppContent() {
-  return (
-    <CollectionContext.Consumer>
-      {({ tasks, tags }) => (
-        <Provider theme={theme}>
+const App = () => (
+  <Provider theme={theme}>
+    <CollectionsProvider>
+      <CollectionContext.Consumer>
+        {({ tasks, tags }) => (
           <AppLayout>
             <AppLayout.Middle>
               <AppLayout.Sidebar>
@@ -82,13 +82,15 @@ function AppContent() {
               </AppLayout.Main>
             </AppLayout.Middle>
           </AppLayout>
-        </Provider>
-      )}
-    </CollectionContext.Consumer>
-  )
-}
+        )}
+      </CollectionContext.Consumer>
+    </CollectionsProvider>
+  </Provider>
+)
 
-const App = () => (
+export default App
+
+const CollectionsProvider = ({ children }) => (
   <Component
     getInitialState={() => {
       // localStorage.removeItem('collections')
@@ -111,10 +113,9 @@ const App = () => (
     {({ state: { tasks, tags } }) => {
       return (
         <CollectionContext.Provider value={{ tasks, tags }}>
-          <AppContent />
+          {children}
         </CollectionContext.Provider>
       )
     }}
   </Component>
 )
-export default App
