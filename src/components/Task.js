@@ -6,38 +6,10 @@ import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
-import { Dialog } from '@reach/dialog'
 import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
-
-function EditTaskDialog({
-  onDismiss,
-  task,
-}: {
-  onDismiss: () => void,
-  task: TaskModel,
-}) {
-  return (
-    <Component getRefs={()=>({title:React.createRef()})}>
-      {({refs}) => (
-        <Dialog onDismiss={onDismiss}>
-          <h2 style={{ marginTop: 0 }}>Edit Task</h2>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '1rem',
-            }}
-          >
-            <input ref={refs.title} type={'text'} defaultValue={task.title} />
-          </div>
-          <button onClick={onDismiss}>Ok</button>
-        </Dialog>
-      )}
-    </Component>
-  )
-}
+import { EditTaskDialog } from './EditTaskDialog'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Layout>
