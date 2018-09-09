@@ -22,11 +22,12 @@ import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
 import Component from '@reach/component-component'
 import { Route, Router } from './components/Router'
+import { CollectionContext } from './components/CollectionContext'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
-export const CollectionContext = React.createContext({ tasks: [], tags: [] })
+
 
 const App = () => (
   <Provider theme={theme}>

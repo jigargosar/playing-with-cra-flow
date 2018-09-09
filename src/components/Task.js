@@ -1,7 +1,7 @@
 import { styled } from 'reakit'
 import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
-import { CollectionContext } from '../App'
+import { CollectionContext } from './CollectionContext'
 import * as React from 'react'
 import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
