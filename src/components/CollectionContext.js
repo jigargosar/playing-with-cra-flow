@@ -3,7 +3,7 @@ import Component from '@reach/component-component'
 import { generateTagList } from '../models/Tag'
 import { generateTaskList, setSomeTaskTags } from '../models/Task'
 
-export const CollectionContext = React.createContext({ tasks: [], tags: [] })
+const CollectionContext = React.createContext({ tasks: [], tags: [] })
 export const CollectionProvider = ({ children }) => (
   <Component
     getInitialState={() => {
@@ -34,4 +34,4 @@ export const CollectionProvider = ({ children }) => (
   </Component>
 )
 
-export const CollectionConsumer = CollectionConsumer
+export const CollectionConsumer = CollectionContext.Consumer
