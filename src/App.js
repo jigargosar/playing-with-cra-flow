@@ -5,24 +5,15 @@ import { Provider } from 'reakit'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import {
-  generateTaskList,
-  getAllTasks,
-  getDoneTasks,
-  getPendingCategoryTasks,
-  getPendingTagTasks,
-  setSomeTaskTags,
-} from './models/Task'
+import { getAllTasks, getDoneTasks, getPendingCategoryTasks, getPendingTagTasks } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
-import { generateTagList } from './models/Tag'
 import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
-import Component from '@reach/component-component'
 import { Route, Router } from './components/Router'
-import { CollectionContext } from './components/CollectionContext'
+import { CollectionContext, CollectionProvider } from './components/CollectionContext'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -31,7 +22,7 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 const App = () => (
   <Provider theme={theme}>
-    <CollectionsProvider>
+    <CollectionProvider>
       <CollectionContext.Consumer>
         {({ tasks, tags }) => (
           <AppLayout>
@@ -85,38 +76,9 @@ const App = () => (
           </AppLayout>
         )}
       </CollectionContext.Consumer>
-    </CollectionsProvider>
+    </CollectionProvider>
   </Provider>
 )
 
 export default App
 
-const CollectionsProvider = ({ children }) => (
-  <Component
-    getInitialState={() => {
-      // localStorage.removeItem('collections')
-      const state = localStorage.getItem('collections')
-      if (state) {
-        return JSON.parse(state)
-      } else {
-        const tags = generateTagList()
-        const tasks = generateTaskList().map(setSomeTaskTags(tags))
-        return { tasks, tags }
-      }
-    }}
-    didUpdate={({ state }) => {
-      localStorage.setItem('collections', JSON.stringify(state))
-    }}
-    didMount={({ state }) => {
-      localStorage.setItem('collections', JSON.stringify(state))
-    }}
-  >
-    {({ state: { tasks, tags } }) => {
-      return (
-        <CollectionContext.Provider value={{ tasks, tags }}>
-          {children}
-        </CollectionContext.Provider>
-      )
-    }}
-  </Component>
-)
