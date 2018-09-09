@@ -22,7 +22,7 @@ const App = () => (
   <Provider theme={theme}>
     <CollectionProvider>
       <CollectionConsumer>
-        {({ tasks, tags }) => (
+        {({ tasks }) => (
           <AppLayout>
             <AppLayout.Middle>
               <AppLayout.Sidebar>
