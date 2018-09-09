@@ -14,14 +14,14 @@
     "semi": false,
     "printWidth": 80
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
       "post-commit": "git update-index -g"
     }
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "lint-staged": {
     "*.{js,json,css,md}": [

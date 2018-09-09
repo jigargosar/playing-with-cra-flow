@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="src" pattern="file[playing-with-cra-flow]:src//*" />
+</component>

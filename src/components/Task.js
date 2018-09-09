@@ -29,10 +29,10 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       </Tags>
     </Layout.Left>
     <Layout.Right>
-      <Component initialState={{ showDialog: true, task }}>
+      <Component initialState={{ showDialog: false, task }}>
         {({ state, setState }) => (
           <Fragment>
-            <button onClick={() => setState({ showDialog: true })}>Edit</button>
+            <button onClick={() => setState({ showDialog: true})}>Edit</button>
             {state.showDialog && (
               <Dialog onDismiss={() => setState({ showDialog: false })}>
                 <h2 style={{ marginTop: 0 }}>Edit Task</h2>
