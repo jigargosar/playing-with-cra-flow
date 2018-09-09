@@ -5,9 +5,9 @@ import { styled } from 'reakit'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 
-// type Props = {}
+type Props = {}
 
-export function TagList() {
+export function TagList(p: Props) {
   return (
     <TagItemsLayout>
       <h2>Tags</h2>
