@@ -11,9 +11,9 @@ import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 
-function EditTaskDialog(props: { onDismiss: () => void, task: TaskModel }) {
+function EditTaskDialog({onDismiss,task}: { onDismiss: () => void, task: TaskModel }) {
   return (
-    <Dialog onDismiss={props.onDismiss}>
+    <Dialog onDismiss={onDismiss}>
       <h2 style={{ marginTop: 0 }}>Edit Task</h2>
       <div
         style={{
@@ -22,9 +22,9 @@ function EditTaskDialog(props: { onDismiss: () => void, task: TaskModel }) {
           marginBottom: '1rem',
         }}
       >
-        <input type={'text'} defaultValue={props.task.title} />
+        <input type={'text'} defaultValue={task.title} />
       </div>
-      <button onClick={props.onDismiss}>Ok</button>
+      <button onClick={onDismiss}>Ok</button>
     </Dialog>
   )
 }
