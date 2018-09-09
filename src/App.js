@@ -13,17 +13,15 @@ import { AppLayout } from './components/AppLayout'
 import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
 import { Route, Router } from './components/Router'
-import { CollectionContext, CollectionProvider } from './components/CollectionContext'
+import { CollectionConsumer, CollectionProvider } from './components/CollectionContext'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
-
-
 const App = () => (
   <Provider theme={theme}>
     <CollectionProvider>
-      <CollectionContext.Consumer>
+      <CollectionConsumer>
         {({ tasks, tags }) => (
           <AppLayout>
             <AppLayout.Middle>
@@ -75,10 +73,9 @@ const App = () => (
             </AppLayout.Middle>
           </AppLayout>
         )}
-      </CollectionContext.Consumer>
+      </CollectionConsumer>
     </CollectionProvider>
   </Provider>
 )
 
 export default App
-

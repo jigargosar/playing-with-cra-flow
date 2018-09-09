@@ -33,3 +33,5 @@ export const CollectionProvider = ({ children }) => (
     }}
   </Component>
 )
+
+export const CollectionConsumer = CollectionConsumer

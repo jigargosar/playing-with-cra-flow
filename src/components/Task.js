@@ -1,13 +1,13 @@
 import { styled } from 'reakit'
 import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
-import { CollectionContext } from './CollectionContext'
 import * as React from 'react'
 import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { Dialog } from '@reach/dialog'
 import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
+import { CollectionConsumer } from './CollectionContext'
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Layout>
@@ -17,7 +17,7 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
         <LinkToCategory category={task.category} />
       </Category>
       <Tags>
-        <CollectionContext.Consumer
+        <CollectionConsumer
           children={({ tags }) =>
             getTaskTags(task, tags).map(tag => (
               <Tag key={tag.id}>
@@ -32,7 +32,7 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
       <Component initialState={{ showDialog: false, task }}>
         {({ state, setState }) => (
           <Fragment>
-            <button onClick={() => setState({ showDialog: true})}>Edit</button>
+            <button onClick={() => setState({ showDialog: true })}>Edit</button>
             {state.showDialog && (
               <Dialog onDismiss={() => setState({ showDialog: false })}>
                 <h2 style={{ marginTop: 0 }}>Edit Task</h2>
