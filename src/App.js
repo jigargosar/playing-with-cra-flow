@@ -18,62 +18,67 @@ import { CollectionConsumer, CollectionProvider } from './components/CollectionC
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
+function renderMainContent() {
+  return <CollectionConsumer>
+    {({ tasks }) => (
+      <Router>
+        <Redirect from={'/'} to={'All'}/>
+        <Route
+          path={'All'}
+          render={() => (
+            <TaskList
+              tasks={getAllTasks(tasks)}
+              title={'All Tasks '}
+            />
+          )}
+        />
+        <Route
+          path={'Done'}
+          render={() => (
+            <TaskList
+              tasks={getDoneTasks(tasks)}
+              title={'Done Tasks'}
+            />
+          )}
+        />
+        <TagList path={'Tags'}/>
+        <Route
+          path={'/:category'}
+          render={({ category }) => (
+            <TaskList
+              tasks={getPendingCategoryTasks(category, tasks)}
+              title={`${category} Tasks`}
+            />
+          )}
+        />
+        <Route
+          path={'/tag/:tagTitle/:tid'}
+          render={({ tid }) => (
+            <TaskList
+              tasks={getPendingTagTasks(tid, tasks)}
+              title={`${'Tag'} Tasks`}
+            />
+          )}
+        />
+      </Router>
+    )}
+  </CollectionConsumer>
+}
+
 const App = () => (
   <Provider theme={theme}>
     <CollectionProvider>
-      <CollectionConsumer>
-        {({ tasks }) => (
-          <AppLayout>
-            <AppLayout.Middle>
-              <AppLayout.Sidebar>
-                <Sidebar />
-              </AppLayout.Sidebar>
-              <AppLayout.Main>
-                <Router>
-                  <Redirect from={'/'} to={'All'} />
-                  <Route
-                    path={'All'}
-                    render={() => (
-                      <TaskList
-                        tasks={getAllTasks(tasks)}
-                        title={'All Tasks '}
-                      />
-                    )}
-                  />
-                  <Route
-                    path={'Done'}
-                    render={() => (
-                      <TaskList
-                        tasks={getDoneTasks(tasks)}
-                        title={'Done Tasks'}
-                      />
-                    )}
-                  />
-                  <TagList path={'Tags'} />
-                  <Route
-                    path={'/:category'}
-                    render={({ category }) => (
-                      <TaskList
-                        tasks={getPendingCategoryTasks(category, tasks)}
-                        title={`${category} Tasks`}
-                      />
-                    )}
-                  />
-                  <Route
-                    path={'/tag/:tagTitle/:tid'}
-                    render={({ tid }) => (
-                      <TaskList
-                        tasks={getPendingTagTasks(tid, tasks)}
-                        title={`${'Tag'} Tasks`}
-                      />
-                    )}
-                  />
-                </Router>
-              </AppLayout.Main>
-            </AppLayout.Middle>
-          </AppLayout>
-        )}
-      </CollectionConsumer>
+      <AppLayout>
+        <AppLayout.Middle>
+          <AppLayout.Sidebar>
+            <Sidebar/>
+          </AppLayout.Sidebar>
+          <AppLayout.Main>
+            {renderMainContent()}
+          </AppLayout.Main>
+        </AppLayout.Middle>
+      </AppLayout>
+      )
     </CollectionProvider>
   </Provider>
 )
