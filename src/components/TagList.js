@@ -12,7 +12,7 @@ export function TagList({  }: Props) {
     <TagItemsLayout>
       <h2>Tags</h2>
       <CollectionConsumer>
-        {tags =>
+        {({ tags }) =>
           tags.map(tag => (
             <TagItem key={tag.id}>
               <TagTitle>
