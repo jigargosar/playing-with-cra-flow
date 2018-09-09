@@ -1,7 +1,7 @@
 import { styled } from 'reakit'
 import type { Task as TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
-import { CollectionsContext } from '../App'
+import { CollectionContext } from '../App'
 import * as React from 'react'
 import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
@@ -17,7 +17,7 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
         <LinkToCategory category={task.category} />
       </Category>
       <Tags>
-        <CollectionsContext.Consumer
+        <CollectionContext.Consumer
           children={({ tags }) =>
             getTaskTags(task, tags).map(tag => (
               <Tag key={tag.id}>
