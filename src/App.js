@@ -49,7 +49,7 @@ const App = () => (
                       />
                     )}
                   />
-                  <TagList path={'Tags'} tags={tags} />
+                  <TagList path={'Tags'} />
                   <Route
                     path={'/:category'}
                     render={({ category }) => (

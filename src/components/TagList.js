@@ -1,29 +1,28 @@
 // @flow
 
 import * as React from 'react'
-import { Fragment } from 'react'
 import { styled } from 'reakit'
-import type { Tag } from '../models/Tag'
 import { LinkToTag } from './Links'
+import { CollectionConsumer } from './CollectionContext'
 
-type Props = {
-  tags: Tag[],
-}
+type Props = {}
 
-export function TagList({ tags }: Props) {
+export function TagList({  }: Props) {
   return (
-    <Fragment>
+    <TagItemsLayout>
       <h2>Tags</h2>
-      <TagItemsLayout>
-        {tags.map(tag => (
-          <TagItem key={tag.id}>
-            <TagTitle>
-              <LinkToTag tag={tag} />
-            </TagTitle>
-          </TagItem>
-        ))}
-      </TagItemsLayout>
-    </Fragment>
+      <CollectionConsumer>
+        {tags =>
+          tags.map(tag => (
+            <TagItem key={tag.id}>
+              <TagTitle>
+                <LinkToTag tag={tag} />
+              </TagTitle>
+            </TagItem>
+          ))
+        }
+      </CollectionConsumer>
+    </TagItemsLayout>
   )
 }
 
