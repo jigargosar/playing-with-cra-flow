@@ -19,6 +19,8 @@ export type Task = {|
   createdAt: number,
 |}
 
+export type TaskModel = Task
+
 export const generateTask = (): Task => ({
   // id: chance.n(chance.character, 4, { alpha: true }).join(''),
   id: faker.random.alphaNumeric(4),

@@ -1,5 +1,7 @@
+// @flow
+
 import { styled } from 'reakit'
-import type { Task as TaskModel } from '../models/Task'
+import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { Fragment } from 'react'
@@ -8,6 +10,24 @@ import { Dialog } from '@reach/dialog'
 import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
+
+function EditTaskDialog(props: { onDismiss: () => void, task: TaskModel }) {
+  return (
+    <Dialog onDismiss={props.onDismiss}>
+      <h2 style={{ marginTop: 0 }}>Edit Task</h2>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: '1rem',
+        }}
+      >
+        <input type={'text'} defaultValue={props.task.title} />
+      </div>
+      <button onClick={props.onDismiss}>Ok</button>
+    </Dialog>
+  )
+}
 
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Layout>
@@ -34,21 +54,10 @@ export const TaskItem = ({ task }: { task: TaskModel }) => (
           <Fragment>
             <button onClick={() => setState({ showDialog: true })}>Edit</button>
             {state.showDialog && (
-              <Dialog onDismiss={() => setState({ showDialog: false })}>
-                <h2 style={{ marginTop: 0 }}>Edit Task</h2>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  <input type={'text'} defaultValue={task.title} />
-                </div>
-                <button onClick={() => setState({ showDialog: false })}>
-                  Ok
-                </button>
-              </Dialog>
+              <EditTaskDialog
+                onDismiss={() => setState({ showDialog: false })}
+                task={task}
+              />
             )}
           </Fragment>
         )}
