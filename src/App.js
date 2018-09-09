@@ -53,7 +53,7 @@ const App = () => (
                       render={() => (
                         <TaskList
                           tasks={getAllTasks(tasks)}
-                          title={'All Tasks'}
+                          title={'All Tasks '}
                         />
                       )}
                     />
