@@ -28,6 +28,66 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 export const CollectionContext = React.createContext({ tasks: [], tags: [] })
 
+function AppContent() {
+  return (
+    <CollectionContext.Consumer>
+      {({ tasks, tags }) => (
+        <Provider theme={theme}>
+          <AppLayout>
+            <AppLayout.Middle>
+              <AppLayout.Sidebar>
+                <Sidebar />
+              </AppLayout.Sidebar>
+              <AppLayout.Main>
+                <Router>
+                  <Redirect from={'/'} to={'All'} />
+                  <Route
+                    path={'All'}
+                    render={() => (
+                      <TaskList
+                        tasks={getAllTasks(tasks)}
+                        title={'All Tasks '}
+                      />
+                    )}
+                  />
+                  <Route
+                    path={'Done'}
+                    render={() => (
+                      <TaskList
+                        tasks={getDoneTasks(tasks)}
+                        title={'Done Tasks'}
+                      />
+                    )}
+                  />
+                  <TagList path={'Tags'} tags={tags} />
+                  <Route
+                    path={'/:category'}
+                    render={({ category }) => (
+                      <TaskList
+                        tasks={getPendingCategoryTasks(category, tasks)}
+                        title={`${category} Tasks`}
+                      />
+                    )}
+                  />
+                  <Route
+                    path={'/tag/:tagTitle/:tid'}
+                    render={({ tid }) => (
+                      <TaskList
+                        tasks={getPendingTagTasks(tid, tasks)}
+                        title={`${'Tag'} Tasks`}
+                      />
+                    )}
+                  />
+                </Router>
+              </AppLayout.Main>
+            </AppLayout.Middle>
+          </AppLayout>
+        </Provider>
+      )}
+    </CollectionContext.Consumer>
+  )
+}
+
 const App = () => (
   <Component
     getInitialState={() => {
@@ -41,67 +101,17 @@ const App = () => (
         return { tasks, tags }
       }
     }}
-    didUpdate={({state}) => {
+    didUpdate={({ state }) => {
       localStorage.setItem('collections', JSON.stringify(state))
     }}
-    didMount={({state}) => {
+    didMount={({ state }) => {
       localStorage.setItem('collections', JSON.stringify(state))
     }}
   >
-    {({ state: { tasks, tags }, setState, refs }) => {
+    {({ state: { tasks, tags } }) => {
       return (
         <CollectionContext.Provider value={{ tasks, tags }}>
-          <Provider theme={theme}>
-            <AppLayout>
-              <AppLayout.Middle>
-                <AppLayout.Sidebar>
-                  <Sidebar />
-                </AppLayout.Sidebar>
-                <AppLayout.Main>
-                  <Router>
-                    <Redirect from={'/'} to={'All'} />
-                    <Route
-                      path={'All'}
-                      render={() => (
-                        <TaskList
-                          tasks={getAllTasks(tasks)}
-                          title={'All Tasks '}
-                        />
-                      )}
-                    />
-                    <Route
-                      path={'Done'}
-                      render={() => (
-                        <TaskList
-                          tasks={getDoneTasks(tasks)}
-                          title={'Done Tasks'}
-                        />
-                      )}
-                    />
-                    <TagList path={'Tags'} tags={tags} />
-                    <Route
-                      path={'/:category'}
-                      render={({ category }) => (
-                        <TaskList
-                          tasks={getPendingCategoryTasks(category, tasks)}
-                          title={`${category} Tasks`}
-                        />
-                      )}
-                    />
-                    <Route
-                      path={'/tag/:tagTitle/:tid'}
-                      render={({ tid }) => (
-                        <TaskList
-                          tasks={getPendingTagTasks(tid, tasks)}
-                          title={`${'Tag'} Tasks`}
-                        />
-                      )}
-                    />
-                  </Router>
-                </AppLayout.Main>
-              </AppLayout.Middle>
-            </AppLayout>
-          </Provider>
+          <AppContent />
         </CollectionContext.Provider>
       )
     }}
