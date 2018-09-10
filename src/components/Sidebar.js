@@ -13,17 +13,17 @@ export class Sidebar extends Component<Props> {
   render() {
     return (
       <Fragment>
-        <Title as={'h3'}>Categories</Title>
         <ItemsLayout>
           {categories.map(category => (
             <Item key={category}>
               <LinkToCategory category={category} />
             </Item>
           ))}
+          <hr />
           <Item>
             <LinkTo to={'/Tags'}>Tags</LinkTo>
           </Item>
-
+          <hr />
           <Item>
             <LinkTo to={'/All'}>All</LinkTo>
           </Item>
@@ -36,14 +36,11 @@ export class Sidebar extends Component<Props> {
   }
 }
 
-const Title = styled.h1`
-  margin: 1rem;
-`
 const Item = styled.div`
   text-transform: uppercase;
 `
 const ItemsLayout = styled.div`
-  > ${Item} {
+  > * {
     margin: 0.5rem 1.5rem;
   }
 `
