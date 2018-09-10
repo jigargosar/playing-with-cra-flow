@@ -14,11 +14,7 @@ export function TaskList({ tasks, title }: Props) {
   return (
     <Fragment>
       <h2>{title}</h2>
-      {tasks.map(task => (
-        <Fragment key={task.id}>
-          <Task task={task} />
-        </Fragment>
-      ))}
+      {tasks.map(task => <Task key={task.id} task={task} />)}
     </Fragment>
   )
 }
