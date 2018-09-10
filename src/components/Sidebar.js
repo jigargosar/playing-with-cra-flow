@@ -14,31 +14,23 @@ export class Sidebar extends Component<Props> {
     return (
       <ItemsLayout>
         {categories.map(category => (
-          <Item key={category}>
-            <LinkToCategory category={category} />
-          </Item>
+          <LinkToCategory key={category} category={category} />
         ))}
         <hr />
-        <Item>
-          <LinkTo to={'/Tags'}>Tags</LinkTo>
-        </Item>
+        <LinkTo to={'/Tags'}>Tags</LinkTo>
         <hr />
-        <Item>
-          <LinkTo to={'/All'}>All</LinkTo>
-        </Item>
-        <Item>
-          <LinkTo to={'/Done'}>Done</LinkTo>
-        </Item>
+        <LinkTo to={'/All'}>All</LinkTo>
+        <LinkTo to={'/Done'}>Done</LinkTo>
       </ItemsLayout>
     )
   }
 }
 
-const Item = styled.div`
-  text-transform: uppercase;
-`
 const ItemsLayout = styled.div`
+  margin-top: 1rem;
   > * {
+    display: block;
     margin: 0.5rem 1.5rem;
+    text-transform: uppercase;
   }
 `
