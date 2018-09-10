@@ -12,7 +12,7 @@ type Props = {}
 export class Sidebar extends Component<Props> {
   render() {
     return (
-      <ItemsLayout>
+      <Layout>
         {categories.map(category => (
           <LinkToCategory key={category} category={category} />
         ))}
@@ -21,12 +21,12 @@ export class Sidebar extends Component<Props> {
         <hr />
         <LinkTo to={'/All'}>All</LinkTo>
         <LinkTo to={'/Done'}>Done</LinkTo>
-      </ItemsLayout>
+      </Layout>
     )
   }
 }
 
-const ItemsLayout = styled.div`
+const Layout = styled.div`
   margin-top: 1rem;
   > * {
     display: block;
