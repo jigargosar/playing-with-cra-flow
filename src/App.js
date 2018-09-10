@@ -1,13 +1,11 @@
 // @flow
 
 import * as React from 'react'
-import { Provider } from 'reakit'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
 import { getAllTasks, getDoneTasks, getPendingCategoryTasks, getPendingTagTasks } from './models/Task'
 import { TaskList } from './components/TaskList'
-import { theme } from './components/theme'
 import { Sidebar } from './components/Sidebar'
 import { AppLayout } from './components/AppLayout'
 import { Redirect } from '@reach/router'
@@ -63,19 +61,17 @@ function renderMainContent() {
 }
 
 const App = () => (
-  <Provider theme={theme}>
-    <CollectionProvider>
-      <AppLayout>
-        <AppLayout.Middle>
-          <AppLayout.Sidebar>
-            <Sidebar />
-          </AppLayout.Sidebar>
-          <AppLayout.Main>{renderMainContent()}</AppLayout.Main>
-        </AppLayout.Middle>
-      </AppLayout>
-      )
-    </CollectionProvider>
-  </Provider>
+  <CollectionProvider>
+    <AppLayout>
+      <AppLayout.Middle>
+        <AppLayout.Sidebar>
+          <Sidebar />
+        </AppLayout.Sidebar>
+        <AppLayout.Main>{renderMainContent()}</AppLayout.Main>
+      </AppLayout.Middle>
+    </AppLayout>
+    )
+  </CollectionProvider>
 )
 
 export default App

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Component, Fragment } from 'react'
-import { Divider, Heading, styled } from 'reakit'
+import styled from 'react-emotion'
 import { categories } from '../models/Category'
 import { LinkTo } from './Router'
 import { LinkToCategory } from './Links'
@@ -20,12 +20,10 @@ export class Sidebar extends Component<Props> {
               <LinkToCategory category={category} />
             </Item>
           ))}
-          <Divider margin={'1rem'} />
           <Item>
             <LinkTo to={'/Tags'}>Tags</LinkTo>
           </Item>
 
-          <Divider margin={'1rem'} />
           <Item>
             <LinkTo to={'/All'}>All</LinkTo>
           </Item>
@@ -38,7 +36,7 @@ export class Sidebar extends Component<Props> {
   }
 }
 
-const Title = styled(Heading)`
+const Title = styled.h1`
   margin: 1rem;
 `
 const Item = styled.div`

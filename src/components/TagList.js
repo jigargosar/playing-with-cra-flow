@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { styled } from 'reakit'
+import styled from 'react-emotion'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 

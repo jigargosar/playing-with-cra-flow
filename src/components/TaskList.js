@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { Fragment } from 'react'
 import type { Task as TaskModel } from '../models/Task'
-import { Divider } from 'reakit'
 import { TaskItem } from './Task'
 
 type Props = {
@@ -18,7 +17,6 @@ export function TaskList({ tasks, title }: Props) {
       {tasks.map(task => (
         <Fragment key={task.id}>
           <TaskItem task={task} />
-          <Divider />
         </Fragment>
       ))}
     </Fragment>

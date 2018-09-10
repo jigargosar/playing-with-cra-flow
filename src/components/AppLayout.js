@@ -1,4 +1,4 @@
-import { styled } from 'reakit'
+import styled from 'react-emotion'
 
 export const AppLayout = styled.div`
   display: flex;

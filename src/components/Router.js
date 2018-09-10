@@ -1,5 +1,5 @@
 import { Link as RouterLink, Router as ReachRouter } from '@reach/router'
-import { styled } from 'reakit'
+import styled from 'react-emotion'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
