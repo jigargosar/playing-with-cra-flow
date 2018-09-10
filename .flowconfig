@@ -3,6 +3,7 @@
 
 [ignore]
 .*/test/.*\.json
+.*/node_modules/.*/test
 
 [include]
 

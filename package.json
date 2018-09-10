@@ -30,7 +30,8 @@
     ]
   },
   "scripts": {
-    "start": "cross-env REACT_EDITOR=webstorm react-scripts start",
+    "start_": "cross-env REACT_EDITOR=webstorm react-scripts start",
+    "start": "nodemon -w yarn.lock -x parcel src/index.html --open",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -58,21 +59,22 @@
     "recompose": "^0.30.0",
     "styled-components": "^3.4.5",
     "styled-tools": "^1.5.1",
-    "tachyons": "^4.11.1",
-    "xstate": "^3.3.3"
+    "tachyons": "^4.11.1"
   },
   "devDependencies": {
     "@types/prop-types": "^15.5.5",
     "@types/ramda": "^0.25.37",
     "@types/react-dom": "^16.0.7",
     "@types/recompose": "^0.26.4",
+    "babel-preset-react-app": "^3.1.2",
+    "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
     "flow-bin": "^0.80.0",
-    "fuse-box": "^3.5.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
+    "nodemon": "^1.18.4",
+    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2",
-    "react-cosmos": "^4.6.4",
     "typescript": "^3.0.3",
     "uglify-es": "^3.3.9",
     "uglify-js": "^3.4.9"

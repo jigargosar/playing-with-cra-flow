@@ -11,6 +11,7 @@ import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
 
+
 export const TaskItem = ({ task }: { task: TaskModel }) => (
   <Layout>
     <Layout.Left>
