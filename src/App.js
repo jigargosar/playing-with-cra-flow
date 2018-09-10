@@ -7,12 +7,12 @@ import { chevronDown } from 'react-icons-kit/feather'
 import { getAllTasks, getDoneTasks, getPendingCategoryTasks, getPendingTagTasks } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { Sidebar } from './components/Sidebar'
-import { AppLayout } from './components/AppLayout'
 import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
 import { Route, Router } from './components/Router'
 import { CollectionConsumer, CollectionProvider } from './components/CollectionContext'
 import { findById } from './models/Collection'
+import styled from 'react-emotion'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -62,16 +62,30 @@ function renderMainContent() {
 
 const App = () => (
   <CollectionProvider>
-    <AppLayout>
-      <AppLayout.Middle>
-        <AppLayout.Sidebar>
-          <Sidebar />
-        </AppLayout.Sidebar>
-        <AppLayout.Main>{renderMainContent()}</AppLayout.Main>
-      </AppLayout.Middle>
-    </AppLayout>
+    <AppContainer>
+      <SideBarContainer>
+        <Sidebar />
+      </SideBarContainer>
+      <Content>{renderMainContent()}</Content>
+    </AppContainer>
     )
   </CollectionProvider>
 )
 
 export default App
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`
+const SideBarContainer = styled.div`
+  flex: none;
+  overflow-y: scroll;
+  width: 250px;
+`
+
+const Content = styled.div`
+  overflow-y: scroll;
+  flex: 1 1 auto;
+`
