@@ -24,7 +24,10 @@ export function EditTaskDialog({
           >
             <input ref={refs.title} type={'text'} defaultValue={task.title} />
           </div>
-          <button onClick={onDismiss}>Ok</button>
+          <button onClick={()=> {
+            console.log({title:refs.title.current.value})
+            onDismiss()
+          }}>Ok</button>
         </Dialog>
       )}
     </Component>
