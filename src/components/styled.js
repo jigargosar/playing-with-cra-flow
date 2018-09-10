@@ -1,0 +1,1 @@
+export {default as styled} from 'react-emotion'
