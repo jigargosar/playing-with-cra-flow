@@ -1,5 +1,6 @@
 // @flow
 
+import styled from 'react-emotion'
 import * as React from 'react'
 import { Fragment } from 'react'
 import type { Task as TaskModel } from '../models/Task'
@@ -14,7 +15,13 @@ export function TaskList({ tasks, title }: Props) {
   return (
     <Fragment>
       <h2>{title}</h2>
-      {tasks.map(task => <Task key={task.id} task={task} />)}
+      <TasksLayout>{tasks.map(task => <Task key={task.id} task={task} />)}</TasksLayout>
     </Fragment>
   )
 }
+
+const TasksLayout = styled.div`
+  > * {
+    margin: 1rem;
+  }
+`
