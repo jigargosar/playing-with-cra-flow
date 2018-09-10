@@ -11,8 +11,7 @@ import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
 
-
-export const TaskItem = ({ task }: { task: TaskModel }) => (
+export const Task = ({ task }: { task: TaskModel }) => (
   <Layout>
     <Layout.Left>
       <Title done={task.done}>{task.title}</Title>
