@@ -10,11 +10,11 @@ AppLayout.Middle = styled.div`
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  height:100%;
+  height: 100%;
 `
 
 AppLayout.Sidebar = styled.div`
-  flex:none;
+  flex: none;
   overflow-y: scroll;
   width: 250px;
 `
