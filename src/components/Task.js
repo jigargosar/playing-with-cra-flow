@@ -1,6 +1,6 @@
 // @flow
 
-import { styled } from 'reakit'
+import styled from 'react-emotion'
 import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
@@ -13,7 +13,7 @@ import { EditTaskDialog } from './EditTaskDialog'
 
 export const Task = ({ task }: { task: TaskModel }) => (
   <Layout>
-    <Layout.Left>
+    <LayoutLeft>
       <Title done={task.done}>{task.title}</Title>
       <Category>
         <LinkToCategory category={task.category} />
@@ -29,8 +29,8 @@ export const Task = ({ task }: { task: TaskModel }) => (
           }
         />
       </Tags>
-    </Layout.Left>
-    <Layout.Right>
+    </LayoutLeft>
+    <LayoutRight>
       <Component initialState={{ showDialog: false, task }}>
         {({ state, setState }) => (
           <Fragment>
@@ -44,17 +44,17 @@ export const Task = ({ task }: { task: TaskModel }) => (
           </Fragment>
         )}
       </Component>
-    </Layout.Right>
+    </LayoutRight>
   </Layout>
 )
 const Layout = styled.div`
   display: flex;
 `
-Layout.Left = styled.div`
+const LayoutLeft = styled.div`
   flex: 1 1 auto;
   margin-left: 1rem;
 `
-Layout.Right = styled.div`
+const LayoutRight = styled.div`
   flex: none;
   margin-right: 1rem;
 `
