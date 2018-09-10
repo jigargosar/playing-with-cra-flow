@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import styled from 'react-emotion'
 import { categories } from '../models/Category'
 import { LinkTo } from './Router'
@@ -12,26 +12,24 @@ type Props = {}
 export class Sidebar extends Component<Props> {
   render() {
     return (
-      <Fragment>
-        <ItemsLayout>
-          {categories.map(category => (
-            <Item key={category}>
-              <LinkToCategory category={category} />
-            </Item>
-          ))}
-          <hr />
-          <Item>
-            <LinkTo to={'/Tags'}>Tags</LinkTo>
+      <ItemsLayout>
+        {categories.map(category => (
+          <Item key={category}>
+            <LinkToCategory category={category} />
           </Item>
-          <hr />
-          <Item>
-            <LinkTo to={'/All'}>All</LinkTo>
-          </Item>
-          <Item>
-            <LinkTo to={'/Done'}>Done</LinkTo>
-          </Item>
-        </ItemsLayout>
-      </Fragment>
+        ))}
+        <hr />
+        <Item>
+          <LinkTo to={'/Tags'}>Tags</LinkTo>
+        </Item>
+        <hr />
+        <Item>
+          <LinkTo to={'/All'}>All</LinkTo>
+        </Item>
+        <Item>
+          <LinkTo to={'/Done'}>Done</LinkTo>
+        </Item>
+      </ItemsLayout>
     )
   }
 }
