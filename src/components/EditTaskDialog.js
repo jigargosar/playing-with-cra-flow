@@ -2,6 +2,7 @@ import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as React from 'react'
 import { Dialog } from '@reach/dialog'
+import { CollectionConsumer } from './CollectionContext'
 
 export function EditTaskDialog({
   onDismiss,
@@ -24,10 +25,18 @@ export function EditTaskDialog({
           >
             <input ref={refs.title} type={'text'} defaultValue={task.title} />
           </div>
-          <button onClick={()=> {
-            console.log({title:refs.title.current.value})
-            onDismiss()
-          }}>Ok</button>
+          <CollectionConsumer>
+            {({ updateTask }) => (
+              <button
+                onClick={() => {
+                  updateTask({ title: refs.title.current.value }, task)
+                  onDismiss()
+                }}
+              >
+                Ok
+              </button>
+            )}
+          </CollectionConsumer>
         </Dialog>
       )}
     </Component>

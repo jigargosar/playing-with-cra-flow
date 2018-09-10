@@ -2,9 +2,18 @@ import * as React from 'react'
 import Component from '@reach/component-component'
 import { generateTagList } from '../models/Tag'
 import { generateTaskList, setSomeTaskTags } from '../models/Task'
+import { update } from 'ramda'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
 export const CollectionConsumer = CollectionContext.Consumer
+
+const findIndexById = (id, list) => list.findIndex(m => m.id === id)
+
+const taskUpdater = (changes, task) => ({ tasks }) => {
+  const idx = findIndexById(task.id, tasks)
+  console.assert(idx !== -1)
+  return { tasks: update(idx, { ...tasks[idx], ...changes }, tasks) }
+}
 
 const Collections = ({ children }) => (
   <Component
@@ -26,8 +35,13 @@ const Collections = ({ children }) => (
       localStorage.setItem('collections', JSON.stringify(state))
     }}
   >
-    {({ state }) => {
-      return children(state)
+    {({ state, setState }) => {
+      return children({
+        ...state,
+        updateTask: (changes, task) => {
+          setState(taskUpdater(changes, task))
+        },
+      })
     }}
   </Component>
 )
