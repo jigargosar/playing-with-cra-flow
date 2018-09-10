@@ -17,56 +17,52 @@ import styled from 'react-emotion'
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
-function renderMainContent() {
-  return (
-    <CollectionConsumer>
-      {({ tasks, tags }) => (
-        <Router>
-          <Redirect from={'/'} to={'All'} />
-          <Route
-            path={'All'}
-            render={() => (
-              <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '} />
-            )}
-          />
-          <Route
-            path={'Done'}
-            render={() => (
-              <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'} />
-            )}
-          />
-          <TagList path={'Tags'} />
-          <Route
-            path={'/:category'}
-            render={({ category }) => (
-              <TaskList
-                tasks={getPendingCategoryTasks(category, tasks)}
-                title={`${category} Tasks`}
-              />
-            )}
-          />
-          <Route
-            path={'/tag/:tagTitle/:tid'}
-            render={({ tid }) => (
-              <TaskList
-                tasks={getPendingTagTasks(tid, tasks)}
-                title={`#${findById(tid)(tags).title} Tasks`}
-              />
-            )}
-          />
-        </Router>
-      )}
-    </CollectionConsumer>
-  )
-}
-
 const App = () => (
   <CollectionProvider>
     <AppContainer>
-      <SideBarContainer>
+      <SidebarWrapper>
         <Sidebar />
-      </SideBarContainer>
-      <Content>{renderMainContent()}</Content>
+      </SidebarWrapper>
+      <ContentWrapper>
+        <CollectionConsumer>
+          {({ tasks, tags }) => (
+            <Router>
+              <Redirect from={'/'} to={'All'} />
+              <Route
+                path={'All'}
+                render={() => (
+                  <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '} />
+                )}
+              />
+              <Route
+                path={'Done'}
+                render={() => (
+                  <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'} />
+                )}
+              />
+              <TagList path={'Tags'} />
+              <Route
+                path={'/:category'}
+                render={({ category }) => (
+                  <TaskList
+                    tasks={getPendingCategoryTasks(category, tasks)}
+                    title={`${category} Tasks`}
+                  />
+                )}
+              />
+              <Route
+                path={'/tag/:tagTitle/:tid'}
+                render={({ tid }) => (
+                  <TaskList
+                    tasks={getPendingTagTasks(tid, tasks)}
+                    title={`#${findById(tid)(tags).title} Tasks`}
+                  />
+                )}
+              />
+            </Router>
+          )}
+        </CollectionConsumer>
+      </ContentWrapper>
     </AppContainer>
     )
   </CollectionProvider>
@@ -79,13 +75,13 @@ const AppContainer = styled.div`
   flex-direction: row;
   height: 100vh;
 `
-const SideBarContainer = styled.div`
+const SidebarWrapper = styled.div`
   flex: none;
   overflow-y: scroll;
   width: 250px;
 `
 
-const Content = styled.div`
+const ContentWrapper = styled.div`
   overflow-y: scroll;
   flex: 1 1 auto;
 `
