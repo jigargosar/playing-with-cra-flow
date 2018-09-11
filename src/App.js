@@ -22,9 +22,9 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown}/>
 const App = () => (
   <CollectionProvider>
     <div className={style(horizontal, height('100vh'), someChildWillScroll)}>
-      <SidebarWrapper>
+      <div className={style(scroll)}>
         <Sidebar/>
-      </SidebarWrapper>
+      </div>
       <div className={style(flex, scroll)}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
