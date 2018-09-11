@@ -14,35 +14,38 @@ import { CollectionConsumer, CollectionProvider } from './components/CollectionC
 import { findById } from './models/Collection'
 import styled from 'react-emotion'
 import { style } from 'typestyle'
-import { flex, height, horizontal, scroll, someChildWillScroll } from 'csstips'
+import { flex, height, horizontal, padding, scroll, someChildWillScroll, width } from 'csstips'
+import { rem, viewHeight, viewWidth } from 'csx'
 
-export const IconHome = () => <Icon size={'100%'} icon={home}/>
-export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown}/>
+export const IconHome = () => <Icon size={'100%'} icon={home} />
+export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
+
+const sizeFullView = style(height(viewHeight(100)), width(viewWidth(100)))
 
 const App = () => (
   <CollectionProvider>
-    <div className={style(horizontal, height('100vh'), someChildWillScroll)}>
+    <div className={style(horizontal, sizeFullView, someChildWillScroll)}>
       <div className={style(scroll)}>
-        <Sidebar/>
+        <Sidebar />
       </div>
-      <div className={style(flex, scroll)}>
+      <div className={style(flex, scroll, padding(0, rem(1)))}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
             <Router>
-              <Redirect from={'/'} to={'All'}/>
+              <Redirect from={'/'} to={'All'} />
               <Route
                 path={'All'}
                 render={() => (
-                  <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '}/>
+                  <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '} />
                 )}
               />
               <Route
                 path={'Done'}
                 render={() => (
-                  <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'}/>
+                  <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'} />
                 )}
               />
-              <TagList path={'Tags'}/>
+              <TagList path={'Tags'} />
               <Route
                 path={'/:category'}
                 render={({ category }) => (
