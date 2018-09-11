@@ -67,10 +67,6 @@ export function setupGlobalStyles() {
       line-height: 1.5em;
     }
 
-    button:hover {
-      background-color: #2779bd;
-    }
-
     input[type='text'] {
       font-size: 16px;
       min-height: 1.5rem;
