@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { cssRaw, cssRule, normalize, setupPage } from './typestyle'
-import { antialiased } from './styles'
+import { antialiased, sans } from './styles'
 
 normalize()
 setupPage('#root')
 
-cssRule('html,body', antialiased)
+cssRule('html,body', antialiased, sans)
 
 // language=LESS
 cssRaw`
@@ -18,10 +18,6 @@ cssRaw`
     padding: 0;
     font-size: 16px;
     line-height: 1.5em;
-    //font-family: Roboto, 'Source Code Pro', Menlo, Monaco, Consolas,
-    //'Courier New', monospace;
-    font-family: "Source Sans Pro", system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
-
   }
 
   button {

@@ -18,7 +18,9 @@ export function TagList(p: Props) {
       <CollectionConsumer>
         {({ tags }) => (
           <div className={listClass}>
-            {tags.map(tag => <LinkToTag className={linkClass} tag={tag} />)}
+            {tags.map(tag => (
+              <LinkToTag key={tag.id} className={linkClass} tag={tag} />
+            ))}
           </div>
         )}
       </CollectionConsumer>

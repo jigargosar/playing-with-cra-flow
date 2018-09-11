@@ -16,4 +16,7 @@ export const antialiased = {
 export const sans = {
   fontFamily: `"Source Sans Pro", system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";`,
 }
+export const mono = {
+  fontFamily: `Menlo, Monaco, Consolas, 'Courier New', monospace`,
+}
 export const css = stylesheet({ antialiased })
