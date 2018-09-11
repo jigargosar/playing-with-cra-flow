@@ -40,7 +40,7 @@ const taskRouteFilters = [
   [
     'category/:category',
     ({ category }) => allPass([activePred, t => t.category === category]),
-    ({ category }) => `${category} Tasks`,
+    ({ category }) => `${category}`,
   ],
   [
     'tag/:tagTitle/:tid',
