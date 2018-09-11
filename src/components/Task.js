@@ -10,10 +10,11 @@ import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
+import { content, flex, horizontal, style } from './typestyle'
 
 export const Task = ({ task }: { task: TaskModel }) => (
-  <Layout>
-    <LayoutLeft>
+  <div className={style(horizontal)}>
+    <div className={style(flex)}>
       <Title done={task.done}>{task.title}</Title>
       <Category>
         <LinkToCategory category={task.category} />
@@ -29,8 +30,8 @@ export const Task = ({ task }: { task: TaskModel }) => (
           }
         />
       </Tags>
-    </LayoutLeft>
-    <LayoutRight>
+    </div>
+    <div className={style(content)}>
       <Component initialState={{ showDialog: false, task }}>
         {({ state, setState }) => (
           <Fragment>
@@ -44,20 +45,9 @@ export const Task = ({ task }: { task: TaskModel }) => (
           </Fragment>
         )}
       </Component>
-    </LayoutRight>
-  </Layout>
+    </div>
+  </div>
 )
-const Layout = styled.div`
-  display: flex;
-`
-const LayoutLeft = styled.div`
-  flex: 1 1 auto;
-  margin-left: 1rem;
-`
-const LayoutRight = styled.div`
-  flex: none;
-  margin-right: 1rem;
-`
 const Title = styled.div`
   text-decoration: ${p => (p.done ? 'line-through' : null)};
 `
