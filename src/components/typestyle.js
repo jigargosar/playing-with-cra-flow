@@ -9,6 +9,9 @@ export {
   scroll,
   someChildWillScroll,
   width,
-
+  none,
+  normalize,
+  setupPage,
+  content,
 } from 'csstips'
 export { params, rem, viewHeight, viewWidth } from 'csx'

@@ -5,6 +5,9 @@ import registerServiceWorker from './registerServiceWorker'
 
 import { injectGlobal } from 'react-emotion'
 
+// normalize()
+// setupPage('#root')
+
 injectGlobal`
   html,
   body {
@@ -34,8 +37,10 @@ injectGlobal`
   form {
     margin-bottom: 1rem;
   }
+  h1,h2,h3,h4,h5,h6{
+    margin-top: 0;
+  }
 `
-
 
 function render() {
   ReactDOM.render(<App />, document.getElementById('root'))
