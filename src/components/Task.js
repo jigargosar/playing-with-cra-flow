@@ -49,7 +49,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
           {task.title}
         </div>
       ))}
-      <LinkToCategory className={style(fz.sm)} category={task.category} />
+
       <div className={style(horizontallySpaced(rem(0.5)))}>
         <CollectionConsumer
           children={({ tags }) =>
@@ -64,6 +64,8 @@ export const Task = ({ task }: { task: TaskModel }) => (
         />
       </div>
     </div>
-    <div className={style(content)} />
+    <div className={style(content)}>
+      <LinkToCategory className={style(fz.sm)} category={task.category} />
+    </div>
   </div>
 )
