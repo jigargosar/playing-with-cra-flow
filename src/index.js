@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { cssRaw } from './typestyle'
+import { cssRaw, normalize, setupPage } from './typestyle'
 
-// normalize()
-// setupPage('#root')
+normalize()
+setupPage('#root')
 
 cssRaw`
   html,
