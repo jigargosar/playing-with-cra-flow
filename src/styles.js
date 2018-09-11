@@ -41,6 +41,11 @@ export function setupGlobalStyles() {
     { borderWidth: rem(0.5) },
     { textAlign: 'center' },
     { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+    { lineHeight: 1.15 },
+    { borderRadius: rem(0.25) },
+    { cursor: 'pointer' },
+    padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
 
@@ -56,11 +61,7 @@ export function setupGlobalStyles() {
     button {
       background-color: #3490dc;
       color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: .25rem;
       cursor: pointer;
-      font-size: 100%;
-      line-height: 1.15;
     }
 
     button:hover {
