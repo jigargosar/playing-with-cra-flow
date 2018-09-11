@@ -2,13 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-
-import { injectGlobal } from 'react-emotion'
+import { cssRaw } from './components/typestyle'
 
 // normalize()
 // setupPage('#root')
 
-injectGlobal`
+cssRaw`
   html,
   body {
     margin: 0;

@@ -1,4 +1,4 @@
-export { style, classes, extend } from 'typestyle'
+export { style, classes, extend, cssRaw } from 'typestyle'
 export {
   flex,
   height,
