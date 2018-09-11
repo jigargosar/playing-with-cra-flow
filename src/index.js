@@ -28,7 +28,6 @@ cssRaw`
     //'Courier New', monospace;
     font-family: "Source Sans Pro", system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
 
-    -webkit-font-smoothing: antialiased;
   }
 
   button {
