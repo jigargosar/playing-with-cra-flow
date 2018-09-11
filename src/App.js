@@ -13,34 +13,36 @@ import { Route, Router } from './components/Router'
 import { CollectionConsumer, CollectionProvider } from './components/CollectionContext'
 import { findById } from './models/Collection'
 import styled from 'react-emotion'
+import { style } from 'typestyle'
+import { flex, height, horizontal, scroll, someChildWillScroll } from 'csstips'
 
-export const IconHome = () => <Icon size={'100%'} icon={home} />
-export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
+export const IconHome = () => <Icon size={'100%'} icon={home}/>
+export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown}/>
 
 const App = () => (
   <CollectionProvider>
-    <AppContainer>
+    <div className={style(horizontal, height('100vh'), someChildWillScroll)}>
       <SidebarWrapper>
-        <Sidebar />
+        <Sidebar/>
       </SidebarWrapper>
-      <ContentWrapper>
+      <div className={style(flex, scroll)}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
             <Router>
-              <Redirect from={'/'} to={'All'} />
+              <Redirect from={'/'} to={'All'}/>
               <Route
                 path={'All'}
                 render={() => (
-                  <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '} />
+                  <TaskList tasks={getAllTasks(tasks)} title={'All Tasks '}/>
                 )}
               />
               <Route
                 path={'Done'}
                 render={() => (
-                  <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'} />
+                  <TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'}/>
                 )}
               />
-              <TagList path={'Tags'} />
+              <TagList path={'Tags'}/>
               <Route
                 path={'/:category'}
                 render={({ category }) => (
@@ -62,9 +64,8 @@ const App = () => (
             </Router>
           )}
         </CollectionConsumer>
-      </ContentWrapper>
-    </AppContainer>
-    )
+      </div>
+    </div>
   </CollectionProvider>
 )
 
