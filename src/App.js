@@ -13,7 +13,6 @@ import {
   CollectionConsumer,
   CollectionProvider,
 } from './components/CollectionContext'
-import { style } from 'typestyle'
 import {
   flex,
   height,
@@ -26,7 +25,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, verticallySpaced } from './typestyle'
+import { extend, style, verticallySpaced } from './typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
@@ -90,3 +89,11 @@ const App = () => (
 )
 
 export default App
+
+const pp = extend(padding(1, 2, 0, 0), padding(null, null, 1, 2))
+console.log(pp)
+
+const pt = u => padding(u, null, null, null)
+const pr = u => padding(null, u, null, null)
+const pb = u => padding(null, null, u, null)
+const pl = u => padding(null, null, null, u)
