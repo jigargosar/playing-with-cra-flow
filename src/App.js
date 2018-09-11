@@ -38,7 +38,7 @@ const taskRouteFilters = [
   ['All', props => () => true, props => 'All Tasks'],
   ['Done', props => donePred, props => 'Completed Tasks'],
   [
-    ':category',
+    'category/:category',
     ({ category }) => allPass([activePred, t => t.category === category]),
     ({ category }) => `${category} Tasks`,
   ],

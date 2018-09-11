@@ -19,6 +19,7 @@ import {
   style,
 } from '../typestyle-exports'
 import { cText, strike, ttu } from '../styles'
+import { Match } from '@reach/router'
 
 const fz = { sm: { fontSize: rem(0.8) } }
 
@@ -66,15 +67,21 @@ export const Task = ({ task }: { task: TaskModel }) => (
       </div>
     </div>
     <div className={style(content)}>
-      <LinkToCategory
-        className={style(fz.sm, {
-          color: color('#000')
-            .toHSLA()
-            .lighten(0.5)
-            .toString(),
-        })}
-        category={task.category}
-      />
+      <Match path={'/category/*'}>
+        {props =>
+          props.match ? null : (
+            <LinkToCategory
+              className={style(fz.sm, {
+                color: color('#000')
+                  .toHSLA()
+                  .lighten(0.5)
+                  .toString(),
+              })}
+              category={task.category}
+            />
+          )
+        }
+      </Match>
     </div>
   </div>
 )
