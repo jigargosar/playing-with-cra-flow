@@ -38,6 +38,7 @@ export function setupGlobalStyles() {
       margin: 0;
       padding: 0;
       font-size: 16px;
+      //font-size: 20px;
       line-height: 1.5em;
     }
 
