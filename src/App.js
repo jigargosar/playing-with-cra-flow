@@ -62,7 +62,7 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router className={style(padding(rem(1.5)))}>
+            <Router className={style(padding(rem(1)))}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
