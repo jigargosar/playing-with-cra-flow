@@ -27,6 +27,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
+import { classes } from './components/typestyle'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -50,7 +51,12 @@ const taskRouteFilters = [
 
 const App = () => (
   <CollectionProvider>
-    <div className={style(horizontal, sizeViewport100, someChildWillScroll)}>
+    <div
+      className={classes(
+        sizeViewport100,
+        style(horizontal, someChildWillScroll),
+      )}
+    >
       <div className={style(scroll)}>
         <Sidebar />
       </div>

@@ -1,4 +1,4 @@
-export { style } from 'typestyle'
+export { style, classes } from 'typestyle'
 export {
   flex,
   height,
