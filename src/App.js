@@ -14,6 +14,7 @@ import {
   CollectionProvider,
 } from './components/CollectionContext'
 import {
+  BoxUnit,
   flex,
   height,
   horizontal,
@@ -93,7 +94,7 @@ export default App
 const pp = extend(padding(1, 2, 0, 0), padding(null, null, 1, 2))
 console.log(pp)
 
-const pt = u => padding(u, null, null, null)
-const pr = u => padding(null, u, null, null)
-const pb = u => padding(null, null, u, null)
-const pl = u => padding(null, null, null, u)
+export const pt = (u: BoxUnit) => padding(u, null, null, null)
+export const pr = (u: BoxUnit) => padding(null, u, null, null)
+export const pb = (u: BoxUnit) => padding(null, null, u, null)
+export const pl = (u: BoxUnit) => padding(null, null, null, u)
