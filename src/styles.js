@@ -61,7 +61,6 @@ export function setupGlobalStyles() {
     button {
       background-color: #3490dc;
       color: #fff;
-      cursor: pointer;
     }
 
     button:hover {
