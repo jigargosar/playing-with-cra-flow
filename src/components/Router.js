@@ -1,5 +1,6 @@
 import { Link as RouterLink, Router as ReachRouter } from '@reach/router'
 import styled from 'react-emotion'
+import * as React from 'react'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
@@ -23,3 +24,5 @@ LinkTo.defaultProps = {
     'data-is-current': isCurrent,
   }),
 }
+
+export const Link = props => <RouterLink {...props} />
