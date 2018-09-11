@@ -24,6 +24,8 @@ export const tj = { textAlign: 'justify' }
 
 export const pointer = { cursor: 'pointer' }
 
+export const shadow = { boxShadow: '0 2px 4px 0 rgba(0,0,0,.1)' }
+
 export const pt = (u: BoxUnit) => padding(u, null, null, null)
 export const pr = (u: BoxUnit) => padding(null, u, null, null)
 export const pb = (u: BoxUnit) => padding(null, null, u, null)
