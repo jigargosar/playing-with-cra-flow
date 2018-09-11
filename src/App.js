@@ -61,14 +61,14 @@ const App = () => (
           {({ tasks, tags }) => (
             <Router>
               <Redirect from={'/'} to={'All'} />
-              {taskRouteFilters.map(([path, pred]) => (
+              {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
                   key={path}
                   path={path}
                   render={props => (
                     <TaskList
                       tasks={filterTasks(pred(props), tasks)}
-                      title={'All Tasks '}
+                      title={titleFn({ ...props, tags })}
                     />
                   )}
                 />
