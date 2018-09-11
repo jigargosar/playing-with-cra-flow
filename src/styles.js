@@ -84,5 +84,6 @@ export function setupGlobalStyles() {
     { fontFamily: 'inherit' },
     { minHeight: rem(1.5) },
   )
-  cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
 
+  cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
+}
