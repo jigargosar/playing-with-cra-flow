@@ -20,10 +20,28 @@ import {
 import { strike, ttu } from '../styles'
 
 const fz = { sm: { fontSize: rem(0.8) } }
+
+function renderEditTaskDialogTrigger(task, render) {
+  return <Component initialState={{ showDialog: false, task }}>
+    {({ state, setState }) => (
+      <Fragment>
+        {render}
+        {state.showDialog && (
+          <EditTaskDialog
+            onDismiss={() => setState({ showDialog: false })}
+            task={state.task}
+          />
+        )}
+      </Fragment>
+    )}
+  </Component>
+}
+
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
-      <div className={style(task.done && strike)}>{task.title}</div>
+      {renderEditTaskDialogTrigger(task,
+        <div className={style(task.done && strike)}>{task.title}</div>)}
       <LinkToCategory className={style(fz.sm)} category={task.category} />
       <div className={style(horizontallySpaced(rem(0.5)))}>
         <CollectionConsumer
@@ -39,20 +57,6 @@ export const Task = ({ task }: { task: TaskModel }) => (
         />
       </div>
     </div>
-    <div className={style(content)}>
-      <Component initialState={{ showDialog: false, task }}>
-        {({ state, setState }) => (
-          <Fragment>
-            <button onClick={() => setState({ showDialog: true })}>Edit</button>
-            {state.showDialog && (
-              <EditTaskDialog
-                onDismiss={() => setState({ showDialog: false })}
-                task={task}
-              />
-            )}
-          </Fragment>
-        )}
-      </Component>
-    </div>
+    <div className={style(content)} />
   </div>
 )
