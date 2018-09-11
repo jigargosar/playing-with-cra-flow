@@ -27,7 +27,6 @@ import { allPass } from 'ramda'
 import { findById } from './models/Collection'
 import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
-import { ttu } from './styles'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -46,7 +45,7 @@ const taskRouteFilters = [
     'tag/:tagTitle/:tid',
     ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
     ({ tid, tags }) => (
-      <span className={style(ttu)}>{`#${findById(tid)(tags).title}`}</span>
+      `#${findById(tid)(tags).title}`
     ),
   ],
 ]
