@@ -8,6 +8,7 @@ import { block, rem, style, ttu, verticallySpaced } from './typestyle'
 type Props = {}
 
 const listClass = style(verticallySpaced(rem(0.5)))
+const linkClass = style(ttu, block)
 
 export function TagList(p: Props) {
   return (
@@ -16,8 +17,7 @@ export function TagList(p: Props) {
       <CollectionConsumer>
         {({ tags }) => (
           <div className={listClass}>
-            {tags.map(tag => <LinkToTag className={style(ttu, block)}
-                                        tag={tag} />)}
+            {tags.map(tag => <LinkToTag className={linkClass} tag={tag} />)}
           </div>
         )}
       </CollectionConsumer>
