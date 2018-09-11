@@ -26,7 +26,7 @@ export class Sidebar extends Component<Props> {
   }
 }
 
-const containerStyle = style(padding(rem(1)), verticallySpaced(rem(0.5)), {
+const containerStyle = style(padding(rem(1)), verticallySpaced(rem(1)), {
   $nest: {
     '> a': { display: 'block' },
   },
