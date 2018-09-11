@@ -69,6 +69,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
       <LinkToCategory
         className={style(fz.sm, {
           color: color('#000')
+            .toHSLA()
             .lighten(0.5)
             .toString(),
         })}
