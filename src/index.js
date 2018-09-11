@@ -33,7 +33,7 @@ cssRaw`
     font-family: inherit;
     //text-transform: uppercase;
     font-weight: 700;
-    background-color: #2779bd;
+    background-color: #3490dc;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: .25rem;
@@ -41,7 +41,7 @@ cssRaw`
   }
 
   button:hover {
-    background-color: #3490dc;
+    background-color: #2779bd;
   }
 
   input[type='text'] {
