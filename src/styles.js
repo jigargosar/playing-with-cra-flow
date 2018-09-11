@@ -84,7 +84,7 @@ export function setupGlobalStyles() {
     }
 
     input[type='text'] {
-      font-size: 16px;
+      font-size: '100%';
       min-height: 1.5rem;
       font-family: inherit;
     }
