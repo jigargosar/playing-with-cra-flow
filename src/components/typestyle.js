@@ -1,4 +1,4 @@
-export { style, classes } from 'typestyle'
+export { style, classes, extend } from 'typestyle'
 export {
   flex,
   height,
@@ -13,5 +13,8 @@ export {
   normalize,
   setupPage,
   content,
+  margin,
+  maxHeight,
+  maxWidth,
 } from 'csstips'
-export { params, rem, viewHeight, viewWidth } from 'csx'
+export { color, params, rem, viewHeight, viewWidth } from 'csx'

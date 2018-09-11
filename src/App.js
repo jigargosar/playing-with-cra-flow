@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import { Fragment } from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
@@ -27,13 +26,13 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { classes } from './components/typestyle'
+import { extend } from './components/typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
-const sizeViewport100 = style(height(viewHeight(100)), width(viewWidth(100)))
+const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
 const taskRouteFilters = [
   ['All', props => () => true, props => 'All Tasks'],
@@ -51,11 +50,8 @@ const taskRouteFilters = [
 ]
 
 const contentClass = style(flex, scroll, padding(0, rem(1)))
-const sidebarClass = style(scroll)
-const containerClass = classes(
-  sizeViewport100,
-  style(horizontal, someChildWillScroll),
-)
+const sidebarClass = style(scroll, padding(rem(1.5), 0, 0))
+const containerClass = style(horizontal, someChildWillScroll, sizeViewport100)
 
 const App = () => (
   <CollectionProvider>
@@ -66,21 +62,21 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router>
+            <Router className={style(padding(rem(1.5), 0, 0))}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
                   key={path}
                   path={path}
                   render={props => (
-                    <Fragment>
+                    <div>
                       <h2>{titleFn({ ...props, tags })}</h2>
                       <div>
                         {filterTasks(pred(props), tasks).map(task => (
                           <Task key={task.id} task={task} />
                         ))}
                       </div>
-                    </Fragment>
+                    </div>
                   )}
                 />
               ))}
