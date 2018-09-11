@@ -50,7 +50,7 @@ const taskRouteFilters = [
 ]
 
 const contentClass = style(flex, scroll, padding(0, rem(1)))
-const sidebarClass = style(scroll, padding(rem(1.5), 0, 0))
+const sidebarClass = style(scroll)
 const containerClass = style(horizontal, someChildWillScroll, sizeViewport100)
 
 const App = () => (
