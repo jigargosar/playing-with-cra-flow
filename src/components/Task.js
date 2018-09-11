@@ -21,7 +21,7 @@ import { cText, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
-const fz = { sm: { fontSize: rem(0.8) } }
+const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
 function renderEditTaskDialogTrigger(task, render) {
   return (
@@ -47,6 +47,10 @@ const dimColor = color('#000')
   .toHSLA()
   .lighten(0.5)
   .toString()
+const dim2Color = color('#000')
+  .toHSLA()
+  .lighten(0.25)
+  .toString()
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
@@ -56,16 +60,12 @@ export const Task = ({ task }: { task: TaskModel }) => (
         </div>
       ))}
 
-      <div className={style({ color: dimColor })}>
+      <div className={style({ color: dim2Color }, fz.xs, { lineHeight: 1.5 })}>
         <CollectionConsumer
           children={({ tags }) =>
             intersperse(', ')(
               getTaskTags(task, tags).map(tag => (
-                <LinkToTag
-                  key={tag.title}
-                  className={style(fz.sm)}
-                  tag={tag}
-                />
+                <LinkToTag key={tag.title} tag={tag} />
               )),
             )
           }
