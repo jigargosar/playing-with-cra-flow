@@ -8,7 +8,7 @@ import { ttu } from '../styles'
 
 type Props = {}
 
-const listClass = style(verticallySpaced(rem(0.5)))
+const listClass = style(verticallySpaced(rem(1)))
 const linkClass = style(ttu, block)
 
 export function TagList(p: Props) {
