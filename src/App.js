@@ -1,11 +1,11 @@
 // @flow
 
 import * as React from 'react'
+import { Fragment } from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
 import { activePred, donePred, filterTasks } from './models/Task'
-import { TaskList } from './components/TaskList'
 import { Sidebar } from './components/Sidebar'
 import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
@@ -28,6 +28,7 @@ import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
 import { classes } from './components/typestyle'
+import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -49,18 +50,20 @@ const taskRouteFilters = [
   ],
 ]
 
+const contentClass = style(flex, scroll, padding(0, rem(1)))
+const sidebarClass = style(scroll)
+const containerClass = classes(
+  sizeViewport100,
+  style(horizontal, someChildWillScroll),
+)
+
 const App = () => (
   <CollectionProvider>
-    <div
-      className={classes(
-        sizeViewport100,
-        style(horizontal, someChildWillScroll),
-      )}
-    >
-      <div className={style(scroll)}>
+    <div className={containerClass}>
+      <div className={sidebarClass}>
         <Sidebar />
       </div>
-      <div className={style(flex, scroll, padding(0, rem(1)))}>
+      <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
             <Router>
@@ -70,10 +73,14 @@ const App = () => (
                   key={path}
                   path={path}
                   render={props => (
-                    <TaskList
-                      tasks={filterTasks(pred(props), tasks)}
-                      title={titleFn({ ...props, tags })}
-                    />
+                    <Fragment>
+                      <h2>{titleFn({ ...props, tags })}</h2>
+                      <div>
+                        {filterTasks(pred(props), tasks).map(task => (
+                          <Task key={task.id} task={task} />
+                        ))}
+                      </div>
+                    </Fragment>
                   )}
                 />
               ))}

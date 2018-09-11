@@ -15,7 +15,7 @@ export function TaskList({ tasks, title }: Props) {
   return (
     <Fragment>
       <h2>{title}</h2>
-      <TasksLayout>{tasks.map(task => <Task key={task.id} task={task} />)}</TasksLayout>
+      <div>{tasks.map(task => <Task key={task.id} task={task} />)}</div>
     </Fragment>
   )
 }
