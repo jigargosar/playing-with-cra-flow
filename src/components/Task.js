@@ -48,9 +48,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
     </div>
   </div>
 )
-const Title = styled.div`
-  text-decoration: ${p => (p.done ? 'line-through' : null)};
-`
+
 const Category = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
