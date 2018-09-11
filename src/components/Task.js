@@ -14,7 +14,6 @@ import {
   content,
   flex,
   horizontal,
-  horizontallySpaced,
   rem,
   style,
 } from '../typestyle-exports'
@@ -44,6 +43,10 @@ function renderEditTaskDialogTrigger(task, render) {
 
 const taskTitleClass = task => style(task.done && strike, cText)
 
+const dimColor = color('#000')
+  .toHSLA()
+  .lighten(0.5)
+  .toString()
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
@@ -53,12 +56,16 @@ export const Task = ({ task }: { task: TaskModel }) => (
         </div>
       ))}
 
-      <div className={style(horizontallySpaced(rem(0)))}>
+      <div className={style({ color: dimColor })}>
         <CollectionConsumer
           children={({ tags }) =>
             intersperse(', ')(
               getTaskTags(task, tags).map(tag => (
-                <LinkToTag key={tag.title} className={style(fz.sm)} tag={tag} />
+                <LinkToTag
+                  key={tag.title}
+                  className={style(fz.sm)}
+                  tag={tag}
+                />
               )),
             )
           }
@@ -70,12 +77,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
         {props =>
           props.match ? null : (
             <LinkToCategory
-              className={style(fz.sm, {
-                color: color('#000')
-                  .toHSLA()
-                  .lighten(0.5)
-                  .toString(),
-              })}
+              className={style(fz.sm, { color: dimColor })}
               category={task.category}
             />
           )
