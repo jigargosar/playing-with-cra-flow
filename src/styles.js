@@ -49,13 +49,13 @@ export function setupGlobalStyles() {
   setupPage('#root')
 
   cssRule(
-    'html,body',
+    'html, body',
     antialiased,
     sans,
     { fontSize: 16 },
     { lineHeight: rem(1.5) },
   )
-  cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
+  cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
   cssRule(
     'button',
     // { borderWidth: rem(0.25) },
