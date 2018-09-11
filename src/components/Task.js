@@ -30,7 +30,11 @@ export const Task = ({ task }: { task: TaskModel }) => (
         <CollectionConsumer
           children={({ tags }) =>
             getTaskTags(task, tags).map(tag => (
-              <LinkToTag className={style(fz.sm, ttu)} tag={tag} />
+              <LinkToTag
+                key={tag.title}
+                className={style(fz.sm, ttu)}
+                tag={tag}
+              />
             ))
           }
         />

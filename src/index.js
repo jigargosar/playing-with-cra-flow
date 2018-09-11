@@ -42,6 +42,8 @@ injectGlobal`
   }
   a{
     display: inline-block;
+    color: inherit;
+    text-decoration: none;
   }
 `
 
