@@ -2,15 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { cssRaw, cssRule, normalize, setupPage } from './typestyle'
+import { cssRaw, cssRule, normalize, setupPage, stylesheet } from './typestyle'
 
 normalize()
 setupPage('#root')
 
-cssRule('html,body', {
+const antialiased = {
   '-webkit-font-smoothing': 'antialiased',
   '-moz-osx-font-smoothing': 'grayscale',
-})
+}
+
+export const css = stylesheet({ antialiased })
+
+cssRule('html,body', antialiased)
 
 // language=LESS
 cssRaw`
