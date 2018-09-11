@@ -69,6 +69,8 @@ export const Task = ({ task }: { task: TaskModel }) => (
         }
       </Match>
     </div>
-    <div className={style(hover({ visibility: 'hidden' }))}>...</div>
+    <div className={style(content)}>
+      <div className={style(hover({ visibility: 'hidden' }))}>...</div>
+    </div>
   </div>
 )
