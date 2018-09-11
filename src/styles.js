@@ -65,7 +65,7 @@ export function setupGlobalStyles() {
     { cursor: 'pointer' },
     { color: '#fff' },
     bg('#3490dc'),
-    bgHover('#2779bd'),
+    hover(bg('#2779bd')),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
