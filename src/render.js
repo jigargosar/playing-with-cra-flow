@@ -4,20 +4,14 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { setupGlobalStyles } from './styles'
 
+if (module.hot) {
+  module.hot.accept()
+}
+
 setupGlobalStyles()
 
-function render() {
-  ReactDOM.render(<App />, document.getElementById('root'))
-}
+ReactDOM.render(<App />, document.getElementById('root'))
 
-try {
-  render()
-  registerServiceWorker()
+registerServiceWorker()
 
-  if (module.hot) {
-    module.hot.accept()
-  }
-} catch (e) {
-  console.log(e)
-}
 

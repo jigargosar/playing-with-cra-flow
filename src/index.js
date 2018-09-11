@@ -1,8 +1,8 @@
-import { reinit } from 'typestyle'
+require('./render')
 
 if (module.hot) {
-  reinit()
-  module.hot.accept()
+  module.hot.accept(['./render'], () => {
+    require('typestyle').reinit()
+    require('./render')
+  })
 }
-
-require('./render')
