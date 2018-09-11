@@ -25,12 +25,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import {
-  extend,
-  fillParent,
-  style,
-  verticallySpaced,
-} from './typestyle-exports'
+import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
 
@@ -62,7 +57,9 @@ const containerClass = style(
 )
 const contentClass = style(flex, scroll)
 const sidebarClass = style(scroll, { minWidth: 225 })
-const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), fillParent)
+const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
+  minHeight: '100%',
+})
 
 const App = () => (
   <CollectionProvider>
