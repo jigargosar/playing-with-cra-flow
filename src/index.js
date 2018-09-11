@@ -30,8 +30,8 @@ cssRaw`
     //min-height: 1.5rem;
     text-align: center;
     font-family: inherit;
-    //text-transform: uppercase;
-    font-weight: 700;
+    text-transform: uppercase;
+    //font-weight: 700;
     background: transparent;
     background-color: #3490dc;
     color: #fff;
