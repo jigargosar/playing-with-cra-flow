@@ -45,6 +45,15 @@ export function setupGlobalStyles() {
     { lineHeight: 1.15 },
     { borderRadius: rem(0.25) },
     { cursor: 'pointer' },
+    { backgroundColor: '#3490dc' },
+    { color: '#fff' },
+    {
+      $nest: {
+        ':hover': {
+          backgroundColor: '#2779bd',
+        },
+      },
+    },
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
@@ -56,11 +65,6 @@ export function setupGlobalStyles() {
       font-size: 16px;
       //font-size: 20px;
       line-height: 1.5em;
-    }
-
-    button {
-      background-color: #3490dc;
-      color: #fff;
     }
 
     button:hover {
