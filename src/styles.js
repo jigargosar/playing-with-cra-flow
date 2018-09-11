@@ -13,6 +13,9 @@ import {
 } from './typestyle-exports'
 
 export const ttu = { textTransform: 'uppercase' }
+export const ttc = { textTransform: 'capitalize' }
+export const ttl = { textTransform: 'lowercase' }
+export const ttn = { textTransform: 'none' }
 export const strike = { textDecoration: 'line-through' }
 export const tc = { textAlign: 'center' }
 export const tl = { textAlign: 'left' }
