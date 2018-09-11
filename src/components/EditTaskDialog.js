@@ -3,7 +3,7 @@ import Component from '@reach/component-component'
 import * as React from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
-import { FCol } from './Layout'
+import { rem, style, vertical, verticallySpaced } from './typestyle'
 
 export function EditTaskDialog({
   onDismiss,
@@ -15,15 +15,14 @@ export function EditTaskDialog({
   return (
     <Component getRefs={() => ({ title: React.createRef() })}>
       {({ refs }) => (
-        <Dialog onDismiss={onDismiss}>
-          <h2 style={{ marginTop: 0 }}>Edit Task</h2>
-          <FCol
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
+        <Dialog
+          className={style(verticallySpaced(rem(1)))}
+          onDismiss={onDismiss}
+        >
+          <h2>Edit Task</h2>
+          <div className={style(vertical)}>
             <input ref={refs.title} type={'text'} defaultValue={task.title} />
-          </FCol>
+          </div>
           <CollectionConsumer>
             {({ updateTask }) => (
               <button
