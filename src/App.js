@@ -14,7 +14,6 @@ import {
   CollectionProvider,
 } from './components/CollectionContext'
 import {
-  BoxUnit,
   flex,
   height,
   horizontal,
@@ -91,9 +90,3 @@ const App = () => (
 
 export default App
 
-export const pt = (u: BoxUnit) => padding(u, null, null, null)
-export const pr = (u: BoxUnit) => padding(null, u, null, null)
-export const pb = (u: BoxUnit) => padding(null, null, u, null)
-export const pl = (u: BoxUnit) => padding(null, null, null, u)
-export const ph = (u: BoxUnit) => padding(null, u, null, u)
-export const pv = (u: BoxUnit) => padding(u, null, u, null)
