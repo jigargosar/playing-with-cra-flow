@@ -1,6 +1,6 @@
 import { BoxUnit, padding } from 'csstips'
 
-export { style, classes, extend, cssRaw } from 'typestyle'
+export { style, classes, extend, cssRaw, cssRule } from 'typestyle'
 export {
   flex,
   height,

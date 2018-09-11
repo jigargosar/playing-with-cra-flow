@@ -2,10 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { cssRaw, normalize, setupPage } from './typestyle'
+import { cssRaw, cssRule, normalize, setupPage } from './typestyle'
 
 normalize()
 setupPage('#root')
+
+cssRule('html,body', {
+  '-webkit-font-smoothing': 'antialiased',
+  '-moz-osx-font-smoothing': 'grayscale',
+})
 
 // language=LESS
 cssRaw`
@@ -15,8 +20,10 @@ cssRaw`
     padding: 0;
     font-size: 16px;
     line-height: 1.5em;
-    font-family: Roboto, 'Source Code Pro', Menlo, Monaco, Consolas,
-    'Courier New', monospace;
+    //font-family: Roboto, 'Source Code Pro', Menlo, Monaco, Consolas,
+    //'Courier New', monospace;
+    font-family: "Source Sans Pro", system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
+
     -webkit-font-smoothing: antialiased;
   }
 
