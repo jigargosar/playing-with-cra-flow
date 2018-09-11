@@ -26,7 +26,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { classes, extend } from './components/typestyle'
+import { extend } from './components/typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
@@ -49,13 +49,19 @@ const taskRouteFilters = [
   ],
 ]
 
+const padTopOnly = padding(rem(1.5), 0, 0)
+const containerClass = style(
+  horizontal,
+  someChildWillScroll,
+  sizeViewport100,
+  padTopOnly,
+)
 const contentClass = style(flex, scroll, padding(0, rem(1)))
 const sidebarClass = style(scroll)
-const containerClass = style(horizontal, someChildWillScroll, sizeViewport100)
 
 const App = () => (
   <CollectionProvider>
-    <div className={classes(containerClass, style(padding(rem(1.5), 0, 0)))}>
+    <div className={containerClass}>
       <div className={sidebarClass}>
         <Sidebar />
       </div>
