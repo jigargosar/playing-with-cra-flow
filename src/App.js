@@ -4,17 +4,33 @@ import * as React from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import { getAllTasks, getDoneTasks, getPendingCategoryTasks, getPendingTagTasks } from './models/Task'
+import {
+  getAllTasks,
+  getDoneTasks,
+  getPendingCategoryTasks,
+  getPendingTagTasks,
+} from './models/Task'
 import { TaskList } from './components/TaskList'
 import { Sidebar } from './components/Sidebar'
 import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
 import { Route, Router } from './components/Router'
-import { CollectionConsumer, CollectionProvider } from './components/CollectionContext'
+import {
+  CollectionConsumer,
+  CollectionProvider,
+} from './components/CollectionContext'
 import { findById } from './models/Collection'
 import styled from 'react-emotion'
 import { style } from 'typestyle'
-import { flex, height, horizontal, padding, scroll, someChildWillScroll, width } from 'csstips'
+import {
+  flex,
+  height,
+  horizontal,
+  padding,
+  scroll,
+  someChildWillScroll,
+  width,
+} from 'csstips'
 import { rem, viewHeight, viewWidth } from 'csx'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
