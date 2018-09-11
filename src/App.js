@@ -91,9 +91,6 @@ const App = () => (
 
 export default App
 
-const pp = extend(padding(1, 2, 0, 0), padding(null, null, 1, 2))
-console.log(pp)
-
 export const pt = (u: BoxUnit) => padding(u, null, null, null)
 export const pr = (u: BoxUnit) => padding(null, u, null, null)
 export const pb = (u: BoxUnit) => padding(null, null, u, null)
