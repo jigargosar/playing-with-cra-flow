@@ -22,6 +22,8 @@ export const tl = { textAlign: 'left' }
 export const tr = { textAlign: 'right' }
 export const tj = { textAlign: 'justify' }
 
+export const pointer = { cursor: 'pointer' }
+
 export const pt = (u: BoxUnit) => padding(u, null, null, null)
 export const pr = (u: BoxUnit) => padding(null, u, null, null)
 export const pb = (u: BoxUnit) => padding(null, null, u, null)
@@ -73,7 +75,7 @@ export function setupGlobalStyles() {
     { fontSize: '100%' },
     { lineHeight: 1.15 },
     { borderRadius: rem(0.25) },
-    { cursor: 'pointer' },
+    pointer,
     { color: '#fff' },
     extend(bg('#3490dc'), hover(bg('#2779bd'))),
     padding(rem(0.5), rem(1)),
