@@ -16,5 +16,10 @@ export {
   margin,
   maxHeight,
   maxWidth,
+  block,
+  inlineBlock,
+  inlineRoot,
+  invisible,
+  gridSpaced,
 } from 'csstips'
 export { color, params, rem, viewHeight, viewWidth } from 'csx'
