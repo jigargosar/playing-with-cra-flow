@@ -3,6 +3,7 @@ export {
   flex,
   height,
   horizontal,
+  horizontallySpaced,
   vertical,
   verticallySpaced,
   padding,
