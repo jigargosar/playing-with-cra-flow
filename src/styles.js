@@ -66,8 +66,7 @@ export function setupGlobalStyles() {
     { borderRadius: rem(0.25) },
     { cursor: 'pointer' },
     { color: '#fff' },
-    bg('#3490dc'),
-    hover(bg('#2779bd')),
+    extend(bg('#3490dc'), hover(bg('#2779bd'))),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
