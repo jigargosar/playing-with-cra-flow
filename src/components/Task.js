@@ -17,7 +17,7 @@ import {
   rem,
   style,
 } from '../typestyle-exports'
-import { strike, ttu } from '../styles'
+import { cText, strike, ttu } from '../styles'
 
 const fz = { sm: { fontSize: rem(0.8) } }
 
