@@ -24,7 +24,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
       <div className={style(task.done && strike)}>{task.title}</div>
-      <LinkToCategory className={style(fz.sm, ttu)} category={task.category} />
+      <LinkToCategory className={style(fz.sm)} category={task.category} />
       <div className={style(horizontallySpaced(rem(0.5)))}>
         <CollectionConsumer
           children={({ tags }) =>
