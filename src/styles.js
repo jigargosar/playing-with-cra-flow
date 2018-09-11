@@ -58,7 +58,7 @@ export function setupGlobalStyles() {
   cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
   cssRule(
     'button',
-    { borderWidth: rem(0.5) },
+    // { borderWidth: rem(0.25) },
     { textAlign: 'center' },
     { fontFamily: 'inherit' },
     { fontSize: '100%' },
