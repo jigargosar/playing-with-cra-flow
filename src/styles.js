@@ -36,12 +36,16 @@ function bg(backgroundColor) {
   return { backgroundColor }
 }
 
-function bgHover(backgroundColor) {
+function hover(...ext) {
   return {
     $nest: {
-      ':hover': extend(backgroundColor),
+      ':hover': extend(...ext),
     },
   }
+}
+
+function bgHover(backgroundColor) {
+  return hover(backgroundColor)
 }
 
 export function setupGlobalStyles() {
