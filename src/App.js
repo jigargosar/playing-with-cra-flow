@@ -20,7 +20,6 @@ import {
   CollectionProvider,
 } from './components/CollectionContext'
 import {findById} from './models/Collection'
-import styled from 'react-emotion'
 import {style} from 'typestyle'
 import {
   flex,
@@ -36,11 +35,11 @@ import {rem, viewHeight, viewWidth} from 'csx'
 export const IconHome = () => <Icon size={'100%'} icon={home}/>
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown}/>
 
-const sizeFullView = style(height(viewHeight(100)), width(viewWidth(100)))
+const sizeViewport100 = style(height(viewHeight(100)), width(viewWidth(100)))
 
 const App = () => (
   <CollectionProvider>
-    <div className={style(horizontal, sizeFullView, someChildWillScroll)}>
+    <div className={style(horizontal, sizeViewport100, someChildWillScroll)}>
       <div className={style(scroll)}>
         <Sidebar/>
       </div>
@@ -91,19 +90,3 @@ const App = () => (
 )
 
 export default App
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-`
-const SidebarWrapper = styled.div`
-  flex: none;
-  overflow-y: scroll;
-  width: 250px;
-`
-
-const ContentWrapper = styled.div`
-  overflow-y: scroll;
-  flex: 1 1 auto;
-`
