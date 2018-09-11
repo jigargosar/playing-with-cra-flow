@@ -22,26 +22,32 @@ import { strike, ttu } from '../styles'
 const fz = { sm: { fontSize: rem(0.8) } }
 
 function renderEditTaskDialogTrigger(task, render) {
-  return <Component initialState={{ showDialog: false, task }}>
-    {({ state, setState }) => (
-      <Fragment>
-        {render}
-        {state.showDialog && (
-          <EditTaskDialog
-            onDismiss={() => setState({ showDialog: false })}
-            task={state.task}
-          />
-        )}
-      </Fragment>
-    )}
-  </Component>
+  return (
+    <Component initialState={{ showDialog: false, task }}>
+      {({ state, setState }) => (
+        <Fragment>
+          {render({ open: () => setState({ showDialog: true }) })}
+          {state.showDialog && (
+            <EditTaskDialog
+              onDismiss={() => setState({ showDialog: false })}
+              task={state.task}
+            />
+          )}
+        </Fragment>
+      )}
+    </Component>
+  )
 }
 
+const taskTitleClass = task => style(task.done && strike)
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
-      {renderEditTaskDialogTrigger(task,
-        <div className={style(task.done && strike)}>{task.title}</div>)}
+      {renderEditTaskDialogTrigger(task, ({ open }) => (
+        <div onClick={open} className={taskTitleClass(task)}>
+          {task.title}
+        </div>
+      ))}
       <LinkToCategory className={style(fz.sm)} category={task.category} />
       <div className={style(horizontallySpaced(rem(0.5)))}>
         <CollectionConsumer

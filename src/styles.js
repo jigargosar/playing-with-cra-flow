@@ -23,6 +23,7 @@ export const tr = { textAlign: 'right' }
 export const tj = { textAlign: 'justify' }
 
 export const pointer = { cursor: 'pointer' }
+export const cText = { cursor: 'text' }
 
 export const shadow = { boxShadow: '0 2px 4px 0 rgba(0,0,0,.1)' }
 export const shadow1 = { boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }
