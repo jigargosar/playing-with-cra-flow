@@ -9,15 +9,8 @@ import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
-import {
-  color,
-  content,
-  flex,
-  horizontal,
-  rem,
-  style,
-} from '../typestyle-exports'
-import { cText, strike } from '../styles'
+import { content, flex, horizontal, rem, style } from '../typestyle-exports'
+import { cText, dim2Color, dimColor, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
@@ -43,14 +36,6 @@ function renderEditTaskDialogTrigger(task, render) {
 
 const taskTitleClass = task => style(task.done && strike, cText)
 
-const dimColor = color('#000')
-  .toHSLA()
-  .lighten(0.5)
-  .toString()
-const dim2Color = color('#000')
-  .toHSLA()
-  .lighten(0.25)
-  .toString()
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>

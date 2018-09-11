@@ -27,6 +27,7 @@ import { allPass } from 'ramda'
 import { findById } from './models/Collection'
 import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
+import { bg } from './styles'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -63,7 +64,7 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router className={style(padding(rem(2), rem(1)))}>
+            <Router className={style(padding(rem(2), rem(1), bg('#fff')))}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route

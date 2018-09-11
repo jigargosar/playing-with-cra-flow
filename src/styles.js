@@ -11,6 +11,7 @@ import {
   setupPage,
   stylesheet,
 } from './typestyle-exports'
+import { color } from 'csx'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
@@ -65,7 +66,7 @@ export const mono = {
 }
 export const css = stylesheet({ antialiased })
 
-function bg(backgroundColor) {
+export function bg(backgroundColor) {
   return { backgroundColor }
 }
 
@@ -140,3 +141,12 @@ export function setupGlobalStyles() {
     border(0, 0, null, null),
   )
 }
+
+export const dimColor = color('#000')
+  .toHSLA()
+  .lighten(0.5)
+  .toString()
+export const dim2Color = color('#000')
+  .toHSLA()
+  .lighten(0.25)
+  .toString()
