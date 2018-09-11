@@ -44,11 +44,18 @@ function hover(...ext) {
     },
   }
 }
+
 export function setupGlobalStyles() {
   normalize()
   setupPage('#root')
 
-  cssRule('html,body', antialiased, sans)
+  cssRule(
+    'html,body',
+    antialiased,
+    sans,
+    { fontSize: 16 },
+    { lineHeight: rem(1.5) },
+  )
   cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
   cssRule(
     'button',
@@ -88,6 +95,6 @@ export function setupGlobalStyles() {
       line-height: 1.5em;
     }
 
-    
+
   `
 }
