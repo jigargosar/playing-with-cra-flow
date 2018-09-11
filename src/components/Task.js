@@ -68,8 +68,8 @@ export const Task = ({ task }: { task: TaskModel }) => (
     <div className={style(content)}>
       <LinkToCategory
         className={style(fz.sm, {
-          color: color('#8a8a8a')
-            .toRGBA()
+          color: color('#000')
+            .lighten(0.5)
             .toString(),
         })}
         category={task.category}
