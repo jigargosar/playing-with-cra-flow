@@ -26,7 +26,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend } from './components/typestyle'
+import { extend, verticallySpaced } from './components/typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
@@ -77,7 +77,7 @@ const App = () => (
                   render={props => (
                     <div>
                       <h2>{titleFn({ ...props, tags })}</h2>
-                      <div>
+                      <div className={style(verticallySpaced(rem(1.5)))}>
                         {filterTasks(pred(props), tasks).map(task => (
                           <Task key={task.id} task={task} />
                         ))}
