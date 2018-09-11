@@ -12,6 +12,10 @@ cssRule('html,body', antialiased, sans)
 
 // language=LESS
 cssRaw`
+  *, :after, :before {
+    border: 0 solid #dae1e7;
+  }
+
   html,
   body {
     margin: 0;
@@ -21,13 +25,23 @@ cssRaw`
   }
 
   button {
-    font-size: 12px;
+    //font-size: 12px;
     background: none;
-    min-width: 3rem;
-    min-height: 1.5rem;
+    //min-width: 3rem;
+    //min-height: 1.5rem;
     text-align: center;
     font-family: inherit;
-    text-transform: uppercase;
+    //text-transform: uppercase;
+    font-weight: 700;
+    background-color: #2779bd;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: .25rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #3490dc;
   }
 
   input[type='text'] {
