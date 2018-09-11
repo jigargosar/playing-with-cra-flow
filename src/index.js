@@ -53,6 +53,10 @@ cssRaw`
   a:hover {
     text-decoration: underline;
   }
+
+  span {
+    display: inline-block;
+  }
 `
 
 function render() {
