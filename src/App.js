@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import { filterTasks } from './models/Task'
+import { activePred, donePred, filterTasks } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { Sidebar } from './components/Sidebar'
 import { Redirect } from '@reach/router'
@@ -33,8 +33,6 @@ export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
 
 const sizeViewport100 = style(height(viewHeight(100)), width(viewWidth(100)))
 
-const donePred = t => t.done
-const activePred = t => !t.done
 const taskRouteFilters = [
   ['All', props => () => true, props => 'All Tasks'],
   ['Done', props => donePred, props => 'Completed Tasks'],

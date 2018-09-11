@@ -78,3 +78,6 @@ export function getDoneTasks(tasks: TaskCollection) {
 
 export const getTaskTags = (task: Task, tags: TagCollection): Tag[] =>
   task.tagIds.map(tid => findById(tid)(tags))
+
+export const donePred = (t: Task) => t.done
+export const activePred = (t: Task) => !t.done
