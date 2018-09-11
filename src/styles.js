@@ -5,6 +5,7 @@ import {
   extend,
   fontWeightNormal,
   inlineBlock,
+  margin,
   normalize,
   padding,
   rem,
@@ -65,6 +66,7 @@ export function setupGlobalStyles() {
     fontWeightNormal,
   )
   cssRule('span', inlineBlock)
+  cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
 
   // language=LESS
   cssRaw`
@@ -79,10 +81,6 @@ export function setupGlobalStyles() {
       font-size: 16px;
       min-height: 1.5rem;
       font-family: inherit;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 0;
     }
 
     a {
