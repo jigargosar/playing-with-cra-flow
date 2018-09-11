@@ -70,7 +70,7 @@ export function bg(backgroundColor) {
   return { backgroundColor }
 }
 
-function hover(...ext) {
+export function hover(...ext) {
   return {
     $nest: {
       '&:hover': extend(...ext),

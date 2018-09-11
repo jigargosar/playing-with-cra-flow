@@ -10,7 +10,7 @@ import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
 import { content, flex, horizontal, rem, style } from '../typestyle-exports'
-import { cText, dim2Color, dimColor, strike } from '../styles'
+import { cText, dim2Color, dimColor, hover, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
@@ -69,5 +69,6 @@ export const Task = ({ task }: { task: TaskModel }) => (
         }
       </Match>
     </div>
+    <div className={style(hover({ visibility: 'hidden' }))}>...</div>
   </div>
 )
