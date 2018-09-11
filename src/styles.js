@@ -30,6 +30,10 @@ export const mono = {
 }
 export const css = stylesheet({ antialiased })
 
+function bg(backgroundColor) {
+  return { backgroundColor }
+}
+
 export function setupGlobalStyles() {
   normalize()
   setupPage('#root')
@@ -45,7 +49,7 @@ export function setupGlobalStyles() {
     { lineHeight: 1.15 },
     { borderRadius: rem(0.25) },
     { cursor: 'pointer' },
-    { backgroundColor: '#3490dc' },
+    bg('#3490dc'),
     { color: '#fff' },
     {
       $nest: {
