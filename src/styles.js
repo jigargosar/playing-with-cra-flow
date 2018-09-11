@@ -39,15 +39,10 @@ function bg(backgroundColor) {
 function hover(...ext) {
   return {
     $nest: {
-      ':hover': extend(...ext),
+      '&:hover': extend(...ext),
     },
   }
 }
-
-function bgHover(backgroundColor) {
-  return hover(backgroundColor)
-}
-
 export function setupGlobalStyles() {
   normalize()
   setupPage('#root')
