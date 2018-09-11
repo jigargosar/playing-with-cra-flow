@@ -2,6 +2,7 @@ import {
   border,
   cssRaw,
   cssRule,
+  fontWeightNormal,
   normalize,
   padding,
   rem,
@@ -35,7 +36,13 @@ export function setupGlobalStyles() {
 
   cssRule('html,body', antialiased, sans)
   cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
-  cssRule('button', { borderWidth: rem(0.5) })
+  cssRule(
+    'button',
+    { borderWidth: rem(0.5) },
+    { textAlign: 'center' },
+    { fontFamily: 'inherit' },
+    fontWeightNormal,
+  )
 
   // language=LESS
   cssRaw`

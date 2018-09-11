@@ -1,6 +1,9 @@
 export { style, classes, extend, cssRaw, cssRule, stylesheet } from 'typestyle'
 export {
   border,
+  fontWeightBold,
+  fontStyleItalic,
+  fontWeightNormal,
   BoxUnit,
   normalize,
   padding,
