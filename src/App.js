@@ -49,15 +49,9 @@ const taskRouteFilters = [
   ],
 ]
 
-const padTopOnly = padding(rem(1.5), 0, 0)
-const containerClass = style(
-  horizontal,
-  someChildWillScroll,
-  sizeViewport100,
-  padTopOnly,
-)
-const contentClass = style(flex, scroll, padding(0, rem(1)))
-const sidebarClass = style(scroll)
+const containerClass = style(horizontal, someChildWillScroll, sizeViewport100)
+const contentClass = style(flex, scroll)
+const sidebarClass = style(scroll, { minWidth: 225 })
 
 const App = () => (
   <CollectionProvider>
@@ -68,7 +62,7 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router>
+            <Router className={style(padding(rem(1.5)))}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
