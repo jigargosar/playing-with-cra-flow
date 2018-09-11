@@ -26,18 +26,20 @@ cssRaw`
 
   button {
     //font-size: 12px;
-    background: none;
     //min-width: 3rem;
     //min-height: 1.5rem;
     text-align: center;
     font-family: inherit;
     //text-transform: uppercase;
     font-weight: 700;
+    background: transparent;
     background-color: #3490dc;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: .25rem;
     cursor: pointer;
+    font-size: 100%;
+    line-height: 1.15;
   }
 
   button:hover {
