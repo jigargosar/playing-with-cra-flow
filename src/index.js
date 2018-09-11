@@ -7,6 +7,7 @@ import { cssRaw, normalize, setupPage } from './typestyle'
 normalize()
 setupPage('#root')
 
+// language=LESS
 cssRaw`
   html,
   body {
@@ -15,9 +16,10 @@ cssRaw`
     font-size: 16px;
     line-height: 1.5em;
     font-family: Roboto, 'Source Code Pro', Menlo, Monaco, Consolas,
-      'Courier New', monospace;
+    'Courier New', monospace;
     -webkit-font-smoothing: antialiased;
   }
+
   button {
     font-size: 12px;
     background: none;
@@ -33,20 +35,22 @@ cssRaw`
     min-height: 1.5rem;
     font-family: inherit;
   }
+
   form {
     margin-bottom: 1rem;
   }
-  h1,h2,h3,h4,h5,h6{
+
+  h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
-  
-  a{
+
+  a {
     display: inline-block;
     color: inherit;
     text-decoration: none;
   }
-  
-  a:hover{
+
+  a:hover {
     text-decoration: underline;
   }
 `
