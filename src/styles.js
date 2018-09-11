@@ -80,11 +80,12 @@ export function setupGlobalStyles() {
   )
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
+  cssRule('button, input, optgroup, select, textarea', {
+    fontFamily: 'inherit',
+  })
   cssRule(
     'button',
-    // { borderWidth: rem(0.25) },
     tc,
-    { fontFamily: 'inherit' },
     { fontSize: '100%' },
     { lineHeight: 1.15 },
     { borderRadius: rem(0.25) },
@@ -94,17 +95,9 @@ export function setupGlobalStyles() {
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
-  cssRule('span,a', inlineBlock)
-  cssRule(
-    'a',
-    { color: 'inherit' },
-    { textDecoration: 'none' },
-    hover({ textDecoration: 'underline' }),
-  )
   cssRule(
     `input[type='text']`,
     { fontSize: '100%' },
-    { fontFamily: 'inherit' },
     { minHeight: rem(1.5) },
     shadow,
     { width: '100%' },
@@ -113,6 +106,13 @@ export function setupGlobalStyles() {
     { borderWidth: 1 },
     { borderRadius: rem(0.25) },
     appearanceNone,
+  )
+  cssRule('span,a', inlineBlock)
+  cssRule(
+    'a',
+    { color: 'inherit' },
+    { textDecoration: 'none' },
+    hover({ textDecoration: 'underline' }),
   )
 
   cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
