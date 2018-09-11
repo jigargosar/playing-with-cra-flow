@@ -80,13 +80,15 @@ export function setupGlobalStyles() {
   )
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
-  cssRule('button, input, optgroup, select, textarea', {
-    fontFamily: 'inherit',
-  })
+  cssRule(
+    'button, input, optgroup, select, textarea',
+    { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+    { margin: 0 },
+  )
   cssRule(
     'button',
     tc,
-    { fontSize: '100%' },
     { lineHeight: 1.15 },
     { borderRadius: rem(0.25) },
     pointer,
@@ -97,7 +99,6 @@ export function setupGlobalStyles() {
   )
   cssRule(
     `input[type='text']`,
-    { fontSize: '100%' },
     { minHeight: rem(1.5) },
     shadow,
     { width: '100%' },
