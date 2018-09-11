@@ -38,6 +38,15 @@ export const pb = (u: BoxUnit) => padding(null, null, u, null)
 export const pl = (u: BoxUnit) => padding(null, null, null, u)
 export const ph = (u: BoxUnit) => padding(null, u, null, u)
 export const pv = (u: BoxUnit) => padding(u, null, u, null)
+
+export const br0 = { borderRadius: 0 }
+export const br1 = { borderRadius: rem(0.125) }
+export const br2 = { borderRadius: rem(0.25) }
+export const br3 = { borderRadius: rem(0.5) }
+export const br4 = { borderRadius: rem(1) }
+export const brPill = { borderRadius: 9999 }
+// .br-100 { border-radius: 100%; }
+
 export const antialiased = {
   '-webkit-font-smoothing': 'antialiased',
   '-moz-osx-font-smoothing': 'grayscale',
@@ -86,12 +95,13 @@ export function setupGlobalStyles() {
     { fontSize: '100%' },
     { margin: 0 },
   )
+
   cssRule(
     'button, input',
     { fontFamily: 'inherit' },
     { fontSize: '100%' },
     { margin: 0 },
-    { borderRadius: rem(0.25) },
+    br2,
   )
   cssRule(
     'button',
