@@ -64,7 +64,7 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router className={style(padding(rem(1)))}>
+            <Router className={style(padding(rem(2), rem(1)))}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
@@ -72,7 +72,14 @@ const App = () => (
                   path={path}
                   render={props => (
                     <div>
-                      <h2>{titleFn({ ...props, tags })}</h2>
+                      <div
+                        className={style({
+                          fontSize: rem(1.5),
+                          marginBottom: rem(1),
+                        })}
+                      >
+                        {titleFn({ ...props, tags })}
+                      </div>
                       <div className={style(verticallySpaced(rem(1.5)))}>
                         {filterTasks(pred(props), tasks).map(task => (
                           <Task key={task.id} task={task} />
