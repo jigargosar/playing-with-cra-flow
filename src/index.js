@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { cssRaw } from './components/typestyle'
+import { cssRaw } from './typestyle'
 
 // normalize()
 // setupPage('#root')

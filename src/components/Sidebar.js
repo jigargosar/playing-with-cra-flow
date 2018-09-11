@@ -5,7 +5,7 @@ import { Component } from 'react'
 import { categories } from '../models/Category'
 import { LinkTo } from './Router'
 import { LinkToCategory } from './Links'
-import { padding, rem, style, verticallySpaced } from './typestyle'
+import { padding, rem, style, verticallySpaced } from '../typestyle'
 
 type Props = {}
 

@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { block, rem, style, ttu, verticallySpaced } from './typestyle'
+import { block, rem, style, ttu, verticallySpaced } from '../typestyle'
 
 type Props = {}
 

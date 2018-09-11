@@ -1,6 +1,6 @@
 import { Link as RouterLink, Router as ReachRouter } from '@reach/router'
 import * as React from 'react'
-import { classes, style } from './typestyle'
+import { classes, style } from '../typestyle'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 

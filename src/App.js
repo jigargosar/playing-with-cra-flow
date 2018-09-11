@@ -26,7 +26,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, verticallySpaced } from './components/typestyle'
+import { extend, verticallySpaced } from './typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
