@@ -1,6 +1,5 @@
 // @flow
 
-import styled from 'react-emotion'
 import * as React from 'react'
 import { Fragment } from 'react'
 import type { Task as TaskModel } from '../models/Task'
@@ -19,9 +18,3 @@ export function TaskList({ tasks, title }: Props) {
     </Fragment>
   )
 }
-
-const TasksLayout = styled.div`
-  > * {
-    margin: 1rem;
-  }
-`
