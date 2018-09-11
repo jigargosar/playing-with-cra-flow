@@ -10,12 +10,12 @@ import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
-import { content, flex, horizontal, style } from './typestyle'
+import { content, flex, horizontal, strike, style } from './typestyle'
 
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
-      <Title done={task.done}>{task.title}</Title>
+      <div className={style(task.done && strike)}>{task.title}</div>
       <Category>
         <LinkToCategory category={task.category} />
       </Category>

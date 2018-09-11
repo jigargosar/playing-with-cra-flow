@@ -24,3 +24,5 @@ export {
 } from 'csstips'
 export { color, params, rem, viewHeight, viewWidth } from 'csx'
 export const ttu = { textTransform: 'uppercase' }
+
+export const strike = { textDecoration: 'line-through' }
