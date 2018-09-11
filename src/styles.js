@@ -65,7 +65,7 @@ export function setupGlobalStyles() {
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
-  cssRule('span', inlineBlock)
+  cssRule('span,a', inlineBlock)
   cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
 
   // language=LESS
@@ -84,7 +84,6 @@ export function setupGlobalStyles() {
     }
 
     a {
-      display: inline-block;
       color: inherit;
       text-decoration: none;
     }
