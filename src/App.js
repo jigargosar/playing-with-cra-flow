@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
-import { filterTasks, getPendingCategoryTasks } from './models/Task'
+import { filterTasks } from './models/Task'
 import { TaskList } from './components/TaskList'
 import { Sidebar } from './components/Sidebar'
 import { Redirect } from '@reach/router'
@@ -73,37 +73,7 @@ const App = () => (
                   )}
                 />
               ))}
-              {/*<Route*/}
-              {/*path={'All'}*/}
-              {/*render={() => (*/}
-              {/*<TaskList tasks={getAllTasks(tasks)} title={'All Tasks '} />*/}
-              {/*)}*/}
-              {/*/>*/}
-              {/*<Route*/}
-              {/*path={'Done'}*/}
-              {/*render={() => (*/}
-              {/*<TaskList tasks={getDoneTasks(tasks)} title={'Done Tasks'} />*/}
-              {/*)}*/}
-              {/*/>*/}
               <TagList path={'Tags'} />
-              <Route
-                path={'/:category'}
-                render={({ category }) => (
-                  <TaskList
-                    tasks={getPendingCategoryTasks(category, tasks)}
-                    title={`${category} Tasks`}
-                  />
-                )}
-              />
-              {/*<Route*/}
-              {/*path={'/tag/:tagTitle/:tid'}*/}
-              {/*render={({ tid }) => (*/}
-              {/*<TaskList*/}
-              {/*tasks={getPendingTagTasks(tid, tasks)}*/}
-              {/*title={`#${findById(tid)(tags).title} Tasks`}*/}
-              {/*/>*/}
-              {/*)}*/}
-              {/*/>*/}
             </Router>
           )}
         </CollectionConsumer>
