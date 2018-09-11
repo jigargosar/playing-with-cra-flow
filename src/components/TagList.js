@@ -1,10 +1,9 @@
 // @flow
 
 import * as React from 'react'
-import styled from 'react-emotion'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { rem, style, ttu, verticallySpaced } from './typestyle'
+import { block, rem, style, ttu, verticallySpaced } from './typestyle'
 
 type Props = {}
 
@@ -17,19 +16,11 @@ export function TagList(p: Props) {
       <CollectionConsumer>
         {({ tags }) => (
           <div className={listClass}>
-            {tags.map(tag => (
-              <TagTitle key={tag.id} className={style(ttu)}>
-                <LinkToTag tag={tag} />
-              </TagTitle>
-            ))}
+            {tags.map(tag => <LinkToTag className={style(ttu, block)}
+                                        tag={tag} />)}
           </div>
         )}
       </CollectionConsumer>
     </div>
   )
 }
-
-const TagTitle = styled.div``
-const TagItem = styled.div`
-  text-transform: uppercase;
-`
