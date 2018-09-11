@@ -10,6 +10,7 @@ import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
 import {
+  color,
   content,
   flex,
   horizontal,
@@ -65,7 +66,14 @@ export const Task = ({ task }: { task: TaskModel }) => (
       </div>
     </div>
     <div className={style(content)}>
-      <LinkToCategory className={style(fz.sm)} category={task.category} />
+      <LinkToCategory
+        className={style(fz.sm, {
+          color: color('#8a8a8a')
+            .toRGBA()
+            .toString(),
+        })}
+        category={task.category}
+      />
     </div>
   </div>
 )

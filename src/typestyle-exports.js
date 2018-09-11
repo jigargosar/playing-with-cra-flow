@@ -31,4 +31,14 @@ export {
   invisible,
   gridSpaced,
 } from 'csstips'
-export { color, params, rem, viewHeight, viewWidth } from 'csx'
+export {
+  color,
+  params,
+  rem,
+  viewHeight,
+  viewWidth,
+  hsl,
+  hsla,
+  rgb,
+  rgba,
+} from 'csx'
