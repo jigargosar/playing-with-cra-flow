@@ -25,9 +25,14 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style, verticallySpaced } from './typestyle-exports'
+import {
+  extend,
+  fillParent,
+  style,
+  verticallySpaced,
+} from './typestyle-exports'
 import { Task } from './components/Task'
-import { bg } from './styles'
+import { bg, nearWhiteColor } from './styles'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -45,15 +50,19 @@ const taskRouteFilters = [
   [
     'tag/:tagTitle/:tid',
     ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
-    ({ tid, tags }) => (
-      `#${findById(tid)(tags).title}`
-    ),
+    ({ tid, tags }) => `#${findById(tid)(tags).title}`,
   ],
 ]
 
-const containerClass = style(horizontal, someChildWillScroll, sizeViewport100)
+const containerClass = style(
+  horizontal,
+  someChildWillScroll,
+  sizeViewport100,
+  bg(nearWhiteColor),
+)
 const contentClass = style(flex, scroll)
 const sidebarClass = style(scroll, { minWidth: 225 })
+const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), fillParent)
 
 const App = () => (
   <CollectionProvider>
@@ -64,7 +73,7 @@ const App = () => (
       <div className={contentClass}>
         <CollectionConsumer>
           {({ tasks, tags }) => (
-            <Router className={style(padding(rem(2), rem(1), bg('#fff')))}>
+            <Router className={routerClass}>
               <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route

@@ -30,6 +30,7 @@ export {
   inlineRoot,
   invisible,
   gridSpaced,
+  fillParent,
 } from 'csstips'
 export {
   color,
