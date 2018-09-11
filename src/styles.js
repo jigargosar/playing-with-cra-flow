@@ -2,6 +2,7 @@ import {
   border,
   cssRaw,
   cssRule,
+  extend,
   fontWeightNormal,
   inlineBlock,
   normalize,
@@ -38,9 +39,7 @@ function bg(backgroundColor) {
 function bgHover(backgroundColor) {
   return {
     $nest: {
-      ':hover': {
-        backgroundColor,
-      },
+      ':hover': extend(backgroundColor),
     },
   }
 }
