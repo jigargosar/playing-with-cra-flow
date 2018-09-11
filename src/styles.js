@@ -14,6 +14,11 @@ import {
 
 export const ttu = { textTransform: 'uppercase' }
 export const strike = { textDecoration: 'line-through' }
+export const tc = { textAlign: 'center' }
+export const tl = { textAlign: 'left' }
+export const tr = { textAlign: 'right' }
+export const tj = { textAlign: 'justify' }
+
 export const pt = (u: BoxUnit) => padding(u, null, null, null)
 export const pr = (u: BoxUnit) => padding(null, u, null, null)
 export const pb = (u: BoxUnit) => padding(null, null, u, null)
@@ -56,10 +61,11 @@ export function setupGlobalStyles() {
     { lineHeight: rem(1.5) },
   )
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
+
   cssRule(
     'button',
     // { borderWidth: rem(0.25) },
-    { textAlign: 'center' },
+    tc,
     { fontFamily: 'inherit' },
     { fontSize: '100%' },
     { lineHeight: 1.15 },
