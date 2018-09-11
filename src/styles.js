@@ -3,6 +3,7 @@ import {
   cssRaw,
   cssRule,
   fontWeightNormal,
+  inlineBlock,
   normalize,
   padding,
   rem,
@@ -65,6 +66,7 @@ export function setupGlobalStyles() {
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
   )
+  cssRule('span', inlineBlock)
 
   // language=LESS
   cssRaw`
@@ -99,8 +101,5 @@ export function setupGlobalStyles() {
       text-decoration: underline;
     }
 
-    span {
-      display: inline-block;
-    }
   `
 }
