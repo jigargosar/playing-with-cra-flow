@@ -1,6 +1,5 @@
 import {
   border,
-  cssRaw,
   cssRule,
   extend,
   fontWeightNormal,
@@ -87,14 +86,3 @@ export function setupGlobalStyles() {
   )
   cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
 
-  // language=LESS
-  cssRaw`
-    html,
-    body {
-      font-size: 16px;
-      line-height: 1.5em;
-    }
-
-
-  `
-}
