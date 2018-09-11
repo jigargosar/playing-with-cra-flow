@@ -15,10 +15,9 @@ import {
   horizontal,
   horizontallySpaced,
   rem,
-  strike,
   style,
-  ttu,
 } from '../typestyle'
+import { strike, ttu } from '../styles'
 
 const fz = { sm: { fontSize: rem(0.8) } }
 export const Task = ({ task }: { task: TaskModel }) => (

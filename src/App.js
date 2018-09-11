@@ -25,8 +25,9 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style, ttu, verticallySpaced } from './typestyle'
+import { extend, style, verticallySpaced } from './typestyle'
 import { Task } from './components/Task'
+import { ttu } from './styles'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
