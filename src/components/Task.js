@@ -18,8 +18,9 @@ import {
   rem,
   style,
 } from '../typestyle-exports'
-import { cText, strike, ttu } from '../styles'
+import { cText, strike } from '../styles'
 import { Match } from '@reach/router'
+import { intersperse } from 'ramda'
 
 const fz = { sm: { fontSize: rem(0.8) } }
 
@@ -52,16 +53,14 @@ export const Task = ({ task }: { task: TaskModel }) => (
         </div>
       ))}
 
-      <div className={style(horizontallySpaced(rem(0.5)))}>
+      <div className={style(horizontallySpaced(rem(0)))}>
         <CollectionConsumer
           children={({ tags }) =>
-            getTaskTags(task, tags).map(tag => (
-              <LinkToTag
-                key={tag.title}
-                className={style(fz.sm, ttu)}
-                tag={tag}
-              />
-            ))
+            intersperse(', ')(
+              getTaskTags(task, tags).map(tag => (
+                <LinkToTag key={tag.title} className={style(fz.sm)} tag={tag} />
+              )),
+            )
           }
         />
       </div>
