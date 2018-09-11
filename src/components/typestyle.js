@@ -23,3 +23,4 @@ export {
   gridSpaced,
 } from 'csstips'
 export { color, params, rem, viewHeight, viewWidth } from 'csx'
+export const ttu = { textTransform: 'uppercase' }
