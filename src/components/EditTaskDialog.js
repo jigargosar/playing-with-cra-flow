@@ -3,7 +3,7 @@ import Component from '@reach/component-component'
 import * as React from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
-import { rem, style, vertical, verticallySpaced } from '../typestyle'
+import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 
 type Props = {
   onDismiss: () => void,

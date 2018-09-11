@@ -25,7 +25,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style, verticallySpaced } from './typestyle'
+import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { ttu } from './styles'
 

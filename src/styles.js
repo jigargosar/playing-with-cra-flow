@@ -1,5 +1,13 @@
-import { BoxUnit, normalize, padding, setupPage } from 'csstips'
-import { cssRaw, cssRule, stylesheet } from 'typestyle'
+import {
+  border,
+  cssRaw,
+  cssRule,
+  normalize,
+  padding,
+  rem,
+  setupPage,
+  stylesheet,
+} from './typestyle-exports'
 
 export const ttu = { textTransform: 'uppercase' }
 export const strike = { textDecoration: 'line-through' }
@@ -26,26 +34,19 @@ export function setupGlobalStyles() {
   setupPage('#root')
 
   cssRule('html,body', antialiased, sans)
+  cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
+  cssRule('button', { borderWidth: rem(0.5) })
 
   // language=LESS
   cssRaw`
-    *, :after, :before {
-      border: 0 solid #dae1e7;
-    }
-
     html,
     body {
-      margin: 0;
-      padding: 0;
       font-size: 16px;
       //font-size: 20px;
       line-height: 1.5em;
     }
 
     button {
-      //font-size: 12px;
-      //min-width: 3rem;
-      //min-height: 1.5rem;
       text-align: center;
       font-family: inherit;
       //text-transform: uppercase;

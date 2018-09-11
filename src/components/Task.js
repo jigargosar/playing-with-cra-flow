@@ -16,7 +16,7 @@ import {
   horizontallySpaced,
   rem,
   style,
-} from '../typestyle'
+} from '../typestyle-exports'
 import { strike, ttu } from '../styles'
 
 const fz = { sm: { fontSize: rem(0.8) } }
