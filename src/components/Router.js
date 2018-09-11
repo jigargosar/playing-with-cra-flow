@@ -3,9 +3,7 @@ import styled from 'react-emotion'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
-export const Router = styled(ReachRouter)`
-  padding-top: 1px;
-`
+export const Router = ReachRouter
 
 export const LinkTo = styled(RouterLink)`
   color: inherit;
