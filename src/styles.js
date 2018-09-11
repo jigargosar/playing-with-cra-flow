@@ -50,6 +50,22 @@ export function setupGlobalStyles() {
 
   cssRule('html,body', antialiased, sans)
   cssRule('*,*:before,*:after', border('0 solid #dae1e7'))
+  cssRule(
+    'button',
+    { borderWidth: rem(0.5) },
+    { textAlign: 'center' },
+    { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+    { lineHeight: 1.15 },
+    { borderRadius: rem(0.25) },
+    { cursor: 'pointer' },
+    { color: '#fff' },
+    bg('#3490dc'),
+    bgHover('#2779bd'),
+    padding(rem(0.5), rem(1)),
+    fontWeightNormal,
+  )
+
   // language=LESS
   cssRaw`
     html,
@@ -87,20 +103,4 @@ export function setupGlobalStyles() {
       display: inline-block;
     }
   `
-
-  cssRule(
-    'button',
-    { borderWidth: rem(0.5) },
-    { textAlign: 'center' },
-    { fontFamily: 'inherit' },
-    { fontSize: '100%' },
-    { lineHeight: 1.15 },
-    { borderRadius: rem(0.25) },
-    { cursor: 'pointer' },
-    { color: '#fff' },
-    bg('#3490dc'),
-    bgHover('#2779bd'),
-    padding(rem(0.5), rem(1)),
-    fontWeightNormal,
-  )
 }
