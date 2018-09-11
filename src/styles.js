@@ -87,10 +87,16 @@ export function setupGlobalStyles() {
     { margin: 0 },
   )
   cssRule(
+    'button, input',
+    { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+    { margin: 0 },
+    { borderRadius: rem(0.25) },
+  )
+  cssRule(
     'button',
     tc,
     { lineHeight: 1.15 },
-    { borderRadius: rem(0.25) },
     pointer,
     { color: '#fff' },
     extend(bg('#3490dc'), hover(bg('#2779bd'))),
@@ -105,7 +111,6 @@ export function setupGlobalStyles() {
     padding(rem(0.5), rem(0.75)),
     { lineHeight: 1.25 },
     { borderWidth: 1 },
-    { borderRadius: rem(0.25) },
     appearanceNone,
   )
   cssRule('span,a', inlineBlock)
