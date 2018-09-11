@@ -126,7 +126,6 @@ export function setupGlobalStyles() {
   cssRule('span,a', inlineBlock)
   cssRule(
     'a',
-    // fontWeightBold,
     { color: 'inherit' },
     { textDecoration: 'none' },
     hover({ textDecoration: 'underline' }),
