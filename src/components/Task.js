@@ -39,7 +39,8 @@ function renderEditTaskDialogTrigger(task, render) {
   )
 }
 
-const taskTitleClass = task => style(task.done && strike)
+const taskTitleClass = task => style(task.done && strike, cText)
+
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={style(horizontal)}>
     <div className={style(flex)}>
