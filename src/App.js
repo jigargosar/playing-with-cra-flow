@@ -25,7 +25,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style, verticallySpaced } from './typestyle'
+import { extend, style, ttu, verticallySpaced } from './typestyle'
 import { Task } from './components/Task'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
@@ -44,7 +44,9 @@ const taskRouteFilters = [
   [
     'tag/:tagTitle/:tid',
     ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
-    ({ tid, tags }) => `#${findById(tid)(tags).title}`,
+    ({ tid, tags }) => (
+      <span className={style(ttu)}>{`#${findById(tid)(tags).title}`}</span>
+    ),
   ],
 ]
 
@@ -89,4 +91,3 @@ const App = () => (
 )
 
 export default App
-
