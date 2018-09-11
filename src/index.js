@@ -1,8 +1,8 @@
 import { reinit } from 'typestyle'
 
-reinit()
-require('./render')
-
 if (module.hot) {
+  reinit()
   module.hot.accept()
 }
+
+require('./render')
