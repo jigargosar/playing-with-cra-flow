@@ -26,6 +26,7 @@ import {
 } from 'csstips'
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
+import { findById } from './models/Collection'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -45,6 +46,7 @@ const taskRouteFilters = [
   [
     'tag/:tagTitle/:tid',
     ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
+    ({ tid, tags }) => `#${findById(tid)(tags).title}`,
   ],
 ]
 
