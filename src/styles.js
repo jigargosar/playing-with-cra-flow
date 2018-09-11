@@ -72,6 +72,12 @@ export function setupGlobalStyles() {
     { textDecoration: 'none' },
     hover({ textDecoration: 'underline' }),
   )
+  cssRule(
+    `input[type='text']`,
+    { fontSize: '100%' },
+    { fontFamily: 'inherit' },
+    { minHeight: rem(1.5) },
+  )
   cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
 
   // language=LESS
@@ -79,15 +85,9 @@ export function setupGlobalStyles() {
     html,
     body {
       font-size: 16px;
-      //font-size: 20px;
       line-height: 1.5em;
     }
 
-    input[type='text'] {
-      font-size: '100%';
-      min-height: 1.5rem;
-      font-family: inherit;
-    }
     
   `
 }
