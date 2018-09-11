@@ -5,13 +5,12 @@ import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from './typestyle'
 
-export function EditTaskDialog({
-  onDismiss,
-  task,
-}: {
+type Props = {
   onDismiss: () => void,
   task: TaskModel,
-}) {
+}
+
+export function EditTaskDialog({ onDismiss, task }: Props) {
   return (
     <Component getRefs={() => ({ title: React.createRef() })}>
       {({ refs }) => (
