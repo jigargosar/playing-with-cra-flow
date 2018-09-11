@@ -4,34 +4,33 @@ import * as React from 'react'
 import styled from 'react-emotion'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
+import { rem, style, verticallySpaced } from './typestyle'
 
 type Props = {}
 
 export function TagList(p: Props) {
+  const listClass = style(verticallySpaced(rem(0.5)))
   return (
-    <TagItemsLayout>
+    <div>
       <h2>Tags</h2>
       <CollectionConsumer>
-        {({ tags }) =>
-          tags.map(tag => (
-            <TagItem key={tag.id}>
-              <TagTitle>
-                <LinkToTag tag={tag} />
-              </TagTitle>
-            </TagItem>
-          ))
-        }
+        {({ tags }) => (
+          <div className={listClass}>
+            {tags.map(tag => (
+              <TagItem key={tag.id}>
+                <TagTitle>
+                  <LinkToTag tag={tag} />
+                </TagTitle>
+              </TagItem>
+            ))}
+          </div>
+        )}
       </CollectionConsumer>
-    </TagItemsLayout>
+    </div>
   )
 }
 
 const TagTitle = styled.div``
 const TagItem = styled.div`
   text-transform: uppercase;
-`
-const TagItemsLayout = styled.div`
-  > ${TagItem} {
-    margin: 0.5rem;
-  }
 `
