@@ -58,7 +58,7 @@ export function EditTaskDialog() {
   )
 }
 
-export function EditTaskDialogProvider({ children }: { children: any }) {
+export function EditTaskDialogStateProvider({ children }: { children: any }) {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (

@@ -31,7 +31,7 @@ import { bg, nearWhiteColor } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
-  EditTaskDialogProvider,
+  EditTaskDialogStateProvider,
 } from './components/EditTaskDialog'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
@@ -94,7 +94,7 @@ function renderTaskRoutes(tags, tasks) {
 
 const App = () => (
   <CollectionProvider>
-    <EditTaskDialogProvider>
+    <EditTaskDialogStateProvider>
       <Fragment>
         <div className={containerClass}>
           <div className={sidebarClass}>
@@ -114,7 +114,7 @@ const App = () => (
         </div>
         <EditTaskDialog />
       </Fragment>
-    </EditTaskDialogProvider>
+    </EditTaskDialogStateProvider>
   </CollectionProvider>
 )
 
