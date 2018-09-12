@@ -6,27 +6,38 @@ import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 
+function storageGet(key, defaultState) {
+  const storedState = localStorage.getItem(key)
+  const parseState = storedState && JSON.parse(storedState)
+  return parseState ? parseState : defaultState
+}
+
 export function renderEditTaskDialogTrigger(render: any => any) {
   return (
     <Component
-      initialState={{ showDialog: false, task: {}, title: '' }}
-      didMount={({ state, setState }) => {
-        const storedState = localStorage.getItem('editTaskState')
-        const parseState = storedState && JSON.parse(storedState)
-        if (parseState) {
-          setState(parseState)
-        } else {
-          localStorage.setItem('editTaskState', JSON.stringify(state))
-        }
-      }}
-      didUpdate={({ state }) => {
-        localStorage.setItem('editTaskState', JSON.stringify(state))
-      }}
+      getInitialState={() =>
+        storageGet('editTaskState', {
+          showDialog: false,
+          task: {},
+          title: '',
+        })
+      }
     >
-      {({ state: { task, showDialog, title }, setState }) => {
+      {({ state, setState }) => {
         const onDismiss = () => setState({ showDialog: false })
+        const { task, showDialog, title } = state
         return (
           <Fragment>
+            <Component
+              key={'editTaskState'}
+              value={state}
+              didMount={({ props: { key, value } }) => {
+                localStorage.setItem(key, JSON.stringify(value))
+              }}
+              didUpdate={({ props: { key, value } }) => {
+                localStorage.setItem(key, JSON.stringify(value))
+              }}
+            />
             {render({
               startEditingTask: task => () =>
                 setState({ showDialog: true, task, title: task.title }),
