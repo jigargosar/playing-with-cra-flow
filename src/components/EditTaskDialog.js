@@ -1,6 +1,7 @@
 // @flow
 import Component from '@reach/component-component'
 import * as React from 'react'
+import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
@@ -81,11 +82,13 @@ export function renderEditTaskDialogTrigger(render: any => any) {
               startEditingTask,
             }
             return (
-              <Provider value={childProps}>
+              <Fragment>
                 <StorageSet name={stateName} value={state} />
-                {render({ startEditingTask })}
-                <EditTaskDialog />
-              </Provider>
+                <Provider value={childProps}>
+                  {render({ startEditingTask })}
+                  <EditTaskDialog />
+                </Provider>
+              </Fragment>
             )
           }}
         </CollectionConsumer>
