@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle'
 import { setupGlobalStyles } from './styles'
+import '@reach/dialog/styles.css'
 
 function render() {
   setupGlobalStyles()

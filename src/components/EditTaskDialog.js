@@ -6,6 +6,7 @@ import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 import { noop } from 'ramda-adjunct'
+import type { TaskModel } from '../models/Task'
 
 function storageGet(key, defaultState) {
   const storedState = localStorage.getItem(key)
@@ -36,8 +37,6 @@ const { Provider, Consumer } = React.createContext({
   startEditingTask: noop,
 })
 
-export const EditTaskDialogStateConsumer = Consumer
-
 export function EditTaskDialog() {
   return (
     <Consumer>
@@ -54,6 +53,14 @@ export function EditTaskDialog() {
           <button onClick={onOk}>Ok</button>
         </Dialog>
       )}
+    </Consumer>
+  )
+}
+
+export function withStartEditingTask(task: TaskModel, render: Function) {
+  return (
+    <Consumer>
+      {({ startEditingTask }) => render(startEditingTask(task))}
     </Consumer>
   )
 }

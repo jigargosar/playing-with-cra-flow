@@ -12,9 +12,6 @@ import {
   stylesheet,
 } from './typestyle-exports'
 import { color } from 'csx'
-import dialogCSS from '@reach/dialog/styles.css'
-
-console.log(`dialogCSS`, dialogCSS)
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
