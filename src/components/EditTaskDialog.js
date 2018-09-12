@@ -1,7 +1,6 @@
 // @flow
 import Component from '@reach/component-component'
 import * as React from 'react'
-import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
@@ -42,6 +41,8 @@ function renderETD({ onDismiss, isOpen, title, onTitleChange, onOk }) {
   )
 }
 
+const { Provider, Consumer } = React.createContext(null)
+
 export function renderEditTaskDialogTrigger(render: any => any) {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
@@ -60,11 +61,13 @@ export function renderEditTaskDialogTrigger(render: any => any) {
             }
             const onTitleChange = e => setState({ title: e.target.value })
             return (
-              <Fragment>
+              <Provider
+                value={{ onDismiss, isOpen, title, onTitleChange, onOk }}
+              >
                 <StorageSet name={stateName} value={state} />
                 {render({ startEditingTask })}
                 {renderETD({ onDismiss, isOpen, title, onTitleChange, onOk })}
-              </Fragment>
+              </Provider>
             )
           }}
         </CollectionConsumer>
