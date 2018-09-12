@@ -44,10 +44,11 @@ function renderETD({ onDismiss, isOpen, title, onTitleChange, onOk }) {
 
 export function renderEditTaskDialogTrigger(render: any => any) {
   const stateName = 'editTaskState'
+  const defaultState = { isOpen: false, task: {}, title: '' }
   return (
     <Component
       getInitialState={() =>
-        storageGet(stateName, { isOpen: false, task: {}, title: '' })
+        storageGet(stateName, defaultState)
       }
     >
       {({ state, setState }) => (
