@@ -17,9 +17,10 @@ import {
   rem,
   style,
 } from '../typestyle-exports'
-import { cText, dim2Color, dimColor, pointer, strike } from '../styles'
+import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
+import { style } from 'typestyle'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -41,13 +42,12 @@ function renderEditTaskDialogTrigger(task, render) {
   )
 }
 
-const taskTitleClass = task => style(task.done && strike, cText)
-
+const containerClass = style(horizontal, pointer)
 export const Task = ({ task }: { task: TaskModel }) => (
-  <div className={style(horizontal, pointer)}>
+  <div className={containerClass}>
     <div className={style(flex)}>
       {renderEditTaskDialogTrigger(task, ({ open }) => (
-        <div onClick={open} className={taskTitleClass(task)}>
+        <div onClick={open} className={style(task.done && strike)}>
           {task.title}
         </div>
       ))}
