@@ -13,6 +13,7 @@ import {
   content,
   flex,
   horizontal,
+  padding,
   rem,
   selfStretch,
   style,
@@ -20,9 +21,16 @@ import {
 import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
-import { padding } from 'csstips/src/box'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
+const hasHiddenChildren = {
+  $nest: {
+    '.appearOnHover': {
+      transition: '.15s ease-in',
+    },
+    '&:not(:hover) .appearOnHover': { opacity: 0 },
+  },
+}
 
 function renderEditTaskDialogTrigger(task, render) {
   return (
@@ -42,8 +50,6 @@ function renderEditTaskDialogTrigger(task, render) {
   )
 }
 
-const containerClass = style(horizontal, pointer)
-
 function renderTitle(task) {
   return renderEditTaskDialogTrigger(task, ({ open }) => (
     <div onClick={open} className={style(task.done && strike)}>
@@ -51,7 +57,6 @@ function renderTitle(task) {
     </div>
   ))
 }
-
 function renderTags(task) {
   return (
     <div className={style({ color: dim2Color }, fz.xs, { lineHeight: 1.5 })}>
@@ -67,7 +72,6 @@ function renderTags(task) {
     </div>
   )
 }
-
 function renderCategory(task) {
   return (
     <Match path={`/category/${task.category}`}>
@@ -83,6 +87,7 @@ function renderCategory(task) {
   )
 }
 
+const containerClass = style(horizontal, pointer, hasHiddenChildren)
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
@@ -90,19 +95,14 @@ export const Task = ({ task }: { task: TaskModel }) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-    <div className={style(content, horizontal/*, bg('red')*/)}>
+    <div className={style(content, horizontal /*, bg('red')*/)}>
       <div
         className={style(
           // bg('blue'),
           padding(0, '1rem'),
           // flex,
           selfStretch,
-          {
-            transition: '.15s ease-in',
-            $nest: {
-              '&:not(:hover)': { opacity: 0 },
-            },
-          },
+          hasHiddenChildren,
           pointer,
         )}
       >
