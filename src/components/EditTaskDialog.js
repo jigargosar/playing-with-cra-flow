@@ -38,7 +38,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                 onDismiss={onDismiss}
                 isOpen={showDialog}
               >
-                <h2>Edit 1 Task</h2>
+                <h2>Edit Task </h2>
                 <div className={style(vertical)}>
                   <input
                     ref={refs.title}

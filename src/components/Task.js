@@ -4,7 +4,6 @@ import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
-import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { renderEditTaskDialogTrigger } from './EditTaskDialog'
 import {
