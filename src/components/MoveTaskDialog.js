@@ -18,6 +18,7 @@ import {
 import { noop } from 'ramda-adjunct'
 import type { TaskModel } from '../models/Task'
 import { storageGet, StorageSet } from './StorageSet'
+import type { Category } from '../models/Category'
 import { categories } from '../models/Category'
 import { tc } from '../styles'
 
@@ -28,12 +29,13 @@ const { Provider, Consumer } = React.createContext({
   onTitleChange: noop,
   onOk: noop,
   startEditingTask: noop,
+  onCategoryClick: (category: Category) => () => noop(category),
 })
 
 export function MoveTaskDialog() {
   return (
     <Consumer>
-      {({ onDismiss, isOpen, title, onTitleChange, onOk }) => (
+      {({ onDismiss, isOpen, title, onCategoryClick }) => (
         <Dialog
           className={style(verticallySpaced(rem(1)))}
           onDismiss={onDismiss}
@@ -44,6 +46,7 @@ export function MoveTaskDialog() {
           <div className={style(horizontal, wrap)}>
             {categories.map(category => (
               <button
+                onClick={onCategoryClick(category)}
                 key={category}
                 className={style(margin('0.5rem'), tc, content, flex, {
                   width: '30%',
@@ -83,6 +86,10 @@ export function MoveTaskDialogStateProvider({ children }: { children: any }) {
               updateTask({ title }, task)
               onDismiss()
             }
+            const onCategoryClick = category => () => {
+              updateTask({ category }, task)
+              onDismiss()
+            }
             const onTitleChange = e => setState({ title: e.target.value })
             const childProps = {
               onDismiss,
@@ -91,6 +98,7 @@ export function MoveTaskDialogStateProvider({ children }: { children: any }) {
               onTitleChange,
               onOk,
               startEditingTask,
+              onCategoryClick,
             }
             return (
               <Fragment>
