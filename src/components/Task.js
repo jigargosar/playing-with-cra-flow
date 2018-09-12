@@ -65,7 +65,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
       </div>
     </div>
     <div className={style(content)}>
-      <Match path={'/category/*'}>
+      <Match path={`/category/${task.category}`}>
         {props =>
           props.match ? null : (
             <LinkToCategory
