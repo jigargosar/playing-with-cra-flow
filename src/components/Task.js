@@ -43,39 +43,52 @@ function renderEditTaskDialogTrigger(task, render) {
 
 const containerClass = style(horizontal, pointer)
 
+function renderTitle(task) {
+  return renderEditTaskDialogTrigger(task, ({ open }) => (
+    <div onClick={open} className={style(task.done && strike)}>
+      {task.title}
+    </div>
+  ))
+}
+
+function renderTags(task) {
+  return (
+    <div className={style({ color: dim2Color }, fz.xs, { lineHeight: 1.5 })}>
+      <CollectionConsumer>
+        {({ tags }) =>
+          intersperse(', ')(
+            getTaskTags(task, tags).map(tag => (
+              <LinkToTag key={tag.title} tag={tag} />
+            )),
+          )
+        }
+      </CollectionConsumer>
+    </div>
+  )
+}
+
+function renderCategory(task) {
+  return (
+    <Match path={`/category/${task.category}`}>
+      {props =>
+        props.match ? null : (
+          <LinkToCategory
+            className={style(fz.sm, { color: dimColor })}
+            category={task.category}
+          />
+        )
+      }
+    </Match>
+  )
+}
+
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      {renderEditTaskDialogTrigger(task, ({ open }) => (
-        <div onClick={open} className={style(task.done && strike)}>
-          {task.title}
-        </div>
-      ))}
-
-      <div className={style({ color: dim2Color }, fz.xs, { lineHeight: 1.5 })}>
-        <CollectionConsumer>
-          {({ tags }) =>
-            intersperse(', ')(
-              getTaskTags(task, tags).map(tag => (
-                <LinkToTag key={tag.title} tag={tag} />
-              )),
-            )
-          }
-        </CollectionConsumer>
-      </div>
+      {renderTitle(task)}
+      {renderTags(task)}
     </div>
-    <div className={style(content)}>
-      <Match path={`/category/${task.category}`}>
-        {props =>
-          props.match ? null : (
-            <LinkToCategory
-              className={style(fz.sm, { color: dimColor })}
-              category={task.category}
-            />
-          )
-        }
-      </Match>
-    </div>
+    <div className={style(content)}>{renderCategory(task)}</div>
     <div
       className={style(
         content,
