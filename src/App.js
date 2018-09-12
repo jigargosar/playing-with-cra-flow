@@ -82,7 +82,7 @@ function renderTaskRoutes(tags, tasks, startEditingTask) {
               <Task
                 key={task.id}
                 task={task}
-                startEditingTask={startEditingTask}
+                onEdit={startEditingTask(task)}
               />
             ))}
           </div>

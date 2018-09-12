@@ -64,15 +64,15 @@ function renderCategory(task) {
 const containerClass = style(horizontal, pointer, hasHiddenChildren)
 export const Task = ({
                        task,
-                       startEditingTask,
+                       onEdit,
                      }: {
   task: TaskModel,
-  startEditingTask: Task => any,
+  onEdit: any,
 }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
       <div
-        onClick={startEditingTask(task)}
+        onClick={onEdit}
         className={style(task.done && strike)}
       >
         {task.title}
