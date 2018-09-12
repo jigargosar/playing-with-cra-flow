@@ -80,7 +80,6 @@ export function hover(...ext) {
 }
 
 export function setupGlobalStyles() {
-
   normalize()
   setupPage('#root')
 
@@ -112,11 +111,20 @@ export function setupGlobalStyles() {
     'button',
     tc,
     { lineHeight: 1.15 },
-    pointer,
     { color: '#fff' },
     extend(bg('#3490dc'), hover(bg('#2779bd'))),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
+    {
+      $nest: {
+        '&:not([disabled])': {
+          ...pointer,
+        },
+        '&[disabled]': {
+          ...bg('hsla(207, 71%, 53%, 0.36)'),
+        },
+      },
+    },
   )
   cssRule(
     `input[type='text']`,
