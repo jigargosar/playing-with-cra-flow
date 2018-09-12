@@ -35,7 +35,7 @@ const { Provider, Consumer } = React.createContext({
   startEditingTask: noop,
 })
 
-function renderETD() {
+function EditTaskDialog() {
   return (
     <Consumer>
       {({ onDismiss, isOpen, title, onTitleChange, onOk }) => (
@@ -85,7 +85,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
               >
                 <StorageSet name={stateName} value={state} />
                 {render({ startEditingTask })}
-                {renderETD()}
+                <EditTaskDialog />
               </Provider>
             )
           }}
