@@ -4,7 +4,6 @@ import * as ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle'
 import { setupGlobalStyles } from './styles'
-import App from './App'
 
 setConfig({ logLevel: 'debug' })
 
