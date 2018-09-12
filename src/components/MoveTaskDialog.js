@@ -5,8 +5,7 @@ import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import {
-  content,
-  flex2,
+  flex1,
   horizontal,
   rem,
   style,
@@ -41,7 +40,7 @@ export function MoveTaskDialog() {
           <div className={style(vertical)}>{title}</div>
           <div className={style(horizontal, wrap)}>
             {categories.map(category => (
-              <div key={category} className={style(content, flex2)}>
+              <div key={category} className={style(flex1)}>
                 {category}
               </div>
             ))}
