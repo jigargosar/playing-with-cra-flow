@@ -33,29 +33,31 @@ const { Provider, Consumer } = React.createContext({
 export function MoveTaskDialog() {
   return (
     <Consumer>
-      {({ onDismiss, isOpen, title, onCategoryClick }) => (
-        <Dialog
-          className={style(verticallySpaced(rem(1)))}
-          onDismiss={onDismiss}
-          isOpen={isOpen}
-        >
-          <h3>Move Task</h3>
-          <div className={style(vertical)}>{title}</div>
-          <div className={style(horizontal, wrap)}>
-            {categories.map(category => (
-              <button
-                onClick={onCategoryClick(category)}
-                key={category}
-                className={style(margin('0.5rem'), tc, content, flex, {
-                  width: '30%',
-                })}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </Dialog>
-      )}
+      {({ onDismiss, isOpen, title, onCategoryClick }) =>
+        isOpen && (
+          <Dialog
+            className={style(verticallySpaced(rem(1)))}
+            onDismiss={onDismiss}
+            isOpen={isOpen}
+          >
+            <h3>Move Task</h3>
+            <div className={style(vertical)}>{title}</div>
+            <div className={style(horizontal, wrap)}>
+              {categories.map(category => (
+                <button
+                  onClick={onCategoryClick(category)}
+                  key={category}
+                  className={style(margin('0.5rem'), tc, content, flex, {
+                    width: '30%',
+                  })}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </Dialog>
+        )
+      }
     </Consumer>
   )
 }
@@ -70,16 +72,16 @@ export function showMoveTaskDialog(task: TaskModel, render: Function) {
 
 export function MoveTaskDialogStateProvider({ children }: { children: any }) {
   const stateName = 'moveTaskState'
-  const defaultState = { isOpen: false, task: {}, title: '' }
+  const defaultState = { isOpen: false, task: {} }
   return (
     <Component getInitialState={() => storageGet(stateName, defaultState)}>
       {({ state, setState }) => (
         <CollectionConsumer>
           {({ updateTask }) => {
-            const { task, isOpen, title } = state
+            const { task, isOpen } = state
             const onDismiss = () => setState({ isOpen: false })
             const startEditingTask = task => () =>
-              setState({ isOpen: true, task, title: task.title })
+              setState({ isOpen: true, task })
             const onCategoryClick = category => () => {
               updateTask({ category }, task)
               onDismiss()
@@ -87,7 +89,7 @@ export function MoveTaskDialogStateProvider({ children }: { children: any }) {
             const childProps = {
               onDismiss,
               isOpen,
-              title,
+              title: task.title,
               startEditingTask,
               onCategoryClick,
             }
