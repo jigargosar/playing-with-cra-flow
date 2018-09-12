@@ -30,7 +30,10 @@ import {
   EditTaskDialog,
   EditTaskDialogStateProvider,
 } from './components/EditTaskDialog'
-import { MoveTaskDialogStateProvider } from './components/MoveTaskDialog'
+import {
+  MoveTaskDialog,
+  MoveTaskDialogStateProvider,
+} from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
@@ -114,6 +117,7 @@ const App = () => (
         </div>
       </div>
       <EditTaskDialog />
+      <MoveTaskDialog />
     </Fragment>
   </AllProviders>
 )
