@@ -27,7 +27,7 @@ export function MoveTaskDialog() {
           onDismiss={onDismiss}
           isOpen={isOpen}
         >
-          <h3>Edit Task </h3>
+          <h3>Move Task</h3>
           <div className={style(vertical)}>
             <input type={'text'} value={title} onChange={onTitleChange} />
           </div>
