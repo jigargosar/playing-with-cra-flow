@@ -28,7 +28,7 @@ const appearOnParentHoverClass = 'appearOnParentHover'
 const hasHiddenChildren = {
   $nest: {
     [`.${appearOnParentHoverClass}`]: {
-      transition: '.15s ease-in',
+      transition: 'opacity .15s ease-in',
     },
     [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
   },
