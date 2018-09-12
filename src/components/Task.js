@@ -13,7 +13,6 @@ import {
   content,
   flex,
   horizontal,
-  padding,
   rem,
   selfStretch,
   style,
@@ -21,6 +20,7 @@ import {
 import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
+import { padding } from 'csstips/src/box'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -73,29 +73,10 @@ function renderCategory(task) {
     <Match path={`/category/${task.category}`}>
       {props =>
         props.match ? null : (
-          <div className={style(horizontal)}>
-            <LinkToCategory
-              className={style(fz.sm, { color: dimColor })}
-              category={task.category}
-            />
-            <div
-              className={style(
-                // bg('blue'),
-                padding(0, '0.5rem'),
-                // flex,
-                selfStretch,
-                {
-                  transition: '.15s ease-in',
-                  $nest: {
-                    '&:not(:hover)': { opacity: 0 },
-                  },
-                },
-                pointer,
-              )}
-            >
-              ...
-            </div>
-          </div>
+          <LinkToCategory
+            className={style(fz.sm, { color: dimColor })}
+            category={task.category}
+          />
         )
       }
     </Match>
@@ -109,7 +90,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-    {false && <div className={style(content, horizontal /*, bg('red')*/)}>
+    <div className={style(content, horizontal/*, bg('red')*/)}>
       <div
         className={style(
           // bg('blue'),
@@ -127,6 +108,6 @@ export const Task = ({ task }: { task: TaskModel }) => (
       >
         ...
       </div>
-    </div>}
+    </div>
   </div>
 )
