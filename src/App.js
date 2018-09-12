@@ -61,6 +61,32 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
+function renderTaskRoutes(tags, tasks) {
+  return taskRouteFilters.map(([path, pred, titleFn]) => (
+    <Route
+      key={path}
+      path={path}
+      render={props => (
+        <div>
+          <div
+            className={style({
+              fontSize: rem(1.5),
+              marginBottom: rem(1),
+            })}
+          >
+            {titleFn({ ...props, tags })}
+          </div>
+          <div className={style(verticallySpaced(rem(1.5)))}>
+            {filterTasks(pred(props), tasks).map(task => (
+              <Task key={task.id} task={task} />
+            ))}
+          </div>
+        </div>
+      )}
+    />
+  ))
+}
+
 const App = () => (
   <CollectionProvider>
     <div className={containerClass}>
@@ -72,29 +98,7 @@ const App = () => (
           {({ tasks, tags }) => (
             <Router className={routerClass}>
               <Redirect from={'/'} to={'All'} />
-              {taskRouteFilters.map(([path, pred, titleFn]) => (
-                <Route
-                  key={path}
-                  path={path}
-                  render={props => (
-                    <div>
-                      <div
-                        className={style({
-                          fontSize: rem(1.5),
-                          marginBottom: rem(1),
-                        })}
-                      >
-                        {titleFn({ ...props, tags })}
-                      </div>
-                      <div className={style(verticallySpaced(rem(1.5)))}>
-                        {filterTasks(pred(props), tasks).map(task => (
-                          <Task key={task.id} task={task} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                />
-              ))}
+              {renderTaskRoutes(tags, tasks)}
               <TagList path={'Tags'} />
             </Router>
           )}
