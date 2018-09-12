@@ -26,8 +26,6 @@ const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
   isOpen: false,
   title: '',
-  onTitleChange: noop,
-  onOk: noop,
   startEditingTask: noop,
   onCategoryClick: (category: Category) => () => noop(category),
 })
@@ -82,21 +80,14 @@ export function MoveTaskDialogStateProvider({ children }: { children: any }) {
             const onDismiss = () => setState({ isOpen: false })
             const startEditingTask = task => () =>
               setState({ isOpen: true, task, title: task.title })
-            const onOk = () => {
-              updateTask({ title }, task)
-              onDismiss()
-            }
             const onCategoryClick = category => () => {
               updateTask({ category }, task)
               onDismiss()
             }
-            const onTitleChange = e => setState({ title: e.target.value })
             const childProps = {
               onDismiss,
               isOpen,
               title,
-              onTitleChange,
-              onOk,
               startEditingTask,
               onCategoryClick,
             }
