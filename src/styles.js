@@ -3,6 +3,7 @@ import {
   cssRule,
   extend,
   fontWeightNormal,
+  forceRenderStyles,
   inlineBlock,
   margin,
   normalize,
@@ -141,6 +142,7 @@ export function setupGlobalStyles() {
     { borderStyle: 'solid' },
     border(0, 0, null, null),
   )
+  forceRenderStyles()
 }
 
 export const dimColor = color('#000')

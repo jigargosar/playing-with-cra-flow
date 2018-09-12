@@ -1,4 +1,12 @@
-export { style, classes, extend, cssRaw, cssRule, stylesheet } from 'typestyle'
+export {
+  style,
+  classes,
+  extend,
+  cssRaw,
+  cssRule,
+  stylesheet,
+  forceRenderStyles,
+} from 'typestyle'
 export {
   border,
   fontWeightBold,
