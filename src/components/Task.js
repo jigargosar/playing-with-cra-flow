@@ -15,6 +15,7 @@ import {
   horizontal,
   padding,
   rem,
+  selfStretch,
   style,
 } from '../typestyle-exports'
 import { dim2Color, dimColor, pointer, strike } from '../styles'
@@ -72,10 +73,29 @@ function renderCategory(task) {
     <Match path={`/category/${task.category}`}>
       {props =>
         props.match ? null : (
-          <LinkToCategory
-            className={style(fz.sm, { color: dimColor })}
-            category={task.category}
-          />
+          <div className={style(horizontal)}>
+            <LinkToCategory
+              className={style(fz.sm, { color: dimColor })}
+              category={task.category}
+            />
+            <div
+              className={style(
+                // bg('blue'),
+                padding(0, '0.5rem'),
+                // flex,
+                selfStretch,
+                {
+                  transition: '.15s ease-in',
+                  $nest: {
+                    '&:not(:hover)': { opacity: 0 },
+                  },
+                },
+                pointer,
+              )}
+            >
+              ...
+            </div>
+          </div>
         )
       }
     </Match>
@@ -89,22 +109,24 @@ export const Task = ({ task }: { task: TaskModel }) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-    <div
-      className={style(
-        content,
-        padding('0rem'),
-        {
-          // visibility: 'hidden',
-          transition: '.15s ease-in',
-
-          $nest: {
-            '&:not(:hover)': { opacity: 0 },
+    <div className={style(content, horizontal /*, bg('red')*/)}>
+      <div
+        className={style(
+          // bg('blue'),
+          padding(0, '1rem'),
+          // flex,
+          selfStretch,
+          {
+            transition: '.15s ease-in',
+            $nest: {
+              '&:not(:hover)': { opacity: 0 },
+            },
           },
-        },
-        pointer,
-      )}
-    >
-      ...
+          pointer,
+        )}
+      >
+        ...
+      </div>
     </div>
   </div>
 )
