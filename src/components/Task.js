@@ -39,7 +39,7 @@ function renderEditTaskDialogTrigger(task, render) {
     <Component initialState={{ showDialog: false, task }}>
       {({ state, setState }) => (
         <Fragment>
-          {render({ open: () => setState({ showDialog: true }) })}
+          {render({ open: task => () => setState({ showDialog: true, task }) })}
           {state.showDialog && (
             <EditTaskDialog
               onDismiss={() => setState({ showDialog: false })}
@@ -87,7 +87,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
       {renderEditTaskDialogTrigger(task, ({ open }) => (
-        <div onClick={open} className={style(task.done && strike)}>
+        <div onClick={open(task)} className={style(task.done && strike)}>
           {task.title}
         </div>
       ))}
