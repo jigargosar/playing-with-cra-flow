@@ -28,6 +28,7 @@ import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
 import { Redirect } from '@reach/router'
+import { renderEditTaskDialogTrigger } from './components/EditTaskDialog'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -61,7 +62,7 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
-function renderTaskRoutes(tags, tasks) {
+function renderTaskRoutes(tags, tasks, startEditingTask) {
   return taskRouteFilters.map(([path, pred, titleFn]) => (
     <Route
       key={path}
@@ -78,7 +79,11 @@ function renderTaskRoutes(tags, tasks) {
           </div>
           <div className={style(verticallySpaced(rem(1.5)))}>
             {filterTasks(pred(props), tasks).map(task => (
-              <Task key={task.id} task={task} />
+              <Task
+                key={task.id}
+                task={task}
+                startEditingTask={startEditingTask}
+              />
             ))}
           </div>
         </div>
@@ -89,22 +94,24 @@ function renderTaskRoutes(tags, tasks) {
 
 const App = () => (
   <CollectionProvider>
-    <div className={containerClass}>
-      <div className={sidebarClass}>
-        <Sidebar />
+    {renderEditTaskDialogTrigger(({ startEditingTask }) => (
+      <div className={containerClass}>
+        <div className={sidebarClass}>
+          <Sidebar />
+        </div>
+        <div className={contentClass}>
+          <CollectionConsumer>
+            {({ tasks, tags }) => (
+              <Router className={routerClass}>
+                <Redirect from={'/'} to={'All'} />
+                {renderTaskRoutes(tags, tasks, startEditingTask)}
+                <TagList path={'Tags'} />
+              </Router>
+            )}
+          </CollectionConsumer>
+        </div>
       </div>
-      <div className={contentClass}>
-        <CollectionConsumer>
-          {({ tasks, tags }) => (
-            <Router className={routerClass}>
-              <Redirect from={'/'} to={'All'} />
-              {renderTaskRoutes(tags, tasks)}
-              <TagList path={'Tags'} />
-            </Router>
-          )}
-        </CollectionConsumer>
-      </div>
-    </div>
+    ))}
   </CollectionProvider>
 )
 

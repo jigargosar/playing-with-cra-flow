@@ -5,7 +5,6 @@ import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { renderEditTaskDialogTrigger } from './EditTaskDialog'
 import {
   classes,
   content,
@@ -63,17 +62,21 @@ function renderCategory(task) {
 }
 
 const containerClass = style(horizontal, pointer, hasHiddenChildren)
-export const Task = ({ task }: { task: TaskModel }) => (
+export const Task = ({
+                       task,
+                       startEditingTask,
+                     }: {
+  task: TaskModel,
+  startEditingTask: Task => any,
+}) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      {renderEditTaskDialogTrigger(({ startEditingTask }) => (
-        <div
-          onClick={startEditingTask(task)}
-          className={style(task.done && strike)}
-        >
-          {task.title}
-        </div>
-      ))}
+      <div
+        onClick={startEditingTask(task)}
+        className={style(task.done && strike)}
+      >
+        {task.title}
+      </div>
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
