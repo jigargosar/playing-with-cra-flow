@@ -10,6 +10,7 @@ import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
 import {
+  classes,
   content,
   flex,
   horizontal,
@@ -98,11 +99,9 @@ export const Task = ({ task }: { task: TaskModel }) => (
     <div className={style(content)}>{renderCategory(task)}</div>
     <div className={style(content, horizontal /*, bg('red')*/)}>
       <div
-        className={style(
-          padding(0, '0.5rem'),
-          selfStretch,
-          hasHiddenChildren,
-          pointer,
+        className={classes(
+          appearOnParentOverClass,
+          style(padding(0, '0.5rem'), selfStretch, pointer),
         )}
       >
         ...
