@@ -26,6 +26,7 @@ const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
   isOpen: false,
   title: '',
+  category: '',
   startEditingTask: noop,
   onCategoryClick: (category: Category) => () => noop(category),
 })
@@ -33,7 +34,13 @@ const { Provider, Consumer } = React.createContext({
 export function MoveTaskDialog() {
   return (
     <Consumer>
-      {({ onDismiss, isOpen, title, onCategoryClick }) =>
+      {({
+          onDismiss,
+          isOpen,
+          title,
+          category: currentCategory,
+          onCategoryClick,
+        }) =>
         isOpen && (
           <Dialog
             className={style(verticallySpaced(rem(1)))}
@@ -45,11 +52,17 @@ export function MoveTaskDialog() {
             <div className={style(horizontal, wrap)}>
               {categories.map(category => (
                 <button
+                  disabled={currentCategory === category}
                   onClick={onCategoryClick(category)}
                   key={category}
-                  className={style(margin('0.5rem'), tc, content, flex, {
-                    width: '30%',
-                  })}
+                  className={style(
+                    //
+                    margin('0.5rem'),
+                    tc,
+                    content,
+                    flex,
+                    { width: '30%' },
+                  )}
                 >
                   {category}
                 </button>
@@ -90,6 +103,7 @@ export function MoveTaskDialogStateProvider({ children }: { children: any }) {
               onDismiss,
               isOpen,
               title: task.title,
+              category: task.category,
               startEditingTask,
               onCategoryClick,
             }
