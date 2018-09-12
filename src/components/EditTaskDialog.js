@@ -9,7 +9,7 @@ import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 export function renderEditTaskDialogTrigger(render: any => any) {
   return (
     <Component
-      initialState={{ showDialog: false, task: {} }}
+      initialState={{ showDialog: false, task: {}, title: '' }}
       didMount={({ state, setState }) => {
         const storedState = localStorage.getItem('editTaskState')
         const parseState = storedState && JSON.parse(storedState)
@@ -22,15 +22,14 @@ export function renderEditTaskDialogTrigger(render: any => any) {
       didUpdate={({ state }) => {
         localStorage.setItem('editTaskState', JSON.stringify(state))
       }}
-      getRefs={() => ({ title: React.createRef() })}
     >
-      {({ state: { task, showDialog }, setState, refs }) => {
+      {({ state: { task, showDialog, title }, setState }) => {
         const onDismiss = () => setState({ showDialog: false })
         return (
           <Fragment>
             {render({
               startEditingTask: task => () =>
-                setState({ showDialog: true, task }),
+                setState({ showDialog: true, task, title: task.title }),
             })}
             {
               <Dialog
@@ -41,16 +40,16 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                 <h2>Edit Task </h2>
                 <div className={style(vertical)}>
                   <input
-                    ref={refs.title}
                     type={'text'}
-                    defaultValue={task.title}
+                    value={title}
+                    onChange={e => setState({ title: e.target.value })}
                   />
                 </div>
                 <CollectionConsumer>
                   {({ updateTask }) => (
                     <button
                       onClick={() => {
-                        updateTask({ title: refs.title.current.value }, task)
+                        updateTask({ title }, task)
                         onDismiss()
                       }}
                     >
