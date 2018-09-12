@@ -38,7 +38,7 @@ const { Provider, Consumer } = React.createContext({
 
 export const EditTaskDialogConsumer = Consumer
 
-function EditTaskDialog() {
+export function EditTaskDialog() {
   return (
     <Consumer>
       {({ onDismiss, isOpen, title, onTitleChange, onOk }) => (
@@ -58,7 +58,7 @@ function EditTaskDialog() {
   )
 }
 
-export function EditTaskDialogProvider() {
+export function EditTaskDialogProvider({ children }: { children: any }) {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (
@@ -86,9 +86,7 @@ export function EditTaskDialogProvider() {
             return (
               <Fragment>
                 <StorageSet name={stateName} value={state} />
-                <Provider value={childProps}>
-                  <EditTaskDialog />
-                </Provider>
+                <Provider value={childProps}>{children}</Provider>
               </Fragment>
             )
           }}

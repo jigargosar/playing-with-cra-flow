@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import { Fragment } from 'react'
 import { Icon } from 'react-icons-kit'
 import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
@@ -28,7 +29,10 @@ import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
 import { Redirect } from '@reach/router'
-import { EditTaskDialogProvider } from './components/EditTaskDialog'
+import {
+  EditTaskDialog,
+  EditTaskDialogProvider,
+} from './components/EditTaskDialog'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -91,22 +95,25 @@ function renderTaskRoutes(tags, tasks) {
 const App = () => (
   <CollectionProvider>
     <EditTaskDialogProvider>
-      <div className={containerClass}>
-        <div className={sidebarClass}>
-          <Sidebar />
+      <Fragment>
+        <div className={containerClass}>
+          <div className={sidebarClass}>
+            <Sidebar />
+          </div>
+          <div className={contentClass}>
+            <CollectionConsumer>
+              {({ tasks, tags }) => (
+                <Router className={routerClass}>
+                  <Redirect from={'/'} to={'All'} />
+                  {renderTaskRoutes(tags, tasks)}
+                  <TagList path={'Tags'} />
+                </Router>
+              )}
+            </CollectionConsumer>
+          </div>
         </div>
-        <div className={contentClass}>
-          <CollectionConsumer>
-            {({ tasks, tags }) => (
-              <Router className={routerClass}>
-                <Redirect from={'/'} to={'All'} />
-                {renderTaskRoutes(tags, tasks)}
-                <TagList path={'Tags'} />
-              </Router>
-            )}
-          </CollectionConsumer>
-        </div>
-      </div>
+        <EditTaskDialog />
+      </Fragment>
     </EditTaskDialogProvider>
   </CollectionProvider>
 )
