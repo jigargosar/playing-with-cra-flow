@@ -9,6 +9,8 @@ export {
   reinit,
 } from 'typestyle'
 export {
+  wrap,
+  newLayer,
   border,
   fontWeightBold,
   fontWeightBold as bold,
@@ -21,6 +23,10 @@ export {
   padding,
   setupPage,
   flex,
+  flex1,
+  flex2,
+  flex3,
+  flex4,
   selfCenter,
   selfEnd,
   selfStart,

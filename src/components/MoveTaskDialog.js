@@ -4,10 +4,19 @@ import * as React from 'react'
 import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
-import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
+import {
+  flex3,
+  horizontal,
+  rem,
+  style,
+  vertical,
+  verticallySpaced,
+  wrap,
+} from '../typestyle-exports'
 import { noop } from 'ramda-adjunct'
 import type { TaskModel } from '../models/Task'
 import { storageGet, StorageSet } from './StorageSet'
+import { categories } from '../models/Category'
 
 const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
@@ -28,10 +37,14 @@ export function MoveTaskDialog() {
           isOpen={isOpen}
         >
           <h3>Move Task</h3>
-          <div className={style(vertical)}>
-            <input type={'text'} value={title} onChange={onTitleChange} />
+          <div className={style(vertical)}>{title}</div>
+          <div className={style(horizontal, wrap)}>
+            {categories.map(category => (
+              <div key={category} className={style(flex3)}>
+                {category}
+              </div>
+            ))}
           </div>
-          <button onClick={onOk}>Ok</button>
         </Dialog>
       )}
     </Consumer>
