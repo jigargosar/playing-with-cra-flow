@@ -38,44 +38,43 @@ export function renderEditTaskDialogTrigger(render: any => any) {
         })
       }
     >
-      {({ state, setState }) => {
-        const onDismiss = () => setState({ showDialog: false })
-        const { task, showDialog, title } = state
-        const startEditingTask = task => () =>
-          setState({ showDialog: true, task, title: task.title })
-        return (
-          <Fragment>
-            <StorageSet name={stateName} value={state} />
-            {render({ startEditingTask })}
-            <Dialog
-              className={style(verticallySpaced(rem(1)))}
-              onDismiss={onDismiss}
-              isOpen={showDialog}
-            >
-              <h3>Edit Task </h3>
-              <div className={style(vertical)}>
-                <input
-                  type={'text'}
-                  value={title}
-                  onChange={e => setState({ title: e.target.value })}
-                />
-              </div>
-              <CollectionConsumer>
-                {({ updateTask }) => (
-                  <button
-                    onClick={() => {
-                      updateTask({ title }, task)
-                      onDismiss()
-                    }}
+      {({ state, setState }) => (
+        <CollectionConsumer>
+          {({ updateTask }) => {
+            {
+              const { task, showDialog, title } = state
+              const onDismiss = () => setState({ showDialog: false })
+              const startEditingTask = task => () =>
+                setState({ showDialog: true, task, title: task.title })
+              const onOk = () => {
+                updateTask({ title }, task)
+                onDismiss()
+              }
+              return (
+                <Fragment>
+                  <StorageSet name={stateName} value={state} />
+                  {render({ startEditingTask })}
+                  <Dialog
+                    className={style(verticallySpaced(rem(1)))}
+                    onDismiss={onDismiss}
+                    isOpen={showDialog}
                   >
-                    Ok
-                  </button>
-                )}
-              </CollectionConsumer>
-            </Dialog>
-          </Fragment>
-        )
-      }}
+                    <h3>Edit Task </h3>
+                    <div className={style(vertical)}>
+                      <input
+                        type={'text'}
+                        value={title}
+                        onChange={e => setState({ title: e.target.value })}
+                      />
+                    </div>
+                    <button onClick={onOk}>Ok</button>
+                  </Dialog>
+                </Fragment>
+              )
+            }
+          }}
+        </CollectionConsumer>
+      )}
     </Component>
   )
 }
