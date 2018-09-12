@@ -1,6 +1,7 @@
 import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as React from 'react'
+import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
@@ -35,6 +36,27 @@ export function EditTaskDialog({ onDismiss, task }: Props) {
             )}
           </CollectionConsumer>
         </Dialog>
+      )}
+    </Component>
+  )
+}
+
+export function renderEditTaskDialogTrigger(render) {
+  return (
+    <Component initialState={{ showDialog: false, task: null }}>
+      {({ state, setState }) => (
+        <Fragment>
+          {render({
+            startEditingTask: task => () =>
+              setState({ showDialog: true, task }),
+          })}
+          {state.showDialog && (
+            <EditTaskDialog
+              onDismiss={() => setState({ showDialog: false })}
+              task={state.task}
+            />
+          )}
+        </Fragment>
       )}
     </Component>
   )

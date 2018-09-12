@@ -3,12 +3,10 @@
 import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
-import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
-import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
-import { EditTaskDialog } from './EditTaskDialog'
+import { renderEditTaskDialogTrigger } from './EditTaskDialog'
 import {
   classes,
   content,
@@ -32,27 +30,6 @@ const hasHiddenChildren = {
     },
     [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
   },
-}
-
-function renderEditTaskDialogTrigger(render) {
-  return (
-    <Component initialState={{ showDialog: false, task: null }}>
-      {({ state, setState }) => (
-        <Fragment>
-          {render({
-            startEditingTask: task => () =>
-              setState({ showDialog: true, task }),
-          })}
-          {state.showDialog && (
-            <EditTaskDialog
-              onDismiss={() => setState({ showDialog: false })}
-              task={state.task}
-            />
-          )}
-        </Fragment>
-      )}
-    </Component>
-  )
 }
 
 function renderTags(task) {
