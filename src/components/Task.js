@@ -24,13 +24,13 @@ import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
-const appearOnParentOverClass = 'appearOnParentOver'
+const appearOnParentHoverClass = 'appearOnParentHover'
 const hasHiddenChildren = {
   $nest: {
-    [`.${appearOnParentOverClass}`]: {
+    [`.${appearOnParentHoverClass}`]: {
       transition: '.15s ease-in',
     },
-    [`&:not(:hover) .${appearOnParentOverClass}`]: { opacity: 0 },
+    [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
   },
 }
 
@@ -104,7 +104,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
     <div className={style(content, horizontal /*, bg('red')*/)}>
       <div
         className={classes(
-          appearOnParentOverClass,
+          appearOnParentHoverClass,
           style(padding(0, '0.5rem'), selfStretch, pointer),
         )}
       >
