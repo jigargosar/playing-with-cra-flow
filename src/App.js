@@ -27,6 +27,7 @@ import { findById } from './models/Collection'
 import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
+import { Redirect } from '@reach/router'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -70,7 +71,7 @@ const App = () => (
         <CollectionConsumer>
           {({ tasks, tags }) => (
             <Router className={routerClass}>
-              {/*<Redirect from={'/'} to={'All'} />*/}
+              <Redirect from={'/'} to={'All'} />
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
                   key={path}
