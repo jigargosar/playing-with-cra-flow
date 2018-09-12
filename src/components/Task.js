@@ -109,7 +109,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-    <div className={style(content, horizontal /*, bg('red')*/)}>
+    {false && <div className={style(content, horizontal /*, bg('red')*/)}>
       <div
         className={style(
           // bg('blue'),
@@ -127,6 +127,6 @@ export const Task = ({ task }: { task: TaskModel }) => (
       >
         ...
       </div>
-    </div>
+    </div>}
   </div>
 )
