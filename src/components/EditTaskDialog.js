@@ -50,6 +50,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                 updateTask({ title }, task)
                 onDismiss()
               }
+              const onTitleChange = e => setState({ title: e.target.value })
               return (
                 <Fragment>
                   <StorageSet name={stateName} value={state} />
@@ -64,7 +65,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                       <input
                         type={'text'}
                         value={title}
-                        onChange={e => setState({ title: e.target.value })}
+                        onChange={onTitleChange}
                       />
                     </div>
                     <button onClick={onOk}>Ok</button>
