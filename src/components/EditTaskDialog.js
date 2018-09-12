@@ -13,11 +13,11 @@ function storageGet(key, defaultState) {
 }
 
 export function renderEditTaskDialogTrigger(render: any => any) {
-  const stateKey = 'editTaskState'
+  const stateName = 'editTaskState'
   return (
     <Component
       getInitialState={() =>
-        storageGet(stateKey, {
+        storageGet(stateName, {
           showDialog: false,
           task: {},
           title: '',
@@ -30,13 +30,13 @@ export function renderEditTaskDialogTrigger(render: any => any) {
         return (
           <Fragment>
             <Component
-              id={stateKey}
+              name={stateName}
               value={state}
-              didMount={({ props: { id, value } }) => {
-                localStorage.setItem(id, JSON.stringify(value))
+              didMount={({ props: { name, value } }) => {
+                localStorage.setItem(name, JSON.stringify(value))
               }}
-              didUpdate={({ props: { id, value } }) => {
-                localStorage.setItem(id, JSON.stringify(value))
+              didUpdate={({ props: { name, value } }) => {
+                localStorage.setItem(name, JSON.stringify(value))
               }}
             />
             {render({
