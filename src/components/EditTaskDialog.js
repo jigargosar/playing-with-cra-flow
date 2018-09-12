@@ -10,13 +10,13 @@ export function renderEditTaskDialogTrigger(render: any => any) {
   return (
     <Component
       initialState={{ showDialog: false, task: null }}
-      getInitialState={() => {
-        // localStorage.removeItem('collections')
-        const state = localStorage.getItem('editTaskState')
-        return state ? JSON.parse(state) : { showDialog: false, task: null }
-      }}
-      didMount={({ state }) => {
-        localStorage.setItem('editTaskState', JSON.stringify(state))
+      didMount={({ state, setState }) => {
+        const storedState = localStorage.getItem('editTaskState')
+        if (storedState) {
+          setState(JSON.parse(storedState))
+        } else {
+          localStorage.setItem('editTaskState', JSON.stringify(state))
+        }
       }}
       didUpdate={({ state }) => {
         localStorage.setItem('editTaskState', JSON.stringify(state))
