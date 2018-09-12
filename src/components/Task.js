@@ -70,6 +70,7 @@ function renderTags(task) {
     </div>
   )
 }
+
 function renderCategory(task) {
   return (
     <Match path={`/category/${task.category}`}>
