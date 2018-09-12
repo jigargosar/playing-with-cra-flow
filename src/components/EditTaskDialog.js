@@ -72,17 +72,16 @@ export function renderEditTaskDialogTrigger(render: any => any) {
               onDismiss()
             }
             const onTitleChange = e => setState({ title: e.target.value })
+            const childProps = {
+              onDismiss,
+              isOpen,
+              title,
+              onTitleChange,
+              onOk,
+              startEditingTask,
+            }
             return (
-              <Provider
-                value={{
-                  onDismiss,
-                  isOpen,
-                  title,
-                  onTitleChange,
-                  onOk,
-                  startEditingTask,
-                }}
-              >
+              <Provider value={childProps}>
                 <StorageSet name={stateName} value={state} />
                 {render({ startEditingTask })}
                 <EditTaskDialog />
