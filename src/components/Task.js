@@ -25,10 +25,10 @@ import { intersperse } from 'ramda'
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const hasHiddenChildren = {
   $nest: {
-    '.appearOnHover': {
+    '.appearOnParentOver': {
       transition: '.15s ease-in',
     },
-    '&:not(:hover) .appearOnHover': { opacity: 0 },
+    '&:not(:hover) .appearOnParentOver': { opacity: 0 },
   },
 }
 
@@ -98,9 +98,7 @@ export const Task = ({ task }: { task: TaskModel }) => (
     <div className={style(content, horizontal /*, bg('red')*/)}>
       <div
         className={style(
-          // bg('blue'),
-          padding(0, '1rem'),
-          // flex,
+          padding(0, '0.5rem'),
           selfStretch,
           hasHiddenChildren,
           pointer,
