@@ -12,7 +12,7 @@ function storageGet(key, defaultState) {
   return parseState ? parseState : defaultState
 }
 
-function NewComponent({ name, value }: { name: string, value: any }) {
+function StorageSet({ name, value }: { name: string, value: any }) {
   const didMountOrUpdate = ({ props: { name, value } }) => {
     localStorage.setItem(name, JSON.stringify(value))
   }
@@ -43,7 +43,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
         const { task, showDialog, title } = state
         return (
           <Fragment>
-            <NewComponent name={stateName} value={state} />
+            <StorageSet name={stateName} value={state} />
             {render({
               startEditingTask: task => () =>
                 setState({ showDialog: true, task, title: task.title }),
