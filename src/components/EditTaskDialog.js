@@ -12,11 +12,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
       getInitialState={() => {
         // localStorage.removeItem('collections')
         const state = localStorage.getItem('editTaskState')
-        if (state) {
-          return JSON.parse(state)
-        } else {
-          return { showDialog: false, task: null }
-        }
+        return state ? JSON.parse(state) : { showDialog: false, task: null }
       }}
     >
       {({ state, setState }) => {
