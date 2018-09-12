@@ -6,6 +6,7 @@ export {
   cssRule,
   stylesheet,
   forceRenderStyles,
+  reinit,
 } from 'typestyle'
 export {
   border,

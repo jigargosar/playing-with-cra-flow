@@ -1,11 +1,10 @@
-import { setupGlobalStyles } from './styles'
+import { reinit } from './typestyle-exports'
 
-setupGlobalStyles()
+reinit()
 require('./render')
 
 if (module.hot) {
-  module.hot.accept(['./render'], () => {
-    require('typestyle').reinit()
-    require('./render')
+  module.hot.accept(() => {
+    // require('./render')
   })
 }
