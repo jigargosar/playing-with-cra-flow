@@ -20,6 +20,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "react-hot-loader/babel"
     ]
   },
   "husky": {
@@ -38,7 +41,7 @@
     "start_": "cross-env REACT_EDITOR=webstorm react-scripts start",
     "start": "nodemon -w yarn.lock -x parcel src/index.html --open",
     "build": "react-scripts build",
-		"test": "xo && react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sg": "styleguidist server --open",
     "sgb": "styleguidist build",
@@ -59,6 +62,7 @@
     "ramda-adjunct": "^2.9.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-hot-loader": "^4.3.6",
     "react-icons-kit": "^1.1.7",
     "react-scripts": "1.1.5",
     "recompose": "^0.30.0",
@@ -78,7 +82,6 @@
     "lint-staged": "^7.2.2",
     "nodemon": "^1.18.4",
     "parcel-bundler": "^1.9.7",
-		"prettier": "^1.14.2",
-		"xo": "^0.23.0"
+    "prettier": "^1.14.2"
   }
 }
