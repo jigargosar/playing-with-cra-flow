@@ -44,20 +44,20 @@ export function EditTaskDialog({ onDismiss, task }: Props) {
 export function renderEditTaskDialogTrigger(render) {
   return (
     <Component initialState={{ showDialog: false, task: null }}>
-      {({ state, setState }) => (
-        <Fragment>
-          {render({
-            startEditingTask: task => () =>
-              setState({ showDialog: true, task }),
-          })}
-          {state.showDialog && (
-            <EditTaskDialog
-              onDismiss={() => setState({ showDialog: false })}
-              task={state.task}
-            />
-          )}
-        </Fragment>
-      )}
+      {({ state, setState }) => {
+        const onDismiss = () => setState({ showDialog: false })
+        const task = state.task
+        const showDialog = state.showDialog
+        return (
+          <Fragment>
+            {render({
+              startEditingTask: task => () =>
+                setState({ showDialog: true, task }),
+            })}
+            {showDialog && <EditTaskDialog onDismiss={onDismiss} task={task} />}
+          </Fragment>
+        )
+      }}
     </Component>
   )
 }
