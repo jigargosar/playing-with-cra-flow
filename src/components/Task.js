@@ -52,13 +52,6 @@ function renderEditTaskDialogTrigger(task, render) {
   )
 }
 
-function renderTitle(task) {
-  return renderEditTaskDialogTrigger(task, ({ open }) => (
-    <div onClick={open} className={style(task.done && strike)}>
-      {task.title}
-    </div>
-  ))
-}
 function renderTags(task) {
   return (
     <div className={style({ color: dim2Color }, fz.xs, { lineHeight: 1.5 })}>
@@ -93,7 +86,11 @@ const containerClass = style(horizontal, pointer, hasHiddenChildren)
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      {renderTitle(task)}
+      {renderEditTaskDialogTrigger(task, ({ open }) => (
+        <div onClick={open} className={style(task.done && strike)}>
+          {task.title}
+        </div>
+      ))}
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
