@@ -23,12 +23,13 @@ import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
+const appearOnParentOverClass = 'appearOnParentOver'
 const hasHiddenChildren = {
   $nest: {
-    '.appearOnParentOver': {
+    [`.${appearOnParentOverClass}`]: {
       transition: '.15s ease-in',
     },
-    '&:not(:hover) .appearOnParentOver': { opacity: 0 },
+    [`&:not(:hover) .${appearOnParentOverClass}`]: { opacity: 0 },
   },
 }
 
