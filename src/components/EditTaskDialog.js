@@ -46,32 +46,26 @@ export function renderEditTaskDialogTrigger(render: any => any) {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (
-    <Component
-      getInitialState={() =>
-        storageGet(stateName, defaultState)
-      }
-    >
+    <Component getInitialState={() => storageGet(stateName, defaultState)}>
       {({ state, setState }) => (
         <CollectionConsumer>
           {({ updateTask }) => {
-            {
-              const { task, isOpen, title } = state
-              const onDismiss = () => setState({ isOpen: false })
-              const startEditingTask = task => () =>
-                setState({ isOpen: true, task, title: task.title })
-              const onOk = () => {
-                updateTask({ title }, task)
-                onDismiss()
-              }
-              const onTitleChange = e => setState({ title: e.target.value })
-              return (
-                <Fragment>
-                  <StorageSet name={stateName} value={state} />
-                  {render({ startEditingTask })}
-                  {renderETD({ onDismiss, isOpen, title, onTitleChange, onOk })}
-                </Fragment>
-              )
+            const { task, isOpen, title } = state
+            const onDismiss = () => setState({ isOpen: false })
+            const startEditingTask = task => () =>
+              setState({ isOpen: true, task, title: task.title })
+            const onOk = () => {
+              updateTask({ title }, task)
+              onDismiss()
             }
+            const onTitleChange = e => setState({ title: e.target.value })
+            return (
+              <Fragment>
+                <StorageSet name={stateName} value={state} />
+                {render({ startEditingTask })}
+                {renderETD({ onDismiss, isOpen, title, onTitleChange, onOk })}
+              </Fragment>
+            )
           }}
         </CollectionConsumer>
       )}
