@@ -18,6 +18,7 @@ import {
 import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
+import { EditTaskDialogConsumer } from './EditTaskDialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -62,21 +63,22 @@ function renderCategory(task) {
 }
 
 const containerClass = style(horizontal, pointer, hasHiddenChildren)
-export const Task = ({
-                       task,
-                       onEdit,
-                     }: {
+type TaskProps = {
   task: TaskModel,
-  onEdit: any,
-}) => (
+}
+export const Task = ({ task }: TaskProps) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      <div
-        onClick={onEdit}
-        className={style(task.done && strike)}
-      >
-        {task.title}
-      </div>
+      <EditTaskDialogConsumer>
+        {({ startEditingTask }) => (
+          <div
+            onClick={startEditingTask(task)}
+            className={style(task.done && strike)}
+          >
+            {task.title}
+          </div>
+        )}
+      </EditTaskDialogConsumer>
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>

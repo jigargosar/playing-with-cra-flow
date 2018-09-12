@@ -36,6 +36,8 @@ const { Provider, Consumer } = React.createContext({
   startEditingTask: noop,
 })
 
+export const EditTaskDialogConsumer = Consumer
+
 function EditTaskDialog() {
   return (
     <Consumer>
@@ -56,7 +58,7 @@ function EditTaskDialog() {
   )
 }
 
-export function renderEditTaskDialogTrigger(render: any => any) {
+export function EditTaskDialogProvider() {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (
@@ -85,7 +87,6 @@ export function renderEditTaskDialogTrigger(render: any => any) {
               <Fragment>
                 <StorageSet name={stateName} value={state} />
                 <Provider value={childProps}>
-                  {render({ startEditingTask })}
                   <EditTaskDialog />
                 </Provider>
               </Fragment>

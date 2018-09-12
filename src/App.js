@@ -28,7 +28,7 @@ import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
 import { Redirect } from '@reach/router'
-import { renderEditTaskDialogTrigger } from './components/EditTaskDialog'
+import { EditTaskDialogProvider } from './components/EditTaskDialog'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -62,7 +62,7 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
-function renderTaskRoutes(tags, tasks, startEditingTask) {
+function renderTaskRoutes(tags, tasks) {
   return taskRouteFilters.map(([path, pred, titleFn]) => (
     <Route
       key={path}
@@ -79,11 +79,7 @@ function renderTaskRoutes(tags, tasks, startEditingTask) {
           </div>
           <div className={style(verticallySpaced(rem(1.5)))}>
             {filterTasks(pred(props), tasks).map(task => (
-              <Task
-                key={task.id}
-                task={task}
-                onEdit={startEditingTask(task)}
-              />
+              <Task key={task.id} task={task} />
             ))}
           </div>
         </div>
@@ -94,7 +90,7 @@ function renderTaskRoutes(tags, tasks, startEditingTask) {
 
 const App = () => (
   <CollectionProvider>
-    {renderEditTaskDialogTrigger(({ startEditingTask }) => (
+    <EditTaskDialogProvider>
       <div className={containerClass}>
         <div className={sidebarClass}>
           <Sidebar />
@@ -104,14 +100,14 @@ const App = () => (
             {({ tasks, tags }) => (
               <Router className={routerClass}>
                 <Redirect from={'/'} to={'All'} />
-                {renderTaskRoutes(tags, tasks, startEditingTask)}
+                {renderTaskRoutes(tags, tasks)}
                 <TagList path={'Tags'} />
               </Router>
             )}
           </CollectionConsumer>
         </div>
       </div>
-    ))}
+    </EditTaskDialogProvider>
   </CollectionProvider>
 )
 
