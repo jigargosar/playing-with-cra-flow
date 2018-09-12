@@ -26,24 +26,18 @@ function StorageSet({ name, value }: { name: string, value: any }) {
   )
 }
 
-function EditTaskDialog(props: {
-  onDismiss: () => any,
-  open: any,
-  value: any,
-  onChange: Function,
-  onClick: Function,
-}) {
+function renderETD({ onDismiss, isOpen, title, onTitleChange, onOk }) {
   return (
     <Dialog
       className={style(verticallySpaced(rem(1)))}
-      onDismiss={props.onDismiss}
-      isOpen={props.open}
+      onDismiss={onDismiss}
+      isOpen={isOpen}
     >
       <h3>Edit Task </h3>
       <div className={style(vertical)}>
-        <input type={'text'} value={props.value} onChange={props.onChange} />
+        <input type={'text'} value={title} onChange={onTitleChange} />
       </div>
-      <button onClick={props.onClick}>Ok</button>
+      <button onClick={onOk}>Ok</button>
     </Dialog>
   )
 }
@@ -54,7 +48,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
     <Component
       getInitialState={() =>
         storageGet(stateName, {
-          showDialog: false,
+          isOpen: false,
           task: {},
           title: '',
         })
@@ -64,10 +58,10 @@ export function renderEditTaskDialogTrigger(render: any => any) {
         <CollectionConsumer>
           {({ updateTask }) => {
             {
-              const { task, showDialog, title } = state
-              const onDismiss = () => setState({ showDialog: false })
+              const { task, isOpen, title } = state
+              const onDismiss = () => setState({ isOpen: false })
               const startEditingTask = task => () =>
-                setState({ showDialog: true, task, title: task.title })
+                setState({ isOpen: true, task, title: task.title })
               const onOk = () => {
                 updateTask({ title }, task)
                 onDismiss()
@@ -77,13 +71,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                 <Fragment>
                   <StorageSet name={stateName} value={state} />
                   {render({ startEditingTask })}
-                  <EditTaskDialog
-                    onDismiss={onDismiss}
-                    open={showDialog}
-                    value={title}
-                    onChange={onTitleChange}
-                    onClick={onOk}
-                  />
+                  {renderETD({ onDismiss, isOpen, title, onTitleChange, onOk })}
                 </Fragment>
               )
             }
