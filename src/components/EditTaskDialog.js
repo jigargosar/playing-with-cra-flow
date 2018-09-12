@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
+import { noop } from 'ramda-adjunct'
 
 function storageGet(key, defaultState) {
   const storedState = localStorage.getItem(key)
@@ -25,23 +26,34 @@ function StorageSet({ name, value }: { name: string, value: any }) {
   )
 }
 
-function renderETD({ onDismiss, isOpen, title, onTitleChange, onOk }) {
+const { Provider, Consumer } = React.createContext({
+  onDismiss: noop,
+  isOpen: false,
+  title: '',
+  onTitleChange: noop,
+  onOk: noop,
+  startEditingTask: noop,
+})
+
+function renderETD() {
   return (
-    <Dialog
-      className={style(verticallySpaced(rem(1)))}
-      onDismiss={onDismiss}
-      isOpen={isOpen}
-    >
-      <h3>Edit Task </h3>
-      <div className={style(vertical)}>
-        <input type={'text'} value={title} onChange={onTitleChange} />
-      </div>
-      <button onClick={onOk}>Ok</button>
-    </Dialog>
+    <Consumer>
+      {({ onDismiss, isOpen, title, onTitleChange, onOk }) => (
+        <Dialog
+          className={style(verticallySpaced(rem(1)))}
+          onDismiss={onDismiss}
+          isOpen={isOpen}
+        >
+          <h3>Edit Task </h3>
+          <div className={style(vertical)}>
+            <input type={'text'} value={title} onChange={onTitleChange} />
+          </div>
+          <button onClick={onOk}>Ok</button>
+        </Dialog>
+      )}
+    </Consumer>
   )
 }
-
-const { Provider, Consumer } = React.createContext(null)
 
 export function renderEditTaskDialogTrigger(render: any => any) {
   const stateName = 'editTaskState'
@@ -62,11 +74,18 @@ export function renderEditTaskDialogTrigger(render: any => any) {
             const onTitleChange = e => setState({ title: e.target.value })
             return (
               <Provider
-                value={{ onDismiss, isOpen, title, onTitleChange, onOk }}
+                value={{
+                  onDismiss,
+                  isOpen,
+                  title,
+                  onTitleChange,
+                  onOk,
+                  startEditingTask,
+                }}
               >
                 <StorageSet name={stateName} value={state} />
                 {render({ startEditingTask })}
-                {renderETD({ onDismiss, isOpen, title, onTitleChange, onOk })}
+                {renderETD()}
               </Provider>
             )
           }}
