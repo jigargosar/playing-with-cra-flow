@@ -14,6 +14,12 @@ export function renderEditTaskDialogTrigger(render: any => any) {
         const state = localStorage.getItem('editTaskState')
         return state ? JSON.parse(state) : { showDialog: false, task: null }
       }}
+      didUpdate={({ state }) => {
+        localStorage.setItem('editTaskState', JSON.stringify(state))
+      }}
+      didMount={({ state }) => {
+        localStorage.setItem('editTaskState', JSON.stringify(state))
+      }}
     >
       {({ state, setState }) => {
         const onDismiss = () => setState({ showDialog: false })
