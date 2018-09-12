@@ -8,7 +8,17 @@ import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 
 export function renderEditTaskDialogTrigger(render: any => any) {
   return (
-    <Component initialState={{ showDialog: false, task: null }}>
+    <Component
+      getInitialState={() => {
+        // localStorage.removeItem('collections')
+        const state = localStorage.getItem('editTaskState')
+        if (state) {
+          return JSON.parse(state)
+        } else {
+          return { showDialog: false, task: null }
+        }
+      }}
+    >
       {({ state, setState }) => {
         const onDismiss = () => setState({ showDialog: false })
         const task = state.task
