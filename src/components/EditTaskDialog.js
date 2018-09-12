@@ -26,7 +26,7 @@ function StorageSet({ name, value }: { name: string, value: any }) {
   )
 }
 
-function NewComponent(props: {
+function EditTaskDialog(props: {
   onDismiss: () => any,
   open: any,
   value: any,
@@ -77,7 +77,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                 <Fragment>
                   <StorageSet name={stateName} value={state} />
                   {render({ startEditingTask })}
-                  <NewComponent
+                  <EditTaskDialog
                     onDismiss={onDismiss}
                     open={showDialog}
                     value={title}
