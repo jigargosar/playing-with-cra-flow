@@ -1,17 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import { AppContainer, setConfig } from 'react-hot-loader'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle'
 import { setupGlobalStyles } from './styles'
+import App from './App'
 
-setupGlobalStyles()
+setConfig({ logLevel: 'debug' })
 
-ReactDOM.render(<App />, document.getElementById('root'))
-forceRenderStyles()
+function render() {
+  setupGlobalStyles()
+  const App = require('./App').default
+  ReactDOM.render(
+    <AppContainer>
+      <App />
+    </AppContainer>,
+    document.getElementById('root'),
+  )
+  forceRenderStyles()
+}
+
+render()
 
 registerServiceWorker()
 
 if (module.hot) {
-  module.hot.accept(() => {})
+  module.hot.accept(render)
 }

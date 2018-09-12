@@ -26,7 +26,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
                     className={style(verticallySpaced(rem(1)))}
                     onDismiss={onDismiss}
                   >
-                    <h2>1 2Edit Task</h2>
+                    <h2>Edit 1 Task</h2>
                     <div className={style(vertical)}>
                       <input
                         ref={refs.title}

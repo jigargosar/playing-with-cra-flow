@@ -28,7 +28,6 @@ import { findById } from './models/Collection'
 import { extend, style, verticallySpaced } from './typestyle-exports'
 import { Task } from './components/Task'
 import { bg, nearWhiteColor } from './styles'
-import { hot } from 'react-hot-loader'
 
 export const IconHome = () => <Icon size={'100%'} icon={home} />
 export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
@@ -105,5 +104,6 @@ const App = () => (
   </CollectionProvider>
 )
 
-export const hotApp = hot(module)(App)
-export default hotApp
+// export const hotApp = hot(module)(App)
+// export default App
+export default App
