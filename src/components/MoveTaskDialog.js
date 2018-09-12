@@ -5,7 +5,8 @@ import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
 import { CollectionConsumer } from './CollectionContext'
 import {
-  flex1,
+  content,
+  flex,
   horizontal,
   rem,
   style,
@@ -17,6 +18,7 @@ import { noop } from 'ramda-adjunct'
 import type { TaskModel } from '../models/Task'
 import { storageGet, StorageSet } from './StorageSet'
 import { categories } from '../models/Category'
+import { tc } from '../styles'
 
 const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
@@ -40,7 +42,8 @@ export function MoveTaskDialog() {
           <div className={style(vertical)}>{title}</div>
           <div className={style(horizontal, wrap)}>
             {categories.map(category => (
-              <div key={category} className={style(flex1)}>
+              <div key={category}
+                   className={style(tc, content, flex, { width: '30%' })}>
                 {category}
               </div>
             ))}
