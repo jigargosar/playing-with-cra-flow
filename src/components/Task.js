@@ -34,9 +34,9 @@ const hasHiddenChildren = {
   },
 }
 
-function renderEditTaskDialogTrigger(task, render) {
+function renderEditTaskDialogTrigger(render) {
   return (
-    <Component initialState={{ showDialog: false, task }}>
+    <Component initialState={{ showDialog: false, task: null }}>
       {({ state, setState }) => (
         <Fragment>
           {render({ open: task => () => setState({ showDialog: true, task }) })}
@@ -86,7 +86,7 @@ const containerClass = style(horizontal, pointer, hasHiddenChildren)
 export const Task = ({ task }: { task: TaskModel }) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      {renderEditTaskDialogTrigger(task, ({ open }) => (
+      {renderEditTaskDialogTrigger(({ open }) => (
         <div onClick={open(task)} className={style(task.done && strike)}>
           {task.title}
         </div>
