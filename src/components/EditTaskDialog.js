@@ -47,11 +47,7 @@ export function renderEditTaskDialogTrigger(render: any => any) {
   return (
     <Component
       getInitialState={() =>
-        storageGet(stateName, {
-          isOpen: false,
-          task: {},
-          title: '',
-        })
+        storageGet(stateName, { isOpen: false, task: {}, title: '' })
       }
     >
       {({ state, setState }) => (
