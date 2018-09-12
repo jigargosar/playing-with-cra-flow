@@ -1,10 +1,10 @@
 import { reinit } from './typestyle-exports'
 
-reinit()
-require('./render')
+require('./render').default()
 
 if (module.hot) {
   module.hot.accept(() => {
-    // require('./render')
+    reinit()
+    require('./render').default()
   })
 }

@@ -11,9 +11,12 @@ import { setupGlobalStyles } from './styles'
 //   })
 // }
 
-setupGlobalStyles()
+export default function render() {
+  setupGlobalStyles()
 
-ReactDOM.render(<App />, document.getElementById('root'))
-forceRenderStyles()
+  ReactDOM.render(<App />, document.getElementById('root'))
+  forceRenderStyles()
 
-registerServiceWorker()
+  registerServiceWorker()
+}
+
