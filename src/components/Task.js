@@ -19,6 +19,7 @@ import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { showEditTaskDialog } from './EditTaskDialog'
+import { showMoveTaskDialog } from './MoveTaskDialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -79,14 +80,17 @@ export const Task = ({ task }: TaskProps) => (
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
     <div className={style(content, horizontal /*, bg('red')*/)}>
-      <div
-        className={classes(
-          appearOnParentHoverClass,
-          style(padding(0, '0.5rem'), selfStretch, pointer),
-        )}
-      >
-        ...
-      </div>
+      {showMoveTaskDialog(task, handler => (
+        <div
+          onClick={handler}
+          className={classes(
+            appearOnParentHoverClass,
+            style(padding(0, '0.5rem'), selfStretch, pointer),
+          )}
+        >
+          ...
+        </div>
+      ))}
     </div>
   </div>
 )
