@@ -9,15 +9,16 @@ import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 export function renderEditTaskDialogTrigger(render: any => any) {
   return (
     <Component
+      initialState={{ showDialog: false, task: null }}
       getInitialState={() => {
         // localStorage.removeItem('collections')
         const state = localStorage.getItem('editTaskState')
         return state ? JSON.parse(state) : { showDialog: false, task: null }
       }}
-      didUpdate={({ state }) => {
+      didMount={({ state }) => {
         localStorage.setItem('editTaskState', JSON.stringify(state))
       }}
-      didMount={({ state }) => {
+      didUpdate={({ state }) => {
         localStorage.setItem('editTaskState', JSON.stringify(state))
       }}
     >
