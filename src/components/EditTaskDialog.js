@@ -12,8 +12,9 @@ export function renderEditTaskDialogTrigger(render: any => any) {
       initialState={{ showDialog: false, task: null }}
       didMount={({ state, setState }) => {
         const storedState = localStorage.getItem('editTaskState')
-        if (storedState) {
-          setState(JSON.parse(storedState))
+        const parseState = storedState && JSON.parse(storedState)
+        if (parseState) {
+          requestAnimationFrame(() => setState(parseState))
         } else {
           localStorage.setItem('editTaskState', JSON.stringify(state))
         }
