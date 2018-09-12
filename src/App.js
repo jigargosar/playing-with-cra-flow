@@ -2,9 +2,6 @@
 
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Icon } from 'react-icons-kit'
-import { home } from 'react-icons-kit/icomoon/home'
-import { chevronDown } from 'react-icons-kit/feather'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
@@ -33,9 +30,8 @@ import {
   EditTaskDialog,
   EditTaskDialogStateProvider,
 } from './components/EditTaskDialog'
-
-export const IconHome = () => <Icon size={'100%'} icon={home} />
-export const ChevronDown = () => <Icon size={'100%'} icon={chevronDown} />
+import { MoveTaskDialogStateProvider } from './components/MoveTaskDialog'
+import { nest } from 'recompose'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
@@ -92,30 +88,34 @@ function renderTaskRoutes(tags, tasks) {
   ))
 }
 
+const AllProviders = nest(
+  CollectionProvider,
+  EditTaskDialogStateProvider,
+  MoveTaskDialogStateProvider,
+)
+
 const App = () => (
-  <CollectionProvider>
-    <EditTaskDialogStateProvider>
-      <Fragment>
-        <div className={containerClass}>
-          <div className={sidebarClass}>
-            <Sidebar />
-          </div>
-          <div className={contentClass}>
-            <CollectionConsumer>
-              {({ tasks, tags }) => (
-                <Router className={routerClass}>
-                  <Redirect from={'/'} to={'All'} />
-                  {renderTaskRoutes(tags, tasks)}
-                  <TagList path={'Tags'} />
-                </Router>
-              )}
-            </CollectionConsumer>
-          </div>
+  <AllProviders>
+    <Fragment>
+      <div className={containerClass}>
+        <div className={sidebarClass}>
+          <Sidebar />
         </div>
-        <EditTaskDialog />
-      </Fragment>
-    </EditTaskDialogStateProvider>
-  </CollectionProvider>
+        <div className={contentClass}>
+          <CollectionConsumer>
+            {({ tasks, tags }) => (
+              <Router className={routerClass}>
+                <Redirect from={'/'} to={'All'} />
+                {renderTaskRoutes(tags, tasks)}
+                <TagList path={'Tags'} />
+              </Router>
+            )}
+          </CollectionConsumer>
+        </div>
+      </div>
+      <EditTaskDialog />
+    </Fragment>
+  </AllProviders>
 )
 
 export default App
