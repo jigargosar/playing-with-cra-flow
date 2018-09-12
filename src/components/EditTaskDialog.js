@@ -41,13 +41,12 @@ export function renderEditTaskDialogTrigger(render: any => any) {
       {({ state, setState }) => {
         const onDismiss = () => setState({ showDialog: false })
         const { task, showDialog, title } = state
+        const startEditingTask = task => () =>
+          setState({ showDialog: true, task, title: task.title })
         return (
           <Fragment>
             <StorageSet name={stateName} value={state} />
-            {render({
-              startEditingTask: task => () =>
-                setState({ showDialog: true, task, title: task.title }),
-            })}
+            {render({ startEditingTask })}
             {
               <Dialog
                 className={style(verticallySpaced(rem(1)))}
