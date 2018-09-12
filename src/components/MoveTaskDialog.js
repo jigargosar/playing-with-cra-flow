@@ -8,6 +8,7 @@ import {
   content,
   flex,
   horizontal,
+  margin,
   rem,
   style,
   vertical,
@@ -42,10 +43,14 @@ export function MoveTaskDialog() {
           <div className={style(vertical)}>{title}</div>
           <div className={style(horizontal, wrap)}>
             {categories.map(category => (
-              <div key={category}
-                   className={style(tc, content, flex, { width: '30%' })}>
+              <button
+                key={category}
+                className={style(margin('0.5rem'), tc, content, flex, {
+                  width: '30%',
+                })}
+              >
                 {category}
-              </div>
+              </button>
             ))}
           </div>
         </Dialog>
