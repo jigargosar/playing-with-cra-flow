@@ -6,7 +6,6 @@ import { home } from 'react-icons-kit/icomoon/home'
 import { chevronDown } from 'react-icons-kit/feather'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
-import { Redirect } from '@reach/router'
 import { TagList } from './components/TagList'
 import { Route, Router } from './components/Router'
 import {
@@ -71,7 +70,7 @@ const App = () => (
         <CollectionConsumer>
           {({ tasks, tags }) => (
             <Router className={routerClass}>
-              <Redirect from={'/'} to={'All'} />
+              {/*<Redirect from={'/'} to={'All'} />*/}
               {taskRouteFilters.map(([path, pred, titleFn]) => (
                 <Route
                   key={path}
@@ -104,6 +103,4 @@ const App = () => (
   </CollectionProvider>
 )
 
-// export const hotApp = hot(module)(App)
-// export default App
 export default App
