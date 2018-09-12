@@ -38,7 +38,7 @@
     "start_": "cross-env REACT_EDITOR=webstorm react-scripts start",
     "start": "nodemon -w yarn.lock -x parcel src/index.html --open",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+		"test": "xo && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sg": "styleguidist server --open",
     "sgb": "styleguidist build",
@@ -78,6 +78,7 @@
     "lint-staged": "^7.2.2",
     "nodemon": "^1.18.4",
     "parcel-bundler": "^1.9.7",
-    "prettier": "^1.14.2"
+		"prettier": "^1.14.2",
+		"xo": "^0.23.0"
   }
 }

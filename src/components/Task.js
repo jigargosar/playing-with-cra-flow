@@ -9,8 +9,15 @@ import Component from '@reach/component-component'
 import '@reach/dialog/styles.css'
 import { CollectionConsumer } from './CollectionContext'
 import { EditTaskDialog } from './EditTaskDialog'
-import { content, flex, horizontal, rem, style } from '../typestyle-exports'
-import { cText, dim2Color, dimColor, hover, strike } from '../styles'
+import {
+  content,
+  flex,
+  horizontal,
+  padding,
+  rem,
+  style,
+} from '../typestyle-exports'
+import { cText, dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 
@@ -37,7 +44,7 @@ function renderEditTaskDialogTrigger(task, render) {
 const taskTitleClass = task => style(task.done && strike, cText)
 
 export const Task = ({ task }: { task: TaskModel }) => (
-  <div className={style(horizontal)}>
+  <div className={style(horizontal, pointer)}>
     <div className={style(flex)}>
       {renderEditTaskDialogTrigger(task, ({ open }) => (
         <div onClick={open} className={taskTitleClass(task)}>
@@ -69,8 +76,22 @@ export const Task = ({ task }: { task: TaskModel }) => (
         }
       </Match>
     </div>
-    <div className={style(content)}>
-      <div className={style(hover({ visibility: 'hidden' }))}>...</div>
+    <div
+      className={style(
+        content,
+        padding('0rem'),
+        {
+          // visibility: 'hidden',
+          transition: '.15s ease-in',
+
+          $nest: {
+            '&:not(:hover)': { opacity: 0 },
+          },
+        },
+        pointer,
+      )}
+    >
+      ...
     </div>
   </div>
 )

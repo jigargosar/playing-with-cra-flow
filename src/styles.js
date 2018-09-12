@@ -72,6 +72,7 @@ export function bg(backgroundColor) {
 
 export function hover(...ext) {
   return {
+    transition: '.15s ease-in',
     $nest: {
       '&:hover': extend(...ext),
     },
