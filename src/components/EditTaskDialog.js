@@ -36,7 +36,7 @@ const { Provider, Consumer } = React.createContext({
   startEditingTask: noop,
 })
 
-export const EditTaskDialogConsumer = Consumer
+export const EditTaskDialogStateConsumer = Consumer
 
 export function EditTaskDialog() {
   return (
