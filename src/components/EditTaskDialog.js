@@ -7,26 +7,7 @@ import { CollectionConsumer } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 import { noop } from 'ramda-adjunct'
 import type { TaskModel } from '../models/Task'
-
-function storageGet(key, defaultState) {
-  const storedState = localStorage.getItem(key)
-  const parseState = storedState && JSON.parse(storedState)
-  return parseState ? parseState : defaultState
-}
-
-function StorageSet({ name, value }: { name: string, value: any }) {
-  const didMountOrUpdate = ({ props: { name, value } }) => {
-    localStorage.setItem(name, JSON.stringify(value))
-  }
-  return (
-    <Component
-      name={name}
-      value={value}
-      didMount={didMountOrUpdate}
-      didUpdate={didMountOrUpdate}
-    />
-  )
-}
+import { storageGet, StorageSet } from './StorageSet'
 
 const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
