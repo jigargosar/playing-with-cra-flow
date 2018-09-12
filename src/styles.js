@@ -90,6 +90,7 @@ export function setupGlobalStyles() {
     sans,
     { fontSize: 16 },
     { lineHeight: rem(1.5) },
+    // { lineHeight: rem(1.1) },
   )
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
