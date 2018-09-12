@@ -38,7 +38,7 @@ export function EditTaskDialog() {
   )
 }
 
-export function withStartEditingTask(task: TaskModel, render: Function) {
+export function showEditTaskDialog(task: TaskModel, render: Function) {
   return (
     <Consumer>
       {({ startEditingTask }) => render(startEditingTask(task))}

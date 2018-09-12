@@ -47,7 +47,7 @@ export function showMoveTaskDialog(task: TaskModel, render: Function) {
 }
 
 export function MoveTaskDialogStateProvider({ children }: { children: any }) {
-  const stateName = 'editTaskState'
+  const stateName = 'moveTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (
     <Component getInitialState={() => storageGet(stateName, defaultState)}>

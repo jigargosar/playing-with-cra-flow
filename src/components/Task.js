@@ -18,7 +18,7 @@ import {
 import { dim2Color, dimColor, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
-import { withStartEditingTask } from './EditTaskDialog'
+import { showEditTaskDialog } from './EditTaskDialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -70,7 +70,7 @@ type TaskProps = {
 export const Task = ({ task }: TaskProps) => (
   <div className={containerClass}>
     <div className={style(flex)}>
-      {withStartEditingTask(task, handler => (
+      {showEditTaskDialog(task, handler => (
         <div onClick={handler} className={style(task.done && strike)}>
           {task.title}
         </div>
