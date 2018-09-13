@@ -71,9 +71,7 @@ export const css = stylesheet({ antialiased })
 export function bg(backgroundColor: string | ColorHelper) {
   return isString(backgroundColor)
     ? { backgroundColor }
-    : { backgroundColor: backgroundColor˚.
-  toHexString()
-}
+    : { backgroundColor: backgroundColor.toHexString() }
 }
 
 export function fg(color: string | ColorHelper) {
