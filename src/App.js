@@ -48,9 +48,21 @@ function renderMainRoutes() {
       {({ tasks, tags }) => (
         <Router className={routerClass}>
           <Redirect from={'/'} to={'All'} noThrow />
+          <TagList path={'Tags'} />
           <Route
             path={'All'}
             render={() => <TaskList {...{ title: 'All Tasks', tasks }} />}
+          />
+          <Route
+            path={'Done'}
+            render={() => (
+              <TaskList
+                {...{
+                  title: 'Completed Tasks',
+                  tasks: filterTasks(donePred, tasks),
+                }}
+              />
+            )}
           />
           {taskRouteFilters.map(([path, pred, titleFn]) => (
             <Route
@@ -63,7 +75,6 @@ function renderMainRoutes() {
               }}
             />
           ))}
-          <TagList path={'Tags'} />
         </Router>
       )}
     </CollectionConsumer>
