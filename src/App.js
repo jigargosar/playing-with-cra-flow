@@ -92,7 +92,7 @@ function renderTaskRoutes(tags, tasks) {
         render={props => {
           const pageTitle = titleFn({ ...props, tags })
           const finalTasks = filterTasks(pred(props), tasks)
-          return RenderTaskList({ title: pageTitle, tasks: finalTasks })
+          return <RenderTaskList {...{ title: pageTitle, tasks: finalTasks }} />
         }}
       />
     )
