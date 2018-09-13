@@ -36,6 +36,7 @@ import {
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { ErrorRoute } from './components/ErrorRoute'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
@@ -71,11 +72,6 @@ const AllProviders = nest(
   EditTaskDialogStateProvider,
   MoveTaskDialogStateProvider,
 )
-
-function ErrorRoute(props) {
-  console.log('props', props)
-  return 'Internal Error: please file bug report, or try going back'
-}
 
 function renderMainRouter() {
   return (
