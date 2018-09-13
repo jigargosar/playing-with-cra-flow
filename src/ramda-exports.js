@@ -1,1 +1,1 @@
-export { compose } from 'ramda'
+export { compose, always, allPass } from 'ramda'

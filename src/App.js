@@ -12,7 +12,6 @@ import {
 } from './components/CollectionContext'
 import { flex, horizontal, padding, scroll, someChildWillScroll } from 'csstips'
 import { rem } from 'csx'
-import { allPass } from 'ramda'
 import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
 import { bg, nearWhiteColor, sizeViewport100 } from './styles'
@@ -27,6 +26,7 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
+import { allPass, always } from 'ramda'
 
 const taskRouteFilters = [
   [
@@ -42,7 +42,9 @@ const taskRouteFilters = [
 ]
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
-  return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+  return (
+    <TaskList tasks={filterTasks(pred(otherProps), tasks)} {...otherProps} />
+  )
 }
 
 function renderMainRoutes() {
@@ -56,7 +58,7 @@ function renderMainRoutes() {
           <FilteredTaskList
             path={'Done'}
             title="Done Tasks"
-            pred={donePred}
+            pred={always(donePred)}
             tasks={tasks}
           />
           {taskRouteFilters.map(([path, pred, titleFn]) => (
