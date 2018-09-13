@@ -65,22 +65,6 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
-function renderTaskRoutes(tags, tasks) {
-  return taskRouteFilters.map(([path, pred, titleFn]) => {
-    return (
-      <Route
-        key={path}
-        path={path}
-        render={props => {
-          const pageTitle = titleFn({ ...props, tags })
-          const finalTasks = filterTasks(pred(props), tasks)
-          return <TaskList {...{ title: pageTitle, tasks: finalTasks }} />
-        }}
-      />
-    )
-  })
-}
-
 const AllProviders = nest(
   CollectionProvider,
   EditTaskDialogStateProvider,
@@ -93,7 +77,21 @@ function renderMainRouter() {
       {({ tasks, tags }) => (
         <Router className={routerClass}>
           <Redirect from={'/'} to={'All'} />
-          {renderTaskRoutes(tags, tasks)}
+          {taskRouteFilters.map(([path, pred, titleFn]) => {
+            return (
+              <Route
+                key={path}
+                path={path}
+                render={props => {
+                  const pageTitle = titleFn({ ...props, tags })
+                  const finalTasks = filterTasks(pred(props), tasks)
+                  return (
+                    <TaskList {...{ title: pageTitle, tasks: finalTasks }} />
+                  )
+                }}
+              />
+            )
+          })}
           <TagList path={'Tags'} />
         </Router>
       )}
