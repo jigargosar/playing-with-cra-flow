@@ -29,7 +29,6 @@ import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 
 const taskRouteFilters = [
-  ['Done', props => donePred, props => 'Completed Tasks'],
   [
     'category/:category',
     ({ category }) => allPass([activePred, t => t.category === category]),
@@ -50,6 +49,7 @@ function renderMainRoutes() {
           <Redirect from={'/'} to={'All'} noThrow />
           <TagList path={'Tags'} />
           <Route
+            default
             path={'All'}
             render={() => <TaskList {...{ title: 'All Tasks', tasks }} />}
           />
@@ -58,7 +58,7 @@ function renderMainRoutes() {
             render={() => (
               <TaskList
                 {...{
-                  title: 'Completed Tasks',
+                  title: 'Done Tasks',
                   tasks: filterTasks(donePred, tasks),
                 }}
               />
