@@ -65,7 +65,7 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
-function RenderTaskList({ title, tasks }) {
+function TaskList({ title, tasks }) {
   return (
     <div>
       <div
@@ -92,7 +92,7 @@ function renderTaskRoutes(tags, tasks) {
         render={props => {
           const pageTitle = titleFn({ ...props, tags })
           const finalTasks = filterTasks(pred(props), tasks)
-          return <RenderTaskList {...{ title: pageTitle, tasks: finalTasks }} />
+          return <TaskList {...{ title: pageTitle, tasks: finalTasks }} />
         }}
       />
     )
