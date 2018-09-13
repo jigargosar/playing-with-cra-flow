@@ -22,8 +22,7 @@ import {
 import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style, verticallySpaced } from './typestyle-exports'
-import { Task } from './components/Task'
+import { extend, style } from './typestyle-exports'
 import { bg, nearWhiteColor } from './styles'
 import { Redirect } from '@reach/router'
 import {
@@ -35,6 +34,7 @@ import {
   MoveTaskDialogStateProvider,
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
+import { TaskList } from './components/TaskList'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
@@ -64,24 +64,6 @@ const sidebarClass = style(scroll, { minWidth: 225 })
 const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
-
-function TaskList({ title, tasks }) {
-  return (
-    <div>
-      <div
-        className={style({
-          fontSize: rem(1.5),
-          marginBottom: rem(1),
-        })}
-      >
-        {title}
-      </div>
-      <div className={style(verticallySpaced(rem(1.5)))}>
-        {tasks.map(task => <Task key={task.id} task={task} />)}
-      </div>
-    </div>
-  )
-}
 
 function renderTaskRoutes(tags, tasks) {
   return taskRouteFilters.map(([path, pred, titleFn]) => {
