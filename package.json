@@ -17,12 +17,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": []
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -36,7 +30,7 @@
     ]
   },
   "scripts": {
-    "start": "cross-env REACT_EDITOR=webstorm react-scripts start",
+    "start": "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
