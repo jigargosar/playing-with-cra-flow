@@ -10,13 +10,7 @@ import {
   CollectionConsumer,
   CollectionProvider,
 } from './components/CollectionContext'
-import {
-  flex,
-  horizontal,
-  padding,
-  scroll,
-  someChildWillScroll,
-} from 'csstips'
+import { flex, horizontal, padding, scroll, someChildWillScroll } from 'csstips'
 import { rem } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
@@ -35,7 +29,6 @@ import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 
 const taskRouteFilters = [
-  ['All', props => () => true, props => 'All Tasks'],
   ['Done', props => donePred, props => 'Completed Tasks'],
   [
     'category/:category',
@@ -55,6 +48,10 @@ function renderMainRoutes() {
       {({ tasks, tags }) => (
         <Router className={routerClass}>
           <Redirect from={'/'} to={'All'} noThrow />
+          <Route
+            path={'All'}
+            render={() => <TaskList {...{ title: 'All Tasks', tasks }} />}
+          />
           {taskRouteFilters.map(([path, pred, titleFn]) => (
             <Route
               key={path}
