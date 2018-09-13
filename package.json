@@ -33,7 +33,7 @@
     "start": "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "@reach/component-component": "^0.1.1",
