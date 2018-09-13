@@ -9,7 +9,7 @@ export class ErrorBoundary extends React.Component<{ children: Function },
     info: null,
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: any) {
     this.setState({ error, info })
   }
 
