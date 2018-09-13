@@ -119,14 +119,17 @@ export function setupGlobalStyles() {
     { transition: 'backgroundColor .15s ease-in' },
     {
       $nest: {
+        '&:active': {
+          transform: 'perspective(500px) translateZ(-10px)',
+        },
+        '&:not(:active)': {
+          transform: 'perspective(0) translateZ(0)',
+        },
         '&:not([disabled])': {
           ...pointer,
           $nest: {
             '&:hover': {
               ...bg('#2779bd'),
-            },
-            '&:active': {
-              transform: 'perspective(500px) translateZ(-10px)',
             },
           },
         },
