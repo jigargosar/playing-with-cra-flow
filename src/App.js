@@ -87,6 +87,20 @@ const AllProviders = nest(
   MoveTaskDialogStateProvider,
 )
 
+function renderMainRoutes() {
+  return (
+    <CollectionConsumer>
+      {({ tasks, tags }) => (
+        <Router className={routerClass}>
+          <Redirect from={'/'} to={'All'} />
+          {renderTaskRoutes(tags, tasks)}
+          <TagList path={'Tags'} />
+        </Router>
+      )}
+    </CollectionConsumer>
+  )
+}
+
 const App = () => (
   <AllProviders>
     <Fragment>
@@ -94,17 +108,7 @@ const App = () => (
         <div className={sidebarClass}>
           <Sidebar />
         </div>
-        <div className={contentClass}>
-          <CollectionConsumer>
-            {({ tasks, tags }) => (
-              <Router className={routerClass}>
-                <Redirect from={'/'} to={'All'} />
-                {renderTaskRoutes(tags, tasks)}
-                <TagList path={'Tags'} />
-              </Router>
-            )}
-          </CollectionConsumer>
-        </div>
+        <div className={contentClass}>{renderMainRoutes()}</div>
       </div>
       <EditTaskDialog />
       <MoveTaskDialog />
