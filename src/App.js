@@ -26,14 +26,9 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
-import { allPass, always } from 'ramda'
+import { allPass } from 'ramda'
 
 const taskRouteFilters = [
-  [
-    'category/:category',
-    ({ category }) => allPass([activePred, t => t.category === category]),
-    ({ category }) => `${category}`,
-  ],
   [
     'tag/:tagTitle/:tid',
     ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
@@ -42,12 +37,24 @@ const taskRouteFilters = [
 ]
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
+  return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+}
+
+function CategoryTaskList({ category, ...otherProps }) {
   return (
-    <TaskList tasks={filterTasks(pred(otherProps), tasks)} {...otherProps} />
+    <FilteredTaskList
+      title={`${category}`}
+      pred={allPass([activePred, t => t.category === category])}
+      {...otherProps}
+    />
   )
 }
 
-function CategoryTaskList({ category, tasks, ...otherProps }) {
+CategoryTaskList.defaultProps = {
+  category: 'InBasket',
+}
+
+function TagsTaskList({ category, tasks, ...otherProps }) {
   return (
     <TaskList
       title={`${category}`}
@@ -58,10 +65,6 @@ function CategoryTaskList({ category, tasks, ...otherProps }) {
       {...otherProps}
     />
   )
-}
-
-CategoryTaskList.defaultProps = {
-  category: 'InBasket',
 }
 
 function renderMainRoutes() {
@@ -75,7 +78,7 @@ function renderMainRoutes() {
           <FilteredTaskList
             path={'Done'}
             title="Done Tasks"
-            pred={always(donePred)}
+            pred={donePred}
             tasks={tasks}
           />
           <CategoryTaskList path={'category/:category'} tasks={tasks} />
