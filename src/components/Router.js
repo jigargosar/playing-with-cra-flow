@@ -2,14 +2,7 @@ import { Link as RouterLink, Match, Router as ReachRouter } from '@reach/router'
 import * as React from 'react'
 import { classes, style } from '../typestyle-exports'
 
-export const Route = ({ render, ...otherProps }) => {
-  try {
-    return render(otherProps)
-  } catch (e) {
-    console.warn(e)
-    return 'Error'
-  }
-}
+export const Route = ({ render, ...otherProps }) => render(otherProps)
 
 export const Router = ReachRouter
 export { Match }
