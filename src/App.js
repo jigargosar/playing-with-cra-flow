@@ -47,6 +47,23 @@ function FilteredTaskList({ pred, tasks, ...otherProps }) {
   )
 }
 
+function CategoryTaskList({ category, tasks, ...otherProps }) {
+  return (
+    <TaskList
+      title={`${category}`}
+      tasks={filterTasks(
+        allPass([activePred, t => t.category === category]),
+        tasks,
+      )}
+      {...otherProps}
+    />
+  )
+}
+
+CategoryTaskList.defaultProps = {
+  category: 'InBasket',
+}
+
 function renderMainRoutes() {
   return (
     <CollectionConsumer>
@@ -61,6 +78,7 @@ function renderMainRoutes() {
             pred={always(donePred)}
             tasks={tasks}
           />
+          <CategoryTaskList path={'category/:category'} tasks={tasks} />
           {taskRouteFilters.map(([path, pred, titleFn]) => (
             <Route
               key={path}
