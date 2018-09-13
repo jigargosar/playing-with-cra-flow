@@ -36,8 +36,7 @@
     ]
   },
   "scripts": {
-    "start_": "cross-env REACT_EDITOR=webstorm react-scripts start",
-    "start": "nodemon -w yarn.lock -x parcel src/index.html --open",
+    "start": "cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -60,7 +59,6 @@
     "ramda-adjunct": "^2.9.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
-    "react-hot-loader": "^4.3.6",
     "react-icons-kit": "^1.1.7",
     "react-scripts": "1.1.5",
     "recompose": "^0.30.0",
@@ -72,14 +70,11 @@
     "@types/ramda": "^0.25.37",
     "@types/react-dom": "^16.0.7",
     "@types/recompose": "^0.26.4",
-    "babel-preset-react-app": "^3.1.2",
-    "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
     "flow-bin": "^0.80.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "nodemon": "^1.18.4",
-    "parcel-bundler": "^1.9.7",
     "prettier": "^1.14.2"
   }
 }
