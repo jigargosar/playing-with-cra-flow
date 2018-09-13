@@ -1,21 +1,15 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle'
-import { setupGlobalStyles } from './styles'
-import '@reach/dialog/styles.css'
 
-function render() {
-  setupGlobalStyles()
-  const App = require('./App').default
-  ReactDOM.render(<App />, document.getElementById('root'))
-  forceRenderStyles()
-}
+import App from './App'
 
-render()
+ReactDOM.render(<App />, document.getElementById('root'))
+forceRenderStyles()
 
 registerServiceWorker()
 
-if (module.hot) {
-  module.hot.accept(render)
-}
+// if (module.hot) {
+//   module.hot.accept(console.error)
+// }

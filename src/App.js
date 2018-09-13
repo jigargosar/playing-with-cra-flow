@@ -23,7 +23,7 @@ import { rem, viewHeight, viewWidth } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
 import { extend, style } from './typestyle-exports'
-import { bg, nearWhiteColor } from './styles'
+import { bg, nearWhiteColor, setupGlobalStyles } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
@@ -35,6 +35,10 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
+
+import '@reach/dialog/styles.css'
+
+setupGlobalStyles()
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
