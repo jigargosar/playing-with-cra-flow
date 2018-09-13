@@ -135,7 +135,7 @@ export function setupGlobalStyles() {
           ...pointer,
           $nest: {
             '&:hover': {
-              ...bg('#2779bd'),
+              ...bg(primaryColor.darken(0.1)),
             },
           },
         },
