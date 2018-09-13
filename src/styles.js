@@ -121,12 +121,17 @@ export function setupGlobalStyles() {
       $nest: {
         '&:not([disabled])': {
           ...pointer,
+          $nest: {
+            '&:hover': {
+              ...bg('#2779bd'),
+            },
+            '&:active': {
+              transform: 'perspective(500px) translateZ(-10px)',
+            },
+          },
         },
         '&[disabled]': {
           ...bg('hsla(207, 71%, 53%, 0.36)'),
-        },
-        '&:hover': {
-          ...bg('#2779bd'),
         },
       },
     },
