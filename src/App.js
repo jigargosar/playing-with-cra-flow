@@ -35,8 +35,6 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
-import { ErrorBoundary } from './components/ErrorBoundary'
-import { ErrorRoute } from './components/ErrorRoute'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
@@ -77,35 +75,25 @@ function renderMainRouter() {
   return (
     <CollectionConsumer>
       {({ tasks, tags }) => (
-        <ErrorBoundary>
-          {({ error, info }) => {
-            return error ? (
-              <Router className={routerClass}>
-                <ErrorRoute default error={error} info={info} />
-              </Router>
-            ) : (
-              <Router className={routerClass}>
-                <Redirect from={'/'} to={'All'} noThrow />
-                {taskRouteFilters.map(([path, pred, titleFn]) => (
-                  <Route
-                    key={path}
-                    path={path}
-                    render={props => {
-                      const pageTitle = titleFn({ ...props, tags })
-                      const finalTasks = filterTasks(pred(props), tasks)
-                      return (
-                        <TaskList
-                          {...{ title: pageTitle, tasks: finalTasks }}
-                        />
-                      )
-                    }}
+        <Router className={routerClass}>
+          <Redirect from={'/'} to={'All'} noThrow />
+          {taskRouteFilters.map(([path, pred, titleFn]) => (
+            <Route
+              key={path}
+              path={path}
+              render={props => {
+                const pageTitle = titleFn({ ...props, tags })
+                const finalTasks = filterTasks(pred(props), tasks)
+                return (
+                  <TaskList
+                    {...{ title: pageTitle, tasks: finalTasks }}
                   />
-                ))}
-                <TagList path={'Tags'} />
-              </Router>
-            )
-          }}
-        </ErrorBoundary>
+                )
+              }}
+            />
+          ))}
+          <TagList path={'Tags'} />
+        </Router>
       )}
     </CollectionConsumer>
   )
