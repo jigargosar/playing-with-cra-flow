@@ -8,7 +8,8 @@ import { forceRenderStyles } from './typestyle-exports'
 
 setupGlobalStyles()
 ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
-  console.log('callback', ...args)
+  console.clear()
+  console.log('Render Complete', ...args)
   forceRenderStyles()
 })
 
