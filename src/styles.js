@@ -11,8 +11,9 @@ import {
   setupPage,
   stylesheet,
 } from './typestyle-exports'
-import { color, viewHeight, viewWidth } from 'csx'
+import { color, ColorHelper, viewHeight, viewWidth } from 'csx'
 import { height, width } from 'csstips'
+import { isString } from 'ramda-adjunct'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
@@ -67,8 +68,10 @@ export const mono = {
 }
 export const css = stylesheet({ antialiased })
 
-export function bg(backgroundColor) {
-  return { backgroundColor }
+export function bg(backgroundColor: string | ColorHelper) {
+  return isString(backgroundColor)
+    ? { backgroundColor }
+    : { backgroundColor: bg.toHexString }
 }
 
 export function hover(...ext) {
@@ -108,23 +111,21 @@ export function setupGlobalStyles() {
     { margin: 0 },
     br2,
   )
+  const primaryColor = '#3490dc'
   cssRule(
     'button',
     tc,
     { lineHeight: 1.15 },
     { color: '#fff' },
-    bg('#3490dc'),
+    bg(primaryColor),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
     { transition: 'transform backgroundColor .15s ease-in' },
-    { transform: 'perspective(500px)' },
+    { transform: 'perspective(500px) translateZ(0px)' },
     {
       $nest: {
         '&:active': {
-          transform: 'translateZ(-10px)',
-        },
-        '&:not(:focus)': {
-          transform: 'translateZ(10px)',
+          transform: 'perspective(500px) translateZ(-10px)',
         },
         '&:not([disabled])': {
           ...pointer,
