@@ -35,6 +35,7 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
 const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
@@ -70,24 +71,6 @@ const AllProviders = nest(
   EditTaskDialogStateProvider,
   MoveTaskDialogStateProvider,
 )
-
-class ErrorBoundary extends React.Component<{ children: Function },
-  { error: Error | null, info: any },
-  > {
-  state = {
-    error: null,
-    info: null,
-  }
-
-  componentDidCatch(error, info) {
-    this.setState({ error, info })
-  }
-
-  render() {
-    const { children, ...otherProps } = this.props
-    return children({ ...this.state, ...otherProps })
-  }
-}
 
 function ErrorRoute(props) {
   console.log('props', props)
