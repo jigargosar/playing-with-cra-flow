@@ -117,13 +117,14 @@ export function setupGlobalStyles() {
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
     { transition: 'transform backgroundColor .15s ease-in' },
+    { transform: 'perspective(500px)' },
     {
       $nest: {
         '&:active': {
-          transform: 'perspective(500px) translateZ(-10px)',
+          transform: 'translateZ(-10px)',
         },
-        '&:not(:active)': {
-          transform: 'perspective(500px) translateZ(0px)',
+        '&:not(:focus)': {
+          transform: 'translateZ(10px)',
         },
         '&:not([disabled])': {
           ...pointer,

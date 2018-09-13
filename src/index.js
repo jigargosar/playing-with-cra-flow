@@ -5,6 +5,7 @@ import '@reach/dialog/styles.css'
 import App from './App'
 import { setupGlobalStyles } from './styles'
 import { forceRenderStyles } from './typestyle-exports'
+import { tap } from 'ramda'
 
 setupGlobalStyles()
 ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
@@ -16,5 +17,5 @@ ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
 registerServiceWorker()
 
 if (module.hot) {
-  module.hot.accept(console.error)
+  module.hot.accept(tap(console.error))
 }
