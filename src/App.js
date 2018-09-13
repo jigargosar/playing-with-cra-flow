@@ -87,7 +87,7 @@ const AllProviders = nest(
   MoveTaskDialogStateProvider,
 )
 
-function renderMainRoutes() {
+function renderMainRouter() {
   return (
     <CollectionConsumer>
       {({ tasks, tags }) => (
@@ -108,7 +108,7 @@ const App = () => (
         <div className={sidebarClass}>
           <Sidebar />
         </div>
-        <div className={contentClass}>{renderMainRoutes()}</div>
+        <div className={contentClass}>{renderMainRouter()}</div>
       </div>
       <EditTaskDialog />
       <MoveTaskDialog />
