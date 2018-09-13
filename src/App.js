@@ -65,6 +65,24 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
   minHeight: '100%',
 })
 
+function RenderTaskList({ title, tasks }) {
+  return (
+    <div>
+      <div
+        className={style({
+          fontSize: rem(1.5),
+          marginBottom: rem(1),
+        })}
+      >
+        {title}
+      </div>
+      <div className={style(verticallySpaced(rem(1.5)))}>
+        {tasks.map(task => <Task key={task.id} task={task} />)}
+      </div>
+    </div>
+  )
+}
+
 function renderTaskRoutes(tags, tasks) {
   return taskRouteFilters.map(([path, pred, titleFn]) => {
     return (
@@ -74,23 +92,7 @@ function renderTaskRoutes(tags, tasks) {
         render={props => {
           const pageTitle = titleFn({ ...props, tags })
           const finalTasks = filterTasks(pred(props), tasks)
-          return (
-            <div>
-              <div
-                className={style({
-                  fontSize: rem(1.5),
-                  marginBottom: rem(1),
-                })}
-              >
-                {pageTitle}
-              </div>
-              <div className={style(verticallySpaced(rem(1.5)))}>
-                {finalTasks.map(task => (
-                  <Task key={task.id} task={task} />
-                ))}
-              </div>
-            </div>
-          )
+          return RenderTaskList({ title: pageTitle, tasks: finalTasks })
         }}
       />
     )
