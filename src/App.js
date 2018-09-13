@@ -41,6 +41,10 @@ const taskRouteFilters = [
   ],
 ]
 
+function FilteredTaskList({ pred, tasks, ...otherProps }) {
+  return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+}
+
 function renderMainRoutes() {
   return (
     <CollectionConsumer>
@@ -49,16 +53,11 @@ function renderMainRoutes() {
           <Redirect from={'/'} to={'All'} noThrow />
           <TagList path={'Tags'} />
           <TaskList default path={'All'} {...{ title: 'All Tasks', tasks }} />
-          <Route
+          <FilteredTaskList
             path={'Done'}
-            render={() => (
-              <TaskList
-                {...{
-                  title: 'Done Tasks',
-                  tasks: filterTasks(donePred, tasks),
-                }}
-              />
-            )}
+            title="Done Tasks"
+            pred={donePred}
+            tasks={tasks}
           />
           {taskRouteFilters.map(([path, pred, titleFn]) => (
             <Route
