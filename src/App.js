@@ -66,29 +66,35 @@ const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
 })
 
 function renderTaskRoutes(tags, tasks) {
-  return taskRouteFilters.map(([path, pred, titleFn]) => (
-    <Route
-      key={path}
-      path={path}
-      render={props => (
-        <div>
-          <div
-            className={style({
-              fontSize: rem(1.5),
-              marginBottom: rem(1),
-            })}
-          >
-            {titleFn({ ...props, tags })}
-          </div>
-          <div className={style(verticallySpaced(rem(1.5)))}>
-            {filterTasks(pred(props), tasks).map(task => (
-              <Task key={task.id} task={task} />
-            ))}
-          </div>
-        </div>
-      )}
-    />
-  ))
+  return taskRouteFilters.map(([path, pred, titleFn]) => {
+    return (
+      <Route
+        key={path}
+        path={path}
+        render={props => {
+          const pageTitle = titleFn({ ...props, tags })
+          const finalTasks = filterTasks(pred(props), tasks)
+          return (
+            <div>
+              <div
+                className={style({
+                  fontSize: rem(1.5),
+                  marginBottom: rem(1),
+                })}
+              >
+                {pageTitle}
+              </div>
+              <div className={style(verticallySpaced(rem(1.5)))}>
+                {finalTasks.map(task => (
+                  <Task key={task.id} task={task} />
+                ))}
+              </div>
+            </div>
+          )
+        }}
+      />
+    )
+  })
 }
 
 const AllProviders = nest(
