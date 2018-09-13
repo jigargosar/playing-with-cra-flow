@@ -89,16 +89,25 @@ class ErrorBoundary extends React.Component<{ children: Function },
   }
 }
 
+function ErrorRoute(props) {
+  console.log('props', props)
+  return 'Internal Error: please file bug report, or try going back'
+}
+
 function renderMainRouter() {
   return (
     <CollectionConsumer>
       {({ tasks, tags }) => (
         <ErrorBoundary>
-          {() => (
-            <Router className={routerClass}>
-              <Redirect from={'/'} to={'All'} noThrow />
-              {taskRouteFilters.map(([path, pred, titleFn]) => {
-                return (
+          {({ error, info }) => {
+            return error ? (
+              <Router className={routerClass}>
+                <ErrorRoute default error={error} info={info} />
+              </Router>
+            ) : (
+              <Router className={routerClass}>
+                <Redirect from={'/'} to={'All'} noThrow />
+                {taskRouteFilters.map(([path, pred, titleFn]) => (
                   <Route
                     key={path}
                     path={path}
@@ -112,11 +121,11 @@ function renderMainRouter() {
                       )
                     }}
                   />
-                )
-              })}
-              <TagList path={'Tags'} />
-            </Router>
-          )}
+                ))}
+                <TagList path={'Tags'} />
+              </Router>
+            )
+          }}
         </ErrorBoundary>
       )}
     </CollectionConsumer>
