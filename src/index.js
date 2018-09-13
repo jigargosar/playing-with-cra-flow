@@ -5,8 +5,11 @@ import { forceRenderStyles } from 'typestyle'
 
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
 forceRenderStyles()
+ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
+  console.log('callback', ...args)
+  forceRenderStyles()
+})
 
 registerServiceWorker()
 
