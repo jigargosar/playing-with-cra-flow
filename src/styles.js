@@ -71,7 +71,9 @@ export const css = stylesheet({ antialiased })
 export function bg(backgroundColor: string | ColorHelper) {
   return isString(backgroundColor)
     ? { backgroundColor }
-    : { backgroundColor: bg.toHexString() }
+    : { backgroundColor: backgroundColor˚.
+  toHexString()
+}
 }
 
 export function fg(color: string | ColorHelper) {
@@ -115,7 +117,7 @@ export function setupGlobalStyles() {
     { margin: 0 },
     br2,
   )
-  const primaryColor = '#3490dc'
+  const primaryColor = color('#3490dc')
   cssRule(
     'button',
     tc,
