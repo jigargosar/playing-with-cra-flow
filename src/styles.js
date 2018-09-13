@@ -123,7 +123,7 @@ export function setupGlobalStyles() {
           transform: 'perspective(500px) translateZ(-10px)',
         },
         '&:not(:active)': {
-          transform: 'perspective(0) translateZ(0)',
+          transform: 'perspective(500px) translateZ(0px)',
         },
         '&:not([disabled])': {
           ...pointer,
