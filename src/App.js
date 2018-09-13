@@ -93,25 +93,31 @@ function renderMainRouter() {
   return (
     <CollectionConsumer>
       {({ tasks, tags }) => (
-        <Router className={routerClass}>
-          <Redirect from={'/'} to={'All'} />
-          {taskRouteFilters.map(([path, pred, titleFn]) => {
-            return (
-              <Route
-                key={path}
-                path={path}
-                render={props => {
-                  const pageTitle = titleFn({ ...props, tags })
-                  const finalTasks = filterTasks(pred(props), tasks)
-                  return (
-                    <TaskList {...{ title: pageTitle, tasks: finalTasks }} />
-                  )
-                }}
-              />
-            )
-          })}
-          <TagList path={'Tags'} />
-        </Router>
+        <ErrorBoundary>
+          {() => (
+            <Router className={routerClass}>
+              <Redirect from={'/'} to={'All'} noThrow />
+              {taskRouteFilters.map(([path, pred, titleFn]) => {
+                return (
+                  <Route
+                    key={path}
+                    path={path}
+                    render={props => {
+                      const pageTitle = titleFn({ ...props, tags })
+                      const finalTasks = filterTasks(pred(props), tasks)
+                      return (
+                        <TaskList
+                          {...{ title: pageTitle, tasks: finalTasks }}
+                        />
+                      )
+                    }}
+                  />
+                )
+              })}
+              <TagList path={'Tags'} />
+            </Router>
+          )}
+        </ErrorBoundary>
       )}
     </CollectionConsumer>
   )
