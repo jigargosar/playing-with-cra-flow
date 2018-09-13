@@ -71,7 +71,11 @@ export const css = stylesheet({ antialiased })
 export function bg(backgroundColor: string | ColorHelper) {
   return isString(backgroundColor)
     ? { backgroundColor }
-    : { backgroundColor: bg.toHexString }
+    : { backgroundColor: bg.toHexString() }
+}
+
+export function fg(color: string | ColorHelper) {
+  return isString(color) ? { color } : { color: color.toHexString() }
 }
 
 export function hover(...ext) {
