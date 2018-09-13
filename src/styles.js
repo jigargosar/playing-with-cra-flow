@@ -113,9 +113,10 @@ export function setupGlobalStyles() {
     tc,
     { lineHeight: 1.15 },
     { color: '#fff' },
-    extend(bg('#3490dc'), hover(bg('#2779bd'))),
+    bg('#3490dc'),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
+    { transition: 'backgroundColor .15s ease-in' },
     {
       $nest: {
         '&:not([disabled])': {
@@ -123,6 +124,9 @@ export function setupGlobalStyles() {
         },
         '&[disabled]': {
           ...bg('hsla(207, 71%, 53%, 0.36)'),
+        },
+        '&:hover': {
+          ...bg('#2779bd'),
         },
       },
     },
