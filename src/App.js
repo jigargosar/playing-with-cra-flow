@@ -5,7 +5,7 @@ import { Fragment } from 'react'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
-import { Route, Router } from './components/Router'
+import { Router } from './components/Router'
 import {
   CollectionConsumer,
   CollectionProvider,
@@ -28,14 +28,6 @@ import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { allPass } from 'ramda'
 
-const taskRouteFilters = [
-  [
-    'tag/:tagTitle/:tid',
-    ({ tid }) => allPass([activePred, t => t.tagIds.includes(tid)]),
-    ({ tid, tags }) => `#${findById(tid)(tags).title}`,
-  ],
-]
-
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
 }
@@ -54,17 +46,19 @@ CategoryTaskList.defaultProps = {
   category: 'InBasket',
 }
 
-function TagsTaskList({ category, tasks, ...otherProps }) {
+function TagsTaskList({ tid, tags, ...otherProps }) {
+  const tag = findById(tid)(tags)
   return (
-    <TaskList
-      title={`${category}`}
-      tasks={filterTasks(
-        allPass([activePred, t => t.category === category]),
-        tasks,
-      )}
+    <FilteredTaskList
+      title={`${tag.title}`}
+      pred={allPass([activePred, t => t.tagIds.includes(tid)])}
       {...otherProps}
     />
   )
+}
+
+TagsTaskList.defaultProps = {
+  tid: '',
 }
 
 function renderMainRoutes() {
@@ -82,17 +76,7 @@ function renderMainRoutes() {
             tasks={tasks}
           />
           <CategoryTaskList path={'category/:category'} tasks={tasks} />
-          {taskRouteFilters.map(([path, pred, titleFn]) => (
-            <Route
-              key={path}
-              path={path}
-              render={props => {
-                const pageTitle = titleFn({ ...props, tags })
-                const finalTasks = filterTasks(pred(props), tasks)
-                return <TaskList {...{ title: pageTitle, tasks: finalTasks }} />
-              }}
-            />
-          ))}
+          <TagsTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
         </Router>
       )}
     </CollectionConsumer>
