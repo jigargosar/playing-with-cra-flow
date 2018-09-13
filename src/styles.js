@@ -11,7 +11,8 @@ import {
   setupPage,
   stylesheet,
 } from './typestyle-exports'
-import { color } from 'csx'
+import { color, viewHeight, viewWidth } from 'csx'
+import { height, width } from 'csstips'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
@@ -165,3 +166,7 @@ export const dim2Color = color('#000')
   .toHSLA()
   .lighten(0.25)
   .toString()
+export const sizeViewport100 = extend(
+  height(viewHeight(100)),
+  width(viewWidth(100)),
+)

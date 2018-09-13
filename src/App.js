@@ -12,18 +12,16 @@ import {
 } from './components/CollectionContext'
 import {
   flex,
-  height,
   horizontal,
   padding,
   scroll,
   someChildWillScroll,
-  width,
 } from 'csstips'
-import { rem, viewHeight, viewWidth } from 'csx'
+import { rem } from 'csx'
 import { allPass } from 'ramda'
 import { findById } from './models/Collection'
-import { extend, style } from './typestyle-exports'
-import { bg, nearWhiteColor } from './styles'
+import { style } from './typestyle-exports'
+import { bg, nearWhiteColor, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
@@ -35,8 +33,6 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
-
-const sizeViewport100 = extend(height(viewHeight(100)), width(viewWidth(100)))
 
 const taskRouteFilters = [
   ['All', props => () => true, props => 'All Tasks'],
@@ -52,24 +48,6 @@ const taskRouteFilters = [
     ({ tid, tags }) => `#${findById(tid)(tags).title}`,
   ],
 ]
-
-const containerClass = style(
-  horizontal,
-  someChildWillScroll,
-  sizeViewport100,
-  bg(nearWhiteColor),
-)
-const contentClass = style(flex, scroll)
-const sidebarClass = style(scroll, { minWidth: 225 })
-const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
-  minHeight: '100%',
-})
-
-const AllProviders = nest(
-  CollectionProvider,
-  EditTaskDialogStateProvider,
-  MoveTaskDialogStateProvider,
-)
 
 function renderMainRoutes() {
   return (
@@ -94,6 +72,25 @@ function renderMainRoutes() {
     </CollectionConsumer>
   )
 }
+
+const containerClass = style(
+  horizontal,
+  someChildWillScroll,
+  sizeViewport100,
+  bg(nearWhiteColor),
+)
+const contentClass = style(flex, scroll)
+const sidebarClass = style(scroll, { minWidth: 225 })
+
+const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
+  minHeight: '100%',
+})
+
+const AllProviders = nest(
+  CollectionProvider,
+  EditTaskDialogStateProvider,
+  MoveTaskDialogStateProvider,
+)
 
 const App = () => (
   <AllProviders>
