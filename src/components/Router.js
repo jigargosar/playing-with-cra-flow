@@ -6,6 +6,7 @@ export const Route = ({ render, ...otherProps }) => {
   try {
     return render(otherProps)
   } catch (e) {
+    console.warn(e)
     return 'Error'
   }
 }
