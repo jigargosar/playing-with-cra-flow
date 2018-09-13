@@ -116,7 +116,7 @@ export function setupGlobalStyles() {
     bg('#3490dc'),
     padding(rem(0.5), rem(1)),
     fontWeightNormal,
-    { transition: 'backgroundColor .15s ease-in' },
+    { transition: 'transform backgroundColor .15s ease-in' },
     {
       $nest: {
         '&:active': {
