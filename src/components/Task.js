@@ -15,7 +15,7 @@ import {
   selfStretch,
   style,
 } from '../typestyle-exports'
-import { black25, black50, fg, pointer, strike } from '../styles'
+import { blackA, fg, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { showEditTaskDialog } from './EditTaskDialog'
@@ -34,7 +34,7 @@ const hasHiddenChildren = {
 
 function renderTags(task) {
   return (
-    <div className={style(fg(black25), fz.xs, { lineHeight: 1.5 })}>
+    <div className={style(fg(blackA(0.25)), fz.xs, { lineHeight: 1.5 })}>
       <CollectionConsumer>
         {({ tags }) =>
           intersperse(', ')(
@@ -54,7 +54,7 @@ function renderCategory(task) {
       {props =>
         props.match ? null : (
           <LinkToCategory
-            className={style(fz.sm, fg(black50))}
+            className={style(fz.sm, fg(blackA(0.5)))}
             category={task.category}
           />
         )
