@@ -55,18 +55,21 @@ CategoryTaskList.defaultProps = {
   category: 'InBasket',
 }
 
-function TagTaskList({ tid, tagTitle, tags, ...otherProps }) {
-  return findById(tid)(tags)
-    .map(tag => (
-      <FilteredTaskList
-        title={`${tag.title}`}
-        pred={allPass([activePred, t => t.tagIds.includes(tid)])}
-        {...otherProps}
-      />
-    ))
-    .getOrElse(
-      <ErrorMessage>{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>,
-    )
+function TagTaskList({ tid, tagTitle, ...otherProps }) {
+  return renderWithCollections(({ tags }) =>
+    findById(tid)(tags)
+      .map(tag => (
+        <FilteredTaskList
+          title={`${tag.title}`}
+          pred={allPass([activePred, t => t.tagIds.includes(tid)])}
+          {...otherProps}
+        />
+      ))
+      .getOrElse(
+        <ErrorMessage
+        >{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>,
+      ),
+  )
 }
 
 TagTaskList.defaultProps = {
@@ -83,17 +86,17 @@ const renderWithCollections = render => (
 )
 
 function renderMainRoutes() {
-  return renderWithCollections(({ tags }) => (
+  return (
     <Router className={routerClass}>
       <Redirect from={'/'} to={'all'} noThrow />
       <TagList path={'tag'} />
       <FilteredTaskList path={'all'} {...{ title: 'All Tasks', pred: T }} />
       <FilteredTaskList path={'done'} title="Done Tasks" pred={donePred} />
       <CategoryTaskList path={'category/:category'} />
-      <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} />
+      <TagTaskList path={'tag/:tagTitle/:tid'} />
       <NotFound default />
     </Router>
-  ))
+  )
 }
 
 const containerClass = style(
