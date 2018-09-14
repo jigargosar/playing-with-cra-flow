@@ -18,6 +18,9 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
   hotAcceptSelf(e => {
     console.log(`module.hot.accept`, e)
+    hotDispose(data => {
+      data.skipClearConsole = true
+    }, module)
     throw e
   }, module)
 
@@ -25,8 +28,14 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
     nullableToMaybe(document.getElementById('root'))
       .map(el =>
         ReactDOM.render(<Comp />, el, () => {
-          console.clear()
-          console.log('Render Complete')
+          if (
+            module.hot &&
+            module.hot.data &&
+            !module.hot.data.skipClearConsole
+          ) {
+            console.clear()
+            console.log('Render Complete')
+          }
           resolve()
         }),
       )
