@@ -31,10 +31,10 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
       },
       module,
     )
-  }
-  if (module.hot && shouldClearConsoleOnHMR()) {
-    console.clear()
-    console.log('[HMR]')
+    if (shouldClearConsoleOnHMR()) {
+      console.clear()
+    }
+    console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
   }
 
   hotAcceptSelf(e => {
