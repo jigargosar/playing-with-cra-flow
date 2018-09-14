@@ -15,17 +15,18 @@ promise.catch(console.error)
 
 registerServiceWorker()
 
+function toggleClearConsoleOnHMR() {
+  const clearOnHMRKey = 'clearConsoleOnHMR'
+  storageSet(clearOnHMRKey, !Boolean(storageGet(clearOnHMRKey, true)))
+  console.log(`clearConsoleOnHMR:`, storageGet(clearOnHMRKey, null))
+}
+
 addWindowEventListener(
   'keydown',
   e => {
     // console.log(`key`, e.key)
     if (e.key === '`') {
-      const clearOnHMRKey = 'clearOnHMR'
-      storageSet(clearOnHMRKey, !Boolean(storageGet(clearOnHMRKey, true)))
-      console.log(
-        `clearOnHMR:`,
-        storageGet(clearOnHMRKey, null),
-      )
+      toggleClearConsoleOnHMR()
     }
   },
   module,
