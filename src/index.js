@@ -15,9 +15,9 @@ import { addWindowEventListener } from './disposables'
 setupGlobalStyles()
 const elementById = document.getElementById('root')
 if (elementById) {
-  ReactDOM.render(<App />, elementById, (...args) => {
+  ReactDOM.render(<App />, elementById, () => {
     console.clear()
-    console.log('Render Complete', ...args)
+    console.log('Render Complete')
     forceRenderStyles()
   })
 } else {
