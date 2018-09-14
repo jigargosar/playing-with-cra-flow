@@ -69,11 +69,11 @@ function renderMainRoutes() {
     <CollectionConsumer>
       {({ tasks, tags }) => (
         <Router className={routerClass}>
-          <Redirect from={'/'} to={'All'} noThrow />
+          <Redirect from={'/'} to={'all'} noThrow />
           <TagList path={'tag'} />
-          <TaskList default path={'All'} {...{ title: 'All Tasks', tasks }} />
+          <TaskList default path={'all'} {...{ title: 'All Tasks', tasks }} />
           <FilteredTaskList
-            path={'Done'}
+            path={'done'}
             title="Done Tasks"
             pred={donePred}
             tasks={tasks}
