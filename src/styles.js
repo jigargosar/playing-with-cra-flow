@@ -85,6 +85,23 @@ export function hover(...ext) {
   }
 }
 
+export const dimColor = color('#000')
+  .toHSLA()
+  .lighten(0.5)
+  .toString()
+export const nearWhiteColor = color('#fff')
+  .toHSLA()
+  .darken(0.05)
+  .toString()
+export const dim2Color = color('#000')
+  .toHSLA()
+  .lighten(0.25)
+  .toString()
+export const sizeViewport100 = extend(
+  height(viewHeight(100)),
+  width(viewWidth(100)),
+)
+
 /**
  * Recommended Page setup
  * - Sets up the body to be full size
@@ -195,20 +212,3 @@ export function setupGlobalStyles() {
     border(0, 0, null, null),
   )
 }
-
-export const dimColor = color('#000')
-  .toHSLA()
-  .lighten(0.5)
-  .toString()
-export const nearWhiteColor = color('#fff')
-  .toHSLA()
-  .darken(0.05)
-  .toString()
-export const dim2Color = color('#000')
-  .toHSLA()
-  .lighten(0.25)
-  .toString()
-export const sizeViewport100 = extend(
-  height(viewHeight(100)),
-  width(viewWidth(100)),
-)
