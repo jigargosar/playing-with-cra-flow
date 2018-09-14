@@ -86,6 +86,10 @@ const renderWithCollections = render => (
 )
 
 function renderMainRoutes() {
+  const routerClass = style(padding(rem(2), rem(1)), bg(white), {
+    minHeight: '100%',
+  })
+
   return (
     <Router className={routerClass}>
       <Redirect from={'/'} to={'all'} noThrow />
@@ -98,10 +102,6 @@ function renderMainRoutes() {
     </Router>
   )
 }
-
-const routerClass = style(padding(rem(2), rem(1)), bg(white), {
-  minHeight: '100%',
-})
 
 const AllProviders = nest(
   CollectionProvider,
