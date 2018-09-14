@@ -1,14 +1,13 @@
 // @flow
 import React from 'react'
 
-type Props = { message: any }
+type Props = { children: any }
 
-export function Error({ message }: Props) {
-  console.log('props', message)
+export function Error({ children }: Props) {
   return (
     <div>
       <h3>Error</h3>
-      <p>{message}</p>
+      <p>{children}</p>
       <p>try going back or reload page</p>
     </div>
   )

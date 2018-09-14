@@ -56,12 +56,16 @@ function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
         {...otherProps}
       />
     ))
-    .getOrElse(<Error message={`Tag "${tagTitle}" not found. (id:${tid})`} />)
+    .getOrElse(<Error>{`Tag "${tagTitle}" not found. (id:${tid})`}</Error>)
 }
 
 TagsTaskList.defaultProps = {
   tid: '',
   tagTitle: '',
+}
+
+function NewComponent() {
+  return <Error>404</Error>
 }
 
 function renderMainRoutes() {
@@ -71,7 +75,7 @@ function renderMainRoutes() {
         <Router className={routerClass}>
           <Redirect from={'/'} to={'all'} noThrow />
           <TagList path={'tag'} />
-          <TaskList default path={'all'} {...{ title: 'All Tasks', tasks }} />
+          <TaskList path={'all'} {...{ title: 'All Tasks', tasks }} />
           <FilteredTaskList
             path={'done'}
             title="Done Tasks"
@@ -80,6 +84,7 @@ function renderMainRoutes() {
           />
           <CategoryTaskList path={'category/:category'} tasks={tasks} />
           <TagsTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
+          <NewComponent default />
         </Router>
       )}
     </CollectionConsumer>
