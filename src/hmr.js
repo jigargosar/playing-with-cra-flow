@@ -1,9 +1,7 @@
 // @flow
-import {
-  shouldClearConsoleOnHMR,
-  toggleClearConsoleOnHMR,
-} from './clearConsoleOnHMR'
+
 import { addWindowEventListener } from './disposables'
+import { storageGet, storageSet } from './components/StorageSet'
 
 export const hotDispose = (disposer: Function, module: Object) => {
   if (module.hot) {
@@ -14,6 +12,14 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
   if (module.hot) {
     module.hot.accept(onError)
   }
+}
+
+const clearConsoleOnHMRKey = 'clearConsoleOnHMR'
+export const shouldClearConsoleOnHMR = () =>
+  storageGet(clearConsoleOnHMRKey, true)
+
+export function toggleClearConsoleOnHMR() {
+  storageSet(clearConsoleOnHMRKey, !Boolean(shouldClearConsoleOnHMR()))
 }
 
 function checkAndClearConsole() {
