@@ -1,6 +1,5 @@
 // @flow
 
-import React from 'react'
 import {
   shouldClearConsoleOnHMR,
   toggleClearConsoleOnHMR,
@@ -44,4 +43,3 @@ export function hmrSetup(module: Object) {
     throw e
   }, module)
 }
-
