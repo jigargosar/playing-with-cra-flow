@@ -18,9 +18,18 @@ ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
 
 registerServiceWorker()
 
+window.addEventListener('keydown', keyDownHandler)
+
+function keyDownHandler(e) {
+  console.log(`e`, e)
+}
+
 if (module.hot) {
   module.hot.accept(e => {
     console.log(`module.hot.accept`, e)
     throw e
+  })
+  module.hot.dispose(() => {
+    window.removeEventListener('keydown', keyDownHandler)
   })
 }
