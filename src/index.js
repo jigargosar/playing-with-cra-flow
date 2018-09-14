@@ -4,7 +4,7 @@ import '@reach/dialog/styles.css'
 import { setupGlobalStyles } from './styles'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
-import { hotAcceptSelf, renderRoot } from './hmr'
+import { renderRoot } from './hmr'
 import { addWindowEventListener } from './disposables'
 
 setupGlobalStyles()
@@ -20,8 +20,3 @@ addWindowEventListener(
   },
   module,
 )
-
-hotAcceptSelf(e => {
-  console.log(`module.hot.accept`, e)
-  throw e
-}, module)
