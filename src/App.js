@@ -76,30 +76,30 @@ function NotFound() {
   return <ErrorMessage>404</ErrorMessage>
 }
 
+const renderWithCollections = render => (
+  <CollectionConsumer>{render}</CollectionConsumer>
+)
+
 function renderMainRoutes() {
-  return (
-    <CollectionConsumer>
-      {({ tasks, tags }) => (
-        <Router className={routerClass}>
-          <Redirect from={'/'} to={'all'} noThrow />
-          <TagList path={'tag'} />
-          <FilteredTaskList
-            path={'all'}
-            {...{ title: 'All Tasks', tasks, pred: T }}
-          />
-          <FilteredTaskList
-            path={'done'}
-            title="Done Tasks"
-            pred={donePred}
-            tasks={tasks}
-          />
-          <CategoryTaskList path={'category/:category'} tasks={tasks} />
-          <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
-          <NotFound default />
-        </Router>
-      )}
-    </CollectionConsumer>
-  )
+  return renderWithCollections(({ tasks, tags }) => (
+    <Router className={routerClass}>
+      <Redirect from={'/'} to={'all'} noThrow />
+      <TagList path={'tag'} />
+      <FilteredTaskList
+        path={'all'}
+        {...{ title: 'All Tasks', tasks, pred: T }}
+      />
+      <FilteredTaskList
+        path={'done'}
+        title="Done Tasks"
+        pred={donePred}
+        tasks={tasks}
+      />
+      <CategoryTaskList path={'category/:category'} tasks={tasks} />
+      <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
+      <NotFound default />
+    </Router>
+  ))
 }
 
 const containerClass = style(
