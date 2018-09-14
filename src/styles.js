@@ -81,13 +81,7 @@ export function fg(color: string | ColorHelper) {
   return isString(color) ? { color } : { color: color.toString() }
 }
 
-export function hover(...ext) {
-  return {
-    $nest: {
-      '&:hover': extend(...ext),
-    },
-  }
-}
+export const hover = (...ext) => ({ $nest: { '&:hover': extend(...ext) } })
 
 const black = rgba(0, 0, 0, 1)
 const white = black.invert()
