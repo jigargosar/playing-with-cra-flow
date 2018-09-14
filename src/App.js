@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import { Fragment } from 'react'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
@@ -121,16 +120,14 @@ const AllProviders = nest(
 
 const App = () => (
   <AllProviders>
-    <Fragment>
-      <div className={containerClass}>
-        <div className={sidebarClass}>
-          <Sidebar />
-        </div>
-        <div className={contentClass}>{renderMainRoutes()}</div>
+    <div className={containerClass}>
+      <div className={sidebarClass}>
+        <Sidebar />
       </div>
-      <EditTaskDialog />
-      <MoveTaskDialog />
-    </Fragment>
+      <div className={contentClass}>{renderMainRoutes()}</div>
+    </div>
+    <EditTaskDialog />
+    <MoveTaskDialog />
   </AllProviders>
 )
 
