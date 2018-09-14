@@ -103,19 +103,16 @@ export function whiteA(alpha) {
 export const black25 = blackA(0.25)
 export const black50 = blackA(0.5)
 export const white05 = whiteA(0.05)
-console.log(`white05.toString()`, white05.toString())
-console.log(`white.toHexString()`, white.toString())
-console.log(`black50.toHexString()`, black50.toString())
-export const sizeViewport100 = extend(
-  height(viewHeight(100)),
-  width(viewWidth(100)),
-)
-
 export function gray(darkenBy) {
   return white.darken(darkenBy)
 }
 
 export const gray25 = gray(0.25)
+
+export const sizeViewport100 = extend(
+  height(viewHeight(100)),
+  width(viewWidth(100)),
+)
 
 /**
  * Recommended Page setup
