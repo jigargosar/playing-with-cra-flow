@@ -3,7 +3,6 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { nullableToMaybe } from 'folktale/conversions'
-import * as selectn from 'selectn'
 
 export const hotDispose = (disposer: Function, module: Object) => {
   if (module.hot) {
@@ -17,11 +16,7 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
 }
 
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
-  if (
-    module.hot &&
-    module.hot.data &&
-    !selectn('hot.data.skipClearConsole', module)
-  ) {
+  if (module.hot && module.hot.data) {
     console.clear()
     console.log('[HMR]')
   }
@@ -31,7 +26,6 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
     hotDispose(data => {
       data.skipClearConsole = true
     }, module)
-    throw e
   }, module)
 
   return new Promise((resolve, reject) => {

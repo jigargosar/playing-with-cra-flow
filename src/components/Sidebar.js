@@ -11,6 +11,7 @@ type Props = {}
 
 export class Sidebar extends Component<Props> {
   render() {
+
     return (
       <div className={containerStyle}>
         {categories.map(category => (
