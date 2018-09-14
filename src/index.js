@@ -9,7 +9,8 @@ import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import { forceRenderStyles } from 'typestyle/lib'
-import { hotAcceptSelf, hotDispose } from './hmr'
+import { hotAcceptSelf } from './hmr'
+import { addWindowEventListener } from './disposables'
 
 setupGlobalStyles()
 const elementById = document.getElementById('root')
@@ -25,15 +26,13 @@ if (elementById) {
 
 registerServiceWorker()
 
-window.addEventListener('keydown', keyDownHandler)
-
-function keyDownHandler(e) {
-  console.log(`e`, e)
-}
-
-hotDispose(() => {
-  window.removeEventListener('keydown', keyDownHandler)
-}, module)
+addWindowEventListener(
+  'keydown',
+  e => {
+    console.log(`e`, e)
+  },
+  module,
+)
 
 hotAcceptSelf(e => {
   console.log(`module.hot.accept`, e)
