@@ -4,8 +4,9 @@ import '@reach/dialog/styles.css'
 import { setupGlobalStyles } from './styles'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle/lib'
-import { hmrSetup, renderRootApp } from './hmr'
+import { hmrSetup } from './hmr'
 import App from './App'
+import { renderRootApp } from './react-helpers'
 
 setupGlobalStyles()
 renderRootApp(App)
