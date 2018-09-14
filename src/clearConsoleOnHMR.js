@@ -1,9 +1,9 @@
 import { storageGet, storageSet } from './components/StorageSet'
 
-const clearOnHMRKey = 'clearConsoleOnHMR'
+const clearConsoleOnHMR = 'clearConsoleOnHMR'
 
-export const shouldClearConsoleOnHMR = () => storageGet(clearOnHMRKey, true)
+export const shouldClearConsoleOnHMR = () => storageGet(clearConsoleOnHMR, true)
 export function toggleClearConsoleOnHMR() {
-  storageSet(clearOnHMRKey, !Boolean(shouldClearConsoleOnHMR()))
+  storageSet(clearConsoleOnHMR, !Boolean(shouldClearConsoleOnHMR()))
   // console.log(`clearConsoleOnHMR:`, storageGet(clearOnHMRKey, null))
 }
