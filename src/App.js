@@ -6,8 +6,8 @@ import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
 import { Router } from './components/Router'
 import {
-  CollectionConsumer,
   CollectionProvider,
+  renderWithCollections,
 } from './components/CollectionContext'
 import {
   flex,
@@ -80,10 +80,6 @@ TagTaskList.defaultProps = {
 function NotFound() {
   return <ErrorMessage>404</ErrorMessage>
 }
-
-const renderWithCollections = render => (
-  <CollectionConsumer>{render}</CollectionConsumer>
-)
 
 function renderMainRoutes() {
   const routerClass = style(padding(rem(2), rem(1)), bg(white), {

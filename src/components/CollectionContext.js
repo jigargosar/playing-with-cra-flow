@@ -55,3 +55,6 @@ export const CollectionProvider = ({ children }) => (
     )}
   </Collections>
 )
+export const renderWithCollections = render => (
+  <CollectionConsumer>{render}</CollectionConsumer>
+)
