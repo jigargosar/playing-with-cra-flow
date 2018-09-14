@@ -23,7 +23,7 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
     !selectn('hot.data.skipClearConsole', module)
   ) {
     console.clear()
-    console.log('Render Complete')
+    console.log('[HMR]')
   }
 
   hotAcceptSelf(e => {
