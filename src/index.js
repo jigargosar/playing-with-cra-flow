@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import { renderRoot } from './hmr'
 import { addWindowEventListener } from './disposables'
+import { storageGet, storageSet } from './components/StorageSet'
 
 setupGlobalStyles()
 
@@ -20,7 +21,8 @@ addWindowEventListener(
     const key = e.key
     console.log(`key`, key)
     if (key === '`') {
-      localStorage.getItem('')
+      const clearOnHMR = storageGet('clearOnHMR', true)
+      storageSet('clearOnHMR', !Boolean(clearOnHMR))
     }
   },
   module,
