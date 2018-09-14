@@ -1,5 +1,4 @@
-export { compose, always, allPass } from 'ramda'
-export { compose, always, allPass } from 'ramda-adjunct'
+// export { compose, always, allPass } from 'ramda'
 
 export {
   allEqual,
@@ -139,4 +138,4 @@ export {
   weave,
   weaveLazy,
   Y,
-} from 'ramda-adjunct'
+} from 'ramda-adjunct/'

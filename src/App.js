@@ -32,9 +32,9 @@ import {
 } from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
-import { allPass } from 'ramda'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
+import { allPass } from 'ramda'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
@@ -64,7 +64,8 @@ function TagTaskList({ tid, tagTitle, tags, ...otherProps }) {
       />
     ))
     .getOrElse(
-      <ErrorMessage>{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>)
+      <ErrorMessage>{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>,
+    )
 }
 
 TagTaskList.defaultProps = {
