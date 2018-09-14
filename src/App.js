@@ -20,7 +20,7 @@ import {
 import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
-import { bg, gray, sizeViewport100, white } from './styles'
+import { bg, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
@@ -34,6 +34,7 @@ import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { allPass } from 'ramda'
 import { Error } from './components/Error'
+import { gray, white } from './colors'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />

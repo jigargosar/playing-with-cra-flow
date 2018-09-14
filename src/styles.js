@@ -6,7 +6,7 @@ import {
   rem,
   stylesheet,
 } from './typestyle-exports'
-import { color, ColorHelper, rgba, viewHeight, viewWidth } from 'csx'
+import { color, ColorHelper, viewHeight, viewWidth } from 'csx/lib'
 import {
   border,
   BoxUnit,
@@ -15,8 +15,8 @@ import {
   height,
   margin,
   width,
-} from 'csstips'
-import { isString } from 'ramda-adjunct'
+} from 'csstips/lib'
+import isString from 'ramda-adjunct/lib/isString'
 import { mergeAll } from 'ramda'
 
 export const ttu = { textTransform: 'uppercase' }
@@ -83,13 +83,6 @@ export function fg(color: string | ColorHelper) {
 
 export const hover = (...ext) => ({ $nest: { '&:hover': extend(...ext) } })
 
-export const black = rgba(0, 0, 0, 1)
-export const white = black.invert()
-
-export const blackA = alpha => black.fade(alpha)
-export const whiteA = alpha => white.fade(alpha)
-export const gray = darkenBy => white.darken(darkenBy)
-
 export const sizeViewport100 = extend(
   height(viewHeight(100)),
   width(viewWidth(100)),
@@ -139,7 +132,9 @@ export function setupPage(rootSelector: string) {
 const primaryColor = color('#3490dc')
 
 export const sheet = stylesheet({
-  antialiased, button: mergeAll([tc,
+  antialiased,
+  button: mergeAll([
+    tc,
     { lineHeight: 1.15 },
     { color: '#fff' },
     bg(primaryColor),
@@ -161,10 +156,11 @@ export const sheet = stylesheet({
           },
         },
         '&[disabled]': {
-          ...bg(primaryColor.fade(.5)),
+          ...bg(primaryColor.fade(0.5)),
         },
       },
-    }]),
+    },
+  ]),
 })
 
 export function setupGlobalStyles() {
@@ -201,7 +197,7 @@ export function setupGlobalStyles() {
           },
         },
         '&[disabled]': {
-          ...bg(primaryColor.fade(.5)),
+          ...bg(primaryColor.fade(0.5)),
         },
       },
     },

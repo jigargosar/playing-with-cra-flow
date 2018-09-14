@@ -15,11 +15,12 @@ import {
   selfStretch,
   style,
 } from '../typestyle-exports'
-import { blackA, fg, pointer, strike } from '../styles'
+import { fg, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { showEditTaskDialog } from './EditTaskDialog'
 import { showMoveTaskDialog } from './MoveTaskDialog'
+import { blackA } from '../colors'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
