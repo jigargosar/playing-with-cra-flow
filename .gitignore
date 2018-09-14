@@ -23,3 +23,5 @@ yarn-error.log*
 .docz/
 .cache/
 dist/
+chrome-overrides/
+flow-typed/

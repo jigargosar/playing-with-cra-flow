@@ -7,7 +7,8 @@ export {
   stylesheet,
   forceRenderStyles,
   reinit,
-} from 'typestyle'
+} from 'typestyle/lib'
+
 export {
   wrap,
   newLayer,
@@ -60,7 +61,7 @@ export {
   attachToRight,
   attachToTop,
   betweenJustified,
-} from 'csstips'
+} from 'csstips/lib'
 export {
   color,
   params,
@@ -71,4 +72,4 @@ export {
   hsla,
   rgb,
   rgba,
-} from 'csx'
+} from 'csx/lib'
