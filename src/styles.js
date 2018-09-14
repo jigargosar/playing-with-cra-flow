@@ -89,7 +89,8 @@ export function hover(...ext) {
   }
 }
 
-export const dimColor = color('#000')
+const black = color('#000')
+export const dimColor = black
   .toHSLA()
   .lighten(0.5)
   .toString()
@@ -97,7 +98,7 @@ export const nearWhiteColor = color('#fff')
   .toHSLA()
   .darken(0.05)
   .toString()
-export const dim2Color = color('#000')
+export const dim2Color = black
   .toHSLA()
   .lighten(0.25)
   .toString()
