@@ -30,8 +30,6 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
           resolve()
         }),
       )
-      .orElse(() => {
-        reject(new Error('root not found'))
-      })
+      .orElse(() => reject(new Error('root not found')))
   })
 }
