@@ -3,6 +3,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { nullableToMaybe } from 'folktale/conversions'
+import * as selectn from 'selectn'
 
 export const hotDispose = (disposer: Function, module: Object) => {
   if (module.hot) {
@@ -19,7 +20,7 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
   if (
     module.hot &&
     module.hot.data &&
-    !module.hot.data.skipClearConsole
+    !selectn('hot.data.skipClearConsole', module)
   ) {
     console.clear()
     console.log('Render Complete')
@@ -35,9 +36,7 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
 
   return new Promise((resolve, reject) => {
     nullableToMaybe(document.getElementById('root'))
-      .map(el =>
-        ReactDOM.render(<Comp />, el, resolve),
-      )
+      .map(el => ReactDOM.render(<Comp />, el, resolve))
       .orElse(() => reject(new Error('root not found')))
   })
 }
