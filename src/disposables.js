@@ -8,7 +8,8 @@ export const addWindowEventListener = (
   module: Object,
 ) => {
   window.addEventListener(eventName, listener)
-  const disposer = once(() => window.removeEventListener(eventName, listener))
-  hotDispose(disposer, module)
-  return disposer
+  return hotDispose(
+    once(() => window.removeEventListener(eventName, listener)),
+    module,
+  )
 }
