@@ -27,7 +27,7 @@ import {
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { allPass } from 'ramda'
-import * as selectN from 'selectn'
+import { Error } from './components/Error'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
@@ -47,19 +47,23 @@ CategoryTaskList.defaultProps = {
   category: 'InBasket',
 }
 
-function TagsTaskList({ tid, tags, ...otherProps }) {
+function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
   const tag = findById(tid)(tags)
-  return (
-    <FilteredTaskList
-      title={`${selectN('title', tag)}`}
-      pred={allPass([activePred, t => t.tagIds.includes(tid)])}
-      {...otherProps}
-    />
-  )
+  return tag.matchWith({
+    Just: ({ value: tag }) => (
+      <FilteredTaskList
+        title={`${tag.title}`}
+        pred={allPass([activePred, t => t.tagIds.includes(tid)])}
+        {...otherProps}
+      />
+    ),
+    Nothing: () => <Error message={`Tag ${tagTitle}/${tid} not found`} />,
+  })
 }
 
 TagsTaskList.defaultProps = {
   tid: '',
+  tagTitle: '',
 }
 
 function renderMainRoutes() {
