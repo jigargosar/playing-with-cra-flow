@@ -25,7 +25,6 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
     addWindowEventListener(
       'keydown',
       e => {
-        // console.log(`key`, e.key)
         if (e.key === '`') {
           toggleClearConsoleOnHMR()
         }
