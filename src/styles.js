@@ -6,7 +6,7 @@ import {
   rem,
   stylesheet,
 } from './typestyle-exports'
-import { color, ColorHelper, viewHeight, viewWidth } from 'csx'
+import { color, ColorHelper, rgba, viewHeight, viewWidth } from 'csx'
 import {
   border,
   BoxUnit,
@@ -74,11 +74,11 @@ export const css = stylesheet({ antialiased })
 export function bg(backgroundColor: string | ColorHelper) {
   return isString(backgroundColor)
     ? { backgroundColor }
-    : { backgroundColor: backgroundColor.toHexString() }
+    : { backgroundColor: backgroundColor.toString() }
 }
 
 export function fg(color: string | ColorHelper) {
-  return isString(color) ? { color } : { color: color.toHexString() }
+  return isString(color) ? { color } : { color: color.toString() }
 }
 
 export function hover(...ext) {
@@ -89,10 +89,13 @@ export function hover(...ext) {
   }
 }
 
-const black = color('#000')
-export const black25 = black.lighten(0.25)
-export const black50 = black.lighten(0.5)
-export const white05 = color('#fff').darken(0.05)
+const black = rgba(0, 0, 0, 1)
+export const black25 = black.fade(0.25)
+export const black50 = black.fade(0.5)
+const white = black.invert()
+export const white05 = white.fade(0.5)
+console.log(`white.toHexString()`, white.toString())
+console.log(`black50.toHexString()`, black50.toString())
 export const sizeViewport100 = extend(
   height(viewHeight(100)),
   width(viewWidth(100)),
