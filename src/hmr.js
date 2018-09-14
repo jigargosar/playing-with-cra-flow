@@ -15,7 +15,12 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
   }
 }
 
-export function renderRoot(Comp: Function): Promise<any> {
+export function renderRoot(Comp: Function, module: Object): Promise<any> {
+  hotAcceptSelf(e => {
+    console.log(`module.hot.accept`, e)
+    throw e
+  }, module)
+
   return new Promise((resolve, reject) => {
     nullableToMaybe(document.getElementById('root'))
       .map(el =>

@@ -9,7 +9,7 @@ import { addWindowEventListener } from './disposables'
 
 setupGlobalStyles()
 
-renderRoot(App).catch(console.error)
+renderRoot(App, module).catch(console.error)
 
 registerServiceWorker()
 
