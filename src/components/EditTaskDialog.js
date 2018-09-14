@@ -3,7 +3,7 @@ import Component from '@reach/component-component'
 import * as React from 'react'
 import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog'
-import { CollectionConsumer } from './CollectionContext'
+import { renderWithCollections } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
 import { noop } from 'ramda-adjunct'
 import type { TaskModel } from '../models/Task'
@@ -51,35 +51,33 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
   const defaultState = { isOpen: false, task: {}, title: '' }
   return (
     <Component getInitialState={() => storageGet(stateName, defaultState)}>
-      {({ state, setState }) => (
-        <CollectionConsumer>
-          {({ updateTask }) => {
-            const { task, isOpen, title } = state
-            const onDismiss = () => setState({ isOpen: false })
-            const startEditingTask = task => () =>
-              setState({ isOpen: true, task, title: task.title })
-            const onOk = () => {
-              updateTask({ title }, task)
-              onDismiss()
-            }
-            const onTitleChange = e => setState({ title: e.target.value })
-            const childProps = {
-              onDismiss,
-              isOpen,
-              title,
-              onTitleChange,
-              onOk,
-              startEditingTask,
-            }
-            return (
-              <Fragment>
-                <StorageSet name={stateName} value={state} />
-                <Provider value={childProps}>{children}</Provider>
-              </Fragment>
-            )
-          }}
-        </CollectionConsumer>
-      )}
+      {({ state, setState }) =>
+        renderWithCollections(({ updateTask }) => {
+          const { task, isOpen, title } = state
+          const onDismiss = () => setState({ isOpen: false })
+          const startEditingTask = task => () =>
+            setState({ isOpen: true, task, title: task.title })
+          const onOk = () => {
+            updateTask({ title }, task)
+            onDismiss()
+          }
+          const onTitleChange = e => setState({ title: e.target.value })
+          const childProps = {
+            onDismiss,
+            isOpen,
+            title,
+            onTitleChange,
+            onOk,
+            startEditingTask,
+          }
+          return (
+            <Fragment>
+              <StorageSet name={stateName} value={state} />
+              <Provider value={childProps}>{children}</Provider>
+            </Fragment>
+          )
+        })
+      }
     </Component>
   )
 }
