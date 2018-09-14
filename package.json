@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "runjs": {
-    "requires": [
-      "./node_modules/babel-register"
-    ]
+    "requires": ["./node_modules/babel-register"]
   },
   "prettier": {
     "trailingComma": "all",
@@ -24,14 +22,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --config package.json --write",
-      "git add"
-    ]
+    "*.{js,json,css,md}": ["prettier --config package.json --write", "git add"]
   },
   "scripts": {
     "flow-typed": "flow-typed install -i=dev",
-    "start": "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
+    "start":
+      "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
