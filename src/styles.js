@@ -90,18 +90,11 @@ export function hover(...ext) {
 }
 
 const black = color('#000')
-export const dimColor = black
-  .toHSLA()
-  .lighten(0.5)
-  .toString()
-export const nearWhiteColor = color('#fff')
+export const black25 = black.toHSLA().lighten(0.25)
+export const black50 = black.toHSLA().lighten(0.5)
+export const white05 = color('#fff')
   .toHSLA()
   .darken(0.05)
-  .toString()
-export const dim2Color = black
-  .toHSLA()
-  .lighten(0.25)
-  .toString()
 export const sizeViewport100 = extend(
   height(viewHeight(100)),
   width(viewWidth(100)),
