@@ -5,14 +5,12 @@ import {
   fontWeightNormal,
   inlineBlock,
   margin,
-  normalize,
   padding,
   rem,
-  setupPage,
   stylesheet,
 } from './typestyle-exports'
 import { color, ColorHelper, viewHeight, viewWidth } from 'csx'
-import { height, width } from 'csstips'
+import { fillParent, height, width } from 'csstips'
 import { isString } from 'ramda-adjunct'
 
 export const ttu = { textTransform: 'uppercase' }
@@ -87,8 +85,35 @@ export function hover(...ext) {
   }
 }
 
+/**
+ * Recommended Page setup
+ * - Sets up the body to be full size
+ * - Sets up box sizing to be border box
+ **/
+export function setupPage(rootSelector: string) {
+  /** Use full window size for application */
+  cssRule('html, body', {
+    height: '100%',
+    width: '100%',
+    padding: 0,
+    margin: 0,
+  })
+
+  /** Use border box */
+  cssRule('html', {
+    '-moz-box-sizing': 'border-box',
+    '-webkit-box-sizing': 'border-box',
+    boxSizing: 'border-box',
+  })
+  cssRule('*,*:before,*:after', {
+    boxSizing: 'inherit',
+  })
+
+  /** Also root should fill parent */
+  cssRule(rootSelector, fillParent)
+}
+
 export function setupGlobalStyles() {
-  normalize()
   setupPage('#root')
 
   cssRule(

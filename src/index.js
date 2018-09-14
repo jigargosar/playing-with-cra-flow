@@ -1,10 +1,13 @@
+// setupGlobalStyles()
+// forceRenderStyles()
 import React from 'react'
-import ReactDOM from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
+import 'normalize.css'
 import '@reach/dialog/styles.css'
-import App from './App'
 import { setupGlobalStyles } from './styles'
 import { forceRenderStyles } from './typestyle-exports'
+import ReactDOM from 'react-dom'
+import registerServiceWorker from './registerServiceWorker'
+import App from './App'
 import { tap } from 'ramda'
 
 setupGlobalStyles()
