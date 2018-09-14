@@ -30,6 +30,7 @@
     ]
   },
   "scripts": {
+    "flow-typed": "flow-typed install -i=dev",
     "start": "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -59,10 +60,6 @@
     "typestyle": "^2.0.1"
   },
   "devDependencies": {
-    "@types/prop-types": "^15.5.5",
-    "@types/ramda": "^0.25.38",
-    "@types/react-dom": "^16.0.7",
-    "@types/recompose": "^0.26.5",
     "cross-env": "^5.2.0",
     "flow-bin": "^0.80.0",
     "flow-typed": "^2.5.1",
