@@ -27,7 +27,7 @@ function checkAndClearConsole() {
   console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
 }
 
-export function hotSetupEntry(module) {
+export function hmrSetup(module) {
   if (module.hot) {
     addWindowEventListener(
       'keydown',
