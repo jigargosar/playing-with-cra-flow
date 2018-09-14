@@ -35,8 +35,10 @@ import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 
-function FilteredTaskList({ pred, tasks, ...otherProps }) {
-  return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+function FilteredTaskList({ pred, ...otherProps }) {
+  return renderWithCollections(({ tasks }) => (
+    <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+  ))
 }
 
 function CategoryTaskList({ category, ...otherProps }) {
@@ -81,22 +83,14 @@ const renderWithCollections = render => (
 )
 
 function renderMainRoutes() {
-  return renderWithCollections(({ tasks, tags }) => (
+  return renderWithCollections(({ tags }) => (
     <Router className={routerClass}>
       <Redirect from={'/'} to={'all'} noThrow />
       <TagList path={'tag'} />
-      <FilteredTaskList
-        path={'all'}
-        {...{ title: 'All Tasks', tasks, pred: T }}
-      />
-      <FilteredTaskList
-        path={'done'}
-        title="Done Tasks"
-        pred={donePred}
-        tasks={tasks}
-      />
-      <CategoryTaskList path={'category/:category'} tasks={tasks} />
-      <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
+      <FilteredTaskList path={'all'} {...{ title: 'All Tasks', pred: T }} />
+      <FilteredTaskList path={'done'} title="Done Tasks" pred={donePred} />
+      <CategoryTaskList path={'category/:category'} />
+      <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} />
       <NotFound default />
     </Router>
   ))
