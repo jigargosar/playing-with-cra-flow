@@ -27,7 +27,7 @@ function checkAndClearConsole() {
   console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
 }
 
-export function renderRoot(Comp: Function, module: Object): Promise<any> {
+function hotSetupEntry(module) {
   if (module.hot) {
     addWindowEventListener(
       'keydown',
@@ -45,10 +45,18 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
   hotAcceptSelf(e => {
     throw e
   }, module)
+}
 
+function renderRootApp(Comp) {
   return new Promise((resolve, reject) => {
     nullableToMaybe(document.getElementById('root'))
       .map(el => ReactDOM.render(<Comp />, el, resolve))
       .orElse(() => reject(new Error('root not found')))
   })
+}
+
+export function renderRoot(Comp: Function, module: Object): Promise<any> {
+  hotSetupEntry(module)
+
+  return renderRootApp(Comp)
 }
