@@ -20,7 +20,9 @@ addWindowEventListener(
   e => {
     // console.log(`key`, e.key)
     if (e.key === '`') {
-      storageSet('clearOnHMR', !Boolean(storageGet('clearOnHMR', true)))
+      const clearOnHMRKey = 'clearOnHMR'
+      storageSet(clearOnHMRKey, !Boolean(storageGet(clearOnHMRKey, true)))
+
     }
   },
   module,
