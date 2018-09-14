@@ -14,7 +14,7 @@ import { flex, horizontal, padding, scroll, someChildWillScroll } from 'csstips'
 import { rem } from 'csx'
 import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
-import { bg, sizeViewport100, white05 } from './styles'
+import { bg, gray, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
@@ -87,7 +87,7 @@ const containerClass = style(
   horizontal,
   someChildWillScroll,
   sizeViewport100,
-  bg(white05),
+  bg(gray(.05)),
 )
 const contentClass = style(flex, scroll)
 const sidebarClass = style(scroll, { minWidth: 225 })
