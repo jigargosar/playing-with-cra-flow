@@ -177,7 +177,7 @@ export function setupGlobalStyles() {
     appearanceNone,
   )
 
-  cssRule('span,a', inlineBlock)
+  cssRule('span, a', inlineBlock)
 
   cssRule(
     'a',
