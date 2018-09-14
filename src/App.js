@@ -57,7 +57,9 @@ function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
         {...otherProps}
       />
     ),
-    Nothing: () => <Error message={`Tag ${tagTitle}/${tid} not found`} />,
+    Nothing: () => (
+      <Error message={`Tag "${tagTitle}" not found. (id:${tid})`} />
+    ),
   })
 }
 
