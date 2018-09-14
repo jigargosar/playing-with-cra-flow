@@ -92,17 +92,9 @@ export function hover(...ext) {
 const black = rgba(0, 0, 0, 1)
 const white = black.invert()
 
-export function blackA(alpha) {
-  return black.fade(alpha)
-}
-
-export function whiteA(alpha) {
-  return white.fade(alpha)
-}
-
-export function gray(darkenBy) {
-  return white.darken(darkenBy)
-}
+export const blackA = alpha => black.fade(alpha)
+export const whiteA = alpha => white.fade(alpha)
+export const gray = darkenBy => white.darken(darkenBy)
 
 export const sizeViewport100 = extend(
   height(viewHeight(100)),
