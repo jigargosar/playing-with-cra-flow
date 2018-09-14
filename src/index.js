@@ -5,10 +5,12 @@ import { setupGlobalStyles } from './styles'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import { renderRoot } from './hmr'
+import { forceRenderStyles } from 'typestyle/lib'
 
 setupGlobalStyles()
 
-const promise = renderRoot(App, module)
-promise.catch(console.error)
+renderRoot(App, module)
+  .then(forceRenderStyles)
+  .catch(console.error)
 
 registerServiceWorker()
