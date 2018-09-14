@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = { children: any }
 
-export function Error({ children }: Props) {
+export function ErrorMessage({ children }: Props) {
   return (
     <div>
       <h3>Error</h3>

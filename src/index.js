@@ -22,6 +22,7 @@ if (elementById) {
 } else {
   throw new Error('root not found')
 }
+
 registerServiceWorker()
 
 window.addEventListener('keydown', keyDownHandler)

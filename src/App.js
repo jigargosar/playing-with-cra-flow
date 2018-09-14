@@ -33,7 +33,7 @@ import {
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { allPass } from 'ramda'
-import { Error } from './components/Error'
+import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
@@ -63,7 +63,8 @@ function TagTaskList({ tid, tagTitle, tags, ...otherProps }) {
         {...otherProps}
       />
     ))
-    .getOrElse(<Error>{`Tag "${tagTitle}" not found. (id:${tid})`}</Error>)
+    .getOrElse(
+      <ErrorMessage>{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>)
 }
 
 TagTaskList.defaultProps = {
@@ -72,7 +73,7 @@ TagTaskList.defaultProps = {
 }
 
 function NotFound() {
-  return <Error>404</Error>
+  return <ErrorMessage>404</ErrorMessage>
 }
 
 function renderMainRoutes() {
