@@ -120,6 +120,8 @@ export function setupPage(rootSelector: string) {
     { fontSize: '100%' },
   )
 
+  cssRule('span, a', inlineBlock)
+
   /** Also root should fill parent */
   cssRule(rootSelector, fillParent)
 }
@@ -176,8 +178,6 @@ export function setupGlobalStyles() {
     { borderWidth: 1 },
     appearanceNone,
   )
-
-  cssRule('span, a', inlineBlock)
 
   cssRule(
     'a',
