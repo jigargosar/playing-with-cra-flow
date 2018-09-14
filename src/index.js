@@ -18,9 +18,8 @@ registerServiceWorker()
 addWindowEventListener(
   'keydown',
   e => {
-    const key = e.key
-    console.log(`key`, key)
-    if (key === '`') {
+    // console.log(`key`, e.key)
+    if (e.key === '`') {
       storageSet('clearOnHMR', !Boolean(storageGet('clearOnHMR', true)))
     }
   },
