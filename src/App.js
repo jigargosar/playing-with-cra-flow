@@ -33,7 +33,7 @@ import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
-import { allPass } from 'ramda'
+import { allPass, T } from 'ramda'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
@@ -83,7 +83,10 @@ function renderMainRoutes() {
         <Router className={routerClass}>
           <Redirect from={'/'} to={'all'} noThrow />
           <TagList path={'tag'} />
-          <TaskList path={'all'} {...{ title: 'All Tasks', tasks }} />
+          <FilteredTaskList
+            path={'all'}
+            {...{ title: 'All Tasks', tasks, pred: T }}
+          />
           <FilteredTaskList
             path={'done'}
             title="Done Tasks"
