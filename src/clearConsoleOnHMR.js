@@ -6,7 +6,8 @@ function logClearConsoleOnHMRStatus() {
   console.log(`clearConsoleOnHMR:`, storageGet(clearOnHMRKey, null))
 }
 
+export const shouldClearConsoleOnHMR = () => storageGet(clearOnHMRKey, true)
 export function toggleClearConsoleOnHMR() {
-  storageSet(clearOnHMRKey, !Boolean(storageGet(clearOnHMRKey, true)))
+  storageSet(clearOnHMRKey, !Boolean(shouldClearConsoleOnHMR()))
   logClearConsoleOnHMRStatus()
 }

@@ -3,6 +3,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { nullableToMaybe } from 'folktale/conversions'
+import { shouldClearConsoleOnHMR } from './clearConsoleOnHMR'
 
 export const hotDispose = (disposer: Function, module: Object) => {
   if (module.hot) {
@@ -16,7 +17,7 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
 }
 
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
-  if (module.hot && module.hot.data) {
+  if (module.hot && shouldClearConsoleOnHMR()) {
     console.clear()
     console.log('[HMR]')
   }
