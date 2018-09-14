@@ -1,5 +1,3 @@
-// export { compose, always, allPass } from 'ramda'
-
 export {
   allEqual,
   allP,
