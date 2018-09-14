@@ -23,9 +23,6 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
 
   hotAcceptSelf(e => {
     console.log(`module.hot.accept`, e)
-    hotDispose(data => {
-      data.skipClearConsole = true
-    }, module)
   }, module)
 
   return new Promise((resolve, reject) => {
