@@ -78,7 +78,6 @@ export function fg(color: string | ColorHelper) {
 
 export function hover(...ext) {
   return {
-    transition: '.15s ease-in',
     $nest: {
       '&:hover': extend(...ext),
     },
