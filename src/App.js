@@ -10,11 +10,17 @@ import {
   CollectionConsumer,
   CollectionProvider,
 } from './components/CollectionContext'
-import { flex, horizontal, padding, scroll, someChildWillScroll } from 'csstips'
-import { rem } from 'csx'
+import {
+  flex,
+  horizontal,
+  padding,
+  scroll,
+  someChildWillScroll,
+} from 'csstips/lib'
+import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
-import { bg, gray, sizeViewport100 } from './styles'
+import { bg, gray, sizeViewport100, white } from './styles'
 import { Redirect } from '@reach/router'
 import {
   EditTaskDialog,
@@ -100,7 +106,7 @@ const containerClass = style(
 const contentClass = style(flex, scroll)
 const sidebarClass = style(scroll, { minWidth: 225 })
 
-const routerClass = style(padding(rem(2), rem(1)), bg('#fff'), {
+const routerClass = style(padding(rem(2), rem(1)), bg(white), {
   minHeight: '100%',
 })
 

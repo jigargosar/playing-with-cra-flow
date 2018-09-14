@@ -83,8 +83,8 @@ export function fg(color: string | ColorHelper) {
 
 export const hover = (...ext) => ({ $nest: { '&:hover': extend(...ext) } })
 
-const black = rgba(0, 0, 0, 1)
-const white = black.invert()
+export const black = rgba(0, 0, 0, 1)
+export const white = black.invert()
 
 export const blackA = alpha => black.fade(alpha)
 export const whiteA = alpha => white.fade(alpha)
