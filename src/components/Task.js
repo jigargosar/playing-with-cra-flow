@@ -38,9 +38,11 @@ function renderTags(task) {
       <CollectionConsumer>
         {({ tags }) =>
           intersperse(', ')(
-            getTaskTags(task, tags).map(tag => (
-              <LinkToTag key={tag.title} tag={tag} />
-            )),
+            getTaskTags(task, tags).map(tag =>
+              tag
+                .map(tag => <LinkToTag key={tag.title} tag={tag} />)
+                .getOrElse('unknown tag'),
+            ),
           )
         }
       </CollectionConsumer>
