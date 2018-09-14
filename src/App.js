@@ -64,7 +64,7 @@ TagsTaskList.defaultProps = {
   tagTitle: '',
 }
 
-function NewComponent() {
+function NotFound() {
   return <Error>404</Error>
 }
 
@@ -84,7 +84,7 @@ function renderMainRoutes() {
           />
           <CategoryTaskList path={'category/:category'} tasks={tasks} />
           <TagsTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
-          <NewComponent default />
+          <NotFound default />
         </Router>
       )}
     </CollectionConsumer>
