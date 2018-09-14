@@ -16,8 +16,8 @@ import {
   margin,
   width,
 } from 'csstips/lib'
-import isString from 'ramda-adjunct/lib/isString'
 import { mergeAll } from 'ramda'
+import { isString } from './ramda-exports'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
