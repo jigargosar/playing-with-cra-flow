@@ -92,12 +92,17 @@ export function hover(...ext) {
  **/
 export function setupPage(rootSelector: string) {
   /** Use full window size for application */
-  cssRule('html, body', {
-    height: '100%',
-    width: '100%',
-    padding: 0,
-    margin: 0,
-  })
+  cssRule(
+    'html, body',
+    {
+      height: '100%',
+      width: '100%',
+      padding: 0,
+      margin: 0,
+    },
+    { fontSize: 16 },
+    antialiased,
+  )
 
   /** Use border box */
   cssRule('html', {
@@ -118,11 +123,8 @@ export function setupGlobalStyles() {
 
   cssRule(
     'html, body',
-    antialiased,
     sans,
-    { fontSize: 16 },
     { lineHeight: rem(1.5) },
-    // { lineHeight: rem(1.1) },
   )
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
@@ -140,7 +142,9 @@ export function setupGlobalStyles() {
     { margin: 0 },
     br2,
   )
+
   const primaryColor = color('#3490dc')
+
   cssRule(
     'button',
     tc,
@@ -180,7 +184,9 @@ export function setupGlobalStyles() {
     { borderWidth: 1 },
     appearanceNone,
   )
+
   cssRule('span,a', inlineBlock)
+
   cssRule(
     'a',
     { color: 'inherit' },
@@ -189,6 +195,7 @@ export function setupGlobalStyles() {
   )
 
   cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
+
   cssRule(
     'hr',
     { borderWidth: 1 },
