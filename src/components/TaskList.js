@@ -1,7 +1,7 @@
 // @flow
-import { style } from 'typestyle'
-import { rem } from 'csx'
-import { verticallySpaced } from 'csstips'
+import { style } from 'typestyle/'
+import { rem } from 'csx/'
+import { verticallySpaced } from 'csstips/'
 import { Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
@@ -20,7 +20,9 @@ export function TaskList({ title, tasks }: Props) {
         {title}
       </div>
       <div className={style(verticallySpaced(rem(1.5)))}>
-        {tasks.map(task => <Task key={task.id} task={task} />)}
+        {tasks.map(task => (
+          <Task key={task.id} task={task} />
+        ))}
       </div>
     </div>
   )
