@@ -114,6 +114,12 @@ export function setupPage(rootSelector: string) {
     boxSizing: 'inherit',
   })
 
+  cssRule(
+    'button, input, optgroup, select, textarea',
+    { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+  )
+
   /** Also root should fill parent */
   cssRule(rootSelector, fillParent)
 }
@@ -121,27 +127,12 @@ export function setupPage(rootSelector: string) {
 export function setupGlobalStyles() {
   setupPage('#root')
 
-  cssRule(
-    'html, body',
-    sans,
-    { lineHeight: rem(1.5) },
-  )
+  cssRule('html, body', sans, { lineHeight: rem(1.5) })
   cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
-  cssRule(
-    'button, input, optgroup, select, textarea',
-    { fontFamily: 'inherit' },
-    { fontSize: '100%' },
-    { margin: 0 },
-  )
+  cssRule('button, input, optgroup, select, textarea', { margin: 0 })
 
-  cssRule(
-    'button, input',
-    { fontFamily: 'inherit' },
-    { fontSize: '100%' },
-    { margin: 0 },
-    br2,
-  )
+  cssRule('button, input', br2)
 
   const primaryColor = color('#3490dc')
 
@@ -174,6 +165,7 @@ export function setupGlobalStyles() {
       },
     },
   )
+
   cssRule(
     `input[type='text']`,
     { minHeight: rem(1.5) },
