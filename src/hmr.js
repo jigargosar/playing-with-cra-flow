@@ -27,7 +27,7 @@ function checkAndClearConsole() {
   console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
 }
 
-function hotSetupEntry(module) {
+export function hotSetupEntry(module) {
   if (module.hot) {
     addWindowEventListener(
       'keydown',
@@ -47,7 +47,7 @@ function hotSetupEntry(module) {
   }, module)
 }
 
-function renderRootApp(Comp) {
+export function renderRootApp(Comp: Function): Promise<any> {
   return new Promise((resolve, reject) => {
     nullableToMaybe(document.getElementById('root'))
       .map(el => ReactDOM.render(<Comp />, el, resolve))
@@ -55,8 +55,3 @@ function renderRootApp(Comp) {
   })
 }
 
-export function renderRoot(Comp: Function, module: Object): Promise<any> {
-  hotSetupEntry(module)
-
-  return renderRootApp(Comp)
-}
