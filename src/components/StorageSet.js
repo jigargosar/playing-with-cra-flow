@@ -8,9 +8,13 @@ export function storageGet(key: string, defaultState: any) {
   return parseState ? parseState : defaultState
 }
 
+export function storageSet(key: string, value: any) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
 export function StorageSet({ name, value }: { name: string, value: any }) {
   const didMountOrUpdate = ({ props: { name, value } }) => {
-    localStorage.setItem(name, JSON.stringify(value))
+    storageSet(name, value)
   }
   return (
     <Component
