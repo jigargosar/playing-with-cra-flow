@@ -99,15 +99,6 @@ function renderMainRoutes() {
   )
 }
 
-const containerClass = style(
-  horizontal,
-  someChildWillScroll,
-  sizeViewport100,
-  bg(gray(0.05)),
-)
-const contentClass = style(flex, scroll)
-const sidebarClass = style(scroll, { minWidth: 225 })
-
 const routerClass = style(padding(rem(2), rem(1)), bg(white), {
   minHeight: '100%',
 })
@@ -118,17 +109,28 @@ const AllProviders = nest(
   MoveTaskDialogStateProvider,
 )
 
-const App = () => (
-  <AllProviders>
-    <div className={containerClass}>
-      <div className={sidebarClass}>
-        <Sidebar />
+const App = () => {
+  const containerClass = style(
+    horizontal,
+    someChildWillScroll,
+    sizeViewport100,
+    bg(gray(0.05)),
+  )
+  const contentClass = style(flex, scroll)
+  const sidebarClass = style(scroll, { minWidth: 225 })
+
+  return (
+    <AllProviders>
+      <div className={containerClass}>
+        <div className={sidebarClass}>
+          <Sidebar />
+        </div>
+        <div className={contentClass}>{renderMainRoutes()}</div>
       </div>
-      <div className={contentClass}>{renderMainRoutes()}</div>
-    </div>
-    <EditTaskDialog />
-    <MoveTaskDialog />
-  </AllProviders>
-)
+      <EditTaskDialog />
+      <MoveTaskDialog />
+    </AllProviders>
+  )
+}
 
 export default App
