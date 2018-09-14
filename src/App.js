@@ -12,7 +12,7 @@ import {
 } from './components/CollectionContext'
 import { flex, horizontal, padding, scroll, someChildWillScroll } from 'csstips'
 import { rem } from 'csx'
-import { findById } from './models/Collection'
+import { findByIdOrUndefined } from './models/Collection'
 import { style } from './typestyle-exports'
 import { bg, gray, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
@@ -48,7 +48,7 @@ CategoryTaskList.defaultProps = {
 }
 
 function TagsTaskList({ tid, tags, ...otherProps }) {
-  const tag = findById(tid)(tags)
+  const tag = findByIdOrUndefined(tid)(tags)
   return (
     <FilteredTaskList
       title={`${selectN('title', tag)}`}
