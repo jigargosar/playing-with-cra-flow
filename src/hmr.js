@@ -27,7 +27,7 @@ function checkAndClearConsole() {
   console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
 }
 
-export function hmrSetup(module) {
+export function hmrSetup(module: Object) {
   if (module.hot) {
     addWindowEventListener(
       'keydown',
@@ -54,4 +54,3 @@ export function renderRootApp(Comp: Function): Promise<any> {
       .orElse(() => reject(new Error('root not found')))
   })
 }
-
