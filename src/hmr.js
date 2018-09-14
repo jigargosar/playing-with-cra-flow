@@ -20,6 +20,13 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
   }
 }
 
+function checkAndClearConsole() {
+  if (shouldClearConsoleOnHMR()) {
+    console.clear()
+  }
+  console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
+}
+
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
   if (module.hot) {
     addWindowEventListener(
@@ -27,14 +34,12 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
       e => {
         if (e.key === '`') {
           toggleClearConsoleOnHMR()
+          checkAndClearConsole()
         }
       },
       module,
     )
-    if (shouldClearConsoleOnHMR()) {
-      console.clear()
-    }
-    console.log('[HMR] ClearConsole=', shouldClearConsoleOnHMR())
+    checkAndClearConsole()
   }
 
   hotAcceptSelf(e => {
