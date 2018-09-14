@@ -3,7 +3,11 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { nullableToMaybe } from 'folktale/conversions'
-import { shouldClearConsoleOnHMR } from './clearConsoleOnHMR'
+import {
+  shouldClearConsoleOnHMR,
+  toggleClearConsoleOnHMR,
+} from './clearConsoleOnHMR'
+import { addWindowEventListener } from './disposables'
 
 export const hotDispose = (disposer: Function, module: Object) => {
   if (module.hot) {
@@ -17,6 +21,18 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
 }
 
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
+  if (module.hot) {
+    addWindowEventListener(
+      'keydown',
+      e => {
+        // console.log(`key`, e.key)
+        if (e.key === '`') {
+          toggleClearConsoleOnHMR()
+        }
+      },
+      module,
+    )
+  }
   if (module.hot && shouldClearConsoleOnHMR()) {
     console.clear()
     console.log('[HMR]')
