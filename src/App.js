@@ -90,7 +90,7 @@ function renderMainRoutes() {
     <Router className={routerClass}>
       <Redirect from={'/'} to={'all'} noThrow />
       <TagList path={'tag'} />
-      <FilteredTaskList path={'all'} {...{ title: 'All Tasks', pred: T }} />
+      <FilteredTaskList path={'all'} title={'All Tasks'} pred={T} />
       <FilteredTaskList path={'done'} title="Done Tasks" pred={donePred} />
       <CategoryTaskList path={'category/:category'} />
       <TagTaskList path={'tag/:tagTitle/:tid'} />
