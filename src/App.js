@@ -48,19 +48,15 @@ CategoryTaskList.defaultProps = {
 }
 
 function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
-  const tag = findById(tid)(tags)
-  return tag.matchWith({
-    Just: ({ value: tag }) => (
+  return findById(tid)(tags)
+    .map(tag => (
       <FilteredTaskList
         title={`${tag.title}`}
         pred={allPass([activePred, t => t.tagIds.includes(tid)])}
         {...otherProps}
       />
-    ),
-    Nothing: () => (
-      <Error message={`Tag "${tagTitle}" not found. (id:${tid})`} />
-    ),
-  })
+    ))
+    .getOrElse(<Error message={`Tag "${tagTitle}" not found. (id:${tid})`} />)
 }
 
 TagsTaskList.defaultProps = {
