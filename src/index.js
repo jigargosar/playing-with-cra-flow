@@ -9,14 +9,19 @@ import { addWindowEventListener } from './disposables'
 
 setupGlobalStyles()
 
-renderRoot(App, module).catch(console.error)
+const promise = renderRoot(App, module)
+promise.catch(console.error)
 
 registerServiceWorker()
 
 addWindowEventListener(
   'keydown',
   e => {
-    console.log(`e`, e)
+    const key = e.key
+    console.log(`key`, key)
+    if (key === '`') {
+      localStorage.getItem('')
+    }
   },
   module,
 )
