@@ -17,10 +17,10 @@ export class Sidebar extends Component<Props> {
           <LinkToCategory key={category} category={category} />
         ))}
         <hr />
-        <LinkTo to={'/Tags'}>Tags</LinkTo>
+        <LinkTo to={'/tag'}>Tags</LinkTo>
         <hr />
-        <LinkTo to={'/All'}>All</LinkTo>
-        <LinkTo to={'/Done'}>Done</LinkTo>
+        <LinkTo to={'/all'}>All</LinkTo>
+        <LinkTo to={'/done'}>Done</LinkTo>
       </div>
     )
   }
