@@ -27,6 +27,7 @@ import {
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { allPass } from 'ramda'
+import * as selectN from 'selectn'
 
 function FilteredTaskList({ pred, tasks, ...otherProps }) {
   return <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
@@ -50,7 +51,7 @@ function TagsTaskList({ tid, tags, ...otherProps }) {
   const tag = findById(tid)(tags)
   return (
     <FilteredTaskList
-      title={`${tag.title}`}
+      title={`${selectN('title', tag)}`}
       pred={allPass([activePred, t => t.tagIds.includes(tid)])}
       {...otherProps}
     />
@@ -87,7 +88,7 @@ const containerClass = style(
   horizontal,
   someChildWillScroll,
   sizeViewport100,
-  bg(gray(.05)),
+  bg(gray(0.05)),
 )
 const contentClass = style(flex, scroll)
 const sidebarClass = style(scroll, { minWidth: 225 })

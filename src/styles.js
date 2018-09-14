@@ -17,6 +17,7 @@ import {
   width,
 } from 'csstips'
 import { isString } from 'ramda-adjunct'
+import { mergeAll } from 'ramda'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
@@ -69,7 +70,6 @@ export const sans = {
 export const mono = {
   fontFamily: `Menlo, Monaco, Consolas, 'Courier New', monospace`,
 }
-export const css = stylesheet({ antialiased })
 
 export function bg(backgroundColor: string | ColorHelper) {
   return isString(backgroundColor)
@@ -136,6 +136,37 @@ export function setupPage(rootSelector: string) {
   cssRule(rootSelector, fillParent)
 }
 
+const primaryColor = color('#3490dc')
+
+export const sheet = stylesheet({
+  antialiased, button: mergeAll([tc,
+    { lineHeight: 1.15 },
+    { color: '#fff' },
+    bg(primaryColor),
+    padding(rem(0.5), rem(1)),
+    fontWeightNormal,
+    { transition: 'transform backgroundColor .15s ease-in' },
+    { transform: 'perspective(500px) translateZ(0px)' },
+    {
+      $nest: {
+        '&:active': {
+          transform: 'perspective(500px) translateZ(-10px)',
+        },
+        '&:not([disabled])': {
+          ...pointer,
+          $nest: {
+            '&:hover': {
+              ...bg(primaryColor.darken(0.1)),
+            },
+          },
+        },
+        '&[disabled]': {
+          ...bg(primaryColor.fade(.5)),
+        },
+      },
+    }]),
+})
+
 export function setupGlobalStyles() {
   setupPage('#root')
 
@@ -145,8 +176,6 @@ export function setupGlobalStyles() {
   cssRule('button, input, optgroup, select, textarea', { margin: 0 })
 
   cssRule('button, input', br2)
-
-  const primaryColor = color('#3490dc')
 
   cssRule(
     'button',

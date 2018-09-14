@@ -34,7 +34,7 @@ const hasHiddenChildren = {
 
 function renderTags(task) {
   return (
-    <div className={style(fg(blackA(0.25)), fz.xs, { lineHeight: 1.5 })}>
+    <div className={style(fg(blackA(0.5)), fz.xs, { lineHeight: 1.5 })}>
       <CollectionConsumer>
         {({ tags }) =>
           intersperse(', ')(
