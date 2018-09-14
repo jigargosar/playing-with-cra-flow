@@ -16,6 +16,15 @@ export const hotAcceptSelf = (onError: Function, module: Object) => {
 }
 
 export function renderRoot(Comp: Function, module: Object): Promise<any> {
+  if (
+    module.hot &&
+    module.hot.data &&
+    !module.hot.data.skipClearConsole
+  ) {
+    console.clear()
+    console.log('Render Complete')
+  }
+
   hotAcceptSelf(e => {
     console.log(`module.hot.accept`, e)
     hotDispose(data => {
@@ -27,17 +36,7 @@ export function renderRoot(Comp: Function, module: Object): Promise<any> {
   return new Promise((resolve, reject) => {
     nullableToMaybe(document.getElementById('root'))
       .map(el =>
-        ReactDOM.render(<Comp />, el, () => {
-          if (
-            module.hot &&
-            module.hot.data &&
-            !module.hot.data.skipClearConsole
-          ) {
-            console.clear()
-            console.log('Render Complete')
-          }
-          resolve()
-        }),
+        ReactDOM.render(<Comp />, el, resolve),
       )
       .orElse(() => reject(new Error('root not found')))
   })
