@@ -7,7 +7,7 @@ import { setupGlobalStyles } from './styles'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
-import { forceRenderStyles } from 'typestyle'
+import { forceRenderStyles } from 'typestyle/lib'
 
 setupGlobalStyles()
 ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
