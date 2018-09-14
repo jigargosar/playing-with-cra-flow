@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import { renderRoot } from './hmr'
 import { addWindowEventListener } from './disposables'
-import { storageGet, storageSet } from './components/StorageSet'
+import { toggleClearConsoleOnHMR } from './clearConsoleOnHMR'
 
 setupGlobalStyles()
 
@@ -14,12 +14,6 @@ const promise = renderRoot(App, module)
 promise.catch(console.error)
 
 registerServiceWorker()
-
-function toggleClearConsoleOnHMR() {
-  const clearOnHMRKey = 'clearConsoleOnHMR'
-  storageSet(clearOnHMRKey, !Boolean(storageGet(clearOnHMRKey, true)))
-  console.log(`clearConsoleOnHMR:`, storageGet(clearOnHMRKey, null))
-}
 
 addWindowEventListener(
   'keydown',
