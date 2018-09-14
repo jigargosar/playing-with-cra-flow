@@ -4,11 +4,10 @@ import React from 'react'
 import 'normalize.css'
 import '@reach/dialog/styles.css'
 import { setupGlobalStyles } from './styles'
-import { forceRenderStyles } from './typestyle-exports'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
-import { tap } from 'ramda'
+import { forceRenderStyles } from 'typestyle'
 
 setupGlobalStyles()
 ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
@@ -20,5 +19,8 @@ ReactDOM.render(<App />, document.getElementById('root'), (...args) => {
 registerServiceWorker()
 
 if (module.hot) {
-  module.hot.accept(tap(console.error))
+  module.hot.accept(e => {
+    console.log(`module.hot.accept`, e)
+    throw e
+  })
 }

@@ -172,7 +172,7 @@ export function setupGlobalStyles() {
           },
         },
         '&[disabled]': {
-          ...bg('hsla(207, 71%, 53%, 0.36)'),
+          ...bg(primaryColor.fade(.5)),
         },
       },
     },
