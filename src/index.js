@@ -1,28 +1,15 @@
-// setupGlobalStyles()
-// forceRenderStyles()
 // @flow
-import React from 'react'
 import 'normalize.css'
 import '@reach/dialog/styles.css'
 import { setupGlobalStyles } from './styles'
-import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
-import { forceRenderStyles } from 'typestyle/lib'
-import { hotAcceptSelf } from './hmr'
+import { hotAcceptSelf, renderRoot } from './hmr'
 import { addWindowEventListener } from './disposables'
 
 setupGlobalStyles()
-const elementById = document.getElementById('root')
-if (elementById) {
-  ReactDOM.render(<App />, elementById, () => {
-    console.clear()
-    console.log('Render Complete')
-    forceRenderStyles()
-  })
-} else {
-  throw new Error('root not found')
-}
+
+renderRoot(App).catch(console.error)
 
 registerServiceWorker()
 
