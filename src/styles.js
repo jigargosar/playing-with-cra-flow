@@ -90,10 +90,19 @@ export function hover(...ext) {
 }
 
 const black = rgba(0, 0, 0, 1)
-export const black25 = black.fade(0.25)
-export const black50 = black.fade(0.5)
 const white = black.invert()
-export const white05 = white.fade(0.05)
+
+export function blackA(alpha) {
+  return black.fade(alpha)
+}
+
+export function whiteA(alpha) {
+  return white.fade(alpha)
+}
+
+export const black25 = blackA(0.25)
+export const black50 = blackA(0.5)
+export const white05 = whiteA(0.05)
 console.log(`white05.toString()`, white05.toString())
 console.log(`white.toHexString()`, white.toString())
 console.log(`black50.toHexString()`, black50.toString())
@@ -106,7 +115,7 @@ export function gray(darkenBy) {
   return white.darken(darkenBy)
 }
 
-export const gray25 = gray(.25)
+export const gray25 = gray(0.25)
 
 /**
  * Recommended Page setup
