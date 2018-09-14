@@ -54,7 +54,7 @@ CategoryTaskList.defaultProps = {
   category: 'InBasket',
 }
 
-function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
+function TagTaskList({ tid, tagTitle, tags, ...otherProps }) {
   return findById(tid)(tags)
     .map(tag => (
       <FilteredTaskList
@@ -66,7 +66,7 @@ function TagsTaskList({ tid, tagTitle, tags, ...otherProps }) {
     .getOrElse(<Error>{`Tag "${tagTitle}" not found. (id:${tid})`}</Error>)
 }
 
-TagsTaskList.defaultProps = {
+TagTaskList.defaultProps = {
   tid: '',
   tagTitle: '',
 }
@@ -90,7 +90,7 @@ function renderMainRoutes() {
             tasks={tasks}
           />
           <CategoryTaskList path={'category/:category'} tasks={tasks} />
-          <TagsTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
+          <TagTaskList path={'tag/:tagTitle/:tid'} tags={tags} tasks={tasks} />
           <NotFound default />
         </Router>
       )}
