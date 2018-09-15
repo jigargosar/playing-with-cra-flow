@@ -8,12 +8,10 @@ import {
 } from './typestyle-exports'
 import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx/lib'
 import {
-  border,
   BoxUnit,
   fillParent,
   fontWeightNormal,
   height,
-  margin,
   width,
 } from 'csstips/lib'
 import { mergeAll } from 'ramda'
@@ -129,7 +127,10 @@ export function setupPage(rootSelector: string) {
   cssRule(rootSelector, fillParent)
 }
 
-const primaryColor = hsla(207, 0.6, 0.6, 1)
+const p3 = 360 / 3
+const p6 = 360 / 6
+// const primaryColor = hsla(p6 * 4, 0.6, 0.6, 1)
+const primaryColor = hsla(p3 * 2, 0.6, 0.6, 1)
 console.log(`primaryColor.toHSLA()`, primaryColor.toHSLA().toString())
 
 export const sheet = stylesheet({
@@ -167,68 +168,68 @@ export const sheet = stylesheet({
 export function setupGlobalStyles() {
   setupPage('#root')
 
-  cssRule('html, body', sans, { lineHeight: rem(1.5) })
-  cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
+  // cssRule('html, body', sans, { lineHeight: rem(1.5) })
+  // cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
-  cssRule('button, input, optgroup, select, textarea', { margin: 0 })
+  // cssRule('button, input, optgroup, select, textarea', { margin: 0 })
 
-  cssRule('button, input', br2)
-  cssRule(
-    'button',
-    mergeAll([
-      tc,
-      { lineHeight: 1.15 },
-      { color: '#fff' },
-      bg(primaryColor),
-      padding(rem(0.5), rem(1)),
-      fontWeightNormal,
-      { transition: 'transform backgroundColor .15s ease-in' },
-      { transform: 'perspective(500px) translateZ(0px)' },
-      {
-        $nest: {
-          '&:active': {
-            transform: 'perspective(500px) translateZ(-10px)',
-          },
-          '&:not([disabled])': {
-            ...pointer,
-            $nest: {
-              '&:hover': {
-                ...bg(primaryColor.darken(0.1)),
-              },
-            },
-          },
-          '&[disabled]': {
-            ...bg(primaryColor.fade(0.5)),
-          },
-        },
-      },
-    ]),
-  )
-
-  cssRule(
-    `input[type='text']`,
-    { minHeight: rem(1.5) },
-    shadow,
-    { width: '100%' },
-    padding(rem(0.5), rem(0.75)),
-    { lineHeight: 1.25 },
-    { borderWidth: 1 },
-    appearanceNone,
-  )
-
-  cssRule(
-    'a',
-    { color: 'inherit' },
-    { textDecoration: 'none' },
-    hover({ textDecoration: 'underline' }),
-  )
-
-  cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
-
-  cssRule(
-    'hr',
-    { borderWidth: 1 },
-    { borderStyle: 'solid' },
-    border(0, 0, null, null),
-  )
+  // cssRule('button, input', br2)
+  // cssRule(
+  //   'button',
+  //   mergeAll([
+  //     tc,
+  //     { lineHeight: 1.15 },
+  //     { color: '#fff' },
+  //     bg(primaryColor),
+  //     padding(rem(0.5), rem(1)),
+  //     fontWeightNormal,
+  //     { transition: 'transform backgroundColor .15s ease-in' },
+  //     { transform: 'perspective(500px) translateZ(0px)' },
+  //     {
+  //       $nest: {
+  //         '&:active': {
+  //           transform: 'perspective(500px) translateZ(-10px)',
+  //         },
+  //         '&:not([disabled])': {
+  //           ...pointer,
+  //           $nest: {
+  //             '&:hover': {
+  //               ...bg(primaryColor.darken(0.1)),
+  //             },
+  //           },
+  //         },
+  //         '&[disabled]': {
+  //           ...bg(primaryColor.fade(0.5)),
+  //         },
+  //       },
+  //     },
+  //   ]),
+  // )
+  //
+  // cssRule(
+  //   `input[type='text']`,
+  //   { minHeight: rem(1.5) },
+  //   shadow,
+  //   { width: '100%' },
+  //   padding(rem(0.5), rem(0.75)),
+  //   { lineHeight: 1.25 },
+  //   { borderWidth: 1 },
+  //   appearanceNone,
+  // )
+  //
+  // cssRule(
+  //   'a',
+  //   { color: 'inherit' },
+  //   { textDecoration: 'none' },
+  //   hover({ textDecoration: 'underline' }),
+  // )
+  //
+  // cssRule('h1, h2, h3, h4, h5, h6', margin(0, null, null, null))
+  //
+  // cssRule(
+  //   'hr',
+  //   { borderWidth: 1 },
+  //   { borderStyle: 'solid' },
+  //   border(0, 0, null, null),
+  // )
 }
