@@ -2,7 +2,7 @@
 import { nullableToMaybe } from 'folktale/conversions'
 import * as ReactDOM from 'react-dom'
 import { anyPass, cond, invoker, mathMod, tap } from 'ramda'
-import { atIndex } from '../folktale-helpers'
+import { atClampedIndex } from '../folktale-helpers'
 import { renderWithComponent } from './renderWithComponent'
 import * as React from 'react'
 import { isHotkey } from 'is-hotkey'
@@ -23,7 +23,7 @@ const didMountOrUpdate = ({
       if (totalCount !== elList.length) {
         setState({ totalCount: elList.length })
       }
-      const elToFocus = atIndex(idx, elList)
+      const elToFocus = atClampedIndex(idx, elList)
       requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
     }),
   )
