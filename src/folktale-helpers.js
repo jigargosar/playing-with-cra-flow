@@ -7,5 +7,6 @@ export const atClampedIndex = (idx: number, list: []) => {
   if (list.length === 0) {
     return nullableToMaybe(null)
   }
-  return nullableToMaybe(list[clamp(0, list.length - 1)])
+  const clampIdx = clamp(0, list.length - 1)
+  return nullableToMaybe(list[clampIdx(idx)])
 }
