@@ -21,6 +21,7 @@ import { intersperse } from 'ramda'
 import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
 import { EditTaskModal } from './EditTaskDialog'
+import { Dialog } from '@reach/dialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -80,7 +81,13 @@ export const Task = ({ task }: TaskProps) => (
             {task.title}
           </div>
         )}
-      />
+      >
+        {({ close, isOpen }) => (
+          <Dialog onDismiss={close} isOpen={isOpen}>
+            <h1>Dialog</h1>
+          </Dialog>
+        )}
+      </EditTaskModal>
 
       {renderTags(task)}
     </div>

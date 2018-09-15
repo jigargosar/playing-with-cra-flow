@@ -21,26 +21,23 @@ const { Provider, Consumer } = React.createContext({
   onCategoryChange: noop,
 })
 
-type ModalProps = { trigger: Function }
+type ModalProps = { trigger: Function, children: Function }
 
-export function EditTaskModal({ trigger }: ModalProps) {
+export function EditTaskModal({ trigger, children }: ModalProps) {
   return (
     <Component initialState={{ isOpen: false }}>
       {({ state: { isOpen }, setState }) => {
         const close = () => setState({ isOpen: false })
         const open = () => setState({ isOpen: true })
+        const childProps = {
+          open,
+          close,
+          isOpen,
+        }
         return (
           <Fragment>
-            {trigger({
-              open,
-              close,
-              isOpen,
-            })}
-            {isOpen && (
-              <Dialog onDismiss={close} isOpen={true}>
-                <h1>Dialog</h1>
-              </Dialog>
-            )}
+            {trigger(childProps)}
+            {isOpen && children(childProps)}
           </Fragment>
         )
       }}
