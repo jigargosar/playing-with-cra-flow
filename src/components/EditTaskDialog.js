@@ -74,7 +74,7 @@ export function isEditTaskDialogOpen(render: Function) {
 
 export function EditTaskDialogStateProvider({ children }: { children: any }) {
   const stateName = 'editTaskState'
-  const defaultState = { isOpen: false, task: {}, title: '' }
+  const defaultState = { isOpen: false, task: {}, title: '', category: '' }
   return (
     <Component getInitialState={() => storageGet(stateName, defaultState)}>
       {({ state, setState }) =>
@@ -82,7 +82,12 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
           const { task, isOpen, title, category } = state
           const onDismiss = () => setState({ isOpen: false })
           const startEditingTask = task => () =>
-            setState({ isOpen: true, task, title: task.title })
+            setState({
+              isOpen: true,
+              task,
+              title: task.title,
+              category: task.category,
+            })
           const onOk = () => {
             updateTask({ title }, task)
             onDismiss()
