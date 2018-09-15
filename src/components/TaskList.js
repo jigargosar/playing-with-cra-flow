@@ -59,13 +59,7 @@ export function TaskList({ title, tasks }: Props) {
                 isArrowDown,
                 () => setState({ idx: mathMod(idx + 1, totalCount) }),
               ],
-            ])
-
-            if (isArrowUp(e)) {
-              setState({ idx: mathMod(idx - 1, totalCount) })
-            } else if (isArrowDown(e)) {
-              setState({ idx: mathMod(idx + 1, totalCount) })
-            }
+            ])(e)
 
             const isArrowKey = anyPass([
               isArrowUp,
