@@ -25,7 +25,7 @@ type ModalProps = { trigger: Function }
 
 export function EditTaskModal({ trigger }: ModalProps) {
   return (
-    <Component>
+    <Component initialState={{ isOpen: false }}>
       {({ state: { isOpen }, setState }) => (
         <Fragment>
           {trigger({ handleOpen: setState({ isOpen: true }) })}
