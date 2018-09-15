@@ -7,6 +7,8 @@ import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as ReactDOM from 'react-dom'
+import { nullableToMaybe } from 'folktale/conversions'
+import { tap } from 'ramda'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -23,8 +25,14 @@ export function TaskList({ title, tasks }: Props) {
         initialState={{ idx: 0 }}
         getRefs={() => ({ container: React.createRef() })}
         didMount={({ refs }) => {
-          const containerEl = ReactDOM.findDOMNode(refs.container.current)
-          console.log(`ReactDOM.findDOMNode(props.children[0])`, containerEl)
+          const containerEl = nullableToMaybe(
+            ReactDOM.findDOMNode(refs.container.current),
+          )
+          containerEl.map(
+            tap(el => {
+              el.querySelectorAll('.arrowNav')
+            }),
+          )
         }}
       >
         {({ refs }) => (
