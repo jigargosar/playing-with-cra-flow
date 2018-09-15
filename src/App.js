@@ -34,6 +34,7 @@ import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
+import FocusTrapReact from 'focus-trap-react'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -117,14 +118,16 @@ const App = () => {
 
   return (
     <AllProviders>
-      <div className={containerClass}>
-        <div className={sidebarClass}>
-          <Sidebar />
+      <FocusTrapReact>
+        <div className={containerClass}>
+          <div className={sidebarClass}>
+            <Sidebar />
+          </div>
+          <div className={contentClass}>{renderMainRoutes()}</div>
         </div>
-        <div className={contentClass}>{renderMainRoutes()}</div>
-      </div>
-      <EditTaskDialog />
-      <MoveTaskDialog />
+        <EditTaskDialog />
+        <MoveTaskDialog />
+      </FocusTrapReact>
     </AllProviders>
   )
 }
