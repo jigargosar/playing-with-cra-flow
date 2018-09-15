@@ -41,21 +41,22 @@ export function TaskList({ title, tasks }: Props) {
         didMount={didMountOrUpdate}
         didUpdate={didMountOrUpdate}
       >
-        {({ refs, state: { idx }, setState, props }) => {
-          console.log(`props`, props)
+        {({ refs, state: { idx }, setState, props: { totalCount } }) => {
+          const onKeyDown = e => {
+            if (e.key === 'ArrowUp') {
+              setState({ idx: mathMod(idx - 1, totalCount) })
+              e.preventDefault()
+            } else if (e.key === 'ArrowDown') {
+              setState({ idx: mathMod(idx + 1, totalCount) })
+              e.preventDefault()
+            }
+          }
+
           return (
             <div
               ref={refs.container}
               className={tasksClass}
-              onKeyDown={e => {
-                if (e.key === 'ArrowUp') {
-                  setState({ idx: mathMod(idx - 1, tasks.length) })
-                  e.preventDefault()
-                } else if (e.key === 'ArrowDown') {
-                  setState({ idx: mathMod(idx + 1, tasks.length) })
-                  e.preventDefault()
-                }
-              }}
+              onKeyDown={onKeyDown}
             >
               {tasks.map(task => (
                 <Task key={task.id} task={task} />
