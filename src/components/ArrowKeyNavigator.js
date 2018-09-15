@@ -39,8 +39,8 @@ function onKeyDown({ setState, state: { idx, totalCount } }) {
     const setIdx = idx => setState({ idx: mathMod(idx, totalCount) })
     cond([
       //
-      [isArrowUp, () => setIdx(idx)],
-      [isArrowDown, () => setIdx(idx)],
+      [isArrowUp, () => setIdx(idx - 1)],
+      [isArrowDown, () => setIdx(idx + 1)],
       [isArrowLeft, () => setIdx(0)],
       [isArrowRight, () => setIdx(totalCount - 1)],
     ])(e)
