@@ -5,14 +5,8 @@ import {
   rem,
   stylesheet,
 } from './typestyle-exports'
-import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx/lib'
-import {
-  BoxUnit,
-  fillParent,
-  fontWeightNormal,
-  height,
-  width,
-} from 'csstips/lib'
+import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx/'
+import { BoxUnit, fillParent, fontWeightNormal, height, width } from 'csstips/'
 import { mergeAll } from 'ramda'
 import { isString } from './ramda-exports'
 import { extend } from 'typestyle/'
