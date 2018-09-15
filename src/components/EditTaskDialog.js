@@ -17,12 +17,13 @@ const { Provider, Consumer } = React.createContext({
   onTitleChange: noop,
   onOk: noop,
   startEditingTask: noop,
+  category: 'InBasket',
 })
 
 export function EditTaskDialog() {
   return (
     <Consumer>
-      {({ onDismiss, isOpen, title, onTitleChange, onOk }) => (
+      {({ onDismiss, isOpen, title, category, onTitleChange, onOk }) => (
         <Dialog
           className={style(verticallySpaced(rem(1)))}
           onDismiss={onDismiss}
@@ -33,7 +34,7 @@ export function EditTaskDialog() {
             <input type={'text'} value={title} onChange={onTitleChange} />
           </div>
           <div className={style(vertical)}>
-            <select>
+            <select defaultValue={category}>
               {categories.map(category => (
                 <option key={category} value={category}>
                   {category}
@@ -85,6 +86,7 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
             onTitleChange,
             onOk,
             startEditingTask,
+            category: task.category,
           }
           return (
             <Fragment>
