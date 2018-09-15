@@ -8,6 +8,5 @@ export const atClampedIndex = (idx: number, list: []) => {
   if (listLength === 0) {
     return nullableToMaybe(null)
   }
-  const clampIdx = clamp(0, listLength - 1)
-  return atIndex(clampIdx(idx), list)
+  return atIndex(clamp(0, listLength - 1, idx), list)
 }
