@@ -31,7 +31,12 @@ export function ArrowKeyNavigator({ totalCount, children }: Props) {
       didMount: didMountOrUpdate,
       didUpdate: didMountOrUpdate,
     },
-    ({ refs, state: { idx }, setState, props: { totalCount } }) => {
+    ({
+      refs: { containerRef },
+      state: { idx },
+      setState,
+      props: { totalCount },
+    }) => {
       const onKeyDown = e => {
         const isArrowUp = isHotkey('ArrowUp')
         const isArrowDown = isHotkey('ArrowDown')
@@ -61,7 +66,7 @@ export function ArrowKeyNavigator({ totalCount, children }: Props) {
         }
       }
 
-      return children({ refs, onKeyDown })
+      return children({ containerRef, onKeyDown })
     },
   )
 }

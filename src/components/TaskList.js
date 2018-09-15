@@ -20,12 +20,8 @@ export function TaskList({ title, tasks }: Props) {
     <div>
       <div className={titleClass}>{title}</div>
       <ArrowKeyNavigator totalCount={tasks.length}>
-        {({ refs, onKeyDown }) => (
-          <div
-            ref={refs.container}
-            className={tasksClass}
-            onKeyDown={onKeyDown}
-          >
+        {({ containerRef, onKeyDown }) => (
+          <div ref={containerRef} className={tasksClass} onKeyDown={onKeyDown}>
             {tasks.map(task => (
               <Task key={task.id} task={task} />
             ))}
