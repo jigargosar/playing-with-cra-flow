@@ -8,9 +8,9 @@ import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as ReactDOM from 'react-dom'
 import { nullableToMaybe } from 'folktale/conversions'
-import { invoker, mathMod, tap } from 'ramda'
+import { anyPass, invoker, mathMod, tap } from 'ramda'
 import { atIndex } from '../folktale-helpers'
-import { compareHotkey, isHotkey, parseHotkey } from 'is-hotkey'
+import { isHotkey } from 'is-hotkey'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -44,19 +44,27 @@ export function TaskList({ title, tasks }: Props) {
       >
         {({ refs, state: { idx }, setState, props: { totalCount } }) => {
           const onKeyDown = e => {
-            const hotKey = parseHotkey('Arrow')
-            const checkIfMatches = compareHotkey(hotKey, e)
-
-            console.log(`checkIfMatches`, checkIfMatches)
             const isArrowUp = isHotkey('ArrowUp')
             const isArrowDown = isHotkey('ArrowDown')
+            const isArrowLeft = isHotkey('ArrowLeft')
+            const isArrowRight = isHotkey('ArrowRight')
 
             if (isArrowUp(e)) {
               setState({ idx: mathMod(idx - 1, totalCount) })
-              e.preventDefault()
             } else if (isArrowDown(e)) {
               setState({ idx: mathMod(idx + 1, totalCount) })
+            }
+
+            const isArrowKey = anyPass([
+              isArrowUp,
+              isArrowDown,
+              isArrowRight,
+              isArrowLeft,
+            ])
+
+            if (isArrowKey(e)) {
               e.preventDefault()
+              console.log('isArrowKey')
             }
           }
 
