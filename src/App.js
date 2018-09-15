@@ -27,6 +27,7 @@ import {
   isEditTaskDialogOpen,
 } from './components/EditTaskDialog'
 import {
+  isMoveTaskDialogOpen,
   MoveTaskDialog,
   MoveTaskDialogStateProvider,
 } from './components/MoveTaskDialog'
@@ -119,25 +120,27 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isEditTaskDialogOpen(isEditTaskDialogOpen => (
-        <FocusTrap
-          paused={isEditTaskDialogOpen}
-          tag={'div'}
-          className={containerClass}
-          focusTrapOptions={{
-            escapeDeactivates: false,
-            onActivate: () => console.log('onActivate'),
-            onDeactivate: () => console.log('onDeactivate'),
-          }}
-        >
-          <div className={sidebarClass}>
-            <Sidebar />
-          </div>
-          <div className={contentClass}>{renderMainRoutes()}</div>
-          <EditTaskDialog />
-          <MoveTaskDialog />
-        </FocusTrap>
-      ))}
+      {isMoveTaskDialogOpen(isMoveTaskDialogOpen =>
+        isEditTaskDialogOpen(isEditTaskDialogOpen => (
+          <FocusTrap
+            paused={isEditTaskDialogOpen || isMoveTaskDialogOpen}
+            tag={'div'}
+            className={containerClass}
+            focusTrapOptions={{
+              escapeDeactivates: false,
+              onActivate: () => console.log('onActivate'),
+              onDeactivate: () => console.log('onDeactivate'),
+            }}
+          >
+            <div className={sidebarClass}>
+              <Sidebar />
+            </div>
+            <div className={contentClass}>{renderMainRoutes()}</div>
+            <EditTaskDialog />
+            <MoveTaskDialog />
+          </FocusTrap>
+        )),
+      )}
     </AllProviders>
   )
 }
