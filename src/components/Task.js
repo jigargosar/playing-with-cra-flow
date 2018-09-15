@@ -23,7 +23,7 @@ import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
 import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog/'
-import { vertical } from 'csstips'
+import { vertical, verticallySpaced } from 'csstips'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
 
@@ -87,7 +87,11 @@ export const Task = ({ task }: TaskProps) => (
         )}
       >
         {({ close, isOpen }) => (
-          <Dialog onDismiss={close} isOpen={isOpen}>
+          <Dialog
+            className={style(verticallySpaced(rem(1)))}
+            onDismiss={close}
+            isOpen={isOpen}
+          >
             <Component initialState={pick(['title', 'category'])(task)}>
               {({ state: { title, category }, setState }) => (
                 <Fragment>
