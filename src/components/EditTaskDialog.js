@@ -30,7 +30,7 @@ export function EditTaskModal({ trigger }: ModalProps) {
         <Fragment>
           {trigger({ handleOpen: () => setState({ isOpen: true }) })}
           {isOpen && (
-            <Dialog isOpen={true}>
+            <Dialog onDismiss={() => setState({ isOpen: false })} isOpen={true}>
               <h1>Dialog</h1>
             </Dialog>
           )}
