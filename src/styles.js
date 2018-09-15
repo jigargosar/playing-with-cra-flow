@@ -95,31 +95,31 @@ export function setupPage(rootSelector: string) {
   /** Use full window size for application */
   cssRule(
     'html, body',
-    {
-      height: '100%',
-      width: '100%',
-      padding: 0,
-      margin: 0,
-    },
-    { fontSize: 16 },
+    // {
+    //   height: '100%',
+    //   width: '100%',
+    //   padding: 0,
+    //   margin: 0,
+    // },
+    // { fontSize: 16 },
     antialiased,
   )
 
   /** Use border box */
-  cssRule('html', {
-    '-moz-box-sizing': 'border-box',
-    '-webkit-box-sizing': 'border-box',
-    boxSizing: 'border-box',
-  })
-  cssRule('*,*:before,*:after', {
-    boxSizing: 'inherit',
-  })
+  // cssRule('html', {
+  //   '-moz-box-sizing': 'border-box',
+  //   '-webkit-box-sizing': 'border-box',
+  //   boxSizing: 'border-box',
+  // })
+  // cssRule('*,*:before,*:after', {
+  //   boxSizing: 'inherit',
+  // })
 
-  cssRule(
-    'button, input, optgroup, select, textarea',
-    { fontFamily: 'inherit' },
-    { fontSize: '100%' },
-  )
+  // cssRule(
+  //   'button, input, optgroup, select, textarea',
+  //   { fontFamily: 'inherit' },
+  //   { fontSize: '100%' },
+  // )
 
   cssRule('span, a', inlineBlock)
 
@@ -127,8 +127,8 @@ export function setupPage(rootSelector: string) {
   cssRule(rootSelector, fillParent)
 }
 
-const p3 = 360 / 3
-const p6 = 360 / 6
+export const p3 = 360 / 3
+export const p6 = 360 / 6
 // const primaryColor = hsla(p6 * 4, 0.6, 0.6, 1)
 const primaryColor = hsla(p3 * 2, 0.6, 0.6, 1)
 console.log(`primaryColor.toHSLA()`, primaryColor.toHSLA().toString())
@@ -168,7 +168,8 @@ export const sheet = stylesheet({
 export function setupGlobalStyles() {
   setupPage('#root')
 
-  // cssRule('html, body', sans, { lineHeight: rem(1.5) })
+  cssRule('html, body', sans, { lineHeight: rem(1.5) })
+  cssRule('html, body', { lineHeight: rem(1.5) })
   // cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
   // cssRule('button, input, optgroup, select, textarea', { margin: 0 })
