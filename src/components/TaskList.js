@@ -8,7 +8,7 @@ import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as ReactDOM from 'react-dom'
 import { nullableToMaybe } from 'folktale/conversions'
-import { anyPass, invoker, mathMod, tap } from 'ramda'
+import { anyPass, cond, invoker, mathMod, tap } from 'ramda'
 import { atIndex } from '../folktale-helpers'
 import { isHotkey } from 'is-hotkey'
 
@@ -48,6 +48,18 @@ export function TaskList({ title, tasks }: Props) {
             const isArrowDown = isHotkey('ArrowDown')
             const isArrowLeft = isHotkey('ArrowLeft')
             const isArrowRight = isHotkey('ArrowRight')
+
+            cond([
+              //
+              [
+                isArrowUp,
+                () => setState({ idx: mathMod(idx - 1, totalCount) }),
+              ],
+              [
+                isArrowDown,
+                () => setState({ idx: mathMod(idx + 1, totalCount) }),
+              ],
+            ])
 
             if (isArrowUp(e)) {
               setState({ idx: mathMod(idx - 1, totalCount) })
