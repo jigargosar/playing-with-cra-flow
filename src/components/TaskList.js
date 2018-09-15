@@ -35,30 +35,34 @@ export function TaskList({ title, tasks }: Props) {
     <div>
       <div className={titleClass}>{title}</div>
       <Component
+        totalCount={tasks.length}
         initialState={{ idx: 0 }}
         getRefs={() => ({ container: React.createRef() })}
         didMount={didMountOrUpdate}
         didUpdate={didMountOrUpdate}
       >
-        {({ refs, state: { idx }, setState }) => (
-          <div
-            ref={refs.container}
-            className={tasksClass}
-            onKeyDown={e => {
-              if (e.key === 'ArrowUp') {
-                setState({ idx: mathMod(idx - 1, tasks.length) })
-                e.preventDefault()
-              } else if (e.key === 'ArrowDown') {
-                setState({ idx: mathMod(idx + 1, tasks.length) })
-                e.preventDefault()
-              }
-            }}
-          >
-            {tasks.map(task => (
-              <Task key={task.id} task={task} />
-            ))}
-          </div>
-        )}
+        {({ refs, state: { idx }, setState, props }) => {
+          console.log(`props`, props)
+          return (
+            <div
+              ref={refs.container}
+              className={tasksClass}
+              onKeyDown={e => {
+                if (e.key === 'ArrowUp') {
+                  setState({ idx: mathMod(idx - 1, tasks.length) })
+                  e.preventDefault()
+                } else if (e.key === 'ArrowDown') {
+                  setState({ idx: mathMod(idx + 1, tasks.length) })
+                  e.preventDefault()
+                }
+              }}
+            >
+              {tasks.map(task => (
+                <Task key={task.id} task={task} />
+              ))}
+            </div>
+          )
+        }}
       </Component>
     </div>
   )
