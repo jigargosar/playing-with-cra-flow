@@ -29,22 +29,20 @@ const didMountOrUpdate = ({
   )
 }
 
+const isArrowUp = isHotkey('ArrowUp')
+const isArrowDown = isHotkey('ArrowDown')
+const isArrowLeft = isHotkey('ArrowLeft')
+const isArrowRight = isHotkey('ArrowRight')
+
 function onKeyDown(setState, idx, totalCount) {
   return e => {
-    const isArrowUp = isHotkey('ArrowUp')
-    const isArrowDown = isHotkey('ArrowDown')
-    const isArrowLeft = isHotkey('ArrowLeft')
-    const isArrowRight = isHotkey('ArrowRight')
-
+    const setIdx = idx => setState({ idx: mathMod(idx, totalCount) })
     cond([
       //
-      [isArrowUp, () => setState({ idx: mathMod(idx - 1, totalCount) })],
-      [isArrowDown, () => setState({ idx: mathMod(idx + 1, totalCount) })],
-      [isArrowLeft, () => setState({ idx: mathMod(0, totalCount) })],
-      [
-        isArrowRight,
-        () => setState({ idx: mathMod(totalCount - 1, totalCount) }),
-      ],
+      [isArrowUp, () => setIdx(idx)],
+      [isArrowDown, () => setIdx(idx)],
+      [isArrowLeft, () => setIdx(0)],
+      [isArrowRight, () => setIdx(totalCount - 1)],
     ])(e)
 
     const isArrowKey = anyPass([
