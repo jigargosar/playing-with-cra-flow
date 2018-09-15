@@ -1,4 +1,4 @@
-import { rgba } from 'csx/lib'
+import { rgba } from 'csx/'
 
 export const black = rgba(0, 0, 0, 1)
 export const white = black.invert()
