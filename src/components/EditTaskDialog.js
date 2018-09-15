@@ -89,7 +89,7 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
               category: task.category,
             })
           const onOk = () => {
-            updateTask({ title }, task)
+            updateTask({ title, category }, task)
             onDismiss()
           }
           const onTitleChange = e => setState({ title: e.target.value })
