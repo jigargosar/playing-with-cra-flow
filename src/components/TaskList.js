@@ -8,7 +8,8 @@ import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as ReactDOM from 'react-dom'
 import { nullableToMaybe } from 'folktale/conversions'
-import { tap } from 'ramda'
+import { invoker, tap } from 'ramda'
+import { atIndex } from '../folktale-helpers'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -18,14 +19,14 @@ export function TaskList({ title, tasks }: Props) {
     marginBottom: rem(1),
   })
   const tasksClass = style(verticallySpaced(rem(1.5)))
-  const didMountOrUpdate = ({ refs }) => {
+  const didMountOrUpdate = ({ refs, state: { idx } }) => {
     const containerEl = nullableToMaybe(
       ReactDOM.findDOMNode(refs.container.current),
     )
     containerEl.map(
       tap(el => {
         const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
-        console.log(`elList`, elList)
+        atIndex(idx, elList).map(invoker(0, 'focus'))
       }),
     )
   }
