@@ -10,6 +10,7 @@ import * as ReactDOM from 'react-dom'
 import { nullableToMaybe } from 'folktale/conversions'
 import { invoker, mathMod, tap } from 'ramda'
 import { atIndex } from '../folktale-helpers'
+import { isHotkey } from 'is-hotkey'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -43,10 +44,10 @@ export function TaskList({ title, tasks }: Props) {
       >
         {({ refs, state: { idx }, setState, props: { totalCount } }) => {
           const onKeyDown = e => {
-            if (e.key === 'ArrowUp') {
+            if (isHotkey('ArrowUp', e)) {
               setState({ idx: mathMod(idx - 1, totalCount) })
               e.preventDefault()
-            } else if (e.key === 'ArrowDown') {
+            } else if (isHotkey('ArrowDown', e)) {
               setState({ idx: mathMod(idx + 1, totalCount) })
               e.preventDefault()
             }
