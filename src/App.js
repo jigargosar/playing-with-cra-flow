@@ -127,6 +127,7 @@ const App = () => {
             tag={'div'}
             className={containerClass}
             focusTrapOptions={{
+              returnFocusOnDeactivate: false,
               escapeDeactivates: false,
               onActivate: () => console.log('onActivate'),
               onDeactivate: () => console.log('onDeactivate'),
