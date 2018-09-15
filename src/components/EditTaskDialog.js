@@ -28,7 +28,7 @@ export function EditTaskModal({ trigger }: ModalProps) {
     <Component initialState={{ isOpen: false }}>
       {({ state: { isOpen }, setState }) => (
         <Fragment>
-          {trigger({ handleOpen: setState({ isOpen: true }) })}
+          {trigger({ handleOpen: () => setState({ isOpen: true }) })}
           {isOpen && (
             <Dialog isOpen={true}>
               <h1>Dialog</h1>

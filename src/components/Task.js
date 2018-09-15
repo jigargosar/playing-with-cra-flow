@@ -20,6 +20,7 @@ import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
+import { EditTaskModal } from './EditTaskDialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -73,7 +74,14 @@ type TaskProps = {
 export const Task = ({ task }: TaskProps) => (
   <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
-      <div className={style(task.done && strike)}>{task.title}</div>
+      <EditTaskModal
+        trigger={({ handleOpen }) => (
+          <div onClick={handleOpen} className={style(task.done && strike)}>
+            {task.title}
+          </div>
+        )}
+      />
+
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
