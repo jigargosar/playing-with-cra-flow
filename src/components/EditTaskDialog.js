@@ -32,14 +32,18 @@ export function EditTaskDialog() {
           <div className={style(vertical)}>
             <input type={'text'} value={title} onChange={onTitleChange} />
           </div>
-          <select>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          <button onClick={onOk}>Ok</button>
+          <div className={style(vertical)}>
+            <select>
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <button onClick={onOk}>Ok</button>
+          </div>
         </Dialog>
       )}
     </Consumer>
