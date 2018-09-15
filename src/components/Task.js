@@ -18,7 +18,6 @@ import {
 import { fg, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
-import { showEditTaskDialog } from './EditTaskDialog'
 import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
 
@@ -74,11 +73,7 @@ type TaskProps = {
 export const Task = ({ task }: TaskProps) => (
   <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
-      {showEditTaskDialog(task, handler => (
-        <div onClick={handler} className={style(task.done && strike)}>
-          {task.title}
-        </div>
-      ))}
+      <div className={style(task.done && strike)}>{task.title}</div>
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
