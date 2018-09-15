@@ -75,8 +75,8 @@ export const Task = ({ task }: TaskProps) => (
   <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
       <EditTaskModal
-        trigger={({ handleOpen }) => (
-          <div onClick={handleOpen} className={style(task.done && strike)}>
+        trigger={({ open }) => (
+          <div onClick={open} className={style(task.done && strike)}>
             {task.title}
           </div>
         )}
