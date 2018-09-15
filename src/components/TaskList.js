@@ -23,10 +23,8 @@ export function TaskList({ title, tasks }: Props) {
         initialState={{ idx: 0 }}
         getRefs={() => ({ container: React.createRef() })}
         didMount={({ refs }) => {
-          console.log(
-            `ReactDOM.findDOMNode(props.children[0])`,
-            ReactDOM.findDOMNode(refs.container.current),
-          )
+          const containerEl = ReactDOM.findDOMNode(refs.container.current)
+          console.log(`ReactDOM.findDOMNode(props.children[0])`, containerEl)
         }}
       >
         {({ refs }) => (
