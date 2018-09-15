@@ -35,14 +35,15 @@ export function TaskList({ title, tasks }: Props) {
   return (
     <div>
       <div className={titleClass}>{title}</div>
-      <Component
-        totalCount={tasks.length}
-        initialState={{ idx: 0 }}
-        getRefs={() => ({ container: React.createRef() })}
-        didMount={didMountOrUpdate}
-        didUpdate={didMountOrUpdate}
-      >
-        {({ refs, state: { idx }, setState, props: { totalCount } }) => {
+      {renderWithComponent(
+        {
+          totalCount: tasks.length,
+          initialState: { idx: 0 },
+          getRefs: () => ({ container: React.createRef() }),
+          didMount: didMountOrUpdate,
+          didUpdate: didMountOrUpdate,
+        },
+        ({ refs, state: { idx }, setState, props: { totalCount } }) => {
           const onKeyDown = e => {
             const isArrowUp = isHotkey('ArrowUp')
             const isArrowDown = isHotkey('ArrowDown')
@@ -89,8 +90,12 @@ export function TaskList({ title, tasks }: Props) {
               ))}
             </div>
           )
-        }}
-      </Component>
+        },
+      )}
     </div>
   )
 }
+
+export const renderWithComponent = (props: Object, render: any) => (
+  <Component {...props}>{render}</Component>
+)
