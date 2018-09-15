@@ -3,8 +3,9 @@
 import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
+import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
-import { CollectionConsumer } from './CollectionContext'
+import { CollectionConsumer, renderWithCollections } from './CollectionContext'
 import {
   classes,
   content,
@@ -17,11 +18,14 @@ import {
 } from '../typestyle-exports'
 import { fg, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
-import { intersperse } from 'ramda'
+import { intersperse, pick } from 'ramda'
 import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
 import { ModalState } from './EditTaskDialog'
-import { Dialog } from '@reach/dialog'
+import { Dialog } from '@reach/dialog/'
+import { vertical } from 'csstips'
+import { categories } from '../models/Category'
+import Component from '@reach/component-component'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 const appearOnParentHoverClass = 'appearOnParentHover'
@@ -84,7 +88,44 @@ export const Task = ({ task }: TaskProps) => (
       >
         {({ close, isOpen }) => (
           <Dialog onDismiss={close} isOpen={isOpen}>
-            <h1>Dialog</h1>
+            <Component initialState={pick(['title', 'category'])(task)}>
+              {({ state: { title, category }, setState }) => (
+                <Fragment>
+                  <h3>Edit Task </h3>
+                  <div className={style(vertical)}>
+                    <input
+                      type={'text'}
+                      value={title}
+                      onChange={e => setState({ title: e.target.value })}
+                    />
+                  </div>
+                  <div className={style(vertical)}>
+                    <select
+                      value={category}
+                      onChange={e => setState({ category: e.target.value })}
+                    >
+                      {categories.map(category => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    {renderWithCollections(({ updateTask }) => (
+                      <button
+                        onClick={() => {
+                          updateTask({ title, category }, task)
+                          close()
+                        }}
+                      >
+                        Ok
+                      </button>
+                    ))}
+                  </div>
+                </Fragment>
+              )}
+            </Component>
           </Dialog>
         )}
       </ModalState>
