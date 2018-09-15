@@ -14,24 +14,36 @@ import { isHotkey } from 'is-hotkey'
 
 type Props = { title: string, tasks: TaskModel[] }
 
+const didMountOrUpdate = ({ refs, state: { idx } }) => {
+  const containerEl = nullableToMaybe(
+    ReactDOM.findDOMNode(refs.container.current),
+  )
+  containerEl.map(
+    tap(el => {
+      const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
+      const elToFocus = atIndex(idx, elList)
+      requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
+    }),
+  )
+}
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
     marginBottom: rem(1),
   })
   const tasksClass = style(verticallySpaced(rem(1.5)))
-  const didMountOrUpdate = ({ refs, state: { idx } }) => {
-    const containerEl = nullableToMaybe(
-      ReactDOM.findDOMNode(refs.container.current),
-    )
-    containerEl.map(
-      tap(el => {
-        const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
-        const elToFocus = atIndex(idx, elList)
-        requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
-      }),
+
+  const renderTasks = function renderTasks(refs, onKeyDown) {
+    return (
+      <div ref={refs.container} className={tasksClass} onKeyDown={onKeyDown}>
+        {tasks.map(task => (
+          <Task key={task.id} task={task} />
+        ))}
+      </div>
     )
   }
+
   return (
     <div>
       <div className={titleClass}>{title}</div>
@@ -79,17 +91,7 @@ export function TaskList({ title, tasks }: Props) {
             }
           }
 
-          return (
-            <div
-              ref={refs.container}
-              className={tasksClass}
-              onKeyDown={onKeyDown}
-            >
-              {tasks.map(task => (
-                <Task key={task.id} task={task} />
-              ))}
-            </div>
-          )
+          return renderTasks(refs, onKeyDown)
         },
       )}
     </div>
