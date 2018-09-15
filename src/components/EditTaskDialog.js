@@ -46,6 +46,10 @@ export function showEditTaskDialog(task: TaskModel, render: Function) {
   )
 }
 
+export function isEditTaskDialogOpen(render: Function) {
+  return <Consumer>{({ isOpen }) => render(isOpen)}</Consumer>
+}
+
 export function EditTaskDialogStateProvider({ children }: { children: any }) {
   const stateName = 'editTaskState'
   const defaultState = { isOpen: false, task: {}, title: '' }
