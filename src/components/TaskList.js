@@ -26,7 +26,9 @@ export function TaskList({ title, tasks }: Props) {
     containerEl.map(
       tap(el => {
         const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
-        atIndex(idx, elList).map(invoker(0, 'focus'))
+        const elToFocus = atIndex(idx, elList)
+
+        elToFocus.map(invoker(0, 'focus'))
       }),
     )
   }
