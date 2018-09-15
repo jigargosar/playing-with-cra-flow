@@ -27,6 +27,50 @@ const didMountOrUpdate = ({ refs, state: { idx } }) => {
   )
 }
 
+function ArrowKeyNavigator({ totalCount, children }) {
+  return renderWithComponent(
+    {
+      totalCount,
+      initialState: { idx: 0 },
+      getRefs: () => ({ container: React.createRef() }),
+      didMount: didMountOrUpdate,
+      didUpdate: didMountOrUpdate,
+    },
+    ({ refs, state: { idx }, setState, props: { totalCount } }) => {
+      const onKeyDown = e => {
+        const isArrowUp = isHotkey('ArrowUp')
+        const isArrowDown = isHotkey('ArrowDown')
+        const isArrowLeft = isHotkey('ArrowLeft')
+        const isArrowRight = isHotkey('ArrowRight')
+
+        cond([
+          //
+          [isArrowUp, () => setState({ idx: mathMod(idx - 1, totalCount) })],
+          [isArrowDown, () => setState({ idx: mathMod(idx + 1, totalCount) })],
+          [isArrowLeft, () => setState({ idx: mathMod(0, totalCount) })],
+          [
+            isArrowRight,
+            () => setState({ idx: mathMod(totalCount - 1, totalCount) }),
+          ],
+        ])(e)
+
+        const isArrowKey = anyPass([
+          isArrowUp,
+          isArrowDown,
+          isArrowRight,
+          isArrowLeft,
+        ])
+
+        if (isArrowKey(e)) {
+          e.preventDefault()
+        }
+      }
+
+      return children({ refs, onKeyDown })
+    },
+  )
+}
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -34,66 +78,22 @@ export function TaskList({ title, tasks }: Props) {
   })
   const tasksClass = style(verticallySpaced(rem(1.5)))
 
-  const renderTasks = function renderTasks(refs, onKeyDown) {
-    return (
-      <div ref={refs.container} className={tasksClass} onKeyDown={onKeyDown}>
-        {tasks.map(task => (
-          <Task key={task.id} task={task} />
-        ))}
-      </div>
-    )
-  }
-
   return (
     <div>
       <div className={titleClass}>{title}</div>
-      {renderWithComponent(
-        {
-          totalCount: tasks.length,
-          initialState: { idx: 0 },
-          getRefs: () => ({ container: React.createRef() }),
-          didMount: didMountOrUpdate,
-          didUpdate: didMountOrUpdate,
-        },
-        ({ refs, state: { idx }, setState, props: { totalCount } }) => {
-          const onKeyDown = e => {
-            const isArrowUp = isHotkey('ArrowUp')
-            const isArrowDown = isHotkey('ArrowDown')
-            const isArrowLeft = isHotkey('ArrowLeft')
-            const isArrowRight = isHotkey('ArrowRight')
-
-            cond([
-              //
-              [
-                isArrowUp,
-                () => setState({ idx: mathMod(idx - 1, totalCount) }),
-              ],
-              [
-                isArrowDown,
-                () => setState({ idx: mathMod(idx + 1, totalCount) }),
-              ],
-              [isArrowLeft, () => setState({ idx: mathMod(0, totalCount) })],
-              [
-                isArrowRight,
-                () => setState({ idx: mathMod(totalCount - 1, totalCount) }),
-              ],
-            ])(e)
-
-            const isArrowKey = anyPass([
-              isArrowUp,
-              isArrowDown,
-              isArrowRight,
-              isArrowLeft,
-            ])
-
-            if (isArrowKey(e)) {
-              e.preventDefault()
-            }
-          }
-
-          return renderTasks(refs, onKeyDown)
-        },
-      )}
+      <ArrowKeyNavigator totalCount={tasks.length}>
+        {({ refs, onKeyDown }) => (
+          <div
+            ref={refs.container}
+            className={tasksClass}
+            onKeyDown={onKeyDown}
+          >
+            {tasks.map(task => (
+              <Task key={task.id} task={task} />
+            ))}
+          </div>
+        )}
+      </ArrowKeyNavigator>
     </div>
   )
 }

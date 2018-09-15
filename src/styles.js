@@ -125,7 +125,6 @@ export const p3 = 360 / 3
 export const p6 = 360 / 6
 // const primaryColor = hsla(p6 * 4, 0.6, 0.6, 1)
 const primaryColor = hsla(p3 * 2, 0.6, 0.6, 1)
-console.log(`primaryColor.toHSLA()`, primaryColor.toHSLA().toString())
 
 export const sheet = stylesheet({
   antialiased,
