@@ -1,13 +1,14 @@
 // @flow
-import Component from '@reach/component-component'
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Dialog } from '@reach/dialog'
+import { Dialog } from '@reach/dialog/'
 import { renderWithCollections } from './CollectionContext'
 import { rem, style, vertical, verticallySpaced } from '../typestyle-exports'
-import { noop } from 'ramda-adjunct'
-import type { TaskModel } from '../models/Task'
+import { noop } from 'ramda-adjunct/'
 import { storageGet, StorageSet } from './StorageSet'
+import { categories } from '../models/Category'
+import type { TaskModel } from '../models/Task'
+import Component from '@reach/component-component'
 
 const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
@@ -31,6 +32,13 @@ export function EditTaskDialog() {
           <div className={style(vertical)}>
             <input type={'text'} value={title} onChange={onTitleChange} />
           </div>
+          <select>
+            {categories.map(category => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
           <button onClick={onOk}>Ok</button>
         </Dialog>
       )}
