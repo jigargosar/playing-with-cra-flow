@@ -28,7 +28,7 @@ export function TaskList({ title, tasks }: Props) {
         const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
         const elToFocus = atIndex(idx, elList)
 
-        elToFocus.map(invoker(0, 'focus'))
+        requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
       }),
     )
   }
