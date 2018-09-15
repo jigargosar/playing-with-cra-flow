@@ -1,6 +1,5 @@
 import {
   cssRule,
-  extend,
   inlineBlock,
   padding,
   rem,
@@ -16,6 +15,7 @@ import {
 } from 'csstips/lib'
 import { mergeAll } from 'ramda'
 import { isString } from './ramda-exports'
+import { extend } from 'typestyle/'
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
@@ -234,3 +234,6 @@ export function setupGlobalStyles() {
   //   border(0, 0, null, null),
   // )
 }
+
+export const fgHoverDarken = fgColor =>
+  extend(fg(fgColor), hover(fg(fgColor.darken(0.2))))
