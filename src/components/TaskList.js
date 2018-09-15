@@ -75,7 +75,6 @@ export function TaskList({ title, tasks }: Props) {
 
             if (isArrowKey(e)) {
               e.preventDefault()
-              console.log('isArrowKey')
             }
           }
 
