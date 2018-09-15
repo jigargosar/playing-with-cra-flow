@@ -174,36 +174,6 @@ export function setupGlobalStyles() {
   cssRule('button, input', br2)
 
   cssRule(
-    'button',
-    tc,
-    { lineHeight: 1.15 },
-    { color: '#fff' },
-    bg(primaryColor),
-    padding(rem(0.5), rem(1)),
-    fontWeightNormal,
-    { transition: 'transform backgroundColor .15s ease-in' },
-    { transform: 'perspective(500px) translateZ(0px)' },
-    {
-      $nest: {
-        '&:active': {
-          transform: 'perspective(500px) translateZ(-10px)',
-        },
-        '&:not([disabled])': {
-          ...pointer,
-          $nest: {
-            '&:hover': {
-              ...bg(primaryColor.darken(0.1)),
-            },
-          },
-        },
-        '&[disabled]': {
-          ...bg(primaryColor.fade(0.5)),
-        },
-      },
-    },
-  )
-
-  cssRule(
     `input[type='text']`,
     { minHeight: rem(1.5) },
     shadow,
