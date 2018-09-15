@@ -6,7 +6,7 @@ import {
   rem,
   stylesheet,
 } from './typestyle-exports'
-import { color, ColorHelper, viewHeight, viewWidth } from 'csx/lib'
+import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx/lib'
 import {
   border,
   BoxUnit,
@@ -129,7 +129,8 @@ export function setupPage(rootSelector: string) {
   cssRule(rootSelector, fillParent)
 }
 
-const primaryColor = color('#3490dc')
+const primaryColor = hsla(207, 0.6, 0.6, 1)
+console.log(`primaryColor.toHSLA()`, primaryColor.toHSLA().toString())
 
 export const sheet = stylesheet({
   antialiased,
@@ -172,6 +173,37 @@ export function setupGlobalStyles() {
   cssRule('button, input, optgroup, select, textarea', { margin: 0 })
 
   cssRule('button, input', br2)
+  cssRule(
+    'button',
+    mergeAll([
+      tc,
+      { lineHeight: 1.15 },
+      { color: '#fff' },
+      bg(primaryColor),
+      padding(rem(0.5), rem(1)),
+      fontWeightNormal,
+      { transition: 'transform backgroundColor .15s ease-in' },
+      { transform: 'perspective(500px) translateZ(0px)' },
+      {
+        $nest: {
+          '&:active': {
+            transform: 'perspective(500px) translateZ(-10px)',
+          },
+          '&:not([disabled])': {
+            ...pointer,
+            $nest: {
+              '&:hover': {
+                ...bg(primaryColor.darken(0.1)),
+              },
+            },
+          },
+          '&[disabled]': {
+            ...bg(primaryColor.fade(0.5)),
+          },
+        },
+      },
+    ]),
+  )
 
   cssRule(
     `input[type='text']`,
