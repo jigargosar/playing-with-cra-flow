@@ -47,8 +47,10 @@ export function TaskList({ title, tasks }: Props) {
             onKeyDown={e => {
               if (e.key === 'ArrowUp') {
                 setState({ idx: mathMod(idx - 1, tasks.length) })
+                e.preventDefault()
               } else if (e.key === 'ArrowDown') {
                 setState({ idx: mathMod(idx + 1, tasks.length) })
+                e.preventDefault()
               }
             }}
           >
