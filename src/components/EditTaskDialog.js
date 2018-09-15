@@ -21,6 +21,25 @@ const { Provider, Consumer } = React.createContext({
   onCategoryChange: noop,
 })
 
+type ModalProps = { trigger: Function }
+
+export function EditTaskModal({ trigger }: ModalProps) {
+  return (
+    <Component>
+      {({ state: { isOpen }, setState }) => (
+        <Fragment>
+          {trigger({ handleOpen: setState({ isOpen: true }) })}
+          {isOpen && (
+            <Dialog isOpen={true}>
+              <h1>Dialog</h1>
+            </Dialog>
+          )}
+        </Fragment>
+      )}
+    </Component>
+  )
+}
+
 export function EditTaskDialog() {
   return (
     <Consumer>
