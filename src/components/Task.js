@@ -72,7 +72,7 @@ type TaskProps = {
 }
 
 export const Task = ({ task }: TaskProps) => (
-  <div className={containerClass}>
+  <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
       {showEditTaskDialog(task, handler => (
         <div onClick={handler} className={style(task.done && strike)}>
