@@ -18,23 +18,25 @@ export function TaskList({ title, tasks }: Props) {
     marginBottom: rem(1),
   })
   const tasksClass = style(verticallySpaced(rem(1.5)))
+  const didMountOrUpdate = ({ refs }) => {
+    const containerEl = nullableToMaybe(
+      ReactDOM.findDOMNode(refs.container.current),
+    )
+    containerEl.map(
+      tap(el => {
+        const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
+        console.log(`elList`, elList)
+      }),
+    )
+  }
   return (
     <div>
       <div className={titleClass}>{title}</div>
       <Component
         initialState={{ idx: 0 }}
         getRefs={() => ({ container: React.createRef() })}
-        didMount={({ refs }) => {
-          const containerEl = nullableToMaybe(
-            ReactDOM.findDOMNode(refs.container.current),
-          )
-          containerEl.map(
-            tap(el => {
-              const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
-              console.log(`elList`, elList)
-            }),
-          )
-        }}
+        didMount={didMountOrUpdate}
+        didUpdate={didMountOrUpdate}
       >
         {({ refs }) => (
           <div ref={refs.container} className={tasksClass}>
