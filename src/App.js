@@ -119,9 +119,9 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isEditTaskDialogOpen(isOpen => (
+      {isEditTaskDialogOpen(isEditTaskDialogOpen => (
         <FocusTrap
-          paused={isOpen}
+          paused={isEditTaskDialogOpen}
           tag={'div'}
           className={containerClass}
           focusTrapOptions={{
