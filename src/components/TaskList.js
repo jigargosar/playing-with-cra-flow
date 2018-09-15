@@ -8,7 +8,7 @@ import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
 import * as ReactDOM from 'react-dom'
 import { nullableToMaybe } from 'folktale/conversions'
-import { invoker, tap } from 'ramda'
+import { invoker, mathMod, tap } from 'ramda'
 import { atIndex } from '../folktale-helpers'
 
 type Props = { title: string, tasks: TaskModel[] }
@@ -40,8 +40,18 @@ export function TaskList({ title, tasks }: Props) {
         didMount={didMountOrUpdate}
         didUpdate={didMountOrUpdate}
       >
-        {({ refs }) => (
-          <div ref={refs.container} className={tasksClass}>
+        {({ refs, state: { idx }, setState }) => (
+          <div
+            ref={refs.container}
+            className={tasksClass}
+            onKeyDown={e => {
+              if (e.key === 'ArrowUp') {
+                setState({ idx: mathMod(idx - 1, tasks.length) })
+              } else if (e.key === 'ArrowDown') {
+                setState({ idx: mathMod(idx + 1, tasks.length) })
+              }
+            }}
+          >
             {tasks.map(task => (
               <Task key={task.id} task={task} />
             ))}
