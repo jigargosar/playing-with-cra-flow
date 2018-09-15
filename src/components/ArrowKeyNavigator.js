@@ -7,16 +7,25 @@ import { renderWithComponent } from './renderWithComponent'
 import * as React from 'react'
 import { isHotkey } from 'is-hotkey'
 
-type Props = { totalCount: number, children: Function }
+type Props = { children: Function }
 
-export function ArrowKeyNavigator({ totalCount, children }: Props) {
-  const didMountOrUpdate = ({ refs, state: { idx } }) => {
+export function ArrowKeyNavigator({ children }: Props) {
+  const didMountOrUpdate = ({
+    refs: { containerRef },
+    state: { idx, totalCount },
+    setState,
+  }) => {
     const containerEl = nullableToMaybe(
-      ReactDOM.findDOMNode(refs.container.current),
+      ReactDOM.findDOMNode(containerRef.current),
     )
     containerEl.map(
       tap(el => {
-        const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
+        const elList = el.querySelectorAll(
+          `:scope > [tabindex='0'], :scope > a`,
+        )
+        if (totalCount !== elList.length) {
+          setState({ totalCount: elList.length })
+        }
         const elToFocus = atIndex(idx, elList)
         requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
       }),
@@ -25,18 +34,12 @@ export function ArrowKeyNavigator({ totalCount, children }: Props) {
 
   return renderWithComponent(
     {
-      totalCount,
-      initialState: { idx: 0 },
-      getRefs: () => ({ container: React.createRef() }),
+      initialState: { idx: 0, totalCount: 0 },
+      getRefs: () => ({ containerRef: React.createRef() }),
       didMount: didMountOrUpdate,
       didUpdate: didMountOrUpdate,
     },
-    ({
-      refs: { containerRef },
-      state: { idx },
-      setState,
-      props: { totalCount },
-    }) => {
+    ({ refs: { containerRef }, state: { idx, totalCount }, setState }) => {
       const onKeyDown = e => {
         const isArrowUp = isHotkey('ArrowUp')
         const isArrowDown = isHotkey('ArrowDown')
