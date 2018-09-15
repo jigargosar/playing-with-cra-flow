@@ -1,6 +1,7 @@
 import { Link as RouterLink, Match, Router as ReachRouter } from '@reach/router'
 import * as React from 'react'
 import { classes, style } from '../typestyle-exports'
+import { fg } from '../styles'
 
 export const Route = ({ render, ...otherProps }) => render(otherProps)
 
@@ -9,9 +10,9 @@ export { Match }
 
 export const LinkTo = ({ className, ...otherProps }) => (
   <RouterLink
-    getProps={({ isCurrent, location }) => ({
+    getProps={({ isCurrent }) => ({
       className: classes(
-        style(isCurrent && { color: 'rgba(255, 99, 71, 1)' }),
+        style(isCurrent && fg('rgba(255, 99, 71, 1)')),
         className,
       ),
     })}
