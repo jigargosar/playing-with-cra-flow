@@ -18,12 +18,21 @@ const { Provider, Consumer } = React.createContext({
   onOk: noop,
   startEditingTask: noop,
   category: 'InBasket',
+  onCategoryChange: noop,
 })
 
 export function EditTaskDialog() {
   return (
     <Consumer>
-      {({ onDismiss, isOpen, title, category, onTitleChange, onOk }) => (
+      {({
+        onDismiss,
+        isOpen,
+        title,
+        category,
+        onTitleChange,
+        onCategoryChange,
+        onOk,
+      }) => (
         <Dialog
           className={style(verticallySpaced(rem(1)))}
           onDismiss={onDismiss}
@@ -34,7 +43,7 @@ export function EditTaskDialog() {
             <input type={'text'} value={title} onChange={onTitleChange} />
           </div>
           <div className={style(vertical)}>
-            <select defaultValue={category}>
+            <select value={category} onChange={onCategoryChange}>
               {categories.map(category => (
                 <option key={category} value={category}>
                   {category}
@@ -70,7 +79,7 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
     <Component getInitialState={() => storageGet(stateName, defaultState)}>
       {({ state, setState }) =>
         renderWithCollections(({ updateTask }) => {
-          const { task, isOpen, title } = state
+          const { task, isOpen, title, category } = state
           const onDismiss = () => setState({ isOpen: false })
           const startEditingTask = task => () =>
             setState({ isOpen: true, task, title: task.title })
@@ -79,14 +88,16 @@ export function EditTaskDialogStateProvider({ children }: { children: any }) {
             onDismiss()
           }
           const onTitleChange = e => setState({ title: e.target.value })
+          const onCategoryChange = e => setState({ category: e.target.value })
           const childProps = {
             onDismiss,
             isOpen,
             title,
             onTitleChange,
+            onCategoryChange,
             onOk,
             startEditingTask,
-            category: task.category,
+            category,
           }
           return (
             <Fragment>
