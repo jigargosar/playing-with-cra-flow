@@ -10,14 +10,15 @@ export const Route = ({ render, ...otherProps }) => render(otherProps)
 export const Router = ReachRouter
 export { Match }
 
+function fgHoverDarken(fgColor) {
+  return extend(fg(fgColor), hover(fg(fgColor.darken(0.2))))
+}
+
 export const LinkTo = ({ className, ...otherProps }) => (
   <RouterLink
     getProps={({ isCurrent }) => ({
       className: classes(
-        style(
-          isCurrent &&
-            extend(fg(accentColor), hover(fg(accentColor.darken(0.2)))),
-        ),
+        style(isCurrent && fgHoverDarken(accentColor)),
         className,
       ),
     })}
