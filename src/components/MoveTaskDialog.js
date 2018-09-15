@@ -35,12 +35,12 @@ export function MoveTaskDialog() {
   return (
     <Consumer>
       {({
-          onDismiss,
-          isOpen,
-          title,
-          category: currentCategory,
-          onCategoryClick,
-        }) =>
+        onDismiss,
+        isOpen,
+        title,
+        category: currentCategory,
+        onCategoryClick,
+      }) =>
         isOpen && (
           <Dialog
             className={style(verticallySpaced(rem(1)))}
@@ -81,6 +81,10 @@ export function showMoveTaskDialog(task: TaskModel, render: Function) {
       {({ startEditingTask }) => render(startEditingTask(task))}
     </Consumer>
   )
+}
+
+export function isMoveTaskDialogOpen(render: Function) {
+  return <Consumer>{({ isOpen }) => render(isOpen)}</Consumer>
 }
 
 export function MoveTaskDialogStateProvider({ children }: { children: any }) {
