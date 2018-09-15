@@ -20,7 +20,7 @@ import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
-import { EditTaskModal } from './EditTaskDialog'
+import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
@@ -75,7 +75,7 @@ type TaskProps = {
 export const Task = ({ task }: TaskProps) => (
   <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
-      <EditTaskModal
+      <ModalState
         trigger={({ open }) => (
           <div onClick={open} className={style(task.done && strike)}>
             {task.title}
@@ -87,7 +87,7 @@ export const Task = ({ task }: TaskProps) => (
             <h1>Dialog</h1>
           </Dialog>
         )}
-      </EditTaskModal>
+      </ModalState>
 
       {renderTags(task)}
     </div>

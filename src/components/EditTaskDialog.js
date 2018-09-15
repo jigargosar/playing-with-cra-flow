@@ -23,7 +23,7 @@ const { Provider, Consumer } = React.createContext({
 
 type ModalProps = { trigger: Function, children: Function }
 
-export function EditTaskModal({ trigger, children }: ModalProps) {
+export function ModalState({ trigger, children }: ModalProps) {
   return (
     <Component initialState={{ isOpen: false }}>
       {({ state: { isOpen }, setState }) => {
