@@ -30,7 +30,8 @@ export function TaskList({ title, tasks }: Props) {
           )
           containerEl.map(
             tap(el => {
-              el.querySelectorAll('.arrowNav')
+              const elList = el.querySelectorAll(`:scope > [tabindex='0']`)
+              console.log(`elList`, elList)
             }),
           )
         }}
