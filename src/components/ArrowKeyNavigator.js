@@ -34,7 +34,7 @@ const isArrowDown = isHotkey('ArrowDown')
 const isArrowLeft = isHotkey('ArrowLeft')
 const isArrowRight = isHotkey('ArrowRight')
 
-function onKeyDown(setState, idx, totalCount) {
+function onKeyDown({ setState, state: { idx, totalCount } }) {
   return e => {
     const setIdx = idx => setState({ idx: mathMod(idx, totalCount) })
     cond([
@@ -66,10 +66,10 @@ export function ArrowKeyNavigator({ children }: Props) {
       didMount: didMountOrUpdate,
       didUpdate: didMountOrUpdate,
     },
-    ({ refs: { containerRef }, state: { idx, totalCount }, setState }) => {
+    props => {
       return children({
-        containerRef,
-        onKeyDown: onKeyDown(setState, idx, totalCount),
+        containerRef: props.refs.containerRef,
+        onKeyDown: onKeyDown(props),
       })
     },
   )
