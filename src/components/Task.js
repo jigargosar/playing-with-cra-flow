@@ -62,7 +62,9 @@ type TaskProps = {
   task: TaskModel,
 }
 
-function EditTaskDialog({ task, close, isOpen }) {
+type EditTaskDialogProps = { task: TaskModel, close: Function, isOpen: boolean }
+
+export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
   return (
     <Dialog
       className={style(verticallySpaced(rem(1)))}
