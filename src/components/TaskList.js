@@ -6,7 +6,6 @@ import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import { Fragment } from 'react'
 import type { TaskModel } from '../models/Task'
-import { ArrowKeyNavigator } from './ArrowKeyNavigator'
 import { createStringValue } from 'react-values'
 import Composer from 'react-composer'
 
@@ -25,20 +24,9 @@ export function TaskList({ title, tasks }: Props) {
     <div>
       <div className={titleClass}>{title}</div>
       <Composer
-        components={[
-          <EditingTaskId />,
-          ({ render }) => <ArrowKeyNavigator children={render} />,
-        ]}
-        children={([
-          { value: editingTaskId, set: setEditingTaskId },
-          { containerRef, onKeyDown, onFocus },
-        ]) => (
-          <div
-            ref={containerRef}
-            className={tasksClass}
-            // onKeyDown={editingTaskId ? null : onKeyDown}
-            // onFocus={editingTaskId ? null : onFocus}
-          >
+        components={[<EditingTaskId />]}
+        children={([{ value: editingTaskId, set: setEditingTaskId }]) => (
+          <div className={tasksClass}>
             {tasks.map(task => {
               return (
                 <Fragment key={task.id}>
