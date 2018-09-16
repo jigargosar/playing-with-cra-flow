@@ -34,7 +34,7 @@ export function TaskList({ title, tasks }: Props) {
                 {tasks.map(task => {
                   return task.id === editingTaskId ? (
                     <InlineEditTask
-                      key={'editingTask'}
+                      key={task.id}
                       dismissEditing={() => setEditingTaskId(null)}
                       task={task}
                     />
