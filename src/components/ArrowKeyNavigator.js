@@ -27,7 +27,9 @@ const onFocus = (
 
     const childIdx = Array.from(parentEl.children).indexOf(childEl)
     console.log(`childIdx`, childIdx)
-    setState({ idx: childIdx })
+    if (idx !== childIdx) {
+      setState({ idx: childIdx })
+    }
 
     return null
   })
