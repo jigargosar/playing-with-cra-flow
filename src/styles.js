@@ -89,13 +89,13 @@ export function setupPage(rootSelector: string) {
   /** Use full window size for application */
   cssRule(
     'html, body',
-    // {
-    //   height: '100%',
-    //   width: '100%',
-    //   padding: 0,
-    //   margin: 0,
-    // },
-    // { fontSize: 16 },
+    {
+      height: '100%',
+      width: '100%',
+      padding: 0,
+      margin: 0,
+    },
+    { fontSize: 16 },
     antialiased,
   )
 
