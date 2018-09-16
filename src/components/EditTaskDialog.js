@@ -25,7 +25,7 @@ const ModalCounter = createNumberValue(0)
 
 type ModalProps = { trigger: Function, children: Function }
 
-export const isModalOpen = render => (
+export const isAnyModalOpen = render => (
   <ModalCounter children={({ value }) => render(value > 0)} />
 )
 

@@ -32,7 +32,10 @@ import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import FocusTrap from 'focus-trap-react'
-import { isModalOpen, ModalContextProvider } from './components/EditTaskDialog'
+import {
+  isAnyModalOpen,
+  ModalContextProvider,
+} from './components/EditTaskDialog'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -112,7 +115,7 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isModalOpen(isModalOpen =>
+      {isAnyModalOpen(isModalOpen =>
         isMoveTaskDialogOpen(isMoveTaskDialogOpen => (
           <FocusTrap
             paused={isModalOpen || isMoveTaskDialogOpen}
