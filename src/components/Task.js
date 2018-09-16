@@ -9,7 +9,7 @@ import { CollectionConsumer, renderWithCollections } from './CollectionContext'
 import { content, flex, horizontal, rem, style } from '../typestyle-exports'
 import { fg, strike } from '../styles'
 import { Match } from '@reach/router'
-import { intersperse, pick } from 'ramda'
+import { intersperse, mergeAll, pick } from 'ramda'
 import { blackA } from '../colors'
 import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog/'
@@ -117,7 +117,11 @@ export const Task = ({ task }: TaskProps) => (
       {renderWithCollections(({ updateTask }) => (
         <div className={style(padding(3))}>
           <EditableText
-            className={style(task.done && strike, { width: 'calc(100%)' })}
+            className={style(
+              task.done && strike,
+              { width: 'calc(100%)' },
+              { $nest: { '&>*': mergeAll([task.done && strike]) } },
+            )}
             defaultValue={task.title}
             onConfirm={title => updateTask({ title }, task)}
           />
