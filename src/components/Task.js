@@ -3,18 +3,20 @@
 import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
-import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer, renderWithCollections } from './CollectionContext'
-import { content, flex, horizontal, rem, style } from '../typestyle-exports'
+import { content, flex, rem, style } from '../typestyle-exports'
 import { fg } from '../styles'
 import { Match } from '@reach/router'
-import { intersperse, pick } from 'ramda'
+import { intersperse } from 'ramda'
 import { blackA } from '../colors'
-import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
-import Component from '@reach/component-component'
-import { horizontallySpaced, vertical, verticallySpaced } from 'csstips/'
+import {
+  flex1,
+  horizontal,
+  horizontallySpaced,
+  verticallySpaced,
+} from 'csstips/'
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
@@ -53,58 +55,6 @@ function renderCategory(task) {
     </Match>
   )
 }
-
-type EditTaskDialogProps = { task: TaskModel, close: Function, isOpen: boolean }
-
-export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
-  return (
-    <Dialog
-      className={style(verticallySpaced(rem(1)))}
-      onDismiss={close}
-      isOpen={isOpen}
-    >
-      <Component initialState={pick(['title', 'category'])(task)}>
-        {({ state: { title, category }, setState }) => (
-          <Fragment>
-            <h3>Edit Task </h3>
-            <div className={style(vertical)}>
-              <input
-                type={'text'}
-                value={title}
-                onChange={e => setState({ title: e.target.value })}
-              />
-            </div>
-            <div className={style(vertical)}>
-              <select
-                value={category}
-                onChange={e => setState({ category: e.target.value })}
-              >
-                {categories.map(category => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              {renderWithCollections(({ updateTask }) => (
-                <button
-                  onClick={() => {
-                    updateTask({ title, category }, task)
-                    close()
-                  }}
-                >
-                  Ok
-                </button>
-              ))}
-            </div>
-          </Fragment>
-        )}
-      </Component>
-    </Dialog>
-  )
-}
-
 type IP = {
   dismissEditing: Function,
   task: TaskModel,
@@ -122,26 +72,34 @@ export function InlineEditTask({ dismissEditing, task }: IP) {
           defaultValue={task}
           children={({ value: { title, category }, set }) => {
             return (
-              <div>
-                <div>Editing</div>
-                <InputGroup
-                  value={title}
-                  onChange={e => set('title', e.target.value)}
-                />
-                <HTMLSelect
-                  value={category}
-                  onChange={e => set('category', e.target.value)}
-                  options={categories}
-                />
-                <Button
-                  onClick={() => {
-                    updateTask({ title, categories }, task)
-                    dismissEditing()
-                  }}
+              <div className={style(verticallySpaced('1rem'))}>
+                <div
+                  className={style(horizontal, horizontallySpaced('0.3rem'))}
                 >
-                  Save
-                </Button>
-                <Button onClick={dismissEditing}>Cancel</Button>
+                  <InputGroup
+                    className={style(flex1)}
+                    value={title}
+                    onChange={e => set('title', e.target.value)}
+                  />
+                  <HTMLSelect
+                    value={category}
+                    onChange={e => set('category', e.target.value)}
+                    options={categories}
+                  />
+                </div>
+                <div
+                  className={style(horizontal, horizontallySpaced('0.3rem'))}
+                >
+                  <Button
+                    onClick={() => {
+                      updateTask({ title, category }, task)
+                      dismissEditing()
+                    }}
+                  >
+                    Save
+                  </Button>
+                  <Button onClick={dismissEditing}>Cancel</Button>
+                </div>
               </div>
             )
           }}

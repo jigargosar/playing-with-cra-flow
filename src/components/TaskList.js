@@ -29,11 +29,12 @@ export function TaskList({ title, tasks }: Props) {
               <div
                 ref={containerRef}
                 className={tasksClass}
-                onKeyDown={editingTaskId && onKeyDown}
+                onKeyDown={editingTaskId ? null : onKeyDown}
               >
                 {tasks.map(task => {
                   return task.id === editingTaskId ? (
                     <InlineEditTask
+                      key={task.id}
                       dismissEditing={() => setEditingTaskId(null)}
                       task={task}
                     />
