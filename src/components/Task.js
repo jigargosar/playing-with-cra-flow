@@ -15,7 +15,12 @@ import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
-import { vertical, verticallySpaced } from 'csstips/'
+import {
+  horizontallySpaced,
+  padding,
+  vertical,
+  verticallySpaced,
+} from 'csstips/'
 import { EditableText } from '@blueprintjs/core'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
@@ -107,12 +112,14 @@ function EditTaskDialog({ task, close, isOpen }) {
 }
 
 export const Task = ({ task }: TaskProps) => (
-  <div className={style(horizontal)} tabIndex={0}>
+  <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
     <div className={style(flex)}>
-      <EditableText
-        className={style(task.done && strike, { margin: 3 })}
-        defaultValue={task.title}
-      />
+      <div className={style(padding(3))}>
+        <EditableText
+          className={style(task.done && strike, { width: 'calc(100%)' })}
+          defaultValue={task.title}
+        />
+      </div>
       <ModalState
         trigger={({ open }) => (
           <div onClick={open} className={style(task.done && strike)}>
