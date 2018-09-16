@@ -76,8 +76,8 @@ type TaskProps = {
   task: TaskModel,
 }
 
-function renderEditTaskDialog(task) {
-  return ({ close, isOpen }) => (
+function renderEditTaskDialog({ task, close, isOpen }) {
+  return (
     <Dialog
       className={style(verticallySpaced(rem(1)))}
       onDismiss={close}
@@ -135,7 +135,7 @@ export const Task = ({ task }: TaskProps) => (
           </div>
         )}
       >
-        {renderEditTaskDialog(task)}
+        {({ close, isOpen }) => renderEditTaskDialog({ close, isOpen, task })}
       </ModalState>
       {renderTags(task)}
     </div>
