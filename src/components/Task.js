@@ -54,11 +54,6 @@ function renderCategory(task) {
   )
 }
 
-type TaskProps = {
-  task: TaskModel,
-  setEditingTaskId: string => any,
-}
-
 type EditTaskDialogProps = { task: TaskModel, close: Function, isOpen: boolean }
 
 export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
@@ -110,10 +105,12 @@ export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
   )
 }
 
-export function renderInlineEditTask(
+type IP = {
   dismissEditing: Function,
   task: TaskModel,
-) {
+}
+
+export function InlineEditTask({ dismissEditing, task }: IP) {
   return (
     <FocusTrap
       focusTrapOptions={{ onDeactivate: dismissEditing }}
@@ -151,10 +148,15 @@ export function renderInlineEditTask(
   )
 }
 
-export const Task = ({ task, setEditingTaskId }: TaskProps) => (
+type TaskProps = {
+  task: TaskModel,
+  startEditing: Function,
+}
+
+export const Task = ({ task, startEditing }: TaskProps) => (
   <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
     <div className={style(flex)}>
-      <div onClick={() => setEditingTaskId(task.id)}>{task.title}</div>
+      <div onClick={startEditing}>{task.title}</div>
 
       {/*<ModalState*/}
       {/*trigger={({ open }) => (*/}

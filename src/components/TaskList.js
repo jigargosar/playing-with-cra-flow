@@ -2,7 +2,7 @@
 import { style } from 'typestyle/'
 import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
-import { renderInlineEditTask, Task } from './Task'
+import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { ArrowKeyNavigator } from './ArrowKeyNavigator'
@@ -23,34 +23,33 @@ export function TaskList({ title, tasks }: Props) {
     <div>
       <div className={titleClass}>{title}</div>
       <EditingTaskId
-        children={({ value: editingTaskId, set: setEditingTaskId }) => {
-          return (
-            <ArrowKeyNavigator>
-              {({ containerRef, onKeyDown }) => (
-                <div
-                  ref={containerRef}
-                  className={tasksClass}
-                  onKeyDown={editingTaskId && onKeyDown}
-                >
-                  {tasks.map(task => {
-                    const isEditing = task.id === editingTaskId
-                    const dismissEditing = () => setEditingTaskId(null)
-                    if (isEditing) {
-                      return renderInlineEditTask(dismissEditing, task)
-                    }
-                    return (
-                      <Task
-                        key={task.id}
-                        task={task}
-                        setEditingTaskId={setEditingTaskId}
-                      />
-                    )
-                  })}
-                </div>
-              )}
-            </ArrowKeyNavigator>
-          )
-        }}
+        children={({ value: editingTaskId, set: setEditingTaskId }) => (
+          <ArrowKeyNavigator
+            children={({ containerRef, onKeyDown }) => (
+              <div
+                ref={containerRef}
+                className={tasksClass}
+                onKeyDown={editingTaskId && onKeyDown}
+              >
+                {tasks.map(task => {
+                  return task.id === editingTaskId ? (
+                    <InlineEditTask
+                      dismissEditing={() => setEditingTaskId(null)}
+                      task={task}
+                    />
+                  ) : (
+                    <Task
+                      key={task.id}
+                      task={task}
+                      setEditingTaskId={setEditingTaskId}
+                      startEditing={() => setEditingTaskId(task.id)}
+                    />
+                  )
+                })}
+              </div>
+            )}
+          />
+        )}
       />
     </div>
   )
