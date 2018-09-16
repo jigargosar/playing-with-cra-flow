@@ -11,10 +11,11 @@ import { Divider } from '@blueprintjs/core'
 export function Sidebar() {
   return (
     <ArrowKeyNavigator>
-      {({ containerRef, onKeyDown }) => (
+      {({ containerRef, onKeyDown, onFocus }) => (
         <div
           ref={containerRef}
           onKeyDown={onKeyDown}
+          onFocus={onFocus}
           className={containerStyle}
         >
           {categories.map(category => (
