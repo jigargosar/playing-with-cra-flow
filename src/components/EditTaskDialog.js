@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Fragment } from 'react'
-import Component from '@reach/component-component'
-import { createNumberValue } from 'react-values'
+import { BooleanValue, createNumberValue } from 'react-values'
 
 const ModalCounter = createNumberValue(0)
 
@@ -15,14 +14,15 @@ export function ModalState({ trigger, children }: ModalProps) {
   return (
     <ModalCounter
       children={({ increment, decrement }) => (
-        <Component initialState={{ isOpen: false }}>
-          {({ state: { isOpen }, setState }) => {
+        <BooleanValue
+          defaultValue={false}
+          children={({ value: isOpen, set: setOpen }) => {
             const close = () => {
-              setState({ isOpen: false })
+              setOpen(false)
               decrement()
             }
             const open = () => {
-              setState({ isOpen: true })
+              setOpen(true)
               increment()
             }
             const childProps = {
@@ -37,7 +37,7 @@ export function ModalState({ trigger, children }: ModalProps) {
               </Fragment>
             )
           }}
-        </Component>
+        />
       )}
     />
   )
