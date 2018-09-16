@@ -36,6 +36,7 @@ const isArrowRight = isHotkey('ArrowRight')
 
 function onKeyDown({ setState, state: { idx, totalCount } }) {
   return e => {
+    if (e.target.matches('input,textarea')) return
     const setIdx = idx => setState({ idx: mathMod(idx, totalCount) })
     cond([
       //
