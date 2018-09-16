@@ -15,8 +15,8 @@ import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
 import { horizontallySpaced, vertical, verticallySpaced } from 'csstips/'
-import { HTMLSelect } from '@blueprintjs/core'
-import { createStringValue } from 'react-values'
+import { HTMLSelect, InputGroup } from '@blueprintjs/core'
+import { createStringValue, ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
@@ -118,40 +118,48 @@ export const Task = ({ task }: TaskProps) => (
       if (isEditing) {
         const dismissEditing = () => setEditingTaskId(null)
         return (
-          <FocusTrap focusTrapOptions={{ onDeactivate: dismissEditing }}>
-            <div>
-              <div>Editing</div>
-              <button onClick={dismissEditing}>Cancel</button>
-            </div>
-          </FocusTrap>
+          <FocusTrap
+            focusTrapOptions={{ onDeactivate: dismissEditing }}
+            children={renderWithCollections(({ updateTask }) => (
+              <ObjectValue
+                defaultValue={task}
+                children={({ value: { title, category }, set }) => {
+                  return (
+                    <div>
+                      <div>Editing</div>
+                      <InputGroup
+                        value={title}
+                        onChange={e => set('title', e.target.value)}
+                      />
+                      <HTMLSelect
+                        value={category}
+                        onChange={e => set('category', e.target.value)}
+                        options={categories}
+                      />
+                      <button
+                        onClick={() => {
+                          updateTask({ title, categories }, task)
+                          dismissEditing()
+                        }}
+                      >
+                        Save
+                      </button>
+                      <button onClick={dismissEditing}>Cancel</button>
+                    </div>
+                  )
+                }}
+              />
+            ))}
+          />
         )
       }
-      return renderWithCollections(({ updateTask }) => (
+      return (
         <div
           className={style(horizontal, horizontallySpaced('0.3rem'))}
           tabIndex={0}
         >
           <div className={style(flex)}>
             <div onClick={() => setEditingTaskId(task.id)}>{task.title}</div>
-            {/*<div className={style(padding(3))}>*/}
-            {/*<EditableText*/}
-            {/*tabIndex={0}*/}
-            {/*className={style(*/}
-            {/*task.done && strike,*/}
-            {/*{ width: 'calc(100%)' },*/}
-            {/*{ $nest: { '&>*': mergeAll([task.done && strike]) } },*/}
-            {/*)}*/}
-            {/*defaultValue={task.title}*/}
-            {/*onConfirm={title => updateTask({ title }, task)}*/}
-            {/*/>*/}
-            {/*</div>*/}
-
-            <HTMLSelect
-              defaultValue={task.category}
-              // value={category}
-              onChange={e => updateTask({ category: e.target.value }, task)}
-              options={categories}
-            />
 
             {/*<ModalState*/}
             {/*trigger={({ open }) => (*/}
@@ -166,7 +174,7 @@ export const Task = ({ task }: TaskProps) => (
           </div>
           <div className={style(content)}>{renderCategory(task)}</div>
         </div>
-      ))
+      )
     }}
   />
 )
