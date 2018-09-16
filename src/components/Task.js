@@ -9,14 +9,14 @@ import { CollectionConsumer, renderWithCollections } from './CollectionContext'
 import { content, flex, horizontal, rem, style } from '../typestyle-exports'
 import { fg } from '../styles'
 import { Match } from '@reach/router'
-import { intersperse, pathEq, pick } from 'ramda'
+import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
 import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
 import { horizontallySpaced, vertical, verticallySpaced } from 'csstips/'
 import { HTMLSelect } from '@blueprintjs/core'
-import { createValue } from 'react-values'
+import { createStringValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
@@ -109,18 +109,19 @@ export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
   )
 }
 
-const IsEditingTask = createValue(null)
+const EditingTaskId = createStringValue(null)
 
 export const Task = ({ task }: TaskProps) => (
-  <IsEditingTask
-    children={({ value: editingTask, set: setEditingTask }) => {
-      const isEditing = pathEq(['id'], task.id, editingTask)
+  <EditingTaskId
+    children={({ value: editingTaskId, set: setEditingTaskId }) => {
+      const isEditing = task.id === editingTaskId
       if (isEditing) {
+        const dismissEditing = () => setEditingTaskId(null)
         return (
-          <FocusTrap>
+          <FocusTrap focusTrapOptions={{ onDeactivate: dismissEditing }}>
             <div>
               <div>Editing</div>
-              <button onClick={() => setEditingTask(null)}>Cancel</button>
+              <button onClick={dismissEditing}>Cancel</button>
             </div>
           </FocusTrap>
         )
@@ -131,7 +132,7 @@ export const Task = ({ task }: TaskProps) => (
           tabIndex={0}
         >
           <div className={style(flex)}>
-            <div onClick={() => setEditingTask(task)}>{task.title}</div>
+            <div onClick={() => setEditingTaskId(task.id)}>{task.title}</div>
             {/*<div className={style(padding(3))}>*/}
             {/*<EditableText*/}
             {/*tabIndex={0}*/}
@@ -146,7 +147,6 @@ export const Task = ({ task }: TaskProps) => (
             {/*</div>*/}
 
             <HTMLSelect
-              minimal
               defaultValue={task.category}
               // value={category}
               onChange={e => updateTask({ category: e.target.value }, task)}
