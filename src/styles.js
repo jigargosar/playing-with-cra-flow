@@ -107,11 +107,11 @@ export function setupPage(rootSelector: string) {
   })
   cssRule('*,*:before,*:after', { boxSizing: 'inherit' })
 
-  // cssRule(
-  //   'button, input, optgroup, select, textarea',
-  //   { fontFamily: 'inherit' },
-  //   { fontSize: '100%' },
-  // )
+  cssRule(
+    'button, input, optgroup, select, textarea',
+    { fontFamily: 'inherit' },
+    { fontSize: '100%' },
+  )
 
   cssRule('span, a', inlineBlock)
 
