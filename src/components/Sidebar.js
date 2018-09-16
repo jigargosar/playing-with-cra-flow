@@ -14,8 +14,8 @@ export function Sidebar() {
       {({ containerRef, onKeyDown, onFocus }) => (
         <div
           ref={containerRef}
-          onKeyDown={onKeyDown}
-          onFocus={onFocus}
+          // onKeyDown={onKeyDown}
+          // onFocus={onFocus}
           className={containerStyle}
         >
           {categories.map(category => (

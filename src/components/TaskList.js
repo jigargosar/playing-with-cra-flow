@@ -4,6 +4,7 @@ import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
 import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
+import { Fragment } from 'react'
 import type { TaskModel } from '../models/Task'
 import { ArrowKeyNavigator } from './ArrowKeyNavigator'
 import { createStringValue } from 'react-values'
@@ -35,22 +36,24 @@ export function TaskList({ title, tasks }: Props) {
           <div
             ref={containerRef}
             className={tasksClass}
-            onKeyDown={editingTaskId ? null : onKeyDown}
-            onFocus={editingTaskId ? null : onFocus}
+            // onKeyDown={editingTaskId ? null : onKeyDown}
+            // onFocus={editingTaskId ? null : onFocus}
           >
             {tasks.map(task => {
-              return task.id === editingTaskId ? (
-                <InlineEditTask
-                  key={task.id}
-                  dismissEditing={() => setEditingTaskId(null)}
-                  task={task}
-                />
-              ) : (
-                <Task
-                  key={task.id}
-                  task={task}
-                  startEditing={() => setEditingTaskId(task.id)}
-                />
+              return (
+                <Fragment key={task.id}>
+                  {task.id === editingTaskId ? (
+                    <InlineEditTask
+                      dismissEditing={() => setEditingTaskId(null)}
+                      task={task}
+                    />
+                  ) : (
+                    <Task
+                      task={task}
+                      startEditing={() => setEditingTaskId(task.id)}
+                    />
+                  )}
+                </Fragment>
               )
             })}
           </div>
