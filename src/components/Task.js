@@ -11,7 +11,6 @@ import { fg, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse, mergeAll, pick } from 'ramda'
 import { blackA } from '../colors'
-import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
@@ -139,15 +138,15 @@ export const Task = ({ task }: TaskProps) =>
           options={categories}
         />
 
-        <ModalState
-          trigger={({ open }) => (
-            <div onClick={open} className={style(task.done && strike)}>
-              {task.title}
-            </div>
-          )}
-        >
-          {props => <EditTaskDialog {...props} task={task} />}
-        </ModalState>
+        {/*<ModalState*/}
+        {/*trigger={({ open }) => (*/}
+        {/*<div onClick={open} className={style(task.done && strike)}>*/}
+        {/*{task.title}*/}
+        {/*</div>*/}
+        {/*)}*/}
+        {/*>*/}
+        {/*{props => <EditTaskDialog {...props} task={task} />}*/}
+        {/*</ModalState>*/}
         {renderTags(task)}
       </div>
       <div className={style(content)}>{renderCategory(task)}</div>
