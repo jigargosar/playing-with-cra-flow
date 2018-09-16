@@ -85,8 +85,7 @@ export const Task = ({ task }: TaskProps) => (
             {task.title}
           </div>
         )}
-      >
-        {({ close, isOpen }) => (
+        children={({ close, isOpen }) => (
           <Dialog
             className={style(verticallySpaced(rem(1)))}
             onDismiss={close}
@@ -132,8 +131,7 @@ export const Task = ({ task }: TaskProps) => (
             </Component>
           </Dialog>
         )}
-      </ModalState>
-
+      />
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
