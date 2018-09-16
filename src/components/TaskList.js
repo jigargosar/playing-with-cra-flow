@@ -23,35 +23,36 @@ export function TaskList({ title, tasks }: Props) {
   return (
     <div>
       <div className={titleClass}>{title}</div>
-      <Composer />
-      <EditingTaskId
-        children={({ value: editingTaskId, set: setEditingTaskId }) => (
-          <ArrowKeyNavigator
-            children={({ containerRef, onKeyDown }) => (
-              <div
-                ref={containerRef}
-                className={tasksClass}
-                onKeyDown={editingTaskId ? null : onKeyDown}
-              >
-                {tasks.map(task => {
-                  return task.id === editingTaskId ? (
-                    <InlineEditTask
-                      key={task.id}
-                      dismissEditing={() => setEditingTaskId(null)}
-                      task={task}
-                    />
-                  ) : (
-                    <Task
-                      key={task.id}
-                      task={task}
-                      setEditingTaskId={setEditingTaskId}
-                      startEditing={() => setEditingTaskId(task.id)}
-                    />
-                  )
-                })}
-              </div>
-            )}
-          />
+      <Composer
+        components={[
+          <EditingTaskId />,
+          ({ render }) => <ArrowKeyNavigator children={render} />,
+        ]}
+        children={([
+          { value: editingTaskId, set: setEditingTaskId },
+          { containerRef, onKeyDown },
+        ]) => (
+          <div
+            ref={containerRef}
+            className={tasksClass}
+            onKeyDown={editingTaskId ? null : onKeyDown}
+          >
+            {tasks.map(task => {
+              return task.id === editingTaskId ? (
+                <InlineEditTask
+                  key={task.id}
+                  dismissEditing={() => setEditingTaskId(null)}
+                  task={task}
+                />
+              ) : (
+                <Task
+                  key={task.id}
+                  task={task}
+                  startEditing={() => setEditingTaskId(task.id)}
+                />
+              )
+            })}
+          </div>
         )}
       />
     </div>
