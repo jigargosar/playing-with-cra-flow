@@ -21,7 +21,7 @@ import {
   vertical,
   verticallySpaced,
 } from 'csstips/'
-import { EditableText } from '@blueprintjs/core'
+import { EditableText, HTMLSelect } from '@blueprintjs/core'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -111,10 +111,13 @@ function EditTaskDialog({ task, close, isOpen }) {
   )
 }
 
-export const Task = ({ task }: TaskProps) => (
-  <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
-    <div className={style(flex)}>
-      {renderWithCollections(({ updateTask }) => (
+export const Task = ({ task }: TaskProps) =>
+  renderWithCollections(({ updateTask }) => (
+    <div
+      className={style(horizontal, horizontallySpaced('0.3rem'))}
+      tabIndex={0}
+    >
+      <div className={style(flex)}>
         <div className={style(padding(3))}>
           <EditableText
             className={style(
@@ -126,19 +129,25 @@ export const Task = ({ task }: TaskProps) => (
             onConfirm={title => updateTask({ title }, task)}
           />
         </div>
-      ))}
 
-      <ModalState
-        trigger={({ open }) => (
-          <div onClick={open} className={style(task.done && strike)}>
-            {task.title}
-          </div>
-        )}
-      >
-        {props => <EditTaskDialog {...props} task={task} />}
-      </ModalState>
-      {renderTags(task)}
+        <HTMLSelect
+          defaultValue={task.category}
+          // value={category}
+          onChange={e => updateTask({ category: e.target.value }, task)}
+          options={categories}
+        />
+
+        <ModalState
+          trigger={({ open }) => (
+            <div onClick={open} className={style(task.done && strike)}>
+              {task.title}
+            </div>
+          )}
+        >
+          {props => <EditTaskDialog {...props} task={task} />}
+        </ModalState>
+        {renderTags(task)}
+      </div>
+      <div className={style(content)}>{renderCategory(task)}</div>
     </div>
-    <div className={style(content)}>{renderCategory(task)}</div>
-  </div>
-)
+  ))
