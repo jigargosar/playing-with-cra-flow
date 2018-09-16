@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react'
 import { Fragment } from 'react'
 import { Dialog } from '@reach/dialog/'
@@ -21,27 +20,53 @@ const { Provider, Consumer } = React.createContext({
   onCategoryChange: noop,
 })
 
+const ModalContext = React.createContext({})
+
 type ModalProps = { trigger: Function, children: Function }
+
+export const ModalContextProvider = props => (
+  <Component initialState={{ count: 0 }}>
+    {({ state: { count }, setState }) => (
+      <ModalContext.Provider
+        value={{
+          onOpen: () => setState({ count: count + 1 }),
+          onClose: () => setState({ count: count - 1 }),
+        }}
+        {...props}
+      />
+    )}
+  </Component>
+)
 
 export function ModalState({ trigger, children }: ModalProps) {
   return (
-    <Component initialState={{ isOpen: false }}>
-      {({ state: { isOpen }, setState }) => {
-        const close = () => setState({ isOpen: false })
-        const open = () => setState({ isOpen: true })
-        const childProps = {
-          open,
-          close,
-          isOpen,
-        }
-        return (
-          <Fragment>
-            {trigger(childProps)}
-            {isOpen && children(childProps)}
-          </Fragment>
-        )
-      }}
-    </Component>
+    <ModalContext.Consumer>
+      {({ onOpen, onClose }) => (
+        <Component initialState={{ isOpen: false }}>
+          {({ state: { isOpen }, setState }) => {
+            const close = () => {
+              setState({ isOpen: false })
+              onClose()
+            }
+            const open = () => {
+              setState({ isOpen: true })
+              onOpen()
+            }
+            const childProps = {
+              open,
+              close,
+              isOpen,
+            }
+            return (
+              <Fragment>
+                {trigger(childProps)}
+                {isOpen && children(childProps)}
+              </Fragment>
+            )
+          }}
+        </Component>
+      )}
+    </ModalContext.Consumer>
   )
 }
 
