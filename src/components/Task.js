@@ -7,20 +7,17 @@ import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer, renderWithCollections } from './CollectionContext'
 import { content, flex, horizontal, rem, style } from '../typestyle-exports'
-import { fg, strike } from '../styles'
+import { fg } from '../styles'
 import { Match } from '@reach/router'
-import { intersperse, mergeAll, pick } from 'ramda'
+import { intersperse, pathEq, pick } from 'ramda'
 import { blackA } from '../colors'
 import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
-import {
-  horizontallySpaced,
-  padding,
-  vertical,
-  verticallySpaced,
-} from 'csstips/'
-import { EditableText, HTMLSelect } from '@blueprintjs/core'
+import { horizontallySpaced, vertical, verticallySpaced } from 'csstips/'
+import { HTMLSelect } from '@blueprintjs/core'
+import { createValue } from 'react-values'
+import FocusTrap from 'focus-trap-react'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -112,43 +109,64 @@ export function EditTaskDialog({ task, close, isOpen }: EditTaskDialogProps) {
   )
 }
 
-export const Task = ({ task }: TaskProps) =>
-  renderWithCollections(({ updateTask }) => (
-    <div
-      className={style(horizontal, horizontallySpaced('0.3rem'))}
-      tabIndex={0}
-    >
-      <div className={style(flex)}>
-        <div className={style(padding(3))}>
-          <EditableText
-            className={style(
-              task.done && strike,
-              { width: 'calc(100%)' },
-              { $nest: { '&>*': mergeAll([task.done && strike]) } },
-            )}
-            defaultValue={task.title}
-            onConfirm={title => updateTask({ title }, task)}
-          />
+const IsEditingTask = createValue(null)
+
+export const Task = ({ task }: TaskProps) => (
+  <IsEditingTask
+    children={({ value: editingTask, set: setEditingTask }) => {
+      const isEditing = pathEq(['id'], task.id, editingTask)
+      if (isEditing) {
+        return (
+          <FocusTrap>
+            <div>
+              <div>Editing</div>
+              <button onClick={() => setEditingTask(null)}>Cancel</button>
+            </div>
+          </FocusTrap>
+        )
+      }
+      return renderWithCollections(({ updateTask }) => (
+        <div
+          className={style(horizontal, horizontallySpaced('0.3rem'))}
+          tabIndex={0}
+        >
+          <div className={style(flex)}>
+            <div onClick={() => setEditingTask(task)}>{task.title}</div>
+            {/*<div className={style(padding(3))}>*/}
+            {/*<EditableText*/}
+            {/*tabIndex={0}*/}
+            {/*className={style(*/}
+            {/*task.done && strike,*/}
+            {/*{ width: 'calc(100%)' },*/}
+            {/*{ $nest: { '&>*': mergeAll([task.done && strike]) } },*/}
+            {/*)}*/}
+            {/*defaultValue={task.title}*/}
+            {/*onConfirm={title => updateTask({ title }, task)}*/}
+            {/*/>*/}
+            {/*</div>*/}
+
+            <HTMLSelect
+              minimal
+              defaultValue={task.category}
+              // value={category}
+              onChange={e => updateTask({ category: e.target.value }, task)}
+              options={categories}
+            />
+
+            {/*<ModalState*/}
+            {/*trigger={({ open }) => (*/}
+            {/*<div onClick={open} className={style(task.done && strike)}>*/}
+            {/*{task.title}*/}
+            {/*</div>*/}
+            {/*)}*/}
+            {/*>*/}
+            {/*{props => <EditTaskDialog {...props} task={task} />}*/}
+            {/*</ModalState>*/}
+            {renderTags(task)}
+          </div>
+          <div className={style(content)}>{renderCategory(task)}</div>
         </div>
-
-        <HTMLSelect
-          defaultValue={task.category}
-          // value={category}
-          onChange={e => updateTask({ category: e.target.value }, task)}
-          options={categories}
-        />
-
-        {/*<ModalState*/}
-        {/*trigger={({ open }) => (*/}
-        {/*<div onClick={open} className={style(task.done && strike)}>*/}
-        {/*{task.title}*/}
-        {/*</div>*/}
-        {/*)}*/}
-        {/*>*/}
-        {/*{props => <EditTaskDialog {...props} task={task} />}*/}
-        {/*</ModalState>*/}
-        {renderTags(task)}
-      </div>
-      <div className={style(content)}>{renderCategory(task)}</div>
-    </div>
-  ))
+      ))
+    }}
+  />
+)
