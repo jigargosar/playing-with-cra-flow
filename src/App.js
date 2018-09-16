@@ -21,11 +21,6 @@ import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
 import { bg, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
-import {
-  isMoveTaskDialogOpen,
-  MoveTaskDialog,
-  MoveTaskDialogStateProvider,
-} from './components/MoveTaskDialog'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
@@ -98,7 +93,7 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(CollectionProvider, MoveTaskDialogStateProvider)
+const AllProviders = nest(CollectionProvider)
 
 const App = () => {
   const containerClass = style(
@@ -112,27 +107,24 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isAnyModalOpen(anyOpen =>
-        isMoveTaskDialogOpen(isMoveTaskDialogOpen => (
-          <FocusTrap
-            paused={anyOpen || isMoveTaskDialogOpen}
-            tag={'div'}
-            className={containerClass}
-            focusTrapOptions={{
-              returnFocusOnDeactivate: false,
-              escapeDeactivates: false,
-              onActivate: () => console.log('onActivate'),
-              onDeactivate: () => console.log('onDeactivate'),
-            }}
-          >
-            <div className={sidebarClass}>
-              <Sidebar />
-            </div>
-            <div className={contentClass}>{renderMainRoutes()}</div>
-            <MoveTaskDialog />
-          </FocusTrap>
-        )),
-      )}
+      {isAnyModalOpen(anyOpen => (
+        <FocusTrap
+          paused={anyOpen}
+          tag={'div'}
+          className={containerClass}
+          focusTrapOptions={{
+            returnFocusOnDeactivate: false,
+            escapeDeactivates: false,
+            onActivate: () => console.log('onActivate'),
+            onDeactivate: () => console.log('onDeactivate'),
+          }}
+        >
+          <div className={sidebarClass}>
+            <Sidebar />
+          </div>
+          <div className={contentClass}>{renderMainRoutes()}</div>
+        </FocusTrap>
+      ))}
     </AllProviders>
   )
 }

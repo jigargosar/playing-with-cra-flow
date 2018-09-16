@@ -6,37 +6,18 @@ import * as React from 'react'
 import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer, renderWithCollections } from './CollectionContext'
-import {
-  classes,
-  content,
-  flex,
-  horizontal,
-  padding,
-  rem,
-  selfStretch,
-  style,
-} from '../typestyle-exports'
+import { content, flex, horizontal, rem, style } from '../typestyle-exports'
 import { fg, pointer, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse, pick } from 'ramda'
-import { showMoveTaskDialog } from './MoveTaskDialog'
 import { blackA } from '../colors'
 import { ModalState } from './EditTaskDialog'
 import { Dialog } from '@reach/dialog/'
-import { vertical, verticallySpaced } from 'csstips'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
+import { vertical, verticallySpaced } from 'csstips/'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
-const appearOnParentHoverClass = 'appearOnParentHover'
-const hasHiddenChildren = {
-  $nest: {
-    [`.${appearOnParentHoverClass}`]: {
-      transition: 'opacity .15s ease-in',
-    },
-    [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
-  },
-}
 
 function renderTags(task) {
   return (
@@ -71,7 +52,6 @@ function renderCategory(task) {
   )
 }
 
-const containerClass = style(horizontal, pointer, hasHiddenChildren)
 type TaskProps = {
   task: TaskModel,
 }
@@ -126,7 +106,7 @@ function EditTaskDialog({ task, close, isOpen }) {
 }
 
 export const Task = ({ task }: TaskProps) => (
-  <div className={containerClass} tabIndex={0}>
+  <div className={style(horizontal, pointer)} tabIndex={0}>
     <div className={style(flex)}>
       <ModalState
         trigger={({ open }) => (
@@ -140,18 +120,5 @@ export const Task = ({ task }: TaskProps) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-    <div className={style(content, horizontal /*, bg('red')*/)}>
-      {showMoveTaskDialog(task, handler => (
-        <div
-          onClick={handler}
-          className={classes(
-            appearOnParentHoverClass,
-            style(padding(0, '0.5rem'), selfStretch, pointer),
-          )}
-        >
-          ...
-        </div>
-      ))}
-    </div>
   </div>
 )

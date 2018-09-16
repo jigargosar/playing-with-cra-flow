@@ -230,3 +230,12 @@ export function setupGlobalStyles() {
 
 export const fgHoverDarken = fgColor =>
   extend(fg(fgColor), hover(fg(fgColor.darken(0.2))))
+export const appearOnParentHoverClass = 'appearOnParentHover'
+export const hasHiddenChildren = {
+  $nest: {
+    [`.${appearOnParentHoverClass}`]: {
+      transition: 'opacity .15s ease-in',
+    },
+    [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
+  },
+}
