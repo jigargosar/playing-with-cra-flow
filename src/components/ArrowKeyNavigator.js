@@ -18,28 +18,19 @@ const onFocus = (
   e,
   { refs: { containerRef }, state: { idx, totalCount }, setState },
 ) => {
-  getDOMFromRef(containerRef).map(el => {
-    const containerSelector = uniqueSelector(el)
+  getDOMFromRef(containerRef).map(parentEl => {
+    const containerSelector = uniqueSelector(parentEl)
 
-    const chEl = e.target.closest(
+    const childEl = e.target.closest(
       `${containerSelector} > [tabindex='0'], :scope > a`,
     )
 
-    console.log(`chEl`, chEl)
+    const childIdx = Array.from(parentEl.children).indexOf(childEl)
+    console.log(`childIdx`, childIdx)
+    setState({ idx: childIdx })
+
     return null
   })
-
-  // getDOMFromRef(containerRef).map(
-  //   tap(el => {
-  //     const elList = el.querySelectorAll(`:scope > [tabindex='0'], :scope > a`)
-  //     if (totalCount !== elList.length) {
-  //       setState({ totalCount: elList.length })
-  //     }
-  //     const elToFocus = atClampedIndex(idx, elList)
-  //     // console.log(`idx`, idx)
-  //     requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
-  //   }),
-  // )
 }
 
 const didMountOrUpdate = ({
