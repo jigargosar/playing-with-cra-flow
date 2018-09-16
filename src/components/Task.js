@@ -113,7 +113,10 @@ type IP = {
 export function InlineEditTask({ dismissEditing, task }: IP) {
   return (
     <FocusTrap
-      focusTrapOptions={{ onDeactivate: dismissEditing }}
+      focusTrapOptions={{
+        onDeactivate: dismissEditing,
+        clickOutsideDeactivates: true,
+      }}
       children={renderWithCollections(({ updateTask }) => (
         <ObjectValue
           defaultValue={task}
