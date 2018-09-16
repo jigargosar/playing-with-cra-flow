@@ -30,12 +30,18 @@ export function TaskList({ title, tasks }: Props) {
         ]}
         children={([
           { value: editingTaskId, set: setEditingTaskId },
-          { containerRef, onKeyDown },
+          { containerRef, onKeyDown, onFocus },
         ]) => (
           <div
+            id={'task-list-container'}
             ref={containerRef}
             className={tasksClass}
             onKeyDown={editingTaskId ? null : onKeyDown}
+            // onFocus={e => {
+            //   window.t = e.target
+            //   console.log(`e.target.closest("")`, e.target.closest('#an > *'))
+            // }}
+            onFocus={onFocus}
           >
             {tasks.map(task => {
               return task.id === editingTaskId ? (

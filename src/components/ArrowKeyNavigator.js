@@ -6,18 +6,52 @@ import { atClampedIndex } from '../folktale-helpers'
 import { renderWithComponent } from './renderWithComponent'
 import * as React from 'react'
 import { isHotkey } from 'is-hotkey'
+import uniqueSelector from 'unique-selector'
 
 type Props = { children: Function }
+
+function getDOMFromRef(containerRef) {
+  return nullableToMaybe(ReactDOM.findDOMNode(containerRef.current))
+}
+
+const onFocus = (
+  e,
+  { refs: { containerRef }, state: { idx, totalCount }, setState },
+) => {
+  getDOMFromRef(containerRef).map(el => {
+    const containerSelector = uniqueSelector(el)
+
+    const chEl = e.target.closest(
+      `${containerSelector} > [tabindex='0'], :scope > a`,
+    )
+
+    console.log(`chEl`, chEl)
+    return null
+  })
+
+  // getDOMFromRef(containerRef).map(
+  //   tap(el => {
+  //     const elList = el.querySelectorAll(`:scope > [tabindex='0'], :scope > a`)
+  //     if (totalCount !== elList.length) {
+  //       setState({ totalCount: elList.length })
+  //     }
+  //     const elToFocus = atClampedIndex(idx, elList)
+  //     // console.log(`idx`, idx)
+  //     requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
+  //   }),
+  // )
+}
 
 const didMountOrUpdate = ({
   refs: { containerRef },
   state: { idx, totalCount },
   setState,
 }) => {
-  const containerEl = nullableToMaybe(
-    ReactDOM.findDOMNode(containerRef.current),
+  getDOMFromRef(containerRef).map(el =>
+    el.querySelectorAll(`:scope > [tabindex='0'], :scope > a`),
   )
-  containerEl.map(
+
+  getDOMFromRef(containerRef).map(
     tap(el => {
       const elList = el.querySelectorAll(`:scope > [tabindex='0'], :scope > a`)
       if (totalCount !== elList.length) {
@@ -72,6 +106,7 @@ export function ArrowKeyNavigator({ children }: Props) {
       return children({
         containerRef: props.refs.containerRef,
         onKeyDown: onKeyDown(props),
+        onFocus: e => onFocus(e, props),
       })
     },
   )
