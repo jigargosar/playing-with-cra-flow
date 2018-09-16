@@ -24,6 +24,7 @@ const didMountOrUpdate = ({
         setState({ totalCount: elList.length })
       }
       const elToFocus = atClampedIndex(idx, elList)
+      // console.log(`idx`, idx)
       requestAnimationFrame(() => elToFocus.map(invoker(0, 'focus')))
     }),
   )
