@@ -8,6 +8,7 @@ import { storageGet, StorageSet } from './StorageSet'
 import { categories } from '../models/Category'
 import type { TaskModel } from '../models/Task'
 import Component from '@reach/component-component'
+import { createNumberValue } from 'react-values'
 
 const { Provider, Consumer } = React.createContext({
   onDismiss: noop,
@@ -20,44 +21,27 @@ const { Provider, Consumer } = React.createContext({
   onCategoryChange: noop,
 })
 
-const ModalContext = React.createContext({})
+const ModalCounter = createNumberValue(0)
 
 type ModalProps = { trigger: Function, children: Function }
 
-export const ModalContextProvider = props => (
-  <Component initialState={{ count: 0 }}>
-    {({ state: { count }, setState }) => (
-      <ModalContext.Provider
-        value={{
-          onOpen: () => setState({ count: count + 1 }),
-          onClose: () => setState({ count: count - 1 }),
-          isOpen: count > 0,
-        }}
-        {...props}
-      />
-    )}
-  </Component>
-)
-
 export const isModalOpen = render => (
-  <ModalContext.Consumer>
-    {({ isOpen }) => render(isOpen)}
-  </ModalContext.Consumer>
+  <ModalCounter children={({ value }) => render(value > 0)} />
 )
 
 export function ModalState({ trigger, children }: ModalProps) {
   return (
-    <ModalContext.Consumer>
-      {({ onOpen, onClose }) => (
+    <ModalCounter
+      children={({ increment, decrement }) => (
         <Component initialState={{ isOpen: false }}>
           {({ state: { isOpen }, setState }) => {
             const close = () => {
               setState({ isOpen: false })
-              onClose()
+              decrement()
             }
             const open = () => {
               setState({ isOpen: true })
-              onOpen()
+              increment()
             }
             const childProps = {
               open,
@@ -73,7 +57,7 @@ export function ModalState({ trigger, children }: ModalProps) {
           }}
         </Component>
       )}
-    </ModalContext.Consumer>
+    />
   )
 }
 

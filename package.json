@@ -37,6 +37,12 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.6.1",
+    "@blueprintjs/datetime": "^3.2.0",
+    "@blueprintjs/icons": "^3.1.0",
+    "@blueprintjs/select": "^3.2.0",
+    "@blueprintjs/table": "^3.1.1",
+    "@blueprintjs/timezone": "^3.1.0",
     "@reach/component-component": "^0.1.1",
     "@reach/dialog": "^0.1.2",
     "@reach/router": "^1.1.1",
@@ -55,8 +61,10 @@
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.10.0",
     "react": "^16.5.1",
+    "react-composer": "^5.0.1",
     "react-dom": "^16.5.1",
     "react-icons-kit": "^1.1.7",
+    "react-values": "^0.3.0",
     "recompose": "^0.30.0",
     "selectn": "^1.1.2",
     "semantic-ui-react": "^0.82.5",

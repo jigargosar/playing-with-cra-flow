@@ -98,11 +98,7 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(
-  CollectionProvider,
-  ModalContextProvider,
-  MoveTaskDialogStateProvider,
-)
+const AllProviders = nest(CollectionProvider, MoveTaskDialogStateProvider)
 
 const App = () => {
   const containerClass = style(
