@@ -1,19 +1,7 @@
 import * as React from 'react'
 import { Fragment } from 'react'
-import { noop } from 'ramda-adjunct/'
 import Component from '@reach/component-component'
 import { createNumberValue } from 'react-values'
-
-const { Provider, Consumer } = React.createContext({
-  onDismiss: noop,
-  isOpen: false,
-  title: '',
-  onTitleChange: noop,
-  onOk: noop,
-  startEditingTask: noop,
-  category: 'InBasket',
-  onCategoryChange: noop,
-})
 
 const ModalCounter = createNumberValue(0)
 
