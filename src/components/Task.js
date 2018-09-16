@@ -7,7 +7,7 @@ import { Fragment } from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer, renderWithCollections } from './CollectionContext'
 import { content, flex, horizontal, rem, style } from '../typestyle-exports'
-import { fg, pointer, strike } from '../styles'
+import { fg, strike } from '../styles'
 import { Match } from '@reach/router'
 import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
@@ -16,6 +16,7 @@ import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
 import { vertical, verticallySpaced } from 'csstips/'
+import { EditableText } from '@blueprintjs/core'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -106,8 +107,12 @@ function EditTaskDialog({ task, close, isOpen }) {
 }
 
 export const Task = ({ task }: TaskProps) => (
-  <div className={style(horizontal, pointer)} tabIndex={0}>
+  <div className={style(horizontal)} tabIndex={0}>
     <div className={style(flex)}>
+      <EditableText
+        className={style(task.done && strike, { margin: 3 })}
+        defaultValue={task.title}
+      />
       <ModalState
         trigger={({ open }) => (
           <div onClick={open} className={style(task.done && strike)}>
