@@ -37,7 +37,7 @@ export function TaskList({ title, tasks }: Props) {
             ref={containerRef}
             className={tasksClass}
             onKeyDown={editingTaskId ? null : onKeyDown}
-            onFocus={onFocus}
+            onFocus={editingTaskId ? null : onFocus}
           >
             {tasks.map(task => {
               return task.id === editingTaskId ? (
