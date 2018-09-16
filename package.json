@@ -67,7 +67,6 @@
     "react-values": "^0.3.0",
     "recompose": "^0.30.0",
     "selectn": "^1.1.2",
-    "semantic-ui-react": "^0.82.5",
     "tachyons": "^4.11.1",
     "typestyle": "^2.0.1"
   },

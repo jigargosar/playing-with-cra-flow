@@ -7,6 +7,7 @@ import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { ArrowKeyNavigator } from './ArrowKeyNavigator'
 import { createStringValue } from 'react-values'
+import Composer from 'react-composer'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -22,6 +23,7 @@ export function TaskList({ title, tasks }: Props) {
   return (
     <div>
       <div className={titleClass}>{title}</div>
+      <Composer />
       <EditingTaskId
         children={({ value: editingTaskId, set: setEditingTaskId }) => (
           <ArrowKeyNavigator
