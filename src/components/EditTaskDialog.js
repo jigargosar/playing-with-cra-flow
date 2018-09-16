@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Fragment } from 'react'
 import { BooleanValue, createNumberValue } from 'react-values'
+import Composer from 'react-composer'
 
 const ModalCounter = createNumberValue(0)
 
@@ -12,33 +13,30 @@ export const isAnyModalOpen = render => (
 
 export function ModalState({ trigger, children }: ModalProps) {
   return (
-    <ModalCounter
-      children={({ increment, decrement }) => (
-        <BooleanValue
-          defaultValue={false}
-          children={({ value: isOpen, set: setOpen }) => {
-            const close = () => {
-              setOpen(false)
-              decrement()
-            }
-            const open = () => {
-              setOpen(true)
-              increment()
-            }
-            const childProps = {
-              open,
-              close,
-              isOpen,
-            }
-            return (
-              <Fragment>
-                {trigger(childProps)}
-                {isOpen && children(childProps)}
-              </Fragment>
-            )
-          }}
-        />
-      )}
+    <Composer
+      components={[<ModalCounter />, <BooleanValue defaultValue={false} />]}
+      children={([
+        { increment, decrement },
+        { value: isOpen, set: setOpen },
+      ]) => {
+        const childProps = {
+          open: () => {
+            setOpen(true)
+            increment()
+          },
+          close: () => {
+            setOpen(false)
+            decrement()
+          },
+          isOpen,
+        }
+        return (
+          <Fragment>
+            {trigger(childProps)}
+            {isOpen && children(childProps)}
+          </Fragment>
+        )
+      }}
     />
   )
 }
