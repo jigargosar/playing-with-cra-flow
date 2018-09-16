@@ -33,7 +33,6 @@ export function TaskList({ title, tasks }: Props) {
           { containerRef, onKeyDown, onFocus },
         ]) => (
           <div
-            id={'task-list-container'}
             ref={containerRef}
             className={tasksClass}
             onKeyDown={editingTaskId ? null : onKeyDown}
