@@ -135,7 +135,7 @@ export const Task = ({ task }: TaskProps) => (
           </div>
         )}
       >
-        {({ close, isOpen }) => EditTaskDialog({ close, isOpen, task })}
+        {props => <EditTaskDialog {...props} task={task} />}
       </ModalState>
       {renderTags(task)}
     </div>
