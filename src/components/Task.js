@@ -76,6 +76,55 @@ type TaskProps = {
   task: TaskModel,
 }
 
+function renderEditTaskDialog(task) {
+  return ({ close, isOpen }) => (
+    <Dialog
+      className={style(verticallySpaced(rem(1)))}
+      onDismiss={close}
+      isOpen={isOpen}
+    >
+      <Component initialState={pick(['title', 'category'])(task)}>
+        {({ state: { title, category }, setState }) => (
+          <Fragment>
+            <h3>Edit Task </h3>
+            <div className={style(vertical)}>
+              <input
+                type={'text'}
+                value={title}
+                onChange={e => setState({ title: e.target.value })}
+              />
+            </div>
+            <div className={style(vertical)}>
+              <select
+                value={category}
+                onChange={e => setState({ category: e.target.value })}
+              >
+                {categories.map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              {renderWithCollections(({ updateTask }) => (
+                <button
+                  onClick={() => {
+                    updateTask({ title, category }, task)
+                    close()
+                  }}
+                >
+                  Ok
+                </button>
+              ))}
+            </div>
+          </Fragment>
+        )}
+      </Component>
+    </Dialog>
+  )
+}
+
 export const Task = ({ task }: TaskProps) => (
   <div className={containerClass} tabIndex={0}>
     <div className={style(flex)}>
@@ -85,53 +134,9 @@ export const Task = ({ task }: TaskProps) => (
             {task.title}
           </div>
         )}
-        children={({ close, isOpen }) => (
-          <Dialog
-            className={style(verticallySpaced(rem(1)))}
-            onDismiss={close}
-            isOpen={isOpen}
-          >
-            <Component initialState={pick(['title', 'category'])(task)}>
-              {({ state: { title, category }, setState }) => (
-                <Fragment>
-                  <h3>Edit Task </h3>
-                  <div className={style(vertical)}>
-                    <input
-                      type={'text'}
-                      value={title}
-                      onChange={e => setState({ title: e.target.value })}
-                    />
-                  </div>
-                  <div className={style(vertical)}>
-                    <select
-                      value={category}
-                      onChange={e => setState({ category: e.target.value })}
-                    >
-                      {categories.map(category => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    {renderWithCollections(({ updateTask }) => (
-                      <button
-                        onClick={() => {
-                          updateTask({ title, category }, task)
-                          close()
-                        }}
-                      >
-                        Ok
-                      </button>
-                    ))}
-                  </div>
-                </Fragment>
-              )}
-            </Component>
-          </Dialog>
-        )}
-      />
+      >
+        {renderEditTaskDialog(task)}
+      </ModalState>
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
