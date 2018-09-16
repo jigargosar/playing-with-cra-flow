@@ -32,7 +32,7 @@ import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import FocusTrap from 'focus-trap-react'
-import { ModalContextProvider } from './components/EditTaskDialog'
+import { isModalOpen, ModalContextProvider } from './components/EditTaskDialog'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -116,25 +116,27 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isMoveTaskDialogOpen(isMoveTaskDialogOpen => (
-        <FocusTrap
-          paused={isMoveTaskDialogOpen}
-          tag={'div'}
-          className={containerClass}
-          focusTrapOptions={{
-            returnFocusOnDeactivate: false,
-            escapeDeactivates: false,
-            onActivate: () => console.log('onActivate'),
-            onDeactivate: () => console.log('onDeactivate'),
-          }}
-        >
-          <div className={sidebarClass}>
-            <Sidebar />
-          </div>
-          <div className={contentClass}>{renderMainRoutes()}</div>
-          <MoveTaskDialog />
-        </FocusTrap>
-      ))}
+      {isModalOpen(isModalOpen =>
+        isMoveTaskDialogOpen(isMoveTaskDialogOpen => (
+          <FocusTrap
+            paused={isModalOpen || isMoveTaskDialogOpen}
+            tag={'div'}
+            className={containerClass}
+            focusTrapOptions={{
+              returnFocusOnDeactivate: false,
+              escapeDeactivates: false,
+              onActivate: () => console.log('onActivate'),
+              onDeactivate: () => console.log('onDeactivate'),
+            }}
+          >
+            <div className={sidebarClass}>
+              <Sidebar />
+            </div>
+            <div className={contentClass}>{renderMainRoutes()}</div>
+            <MoveTaskDialog />
+          </FocusTrap>
+        )),
+      )}
     </AllProviders>
   )
 }

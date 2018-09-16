@@ -31,11 +31,18 @@ export const ModalContextProvider = props => (
         value={{
           onOpen: () => setState({ count: count + 1 }),
           onClose: () => setState({ count: count - 1 }),
+          isOpen: count > 0,
         }}
         {...props}
       />
     )}
   </Component>
+)
+
+export const isModalOpen = render => (
+  <ModalContext.Consumer>
+    {({ isOpen }) => render(isOpen)}
+  </ModalContext.Consumer>
 )
 
 export function ModalState({ trigger, children }: ModalProps) {
