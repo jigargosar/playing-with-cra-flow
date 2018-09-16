@@ -8,6 +8,7 @@ import { Fragment } from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import Composer from 'react-composer'
+import { PoseGroup } from 'react-pose'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -27,23 +28,25 @@ export function TaskList({ title, tasks }: Props) {
         components={[<EditingTaskId />]}
         children={([{ value: editingTaskId, set: setEditingTaskId }]) => (
           <div className={tasksClass}>
-            {tasks.map(task => {
-              return (
-                <Fragment key={task.id}>
-                  {task.id === editingTaskId ? (
-                    <InlineEditTask
-                      dismissEditing={() => setEditingTaskId(null)}
-                      task={task}
-                    />
-                  ) : (
-                    <Task
-                      task={task}
-                      startEditing={() => setEditingTaskId(task.id)}
-                    />
-                  )}
-                </Fragment>
-              )
-            })}
+            <PoseGroup>
+              {tasks.map(task => {
+                return (
+                  <Fragment key={task.id}>
+                    {task.id === editingTaskId ? (
+                      <InlineEditTask
+                        dismissEditing={() => setEditingTaskId(null)}
+                        task={task}
+                      />
+                    ) : (
+                      <Task
+                        task={task}
+                        startEditing={() => setEditingTaskId(task.id)}
+                      />
+                    )}
+                  </Fragment>
+                )
+              })}
+            </PoseGroup>
           </div>
         )}
       />

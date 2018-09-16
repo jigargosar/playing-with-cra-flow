@@ -64,6 +64,7 @@
     "react-composer": "^5.0.1",
     "react-dom": "^16.5.1",
     "react-icons-kit": "^1.1.7",
+    "react-pose": "^3.3.0",
     "react-values": "^0.3.0",
     "recompose": "^0.30.0",
     "selectn": "^1.1.2",

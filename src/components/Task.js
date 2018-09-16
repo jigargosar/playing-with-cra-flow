@@ -20,6 +20,7 @@ import {
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
+import posed from 'react-pose'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -72,7 +73,7 @@ export function InlineEditTask({ dismissEditing, task }: IP) {
           defaultValue={task}
           children={({ value: { title, category }, set }) => {
             return (
-              <div className={style(verticallySpaced('1rem'))}>
+              <TaskDiv className={style(verticallySpaced('1rem'))}>
                 <div
                   className={style(horizontal, horizontallySpaced('0.3rem'))}
                 >
@@ -100,7 +101,7 @@ export function InlineEditTask({ dismissEditing, task }: IP) {
                   </Button>
                   <Button onClick={dismissEditing}>Cancel</Button>
                 </div>
-              </div>
+              </TaskDiv>
             )
           }}
         />
@@ -114,8 +115,16 @@ type TaskProps = {
   startEditing: Function,
 }
 
+const TaskDiv = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+})
+
 export const Task = ({ task, startEditing }: TaskProps) => (
-  <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
+  <TaskDiv
+    className={style(horizontal, horizontallySpaced('0.3rem'))}
+    tabIndex={0}
+  >
     <div className={style(flex)}>
       <div onClick={startEditing}>{task.title}</div>
 
@@ -131,5 +140,5 @@ export const Task = ({ task, startEditing }: TaskProps) => (
       {renderTags(task)}
     </div>
     <div className={style(content)}>{renderCategory(task)}</div>
-  </div>
+  </TaskDiv>
 )
