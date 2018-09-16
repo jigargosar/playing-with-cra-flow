@@ -15,7 +15,7 @@ import { Dialog } from '@reach/dialog/'
 import { categories } from '../models/Category'
 import Component from '@reach/component-component'
 import { horizontallySpaced, vertical, verticallySpaced } from 'csstips/'
-import { HTMLSelect, InputGroup } from '@blueprintjs/core'
+import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { createStringValue, ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
 
@@ -136,15 +136,15 @@ export const Task = ({ task }: TaskProps) => (
                         onChange={e => set('category', e.target.value)}
                         options={categories}
                       />
-                      <button
+                      <Button
                         onClick={() => {
                           updateTask({ title, categories }, task)
                           dismissEditing()
                         }}
                       >
                         Save
-                      </button>
-                      <button onClick={dismissEditing}>Cancel</button>
+                      </Button>
+                      <Button onClick={dismissEditing}>Cancel</Button>
                     </div>
                   )
                 }}
