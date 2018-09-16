@@ -115,10 +115,10 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isAnyModalOpen(isModalOpen =>
+      {isAnyModalOpen(anyOpen =>
         isMoveTaskDialogOpen(isMoveTaskDialogOpen => (
           <FocusTrap
-            paused={isModalOpen || isMoveTaskDialogOpen}
+            paused={anyOpen || isMoveTaskDialogOpen}
             tag={'div'}
             className={containerClass}
             focusTrapOptions={{
