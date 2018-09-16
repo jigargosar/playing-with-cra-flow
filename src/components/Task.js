@@ -114,12 +114,16 @@ function EditTaskDialog({ task, close, isOpen }) {
 export const Task = ({ task }: TaskProps) => (
   <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
     <div className={style(flex)}>
-      <div className={style(padding(3))}>
-        <EditableText
-          className={style(task.done && strike, { width: 'calc(100%)' })}
-          defaultValue={task.title}
-        />
-      </div>
+      {renderWithCollections(({ updateTask }) => (
+        <div className={style(padding(3))}>
+          <EditableText
+            className={style(task.done && strike, { width: 'calc(100%)' })}
+            defaultValue={task.title}
+            onConfirm={title => updateTask({ title }, task)}
+          />
+        </div>
+      ))}
+
       <ModalState
         trigger={({ open }) => (
           <div onClick={open} className={style(task.done && strike)}>
