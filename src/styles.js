@@ -162,7 +162,7 @@ export function setupGlobalStyles() {
   setupPage('#root')
 
   cssRule('html, body', sans)
-  cssRule('html, body', { lineHeight: rem(1.5) })
+  // cssRule('html, body', { lineHeight: rem(1.5) })
   // cssRule('*, *:before, *:after', border('0 solid #dae1e7'))
 
   // cssRule('button, input, optgroup, select, textarea', { margin: 0 })
