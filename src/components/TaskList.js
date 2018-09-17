@@ -29,21 +29,16 @@ const EditingTaskId = mapRenderFnArgs(
 const duration = 450
 
 const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in`,
+  transition: `opacity ${duration}ms linear`,
   opacity: 1,
   position: 'relative',
-  top: 0,
 }
 
 const transitionStyles = {
-  entering: { opacity: 0, position: 'absolute', zIndex: 1 },
-  entered: {
-    opacity: 1,
-    position: 'relative',
-    transition: `opacity ${duration}ms ease-in`,
-  },
-  // exiting: { opacity: 1 },
-  // exited: { opacity: 0 },
+  entering: { opacity: 0, zIndex: 100, position: 'absolute', top: 0 },
+  entered: { opacity: 1, zIndex: 100 },
+  exiting: { opacity: 0, zIndex: 0, position: 'relative', top: 0 },
+  exited: { opacity: 0, zIndex: 0 },
 }
 
 const tasksContainerClass = style(
@@ -66,31 +61,46 @@ export function TaskList({ title, tasks }: Props) {
             {tasks.map(task => (
               <div key={task.id}>
                 <TransitionGroup>
-                  <Transition key={getTaskKey(task)} timeout={duration}>
-                    {state => {
-                      console.log(`state`, state)
-                      return (
-                        <div
-                          style={{
-                            ...defaultStyle,
-                            ...transitionStyles[state],
-                          }}
-                        >
-                          {isEditingTask(task) ? (
-                            <InlineEditTask
-                              dismissEditing={() => setEditingTaskId(null)}
-                              task={task}
-                            />
-                          ) : (
+                  {!isEditingTask(task) && (
+                    <Transition key={'not-editing'} timeout={duration}>
+                      {state => {
+                        console.log(`mode display`, state)
+                        return (
+                          <div
+                            style={{
+                              ...defaultStyle,
+                              ...transitionStyles[state],
+                            }}
+                          >
                             <Task
                               task={task}
                               startEditing={() => setEditingTaskId(task.id)}
                             />
-                          )}
-                        </div>
-                      )
-                    }}
-                  </Transition>
+                          </div>
+                        )
+                      }}
+                    </Transition>
+                  )}
+                  {isEditingTask(task) && (
+                    <Transition key={'editing'} timeout={duration}>
+                      {state => {
+                        console.log(`mode edit`, state)
+                        return (
+                          <div
+                            style={{
+                              ...defaultStyle,
+                              ...transitionStyles[state],
+                            }}
+                          >
+                            <InlineEditTask
+                              dismissEditing={() => setEditingTaskId(null)}
+                              task={task}
+                            />
+                          </div>
+                        )
+                      }}
+                    </Transition>
+                  )}
                 </TransitionGroup>
               </div>
             ))}
