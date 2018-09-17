@@ -29,6 +29,7 @@ const PoseDiv = pose.div({
     transition: tween,
   },
 })
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -49,23 +50,24 @@ export function TaskList({ title, tasks }: Props) {
           return (
             <div className={tasksClass}>
               <PoseGroup>
-                {tasks.map(task => {
-                  return (
-                    <PoseDiv key={getTaskKey(task)}>
-                      {isEditingTask(task) ? (
+                {tasks.map(
+                  task =>
+                    isEditingTask(task) ? (
+                      <PoseDiv key={getTaskKey(task)}>
                         <InlineEditTask
                           dismissEditing={() => setEditingTaskId(null)}
                           task={task}
                         />
-                      ) : (
+                      </PoseDiv>
+                    ) : (
+                      <PoseDiv key={getTaskKey(task)}>
                         <Task
                           task={task}
                           startEditing={() => setEditingTaskId(task.id)}
                         />
-                      )}
-                    </PoseDiv>
-                  )
-                })}
+                      </PoseDiv>
+                    ),
+                )}
               </PoseGroup>
             </div>
           )
