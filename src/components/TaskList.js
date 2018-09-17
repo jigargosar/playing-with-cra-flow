@@ -41,29 +41,39 @@ export function TaskList({ title, tasks }: Props) {
       <div className={titleClass}>{title}</div>
       <Composer
         components={[<EditingTaskId />]}
-        children={([{ editingTaskId, setEditingTaskId }]) => (
-          <div className={tasksClass}>
-            <PoseGroup>
-              {tasks.map(task => {
-                return task.id === editingTaskId ? (
-                  <PoseDiv key={'editing'}>
-                    <InlineEditTask
-                      dismissEditing={() => setEditingTaskId(null)}
-                      task={task}
-                    />
-                  </PoseDiv>
-                ) : (
-                  <PoseDiv key={task.id}>
-                    <Task
-                      task={task}
-                      startEditing={() => setEditingTaskId(task.id)}
-                    />
-                  </PoseDiv>
-                )
-              })}
-            </PoseGroup>
-          </div>
-        )}
+        children={([{ editingTaskId, setEditingTaskId }]) => {
+          const getTaskKey = task =>
+            task.id === editingTaskId ? 'editing' : task.id
+          const isEditingTask = task => task.id === editingTaskId
+
+          return (
+            <div className={tasksClass}>
+              <PoseGroup>
+                {tasks.map(task => {
+                  return (
+                    <PoseDiv key={getTaskKey(task)}>
+                      {isEditingTask(task) ? (
+                        <PoseDiv key={getTaskKey(task)}>
+                          <InlineEditTask
+                            dismissEditing={() => setEditingTaskId(null)}
+                            task={task}
+                          />
+                        </PoseDiv>
+                      ) : (
+                        <PoseDiv key={getTaskKey(task)}>
+                          <Task
+                            task={task}
+                            startEditing={() => setEditingTaskId(task.id)}
+                          />
+                        </PoseDiv>
+                      )}
+                    </PoseDiv>
+                  )
+                })}
+              </PoseGroup>
+            </div>
+          )
+        }}
       />
     </div>
   )
