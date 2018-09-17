@@ -8,12 +8,26 @@ import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import Composer from 'react-composer'
 import pose, { PoseGroup } from 'react-pose'
+import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
 
 const EditingTaskId = createStringValue(null)
 
-const PoseDiv = pose.div()
+const PoseDiv = pose.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+  flip: {
+    transition: tween,
+  },
+})
+
+const PoseContainer = ({ children, ...otherProps }) => (
+  <div {...otherProps}>
+    <PoseGroup flipMove={true}>{children}</PoseGroup>
+  </div>
+)
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -27,27 +41,25 @@ export function TaskList({ title, tasks }: Props) {
       <Composer
         components={[<EditingTaskId />]}
         children={([{ value: editingTaskId, set: setEditingTaskId }]) => (
-          <div className={tasksClass}>
-            <PoseGroup>
-              {tasks.map(task => {
-                return (
-                  <PoseDiv key={task.id}>
-                    {task.id === editingTaskId ? (
-                      <InlineEditTask
-                        dismissEditing={() => setEditingTaskId(null)}
-                        task={task}
-                      />
-                    ) : (
-                      <Task
-                        task={task}
-                        startEditing={() => setEditingTaskId(task.id)}
-                      />
-                    )}
-                  </PoseDiv>
-                )
-              })}
-            </PoseGroup>
-          </div>
+          <PoseContainer className={tasksClass}>
+            {tasks.map(task => {
+              return task.id === editingTaskId ? (
+                <PoseDiv key={'editing'}>
+                  <InlineEditTask
+                    dismissEditing={() => setEditingTaskId(null)}
+                    task={task}
+                  />
+                </PoseDiv>
+              ) : (
+                <PoseDiv key={task.id}>
+                  <Task
+                    task={task}
+                    startEditing={() => setEditingTaskId(task.id)}
+                  />
+                </PoseDiv>
+              )
+            })}
+          </PoseContainer>
         )}
       />
     </div>
