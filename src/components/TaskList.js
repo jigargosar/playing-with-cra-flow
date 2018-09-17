@@ -44,32 +44,30 @@ export function TaskList({ title, tasks }: Props) {
       <div className={titleClass}>{title}</div>
       <Composer
         components={[<EditingTaskId />]}
-        children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => {
-          return (
-            <div className={tasksClass}>
-              <PoseGroup>
-                {tasks.map(
-                  task =>
-                    isEditingTask(task) ? (
-                      <PoseDiv key={getTaskKey(task)}>
-                        <InlineEditTask
-                          dismissEditing={() => setEditingTaskId(null)}
-                          task={task}
-                        />
-                      </PoseDiv>
-                    ) : (
-                      <PoseDiv key={getTaskKey(task)}>
-                        <Task
-                          task={task}
-                          startEditing={() => setEditingTaskId(task.id)}
-                        />
-                      </PoseDiv>
-                    ),
-                )}
-              </PoseGroup>
-            </div>
-          )
-        }}
+        children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => (
+          <div className={tasksClass}>
+            <PoseGroup>
+              {tasks.map(
+                task =>
+                  isEditingTask(task) ? (
+                    <PoseDiv key={getTaskKey(task)}>
+                      <InlineEditTask
+                        dismissEditing={() => setEditingTaskId(null)}
+                        task={task}
+                      />
+                    </PoseDiv>
+                  ) : (
+                    <PoseDiv key={getTaskKey(task)}>
+                      <Task
+                        task={task}
+                        startEditing={() => setEditingTaskId(task.id)}
+                      />
+                    </PoseDiv>
+                  ),
+              )}
+            </PoseGroup>
+          </div>
+        )}
       />
     </div>
   )
