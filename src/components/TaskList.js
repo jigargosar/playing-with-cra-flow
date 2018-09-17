@@ -6,6 +6,7 @@ import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import posed, { PoseGroup } from 'react-pose'
+import { Transition, TransitionGroup } from 'react-transition-group'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -55,7 +56,18 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseItem key={task.id}>
-                  {renderTask(isEditingTask, task, setEditingTaskId)}
+                  <TransitionGroup component={null}>
+                    <Transition key={getTaskKey(task)} timeout={300}>
+                      {state => {
+                        console.log(`state`, state)
+                        return (
+                          <div>
+                            {renderTask(isEditingTask, task, setEditingTaskId)}
+                          </div>
+                        )
+                      }}
+                    </Transition>
+                  </TransitionGroup>
                 </PoseItem>
               ))}
             </PoseGroup>
