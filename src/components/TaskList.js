@@ -19,7 +19,8 @@ const EditingTaskId = mapRenderFnArgs(
   ({ value: editingTaskId, set: setEditingTaskId }) => ({
     editingTaskId,
     setEditingTaskId,
-    getTaskKey: task => (task.id === editingTaskId ? 'editing' : task.id),
+    getTaskKey: task =>
+      task.id === editingTaskId ? `editing-${task.id}` : task.id,
     isEditingTask: task => task.id === editingTaskId,
   }),
 )(createStringValue(null))
