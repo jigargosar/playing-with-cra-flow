@@ -34,11 +34,6 @@ const PoseItem = posed.div({
   },
 })
 
-const PoseItem2 = posed.div({
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
-})
-
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -53,23 +48,17 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseItem key={task.id}>
-                  <PoseGroup>
-                    {isEditingTask(task) ? (
-                      <PoseItem2 key={'e'}>
-                        <InlineEditTask
-                          dismissEditing={() => setEditingTaskId(null)}
-                          task={task}
-                        />
-                      </PoseItem2>
-                    ) : (
-                      <PoseItem2 key={'ne'}>
-                        <Task
-                          task={task}
-                          startEditing={() => setEditingTaskId(task.id)}
-                        />
-                      </PoseItem2>
-                    )}
-                  </PoseGroup>
+                  {isEditingTask(task) ? (
+                    <InlineEditTask
+                      dismissEditing={() => setEditingTaskId(null)}
+                      task={task}
+                    />
+                  ) : (
+                    <Task
+                      task={task}
+                      startEditing={() => setEditingTaskId(task.id)}
+                    />
+                  )}
                 </PoseItem>
               ))}
             </PoseGroup>
