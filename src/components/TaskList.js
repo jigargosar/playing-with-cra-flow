@@ -20,12 +20,22 @@ const EditingTaskId = mapRenderFnArgs(
     editingTaskId,
     setEditingTaskId,
     getTaskKey: task =>
-      task.id === editingTaskId ? `editing-${task.id}` : task.id,
+      task.id === editingTaskId
+        ? `editing-${task.id}`
+        : `not-editing-${task.id}`,
     isEditingTask: task => task.id === editingTaskId,
   }),
 )(createStringValue(null))
 
 const PoseItem = pose.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+  flip: {
+    transition: tween,
+  },
+})
+
+const PoseItem2 = pose.div({
   enter: { opacity: 1 },
   exit: { opacity: 0 },
   flip: {
@@ -48,21 +58,21 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseItem key={task.id}>
-                  {isEditingTask(task) ? (
-                    <PoseItem pose={isEditingTask(task) ? 'enter' : 'exit'}>
-                      <InlineEditTask
-                        dismissEditing={() => setEditingTaskId(null)}
-                        task={task}
-                      />
-                    </PoseItem>
-                  ) : (
-                    <PoseItem pose={isEditingTask(task) ? 'exit' : 'enter'}>
-                      <Task
-                        task={task}
-                        startEditing={() => setEditingTaskId(task.id)}
-                      />
-                    </PoseItem>
-                  )}
+                  <PoseGroup singleChildOnly={true}>
+                    <PoseItem2 key={isEditingTask(task) ? 'e' : 'ne'}>
+                      {isEditingTask(task) ? (
+                        <InlineEditTask
+                          dismissEditing={() => setEditingTaskId(null)}
+                          task={task}
+                        />
+                      ) : (
+                        <Task
+                          task={task}
+                          startEditing={() => setEditingTaskId(task.id)}
+                        />
+                      )}
+                    </PoseItem2>
+                  </PoseGroup>
                 </PoseItem>
               ))}
             </PoseGroup>
