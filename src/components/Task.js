@@ -63,6 +63,7 @@ type IP = {
 export function InlineEditTask({ dismissEditing, task }: IP) {
   return (
     <FocusTrap
+      active={false}
       focusTrapOptions={{
         onDeactivate: dismissEditing,
         clickOutsideDeactivates: true,
