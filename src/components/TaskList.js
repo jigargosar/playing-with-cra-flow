@@ -53,19 +53,15 @@ export function TaskList({ title, tasks }: Props) {
                   return (
                     <PoseDiv key={getTaskKey(task)}>
                       {isEditingTask(task) ? (
-                        <PoseDiv key={getTaskKey(task)}>
-                          <InlineEditTask
-                            dismissEditing={() => setEditingTaskId(null)}
-                            task={task}
-                          />
-                        </PoseDiv>
+                        <InlineEditTask
+                          dismissEditing={() => setEditingTaskId(null)}
+                          task={task}
+                        />
                       ) : (
-                        <PoseDiv key={getTaskKey(task)}>
-                          <Task
-                            task={task}
-                            startEditing={() => setEditingTaskId(task.id)}
-                          />
-                        </PoseDiv>
+                        <Task
+                          task={task}
+                          startEditing={() => setEditingTaskId(task.id)}
+                        />
                       )}
                     </PoseDiv>
                   )
