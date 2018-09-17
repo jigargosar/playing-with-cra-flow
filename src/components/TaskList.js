@@ -24,7 +24,7 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const PoseDiv = pose.div({
+const PoseItem = pose.div({
   enter: { opacity: 1 },
   exit: { opacity: 0 },
   flip: {
@@ -48,19 +48,19 @@ export function TaskList({ title, tasks }: Props) {
               {tasks.map(
                 task =>
                   isEditingTask(task) ? (
-                    <PoseDiv key={getTaskKey(task)}>
+                    <PoseItem key={getTaskKey(task)}>
                       <InlineEditTask
                         dismissEditing={() => setEditingTaskId(null)}
                         task={task}
                       />
-                    </PoseDiv>
+                    </PoseItem>
                   ) : (
-                    <PoseDiv key={getTaskKey(task)}>
+                    <PoseItem key={getTaskKey(task)}>
                       <Task
                         task={task}
                         startEditing={() => setEditingTaskId(task.id)}
                       />
-                    </PoseDiv>
+                    </PoseItem>
                   ),
               )}
             </PoseGroup>
