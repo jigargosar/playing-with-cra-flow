@@ -34,7 +34,9 @@
     "start": "nodemon -w yarn.lock -x cross-env REACT_EDITOR=webstorm react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@blueprintjs/core": "^3.6.1",
@@ -59,6 +61,7 @@
     "is-hotkey": "^0.1.3",
     "normalize.css": "^8.0.0",
     "popmotion": "^8.3.8",
+    "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.10.0",
     "react": "^16.5.1",
@@ -75,6 +78,12 @@
     "unique-selector": "^0.3.6"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-links": "^3.4.10",
+    "@storybook/addons": "^3.4.10",
+    "@storybook/react": "^3.4.10",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
     "flow-bin": "^0.80.0",
     "flow-typed": "^2.5.1",
