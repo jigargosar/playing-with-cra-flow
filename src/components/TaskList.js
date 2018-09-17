@@ -6,7 +6,6 @@ import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import posed, { PoseGroup } from 'react-pose'
-import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -26,13 +25,13 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const PoseItem = posed.div({
+const PoseItem = posed.div(/*{
   enter: { opacity: 1 },
   exit: { opacity: 0 },
   flip: {
     transition: tween,
   },
-})
+}*/)
 
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
