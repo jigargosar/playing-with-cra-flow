@@ -47,21 +47,23 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseItem key={task.id}>
-                  {isEditingTask(task) ? (
-                    <PoseItem key={getTaskKey(task)}>
-                      <InlineEditTask
-                        dismissEditing={() => setEditingTaskId(null)}
-                        task={task}
-                      />
-                    </PoseItem>
-                  ) : (
-                    <PoseItem key={getTaskKey(task)}>
-                      <Task
-                        task={task}
-                        startEditing={() => setEditingTaskId(task.id)}
-                      />
-                    </PoseItem>
-                  )}
+                  <PoseGroup>
+                    {isEditingTask(task) ? (
+                      <PoseItem key={getTaskKey(task)}>
+                        <InlineEditTask
+                          dismissEditing={() => setEditingTaskId(null)}
+                          task={task}
+                        />
+                      </PoseItem>
+                    ) : (
+                      <PoseItem key={getTaskKey(task)}>
+                        <Task
+                          task={task}
+                          startEditing={() => setEditingTaskId(task.id)}
+                        />
+                      </PoseItem>
+                    )}
+                  </PoseGroup>
                 </PoseItem>
               ))}
             </PoseGroup>
