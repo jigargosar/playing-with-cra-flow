@@ -1,4 +1,3 @@
-// @flow
 import { style } from 'typestyle/'
 import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
@@ -12,7 +11,16 @@ import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
 
-const EditingTaskId = createStringValue(null)
+export const mapRenderFnArgs = fn => Comp => ({ children, ...otherProps }) => (
+  <Comp children={props => children(fn(props))} {...otherProps} />
+)
+
+const EditingTaskId = mapRenderFnArgs(
+  ({ value: editingTaskId, set: setEditingTaskId }) => ({
+    editingTaskId,
+    setEditingTaskId,
+  }),
+)(createStringValue(null))
 
 const PoseDiv = pose.div({
   enter: { opacity: 1 },
@@ -40,7 +48,7 @@ export function TaskList({ title, tasks }: Props) {
       <div className={titleClass}>{title}</div>
       <Composer
         components={[<EditingTaskId />]}
-        children={([{ value: editingTaskId, set: setEditingTaskId }]) => (
+        children={([{ editingTaskId, setEditingTaskId }]) => (
           <PoseContainer className={tasksClass}>
             {tasks.map(task => {
               return task.id === editingTaskId ? (
