@@ -45,9 +45,9 @@ export function TaskList({ title, tasks }: Props) {
         children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => (
           <div className={style(verticallySpaced(rem(1.5)))}>
             <PoseGroup>
-              {tasks.map(
-                task =>
-                  isEditingTask(task) ? (
+              {tasks.map(task => (
+                <PoseItem key={task.id}>
+                  {isEditingTask(task) ? (
                     <PoseItem key={getTaskKey(task)}>
                       <InlineEditTask
                         dismissEditing={() => setEditingTaskId(null)}
@@ -61,8 +61,9 @@ export function TaskList({ title, tasks }: Props) {
                         startEditing={() => setEditingTaskId(task.id)}
                       />
                     </PoseItem>
-                  ),
-              )}
+                  )}
+                </PoseItem>
+              ))}
             </PoseGroup>
           </div>
         )}
