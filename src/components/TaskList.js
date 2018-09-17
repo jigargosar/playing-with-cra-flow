@@ -29,13 +29,6 @@ const PoseDiv = pose.div({
     transition: tween,
   },
 })
-
-const PoseContainer = ({ children, ...otherProps }) => (
-  <div {...otherProps}>
-    <PoseGroup flipMove={true}>{children}</PoseGroup>
-  </div>
-)
-
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
