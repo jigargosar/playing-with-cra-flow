@@ -37,15 +37,13 @@ export function TaskList({ title, tasks }: Props) {
     fontSize: rem(1.5),
     marginBottom: rem(1),
   })
-  const tasksClass = style(verticallySpaced(rem(1.5)))
-
   return (
     <div>
       <div className={titleClass}>{title}</div>
       <Composer
         components={[<EditingTaskId />]}
         children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => (
-          <div className={tasksClass}>
+          <div className={style(verticallySpaced(rem(1.5)))}>
             <PoseGroup>
               {tasks.map(
                 task =>
