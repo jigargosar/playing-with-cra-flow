@@ -19,6 +19,8 @@ const EditingTaskId = mapRenderFnArgs(
   ({ value: editingTaskId, set: setEditingTaskId }) => ({
     editingTaskId,
     setEditingTaskId,
+    getTaskKey: task => (task.id === editingTaskId ? 'editing' : task.id),
+    isEditingTask: task => task.id === editingTaskId,
   }),
 )(createStringValue(null))
 
@@ -42,11 +44,7 @@ export function TaskList({ title, tasks }: Props) {
       <div className={titleClass}>{title}</div>
       <Composer
         components={[<EditingTaskId />]}
-        children={([{ editingTaskId, setEditingTaskId }]) => {
-          const getTaskKey = task =>
-            task.id === editingTaskId ? 'editing' : task.id
-          const isEditingTask = task => task.id === editingTaskId
-
+        children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => {
           return (
             <div className={tasksClass}>
               <PoseGroup>
