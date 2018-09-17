@@ -4,16 +4,16 @@ import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
 import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
-import { Fragment } from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import Composer from 'react-composer'
-import { PoseGroup } from 'react-pose'
+import pose, { PoseGroup } from 'react-pose'
 
 type Props = { title: string, tasks: TaskModel[] }
 
 const EditingTaskId = createStringValue(null)
 
+const PoseDiv = pose.div()
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -31,7 +31,7 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => {
                 return (
-                  <Fragment key={task.id}>
+                  <PoseDiv key={task.id}>
                     {task.id === editingTaskId ? (
                       <InlineEditTask
                         dismissEditing={() => setEditingTaskId(null)}
@@ -43,7 +43,7 @@ export function TaskList({ title, tasks }: Props) {
                         startEditing={() => setEditingTaskId(task.id)}
                       />
                     )}
-                  </Fragment>
+                  </PoseDiv>
                 )
               })}
             </PoseGroup>
