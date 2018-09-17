@@ -66,6 +66,7 @@
     "react-dom": "^16.5.1",
     "react-icons-kit": "^1.1.7",
     "react-pose": "^3.3.0",
+    "react-spring": "^5.7.2",
     "react-values": "^0.3.0",
     "recompose": "^0.30.0",
     "selectn": "^1.1.2",
