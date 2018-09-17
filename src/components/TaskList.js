@@ -5,8 +5,8 @@ import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
-import posed, { PoseGroup } from 'react-pose'
 import { Transition, TransitionGroup } from 'react-transition-group'
+import { relative } from '../styles'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -26,21 +26,31 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const PoseItem = posed.div(/*{
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
-  flip: {
-    transition: tween,
-  },
-}*/)
+const duration = 450
 
-function renderTask(isEditingTask, task, setEditingTaskId) {
-  return isEditingTask(task) ? (
-    <InlineEditTask dismissEditing={() => setEditingTaskId(null)} task={task} />
-  ) : (
-    <Task task={task} startEditing={() => setEditingTaskId(task.id)} />
-  )
+const defaultStyle = {
+  transition: `opacity ${duration}ms ease-in`,
+  opacity: 1,
+  position: 'relative',
+  top: 0,
 }
+
+const transitionStyles = {
+  entering: { opacity: 0, position: 'absolute', zIndex: 1 },
+  entered: {
+    opacity: 1,
+    position: 'relative',
+    transition: `opacity ${duration}ms ease-in`,
+  },
+  // exiting: { opacity: 1 },
+  // exited: { opacity: 0 },
+}
+
+const tasksContainerClass = style(
+  //
+  verticallySpaced(rem(1.5)),
+  relative,
+)
 
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
@@ -52,25 +62,38 @@ export function TaskList({ title, tasks }: Props) {
       <div className={titleClass}>{title}</div>
       <EditingTaskId
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
-          <div className={style(verticallySpaced(rem(1.5)))}>
-            <PoseGroup>
-              {tasks.map(task => (
-                <PoseItem key={task.id}>
-                  <TransitionGroup component={null}>
-                    <Transition key={getTaskKey(task)} timeout={300}>
-                      {state => {
-                        console.log(`state`, state)
-                        return (
-                          <div>
-                            {renderTask(isEditingTask, task, setEditingTaskId)}
-                          </div>
-                        )
-                      }}
-                    </Transition>
-                  </TransitionGroup>
-                </PoseItem>
-              ))}
-            </PoseGroup>
+          <div className={tasksContainerClass}>
+            {tasks.map(task => (
+              <div key={task.id}>
+                <TransitionGroup>
+                  <Transition key={getTaskKey(task)} timeout={duration}>
+                    {state => {
+                      console.log(`state`, state)
+                      return (
+                        <div
+                          style={{
+                            ...defaultStyle,
+                            ...transitionStyles[state],
+                          }}
+                        >
+                          {isEditingTask(task) ? (
+                            <InlineEditTask
+                              dismissEditing={() => setEditingTaskId(null)}
+                              task={task}
+                            />
+                          ) : (
+                            <Task
+                              task={task}
+                              startEditing={() => setEditingTaskId(task.id)}
+                            />
+                          )}
+                        </div>
+                      )
+                    }}
+                  </Transition>
+                </TransitionGroup>
+              </div>
+            ))}
           </div>
         )}
       />
