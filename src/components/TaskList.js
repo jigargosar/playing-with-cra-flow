@@ -27,15 +27,23 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const duration = 2000
+const duration = 450
 
 const defaultStyle = {
-  transition: `opacity ${duration}ms linear`,
+  transition: `opacity ${duration}ms ease-in-out`,
   opacity: 1,
 }
 
 const transitionStyles = {
-  entering: { opacity: 0, top: 0, position: 'absolute', zIndex: 1 },
+  entering: {
+    opacity: 0.5,
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    position: 'absolute',
+    zIndex: 1,
+  },
   exiting: { opacity: 0 },
 }
 
