@@ -5,8 +5,7 @@ import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
-import Composer from 'react-composer'
-import pose, { PoseGroup } from 'react-pose'
+import posed, { PoseGroup } from 'react-pose'
 import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
@@ -27,7 +26,7 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const PoseItem = pose.div({
+const PoseItem = posed.div({
   enter: { opacity: 1 },
   exit: { opacity: 0 },
   flip: {
@@ -35,8 +34,8 @@ const PoseItem = pose.div({
   },
 })
 
-const PoseItem2 = pose.div({
-  enter: { opacity: 1 },
+const PoseItem2 = posed.div({
+  enter: { opacity: 1, delay: 300, beforeChildren: 300 },
   exit: { opacity: 0 },
   flip: {
     transition: tween,
@@ -51,27 +50,28 @@ export function TaskList({ title, tasks }: Props) {
   return (
     <div>
       <div className={titleClass}>{title}</div>
-      <Composer
-        components={[<EditingTaskId />]}
+      <EditingTaskId
         children={([{ isEditingTask, getTaskKey, setEditingTaskId }]) => (
           <div className={style(verticallySpaced(rem(1.5)))}>
             <PoseGroup>
               {tasks.map(task => (
                 <PoseItem key={task.id}>
-                  <PoseGroup singleChildOnly={true}>
-                    <PoseItem2 key={isEditingTask(task) ? 'e' : 'ne'}>
-                      {isEditingTask(task) ? (
-                        <InlineEditTask
-                          dismissEditing={() => setEditingTaskId(null)}
-                          task={task}
-                        />
-                      ) : (
-                        <Task
-                          task={task}
-                          startEditing={() => setEditingTaskId(task.id)}
-                        />
-                      )}
-                    </PoseItem2>
+                  <PoseGroup animateOnMount={true}>
+                    {[
+                      <PoseItem2 key={isEditingTask(task) ? 'e' : 'ne'}>
+                        {isEditingTask(task) ? (
+                          <InlineEditTask
+                            dismissEditing={() => setEditingTaskId(null)}
+                            task={task}
+                          />
+                        ) : (
+                          <Task
+                            task={task}
+                            startEditing={() => setEditingTaskId(task.id)}
+                          />
+                        )}
+                      </PoseItem2>,
+                    ]}
                   </PoseGroup>
                 </PoseItem>
               ))}

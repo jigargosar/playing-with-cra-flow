@@ -4,7 +4,7 @@ import * as React from 'react'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
-import { Router } from './components/Router'
+import { Location, Router } from './components/Router'
 import {
   CollectionProvider,
   renderWithCollections,
@@ -28,6 +28,7 @@ import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import FocusTrap from 'focus-trap-react'
 import { isAnyModalOpen } from './components/EditTaskDialog'
+import posed, { PoseGroup } from 'react-pose'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -75,21 +76,38 @@ function NotFound() {
   return <ErrorMessage>404</ErrorMessage>
 }
 
+const RouteContainer = posed.div({
+  enter: { opacity: 1, delay: 300, beforeChildren: 300 },
+  exit: { opacity: 0 },
+})
+
 function renderMainRoutes() {
   const routerClass = style(padding(rem(2), rem(1)), bg(white), {
     minHeight: '100%',
   })
 
   return (
-    <Router className={routerClass}>
-      <Redirect from={'/'} to={'all'} noThrow />
-      <TagList path={'tag'} />
-      <FilteredTaskList path={'all'} title={'All Tasks'} pred={T} />
-      <FilteredTaskList path={'done'} title="Done Tasks" pred={donePred} />
-      <CategoryTaskList path={'category/:category'} />
-      <TagTaskList path={'tag/:tagTitle/:tid'} />
-      <NotFound default />
-    </Router>
+    <Location
+      children={({ location }) => (
+        <PoseGroup>
+          <RouteContainer key={location.key}>
+            <Router location={location} className={routerClass}>
+              <Redirect from={'/'} to={'all'} noThrow />
+              <TagList path={'tag'} />
+              <FilteredTaskList path={'all'} title={'All Tasks'} pred={T} />
+              <FilteredTaskList
+                path={'done'}
+                title="Done Tasks"
+                pred={donePred}
+              />
+              <CategoryTaskList path={'category/:category'} />
+              <TagTaskList path={'tag/:tagTitle/:tid'} />
+              <NotFound default />
+            </Router>
+          </RouteContainer>
+        </PoseGroup>
+      )}
+    />
   )
 }
 
