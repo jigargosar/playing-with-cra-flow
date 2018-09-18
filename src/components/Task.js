@@ -2,7 +2,7 @@ import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { content, flex, rem } from '../typestyle-exports'
+import { content, flex } from '../typestyle-exports'
 import { fg } from '../styles'
 import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
@@ -19,8 +19,7 @@ import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
-
-const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
+import { fz } from '../theme'
 
 function renderTags(task) {
   return (
