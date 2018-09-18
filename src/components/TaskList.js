@@ -80,26 +80,22 @@ export function TaskList({ title, tasks }: Props) {
           <div className={tasksContainerClass}>
             {tasks.map(task => (
               <TransitionGroup key={task.id} component={null}>
-                {!isEditingTask(task) && (
-                  <Fade key={getTaskKey(task)}>
-                    <div>
+                <Fade key={getTaskKey(task)}>
+                  <div>
+                    {!isEditingTask(task) && (
                       <Task
                         task={task}
                         startEditing={() => setEditingTaskId(task.id)}
                       />
-                    </div>
-                  </Fade>
-                )}
-                {isEditingTask(task) && (
-                  <Fade key={getTaskKey(task)}>
-                    <div>
+                    )}
+                    {isEditingTask(task) && (
                       <InlineEditTask
                         dismissEditing={() => setEditingTaskId(null)}
                         task={task}
                       />
-                    </div>
-                  </Fade>
-                )}
+                    )}
+                  </div>
+                </Fade>
               </TransitionGroup>
             ))}
           </div>
