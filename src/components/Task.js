@@ -2,9 +2,8 @@ import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer, renderWithCollections } from './CollectionContext'
-import { content, flex, rem, style } from '../typestyle-exports'
+import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { Match } from '@reach/router'
 import { intersperse } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
@@ -17,7 +16,7 @@ import {
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
-import { classes } from 'typestyle/'
+import { classes, style } from 'typestyle/'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -36,21 +35,6 @@ function renderTags(task) {
         }
       </CollectionConsumer>
     </div>
-  )
-}
-
-function renderCategory(task) {
-  return (
-    <Match path={`/category/${task.category}`}>
-      {props =>
-        props.match ? null : (
-          <LinkToCategory
-            className={style(fz.sm, fg(blackA(0.5)))}
-            category={task.category}
-          />
-        )
-      }
-    </Match>
   )
 }
 
@@ -105,25 +89,29 @@ export function InlineEditTask({ dismissEditing, task, className }) {
   )
 }
 
-export const TaskDisplayItem = ({ task, startEditing, className }) => {
+export const TaskDisplayItem = ({
+  task,
+  startEditing,
+  className,
+  category,
+}) => {
   const rootClass = style(horizontal, horizontallySpaced('0.3rem'))
   return (
     <div className={classes(rootClass, className)} tabIndex={0}>
       <div className={style(flex)}>
         <div onClick={startEditing}>{task.title}</div>
-
-        {/*<ModalState*/}
-        {/*trigger={({ open }) => (*/}
-        {/*<div onClick={open} className={style(task.done && strike)}>*/}
-        {/*{task.title}*/}
-        {/*</div>*/}
-        {/*)}*/}
-        {/*>*/}
-        {/*{props => <EditTaskDialog {...props} task={task} />}*/}
-        {/*</ModalState>*/}
         {renderTags(task)}
       </div>
-      <div className={style(content)}>{renderCategory(task)}</div>
+      {task.category !== category && (
+        <div className={style(content)}>
+          {
+            <LinkToCategory
+              className={style(fz.sm, fg(blackA(0.5)))}
+              category={task.category}
+            />
+          }
+        </div>
+      )}
     </div>
   )
 }

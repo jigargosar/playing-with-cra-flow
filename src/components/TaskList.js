@@ -38,18 +38,23 @@ const PoseDiv = pose.div({
   },
 })
 
-function renderTask(isEditingTask, task, setEditingTaskId) {
+function renderTask(isEditingTask, task, setEditingTaskId, otherProps) {
   return isEditingTask(task) ? (
-    <InlineEditTask dismissEditing={() => setEditingTaskId(null)} task={task} />
+    <InlineEditTask
+      dismissEditing={() => setEditingTaskId(null)}
+      task={task}
+      {...otherProps}
+    />
   ) : (
     <TaskDisplayItem
       task={task}
       startEditing={() => setEditingTaskId(task.id)}
+      {...otherProps}
     />
   )
 }
 
-export function TaskList({ title, tasks }) {
+export function TaskList({ title, tasks, ...otherProps }) {
   const titleClass = style({
     fontSize: rem(1.5),
     marginBottom: rem(1),
@@ -67,7 +72,12 @@ export function TaskList({ title, tasks }) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseDiv key={getTaskKey(task)}>
-                  {renderTask(isEditingTask, task, setEditingTaskId)}
+                  {renderTask(
+                    isEditingTask,
+                    task,
+                    setEditingTaskId,
+                    otherProps,
+                  )}
                 </PoseDiv>
               ))}
             </PoseGroup>
