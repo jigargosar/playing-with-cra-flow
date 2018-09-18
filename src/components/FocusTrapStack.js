@@ -3,6 +3,21 @@ import FocusTrapReact from 'focus-trap-react'
 import Component from '@reach/component-component'
 import { head, omit, tail } from 'ramda'
 
+import { createStore, Provider, Subscribe } from 'react-contextual'
+import { defaultProps } from 'recompose'
+
+const stackStore = createStore({
+  stack: [],
+  push: item => ({ stack }) => ({ stack: [item, ...stack] }),
+  pop: () => ({ stack }) => ({ stack: tail(stack) }),
+})
+
+export const App = () => (
+  <Provider store={stackStore}>
+    <Subscribe to={stackStore}>{props => <div>{props.text}</div>}</Subscribe>
+  </Provider>
+)
+
 export function createComponentContext(componentProps) {
   const { Provider, Consumer } = React.createContext({})
   const ComponentProvider = providerProps => (
@@ -17,50 +32,50 @@ export function createComponentContext(componentProps) {
   return { Provider: ComponentProvider, Consumer }
 }
 
-const { Provider, Consumer } = createComponentContext({
+const stackCtx = createComponentContext({
   initialState: { stack: [] },
 })
 
-export const FocusTrapProvider = Provider
+export const FocusTrapProvider = stackCtx.Provider
+export const FocusTrapStackProvider = defaultProps({ store: stackStore })(
+  Provider,
+)
+// export const FocusTrapStackProvider = defaultProps({})('div')
 
 export function FocusTrap({ ...otherProps }) {
   return (
-    <Consumer>
-      {({ state: { stack }, setState: setStackState }) => {
-        return (
-          <Component
-            getRefs={() => ({ trapRef: React.createRef() })}
-            didMount={({ refs }) => {
-              setStackState({ stack: [refs, ...stack] })
-              console.log(`didMount: stack`, stack)
-              console.log(`didMount: stack.length`, stack.length)
-            }}
-            didUpdate={() => {
-              console.log(`didUpdate: stack`, stack)
-              console.log(`didUpdate: stack.length`, stack.length)
-            }}
-            willUnmount={({ refs }) => {
-              console.log(`willUnmount: stack`, stack)
-              console.log(`willUnmount: stack.length`, stack.length)
-              const oldRefs = head(stack)
-              console.log('willUnmount', refs, oldRefs)
-              console.assert(oldRefs === refs)
-              setStackState({ stack: tail(stack) })
-            }}
-            children={({ refs }) => {
-              const paused = head(stack) !== refs
-              console.log(`paused`, paused, stack.length)
-              return (
-                <FocusTrapReact
-                  paused={paused}
-                  ref={refs.trapRef}
-                  {...omit(['paused', 'ref'])(otherProps)}
-                />
-              )
-            }}
-          />
-        )
-      }}
-    </Consumer>
+    <Subscribe
+      to={stackStore}
+      select={({ stack, ...props }) => ({
+        stack,
+        ...props,
+        peek: () => head(stack),
+      })}
+    >
+      {({ push, pop, peek }) => (
+        <Component
+          getRefs={() => ({ trapRef: React.createRef() })}
+          didMount={({ refs }) => {
+            push(refs)
+          }}
+          didUpdate={() => {}}
+          willUnmount={({ refs }) => {
+            const oldRefs = peek()
+            console.log('willUnmount', refs, oldRefs)
+            console.assert(oldRefs === refs)
+            pop()
+          }}
+          children={({ refs }) => {
+            return (
+              <FocusTrapReact
+                paused={peek() !== refs}
+                ref={refs.trapRef}
+                {...omit(['paused', 'ref'])(otherProps)}
+              />
+            )
+          }}
+        />
+      )}
+    </Subscribe>
   )
 }
