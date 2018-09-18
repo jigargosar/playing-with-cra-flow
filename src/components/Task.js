@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { intersperse, partial } from 'ramda'
+import { intersperse, partial, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import {
@@ -18,6 +18,7 @@ import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
+import { noop } from '../ramda-exports'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -49,10 +50,13 @@ const TaskForm = adopt(
     const {
       props: { task },
       collections: { updateTask },
-      form: { input, values },
+      form,
     } = props
+    console.log(`form`, form)
+    const { input, values } = form
     return {
-      save: partial(updateTask, [values, task]),
+      save: partial(updateTask, [pick(['title', 'category'])(values), task]),
+      cancel: noop,
       input,
     }
   },
