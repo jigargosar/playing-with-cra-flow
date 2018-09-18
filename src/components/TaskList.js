@@ -1,7 +1,7 @@
 import { style } from 'typestyle/'
 import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
-import { InlineEditTask, Task } from './Task'
+import { InlineEditTask, TaskDisplayItem } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
@@ -45,6 +45,17 @@ const PoseDiv = pose.div({
   },
 })
 
+function renderTask(isEditingTask, task, setEditingTaskId) {
+  return isEditingTask(task) ? (
+    <InlineEditTask dismissEditing={() => setEditingTaskId(null)} task={task} />
+  ) : (
+    <TaskDisplayItem
+      task={task}
+      startEditing={() => setEditingTaskId(task.id)}
+    />
+  )
+}
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -59,17 +70,7 @@ export function TaskList({ title, tasks }: Props) {
             <PoseGroup>
               {tasks.map(task => (
                 <PoseDiv key={getTaskKey(task)}>
-                  {isEditingTask(task) ? (
-                    <InlineEditTask
-                      dismissEditing={() => setEditingTaskId(null)}
-                      task={task}
-                    />
-                  ) : (
-                    <Task
-                      task={task}
-                      startEditing={() => setEditingTaskId(task.id)}
-                    />
-                  )}
+                  {renderTask(isEditingTask, task, setEditingTaskId)}
                 </PoseDiv>
               ))}
             </PoseGroup>

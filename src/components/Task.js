@@ -105,7 +105,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
   )
 }
 
-export const Task = ({ task, startEditing, className }) => {
+export const TaskDisplayItem = ({ task, startEditing, className }) => {
   const rootClass = style(horizontal, horizontallySpaced('0.3rem'))
   return (
     <div className={classes(rootClass, className)} tabIndex={0}>
