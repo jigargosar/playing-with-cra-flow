@@ -14,6 +14,8 @@ import { Value } from 'react-powerplug'
 //   stopEditing: () => ({ task: null }),
 // })
 
+const EditTaskContext = React.createContext({})
+
 const EditTaskStore = adopt(
   {
     taskId: <Value initial={null} />,
@@ -28,11 +30,15 @@ const EditTaskStore = adopt(
   }),
 )
 
-const tasksContainerClass = style(
-  //
-  verticallySpaced(rem(1.5)),
-  relative,
+export const ETP = ({ children }) => (
+  <EditTaskStore
+    children={props => (
+      <EditTaskContext.Provider value={props} children={children} />
+    )}
+  />
 )
+
+const tasksContainerClass = style(verticallySpaced(rem(1.5)), relative)
 
 const PoseDiv = pose.div({
   enter: {
@@ -55,7 +61,7 @@ export function TaskList({ title, tasks, ...otherProps }) {
           {title}
         </PoseDiv>
       </PoseGroup>
-      <EditTaskStore
+      <EditTaskContext.Consumer
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>

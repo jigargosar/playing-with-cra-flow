@@ -20,7 +20,7 @@ import { style } from './typestyle-exports'
 import { bg, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
-import { TaskList } from './components/TaskList'
+import { ETP, TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
@@ -87,7 +87,7 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(CollectionProvider, FocusTrapStackProvider)
+const AllProviders = nest(CollectionProvider, FocusTrapStackProvider, ETP)
 
 const App = () => {
   const containerClass = style(
