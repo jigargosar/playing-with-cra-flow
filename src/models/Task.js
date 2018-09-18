@@ -4,7 +4,7 @@ import * as faker from 'faker'
 import Chance from 'chance'
 import type { Category } from './Category'
 import { categories } from './Category'
-import { ascend, compose, filter, indexOf, sortWith, times } from 'ramda'
+import { ascend, compose, filter, indexOf, prop, sortWith, times } from 'ramda'
 import type { Tag, TagCollection, TagId } from './Tag'
 import { findById } from './Collection'
 import Maybe from 'folktale/maybe'
@@ -50,13 +50,22 @@ export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
 export type TaskCollection = Task[]
 
 export function getAllTasks(tasksCollection: TaskCollection): Task[] {
-  return sortWith([ascend(getCategoryIndexOfTask)])(tasksCollection)
+  return sortWith([
+    //
+    ascend(getCategoryIndexOfTask),
+    ascend(prop('createdAt')),
+    ascend(prop('title')),
+  ])(tasksCollection)
 }
 
 export const filterTasks = (
   pred: Task => boolean,
   tasksCollection: TaskCollection,
-) => compose(filter(pred), getAllTasks)(tasksCollection)
+) =>
+  compose(
+    filter(pred),
+    getAllTasks,
+  )(tasksCollection)
 
 export function getActiveTasks(tasksCollection: TaskCollection): Task[] {
   return getAllTasks(tasksCollection).filter(task => !task.done)
