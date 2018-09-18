@@ -14,7 +14,6 @@ import {
   verticallySpaced,
 } from 'csstips/'
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
-import { ObjectValue } from 'react-values'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { Adopt } from 'react-adopt'
@@ -51,16 +50,14 @@ export function InlineEditTask({ dismissEditing, task, className }) {
     >
       <Adopt
         mapper={{
-          c: <CollectionConsumer />,
-          et: <ObjectValue defaultValue={task} />,
+          collections: <CollectionConsumer />,
           title: <Input initial={task.title} />,
           category: <Input initial={task.category} />,
         }}
-        mapProps={({ title, category, c: { updateTask }, et: { set } }) => ({
+        mapProps={({ title, category, collections: { updateTask } }) => ({
           updateTask,
           title,
           category,
-          set,
         })}
         children={({ updateTask, title, category }) => {
           return (
