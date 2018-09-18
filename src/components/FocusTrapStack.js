@@ -33,9 +33,7 @@ export function FocusTrap({ ...otherProps }) {
           }}
           didUpdate={() => {}}
           willUnmount={({ refs }) => {
-            const oldRefs = peek()
-            console.log('willUnmount', refs, oldRefs)
-            console.assert(oldRefs === refs)
+            console.assert(peek() === refs)
             pop()
           }}
           children={({ refs }) => {
