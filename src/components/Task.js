@@ -51,11 +51,9 @@ const TaskForm = adopt(
     const {
       props: { task },
       collections: { updateTask },
-      form,
+      form: { input, values },
       actions,
     } = props
-    console.log(`form`, form)
-    const { input, values } = form
     return {
       save: () => {
         updateTask(pick(['title', 'category'])(values), task)
