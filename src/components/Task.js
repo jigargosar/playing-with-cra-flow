@@ -1,4 +1,3 @@
-import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
@@ -54,14 +53,11 @@ function renderCategory(task) {
     </Match>
   )
 }
-type IP = {
-  dismissEditing: Function,
-  task: TaskModel,
-}
 
-export function InlineEditTask({ dismissEditing, task }: IP) {
+export function InlineEditTask({ dismissEditing, task, className }) {
   return (
     <FocusTrap
+      className={className}
       active={false}
       focusTrapOptions={{
         onDeactivate: dismissEditing,
