@@ -34,6 +34,12 @@ const tasksContainerClass = style(
 )
 
 const PoseDiv = pose.div({
+  enter: {
+    opacity: 0.99,
+  },
+  exit: {
+    opacity: 0.01,
+  },
   flip: {
     transition: tween,
   },
@@ -52,11 +58,7 @@ export function TaskList({ title, tasks }: Props) {
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
-                <PoseDiv
-                  //
-                  key={getTaskKey(task)}
-                  // key={task.id}
-                >
+                <PoseDiv key={getTaskKey(task)}>
                   {isEditingTask(task) ? (
                     <InlineEditTask
                       dismissEditing={() => setEditingTaskId(null)}
@@ -68,22 +70,6 @@ export function TaskList({ title, tasks }: Props) {
                       startEditing={() => setEditingTaskId(task.id)}
                     />
                   )}
-
-                  {/*<TransitionGroup component={null}>*/}
-                  {/*<Fade key={getTaskKey(task)}>*/}
-                  {/*{isEditingTask(task) ? (*/}
-                  {/*<InlineEditTask*/}
-                  {/*dismissEditing={() => setEditingTaskId(null)}*/}
-                  {/*task={task}*/}
-                  {/*/>*/}
-                  {/*) : (*/}
-                  {/*<Task*/}
-                  {/*task={task}*/}
-                  {/*startEditing={() => setEditingTaskId(task.id)}*/}
-                  {/*/>*/}
-                  {/*)}*/}
-                  {/*</Fade>*/}
-                  {/*</TransitionGroup>*/}
                 </PoseDiv>
               ))}
             </PoseGroup>
