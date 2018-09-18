@@ -42,7 +42,6 @@ export function InlineEditTask({ dismissEditing, task, className }) {
   return (
     <FocusTrap
       className={className}
-      // active={false}
       focusTrapOptions={{
         onDeactivate: dismissEditing,
         clickOutsideDeactivates: true,

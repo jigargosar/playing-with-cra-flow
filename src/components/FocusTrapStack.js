@@ -43,7 +43,6 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
               paused={peek() !== refs}
               // active={peek() === refs}
               ref={refs.trapRef}
-              {...omit(['paused', 'ref', 'focusTrapOptions'])(otherProps)}
               focusTrapOptions={mergeDeepRight(
                 {
                   returnFocusOnDeactivate: true,
@@ -54,6 +53,7 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
                 },
                 focusTrapOptions,
               )}
+              {...omit(['paused', 'ref', 'focusTrapOptions'])(otherProps)}
             />
           )}
         />
