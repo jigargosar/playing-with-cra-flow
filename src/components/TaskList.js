@@ -1,11 +1,11 @@
-import { style } from 'typestyle/'
+import { style, stylesheet } from 'typestyle/'
 import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
 import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
-import { Transition, TransitionGroup } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { relative } from '../styles'
 
 type Props = { title: string, tasks: TaskModel[] }
@@ -26,20 +26,32 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const duration = 200
+const duration = 450
 
-const defaultStyle = {
-  transition: `${duration}ms ease-in-out`,
-  opacity: 1,
-}
-
-const transitionStyles = {
-  entering: {
+const transitionSheet = stylesheet({
+  enter: {
     opacity: 0.01,
-    position: 'absolute',
   },
-  exiting: { opacity: 0.01 },
-}
+  enterActive: {
+    opacity: 1,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    transition: `opacity ${duration}ms ease-in-out`,
+    // transitionDelay: `${duration}ms`,
+    zIndex: 1,
+  },
+  exit: {
+    opacity: 1,
+  },
+  exitActive: {
+    opacity: 0.01,
+    // transition: `opacity ${duration}ms ease-in`,
+    transition: `opacity ${duration}ms ease-in-out`,
+  },
+})
+
+console.log(`transitionSheet`, transitionSheet)
 
 const tasksContainerClass = style(
   //
@@ -61,38 +73,32 @@ export function TaskList({ title, tasks }: Props) {
             {tasks.map(task => (
               <TransitionGroup key={task.id} component={null}>
                 {!isEditingTask(task) && (
-                  <Transition key={getTaskKey(task)} timeout={duration}>
-                    {state => (
-                      <div
-                        style={{
-                          ...defaultStyle,
-                          ...transitionStyles[state],
-                        }}
-                      >
-                        <Task
-                          task={task}
-                          startEditing={() => setEditingTaskId(task.id)}
-                        />
-                      </div>
-                    )}
-                  </Transition>
+                  <CSSTransition
+                    classNames={transitionSheet}
+                    key={getTaskKey(task)}
+                    timeout={duration}
+                  >
+                    <div>
+                      <Task
+                        task={task}
+                        startEditing={() => setEditingTaskId(task.id)}
+                      />
+                    </div>
+                  </CSSTransition>
                 )}
                 {isEditingTask(task) && (
-                  <Transition key={getTaskKey(task)} timeout={duration}>
-                    {state => (
-                      <div
-                        style={{
-                          ...defaultStyle,
-                          ...transitionStyles[state],
-                        }}
-                      >
-                        <InlineEditTask
-                          dismissEditing={() => setEditingTaskId(null)}
-                          task={task}
-                        />
-                      </div>
-                    )}
-                  </Transition>
+                  <CSSTransition
+                    classNames={transitionSheet}
+                    key={getTaskKey(task)}
+                    timeout={duration}
+                  >
+                    <div>
+                      <InlineEditTask
+                        dismissEditing={() => setEditingTaskId(null)}
+                        task={task}
+                      />
+                    </div>
+                  </CSSTransition>
                 )}
               </TransitionGroup>
             ))}
