@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { intersperse, partial, pick } from 'ramda'
+import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import {
@@ -18,7 +18,7 @@ import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
-import { noop } from '../ramda-exports'
+import { EditTaskConsumer } from '../contexts/EditTask'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -42,6 +42,7 @@ function renderTags(task) {
 
 const TaskForm = adopt(
   {
+    actions: <EditTaskConsumer />,
     collections: <CollectionConsumer />,
     form: ({ task, render }) => <Form initial={task} children={render} />,
     props: ({ task, render }) => render({ task }),
@@ -51,12 +52,16 @@ const TaskForm = adopt(
       props: { task },
       collections: { updateTask },
       form,
+      actions,
     } = props
     console.log(`form`, form)
     const { input, values } = form
     return {
-      save: partial(updateTask, [pick(['title', 'category'])(values), task]),
-      cancel: noop,
+      save: () => {
+        updateTask(pick(['title', 'category'])(values), task)
+        actions.stopEditingTask()
+      },
+      cancel: () => actions.stopEditingTask(),
       input,
     }
   },
@@ -73,7 +78,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
     >
       <TaskForm
         task={task}
-        children={({ input, save }) => {
+        children={({ input, save, cancel }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
@@ -81,15 +86,8 @@ export function InlineEditTask({ dismissEditing, task, className }) {
                 <HTMLSelect {...input('category').bind} options={categories} />
               </div>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
-                <Button
-                  onClick={() => {
-                    save()
-                    dismissEditing()
-                  }}
-                >
-                  Save
-                </Button>
-                <Button onClick={dismissEditing}>Cancel</Button>
+                <Button onClick={save}>Save</Button>
+                <Button onClick={cancel}>Cancel</Button>
               </div>
             </div>
           )
