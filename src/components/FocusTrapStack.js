@@ -5,6 +5,7 @@ import { head, identical, mergeDeepRight, omit, reject, tail } from 'ramda'
 
 import { createStore, Provider, Subscribe } from 'react-contextual'
 import { defaultProps } from 'recompose'
+import { noop } from '../ramda-exports'
 
 const stackStore = createStore({
   stack: [],
@@ -48,6 +49,8 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
                     escapeDeactivates: true,
                     // onActivate: () => console.log('onActivate'),
                     // onDeactivate: () => console.log('onDeactivate'),
+                    onActivate: noop,
+                    onDeactivate: noop,
                   },
                   focusTrapOptions,
                 )}
