@@ -17,7 +17,7 @@ import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
-import { Form, Input } from 'react-powerplug'
+import { Form } from 'react-powerplug'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -43,29 +43,17 @@ const ETS = adopt(
   {
     collections: <CollectionConsumer />,
     form: ({ task, render }) => <Form initial={task} children={render} />,
-    title: ({ task, render }) => (
-      <Input initial={task.title} children={render} />
-    ),
-    category: ({ task, render }) => (
-      <Input initial={task.category} children={render} />
-    ),
     props: ({ task, render }) => render({ task }),
   },
   props => {
     const {
       props: { task },
       collections: { updateTask },
-      title,
-      category,
-      form,
+      form: { input, values },
     } = props
-    // const values = map(prop('value'))({ title, category })
-    const values = form.values
     return {
-      updateTask: partial(updateTask, [values, task]),
-      title,
-      category,
-      form,
+      save: partial(updateTask, [values, task]),
+      input,
     }
   },
 )
@@ -81,7 +69,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
     >
       <ETS
         task={task}
-        children={({ form: { input, values }, updateTask }) => {
+        children={({ input, save }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
@@ -91,7 +79,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <Button
                   onClick={() => {
-                    updateTask()
+                    save()
                     dismissEditing()
                   }}
                 >
