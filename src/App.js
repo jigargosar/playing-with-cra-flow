@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from 'react'
 import { activePred, donePred, filterTasks } from './models/Task'
 import { Sidebar } from './components/Sidebar'
@@ -40,13 +38,10 @@ function CategoryTaskList({ category, ...otherProps }) {
     <FilteredTaskList
       title={`${category}`}
       pred={allPass([activePred, t => t.category === category])}
+      category={category}
       {...otherProps}
     />
   )
-}
-
-CategoryTaskList.defaultProps = {
-  category: 'InBasket',
 }
 
 function TagTaskList({ tid, tagTitle, ...otherProps }) {

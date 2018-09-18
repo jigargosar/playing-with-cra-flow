@@ -3,12 +3,9 @@ import { rem } from 'csx/'
 import { verticallySpaced } from 'csstips/'
 import { InlineEditTask, TaskDisplayItem } from './Task'
 import * as React from 'react'
-import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import { relative } from '../styles'
 import pose, { PoseGroup } from 'react-pose'
-
-type Props = { title: string, tasks: TaskModel[] }
 
 export const mapRenderFnArgs = fn => Comp => ({ children, ...otherProps }) => (
   <Comp children={props => children(fn(props))} {...otherProps} />
@@ -39,7 +36,6 @@ const PoseDiv = pose.div({
   exit: {
     opacity: 0,
   },
-  flip: {},
 })
 
 function renderTask(isEditingTask, task, setEditingTaskId) {
@@ -53,14 +49,18 @@ function renderTask(isEditingTask, task, setEditingTaskId) {
   )
 }
 
-export function TaskList({ title, tasks }: Props) {
+export function TaskList({ title, tasks }) {
   const titleClass = style({
     fontSize: rem(1.5),
     marginBottom: rem(1),
   })
   return (
     <div>
-      <div className={titleClass}>{title}</div>
+      <PoseGroup>
+        <PoseDiv key={title} className={titleClass}>
+          {title}
+        </PoseDiv>
+      </PoseGroup>
       <EditingTaskId
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>

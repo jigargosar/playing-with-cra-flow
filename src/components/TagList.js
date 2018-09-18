@@ -1,20 +1,20 @@
-// @flow
-
 import * as React from 'react'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { block, rem, style, verticallySpaced } from '../typestyle-exports'
 import { ttu } from '../styles'
 
-type Props = {}
-
 const listClass = style(verticallySpaced(rem(1)))
 const linkClass = style(ttu, block)
 
-export function TagList(p: Props) {
+export function TagList() {
+  const titleClass = style({
+    fontSize: rem(1.5),
+    marginBottom: rem(1),
+  })
   return (
     <div>
-      <h2>Tags</h2>
+      <div className={titleClass}>Tags</div>
       <CollectionConsumer>
         {({ tags }) => (
           <div className={listClass}>
