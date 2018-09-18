@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { intersperse } from 'ramda'
+import { intersperse, map, prop } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import {
@@ -56,14 +56,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
           title: <Input initial={task.title} />,
           category: <Input initial={task.category} />,
         }}
-        mapProps={({
-          title,
-          c: { updateTask },
-          et: {
-            value: { category },
-            set,
-          },
-        }) => ({
+        mapProps={({ title, category, c: { updateTask }, et: { set } }) => ({
           updateTask,
           title,
           category,
@@ -74,16 +67,12 @@ export function InlineEditTask({ dismissEditing, task, className }) {
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <InputGroup className={style(flex1)} {...title.bind} />
-                <HTMLSelect
-                  value={category}
-                  onChange={e => set('category', e.target.value)}
-                  options={categories}
-                />
+                <HTMLSelect {...category.bind} options={categories} />
               </div>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <Button
                   onClick={() => {
-                    updateTask({ title: title.value, category }, task)
+                    updateTask(map(prop('value'))({ title, category }), task)
                     dismissEditing()
                   }}
                 >

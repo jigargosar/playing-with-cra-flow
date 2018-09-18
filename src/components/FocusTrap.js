@@ -47,8 +47,7 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
           willUnmount={({ refs }) => remove(refs)}
           children={({ refs }) => {
             const paused = peek() !== refs
-            console.log(`paused`, paused)
-
+            // console.log(`paused`, paused)
             return (
               <FocusTrapReact
                 paused={paused}
