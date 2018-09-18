@@ -5,10 +5,9 @@ import { InlineEditTask, Task } from './Task'
 import * as React from 'react'
 import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
-import { TransitionGroup } from 'react-transition-group'
 import { relative } from '../styles'
-import { Fade } from './Fade'
 import pose, { PoseGroup } from 'react-pose'
+import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -34,7 +33,11 @@ const tasksContainerClass = style(
   relative,
 )
 
-const PoseDiv = pose.div()
+const PoseDiv = pose.div({
+  flip: {
+    transition: tween,
+  },
+})
 
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
@@ -51,24 +54,36 @@ export function TaskList({ title, tasks }: Props) {
               {tasks.map(task => (
                 <PoseDiv
                   //
-                  // key={getTaskKey(task)}
-                  key={task.id}
+                  key={getTaskKey(task)}
+                  // key={task.id}
                 >
-                  <TransitionGroup component={null}>
-                    <Fade key={getTaskKey(task)}>
-                      {isEditingTask(task) ? (
-                        <InlineEditTask
-                          dismissEditing={() => setEditingTaskId(null)}
-                          task={task}
-                        />
-                      ) : (
-                        <Task
-                          task={task}
-                          startEditing={() => setEditingTaskId(task.id)}
-                        />
-                      )}
-                    </Fade>
-                  </TransitionGroup>
+                  {isEditingTask(task) ? (
+                    <InlineEditTask
+                      dismissEditing={() => setEditingTaskId(null)}
+                      task={task}
+                    />
+                  ) : (
+                    <Task
+                      task={task}
+                      startEditing={() => setEditingTaskId(task.id)}
+                    />
+                  )}
+
+                  {/*<TransitionGroup component={null}>*/}
+                  {/*<Fade key={getTaskKey(task)}>*/}
+                  {/*{isEditingTask(task) ? (*/}
+                  {/*<InlineEditTask*/}
+                  {/*dismissEditing={() => setEditingTaskId(null)}*/}
+                  {/*task={task}*/}
+                  {/*/>*/}
+                  {/*) : (*/}
+                  {/*<Task*/}
+                  {/*task={task}*/}
+                  {/*startEditing={() => setEditingTaskId(task.id)}*/}
+                  {/*/>*/}
+                  {/*)}*/}
+                  {/*</Fade>*/}
+                  {/*</TransitionGroup>*/}
                 </PoseDiv>
               ))}
             </PoseGroup>
