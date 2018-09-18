@@ -16,7 +16,7 @@ import {
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import { classes, style } from 'typestyle/'
-import { FocusTrap } from './FocusTrapStack'
+import { FocusTrap } from './FocusTrap'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 

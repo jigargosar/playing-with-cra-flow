@@ -30,7 +30,7 @@ const EditTaskStore = adopt(
   }),
 )
 
-export const ETP = ({ children }) => (
+export const EditTaskProvider = ({ children }) => (
   <EditTaskStore
     children={props => (
       <EditTaskContext.Provider value={props} children={children} />

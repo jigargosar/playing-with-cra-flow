@@ -20,11 +20,11 @@ import { style } from './typestyle-exports'
 import { bg, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
-import { ETP, TaskList } from './components/TaskList'
+import { EditTaskProvider, TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
-import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrapStack'
+import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -87,7 +87,11 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(CollectionProvider, FocusTrapStackProvider, ETP)
+const AllProviders = nest(
+  CollectionProvider,
+  FocusTrapStackProvider,
+  EditTaskProvider,
+)
 
 const App = () => {
   const containerClass = style(
