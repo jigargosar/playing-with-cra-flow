@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { intersperse, map, prop } from 'ramda'
+import { intersperse, map, partial, prop } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import {
@@ -49,10 +49,15 @@ const ETS = adopt(
       <Input initial={task.category} children={render} />
     ),
   },
-  ({ task, collections: { updateTask }, ...otherProps }) => ({
-    updateTask,
-    ...otherProps,
-  }),
+  ({ task, collections: { updateTask }, title, category }) => {
+    const values = map(prop('value'))({ title, category })
+    return {
+      updateTask: partial(updateTask, [values, task]),
+      title,
+      category,
+      values,
+    }
+  },
 )
 
 export function InlineEditTask({ dismissEditing, task, className }) {
@@ -76,7 +81,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <Button
                   onClick={() => {
-                    updateTask(map(prop('value'))({ title, category }), task)
+                    updateTask()
                     dismissEditing()
                   }}
                 >
