@@ -31,10 +31,21 @@ const EditingTaskId = mapRenderFnArgs(
   }),
 )(createStringValue(null))
 
-const EditTaskStore = adopt({
-  taskId: <Value initial={null} />,
-  eid: <EditingTaskId />,
-})
+const EditTaskStore = adopt(
+  {
+    taskId: <Value initial={null} />,
+    eid: <EditingTaskId />,
+  },
+  ({ taskId, eid }) => ({
+    getTaskKey: task =>
+      task.id === taskId.value
+        ? `editing-${task.id}`
+        : `not-editing-${task.id}`,
+    isEditingTask: task => task.id === taskId.value,
+    setEditingTaskId: taskId.set,
+    eid,
+  }),
+)
 
 const tasksContainerClass = style(
   //
@@ -64,9 +75,7 @@ export function TaskList({ title, tasks, ...otherProps }) {
         </PoseDiv>
       </PoseGroup>
       <EditTaskStore
-        children={({
-          eid: { isEditingTask, getTaskKey, setEditingTaskId },
-        }) => (
+        children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
