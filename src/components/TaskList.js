@@ -28,7 +28,7 @@ const EditingTaskId = mapRenderFnArgs(
 
 const duration = 450
 
-const transitionSheet = stylesheet({
+const fadeClasses = stylesheet({
   enter: {
     opacity: 0.01,
   },
@@ -51,8 +51,6 @@ const transitionSheet = stylesheet({
   },
 })
 
-console.log(`transitionSheet`, transitionSheet)
-
 const tasksContainerClass = style(
   //
   verticallySpaced(rem(1.5)),
@@ -74,7 +72,7 @@ export function TaskList({ title, tasks }: Props) {
               <TransitionGroup key={task.id} component={null}>
                 {!isEditingTask(task) && (
                   <CSSTransition
-                    classNames={transitionSheet}
+                    classNames={fadeClasses}
                     key={getTaskKey(task)}
                     timeout={duration}
                   >
@@ -88,7 +86,7 @@ export function TaskList({ title, tasks }: Props) {
                 )}
                 {isEditingTask(task) && (
                   <CSSTransition
-                    classNames={transitionSheet}
+                    classNames={fadeClasses}
                     key={getTaskKey(task)}
                     timeout={duration}
                   >
