@@ -7,7 +7,6 @@ import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import { Transition, TransitionGroup } from 'react-transition-group'
 import { relative } from '../styles'
-import { take } from 'ramda'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -64,51 +63,41 @@ export function TaskList({ title, tasks }: Props) {
       <EditingTaskId
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>
-            {take(1, tasks).map(task => (
+            {tasks.map(task => (
               <div key={task.id} className={style(relative, { top: 0 })}>
                 <TransitionGroup key={task.id} component={null}>
                   {!isEditingTask(task) && (
                     <Transition key={getTaskKey(task)} timeout={duration}>
-                      {state => {
-                        console.log(`mode display`, state)
-                        return (
-                          !isEditingTask(task) && (
-                            <div
-                              style={{
-                                ...defaultStyle,
-                                ...transitionStyles[state],
-                              }}
-                            >
-                              <Task
-                                task={task}
-                                startEditing={() => setEditingTaskId(task.id)}
-                              />
-                            </div>
-                          )
-                        )
-                      }}
+                      {state => (
+                        <div
+                          style={{
+                            ...defaultStyle,
+                            ...transitionStyles[state],
+                          }}
+                        >
+                          <Task
+                            task={task}
+                            startEditing={() => setEditingTaskId(task.id)}
+                          />
+                        </div>
+                      )}
                     </Transition>
                   )}
                   {isEditingTask(task) && (
                     <Transition key={getTaskKey(task)} timeout={duration}>
-                      {state => {
-                        console.log(`mode edit`, state)
-                        return (
-                          isEditingTask(task) && (
-                            <div
-                              style={{
-                                ...defaultStyle,
-                                ...transitionStyles[state],
-                              }}
-                            >
-                              <InlineEditTask
-                                dismissEditing={() => setEditingTaskId(null)}
-                                task={task}
-                              />
-                            </div>
-                          )
-                        )
-                      }}
+                      {state => (
+                        <div
+                          style={{
+                            ...defaultStyle,
+                            ...transitionStyles[state],
+                          }}
+                        >
+                          <InlineEditTask
+                            dismissEditing={() => setEditingTaskId(null)}
+                            task={task}
+                          />
+                        </div>
+                      )}
                     </Transition>
                   )}
                 </TransitionGroup>
