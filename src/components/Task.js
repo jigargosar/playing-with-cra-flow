@@ -48,14 +48,20 @@ const ETS = adopt(
     category: ({ task, render }) => (
       <Input initial={task.category} children={render} />
     ),
+    props: ({ task, render }) => render({ task }),
   },
-  ({ task, collections: { updateTask }, title, category }) => {
+  props => {
+    const {
+      props: { task },
+      collections: { updateTask },
+      title,
+      category,
+    } = props
     const values = map(prop('value'))({ title, category })
     return {
       updateTask: partial(updateTask, [values, task]),
       title,
       category,
-      values,
     }
   },
 )
