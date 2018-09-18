@@ -62,7 +62,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
           category,
           set,
         })}
-        children={({ updateTask, title, category, set }) => {
+        children={({ updateTask, title, category }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
