@@ -8,6 +8,7 @@ import { createStringValue } from 'react-values'
 import { TransitionGroup } from 'react-transition-group'
 import { relative } from '../styles'
 import { Fade } from './Fade'
+import pose, { PoseGroup } from 'react-pose'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -33,6 +34,8 @@ const tasksContainerClass = style(
   relative,
 )
 
+const PoseDiv = pose.div()
+
 export function TaskList({ title, tasks }: Props) {
   const titleClass = style({
     fontSize: rem(1.5),
@@ -44,23 +47,27 @@ export function TaskList({ title, tasks }: Props) {
       <EditingTaskId
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>
-            {tasks.map(task => (
-              <TransitionGroup key={task.id} component={null}>
-                <Fade key={getTaskKey(task)}>
-                  {isEditingTask(task) ? (
-                    <InlineEditTask
-                      dismissEditing={() => setEditingTaskId(null)}
-                      task={task}
-                    />
-                  ) : (
-                    <Task
-                      task={task}
-                      startEditing={() => setEditingTaskId(task.id)}
-                    />
-                  )}
-                </Fade>
-              </TransitionGroup>
-            ))}
+            <PoseGroup>
+              {tasks.map(task => (
+                <PoseDiv key={task.id}>
+                  <TransitionGroup key={task.id} component={null}>
+                    <Fade key={getTaskKey(task)}>
+                      {isEditingTask(task) ? (
+                        <InlineEditTask
+                          dismissEditing={() => setEditingTaskId(null)}
+                          task={task}
+                        />
+                      ) : (
+                        <Task
+                          task={task}
+                          startEditing={() => setEditingTaskId(task.id)}
+                        />
+                      )}
+                    </Fade>
+                  </TransitionGroup>
+                </PoseDiv>
+              ))}
+            </PoseGroup>
           </div>
         )}
       />
