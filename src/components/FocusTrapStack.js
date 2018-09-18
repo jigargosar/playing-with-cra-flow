@@ -64,8 +64,6 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
                     returnFocusOnDeactivate: true,
                     // returnFocusOnDeactivate: false,
                     escapeDeactivates: true,
-                    // onActivate: () => console.log('onActivate'),
-                    // onDeactivate: () => console.log('onDeactivate'),
                     onActivate: noop,
                     onDeactivate: noop,
                   }),
