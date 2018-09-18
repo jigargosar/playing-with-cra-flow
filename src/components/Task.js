@@ -1,5 +1,3 @@
-// @flow
-
 import type { TaskModel } from '../models/Task'
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
@@ -20,6 +18,7 @@ import {
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import FocusTrap from 'focus-trap-react'
+import { classes } from 'typestyle/'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -110,27 +109,25 @@ export function InlineEditTask({ dismissEditing, task }: IP) {
   )
 }
 
-type TaskProps = {
-  task: TaskModel,
-  startEditing: Function,
-}
+export const Task = ({ task, startEditing, className }) => {
+  const rootClass = style(horizontal, horizontallySpaced('0.3rem'))
+  return (
+    <div className={classes(rootClass, className)} tabIndex={0}>
+      <div className={style(flex)}>
+        <div onClick={startEditing}>{task.title}</div>
 
-export const Task = ({ task, startEditing }: TaskProps) => (
-  <div className={style(horizontal, horizontallySpaced('0.3rem'))} tabIndex={0}>
-    <div className={style(flex)}>
-      <div onClick={startEditing}>{task.title}</div>
-
-      {/*<ModalState*/}
-      {/*trigger={({ open }) => (*/}
-      {/*<div onClick={open} className={style(task.done && strike)}>*/}
-      {/*{task.title}*/}
-      {/*</div>*/}
-      {/*)}*/}
-      {/*>*/}
-      {/*{props => <EditTaskDialog {...props} task={task} />}*/}
-      {/*</ModalState>*/}
-      {renderTags(task)}
+        {/*<ModalState*/}
+        {/*trigger={({ open }) => (*/}
+        {/*<div onClick={open} className={style(task.done && strike)}>*/}
+        {/*{task.title}*/}
+        {/*</div>*/}
+        {/*)}*/}
+        {/*>*/}
+        {/*{props => <EditTaskDialog {...props} task={task} />}*/}
+        {/*</ModalState>*/}
+        {renderTags(task)}
+      </div>
+      <div className={style(content)}>{renderCategory(task)}</div>
     </div>
-    <div className={style(content)}>{renderCategory(task)}</div>
-  </div>
-)
+  )
+}
