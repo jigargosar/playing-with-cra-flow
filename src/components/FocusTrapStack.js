@@ -34,14 +34,11 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
           getRefs={() => ({ trapRef: React.createRef() })}
           didMount={({ refs }) => push(refs)}
           willUnmount={({ refs }) => {
-            // console.assert(peek() === refs)
-            // pop()
             remove(refs)
           }}
           children={({ refs }) => (
             <FocusTrapReact
               paused={peek() !== refs}
-              // active={peek() === refs}
               ref={refs.trapRef}
               focusTrapOptions={mergeDeepRight(
                 {
