@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
-import { intersperse, map, partial, prop } from 'ramda'
+import { intersperse, partial } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import {
@@ -17,7 +17,7 @@ import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
-import { Input } from 'react-powerplug'
+import { Form, Input } from 'react-powerplug'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -42,6 +42,7 @@ function renderTags(task) {
 const ETS = adopt(
   {
     collections: <CollectionConsumer />,
+    form: ({ task, render }) => <Form initial={task} children={render} />,
     title: ({ task, render }) => (
       <Input initial={task.title} children={render} />
     ),
@@ -56,12 +57,15 @@ const ETS = adopt(
       collections: { updateTask },
       title,
       category,
+      form,
     } = props
-    const values = map(prop('value'))({ title, category })
+    // const values = map(prop('value'))({ title, category })
+    const values = form.values
     return {
       updateTask: partial(updateTask, [values, task]),
       title,
       category,
+      form,
     }
   },
 )
@@ -77,12 +81,12 @@ export function InlineEditTask({ dismissEditing, task, className }) {
     >
       <ETS
         task={task}
-        children={({ updateTask, title, category }) => {
+        children={({ form: { input, values }, updateTask }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
-                <InputGroup className={style(flex1)} {...title.bind} />
-                <HTMLSelect {...category.bind} options={categories} />
+                <InputGroup className={style(flex1)} {...input('title').bind} />
+                <HTMLSelect {...input('category').bind} options={categories} />
               </div>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <Button
