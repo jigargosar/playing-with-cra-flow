@@ -35,15 +35,10 @@ const defaultStyle = {
 
 const transitionStyles = {
   entering: {
-    opacity: 0,
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
+    opacity: 0.01,
     position: 'absolute',
-    zIndex: 100,
   },
-  exiting: { opacity: 0, zIndex: 0 },
+  exiting: { opacity: 0.01 },
 }
 
 const tasksContainerClass = style(
