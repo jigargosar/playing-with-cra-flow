@@ -106,8 +106,6 @@ const App = () => {
         focusTrapOptions={{
           returnFocusOnDeactivate: false,
           escapeDeactivates: false,
-          onActivate: () => console.log('onActivate'),
-          onDeactivate: () => console.log('onDeactivate'),
         }}
       >
         <div className={sidebarClass}>
