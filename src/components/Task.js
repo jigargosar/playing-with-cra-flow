@@ -18,6 +18,7 @@ import { ObjectValue } from 'react-values'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { Adopt } from 'react-adopt'
+import { Input } from 'react-powerplug'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -52,22 +53,27 @@ export function InlineEditTask({ dismissEditing, task, className }) {
         mapper={{
           c: <CollectionConsumer />,
           et: <ObjectValue defaultValue={task} />,
+          title: <Input initial={task.title} />,
+          category: <Input initial={task.category} />,
         }}
-        children={({
+        mapProps={({
+          title,
           c: { updateTask },
           et: {
-            value: { title, category },
+            value: { category },
             set,
           },
-        }) => {
+        }) => ({
+          updateTask,
+          title,
+          category,
+          set,
+        })}
+        children={({ updateTask, title, category, set }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
-                <InputGroup
-                  className={style(flex1)}
-                  value={title}
-                  onChange={e => set('title', e.target.value)}
-                />
+                <InputGroup className={style(flex1)} {...title.bind} />
                 <HTMLSelect
                   value={category}
                   onChange={e => set('category', e.target.value)}
@@ -77,7 +83,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
                 <Button
                   onClick={() => {
-                    updateTask({ title, category }, task)
+                    updateTask({ title: title.value, category }, task)
                     dismissEditing()
                   }}
                 >
