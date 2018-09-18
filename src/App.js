@@ -20,11 +20,12 @@ import { style } from './typestyle-exports'
 import { bg, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
-import { EditTaskProvider, TaskList } from './components/TaskList'
+import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
+import { EditTaskProvider } from './contexts/EditTask'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
