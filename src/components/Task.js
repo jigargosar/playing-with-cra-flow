@@ -54,12 +54,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
           title: <Input initial={task.title} />,
           category: <Input initial={task.category} />,
         }}
-        mapProps={({ title, category, collections: { updateTask } }) => ({
-          updateTask,
-          title,
-          category,
-        })}
-        children={({ updateTask, title, category }) => {
+        children={({ collections: { updateTask }, title, category }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
