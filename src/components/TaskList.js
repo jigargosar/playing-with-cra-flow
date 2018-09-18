@@ -6,6 +6,14 @@ import * as React from 'react'
 import { createStringValue } from 'react-values'
 import { relative } from '../styles'
 import pose, { PoseGroup } from 'react-pose'
+import { adopt } from 'react-adopt'
+import { Value } from 'react-powerplug'
+
+// const editTaskStore = createStore({
+//   task: null,
+//   startEditing: task => ({ task }),
+//   stopEditing: () => ({ task: null }),
+// })
 
 export const mapRenderFnArgs = fn => Comp => ({ children, ...otherProps }) => (
   <Comp children={props => children(fn(props))} {...otherProps} />
@@ -22,6 +30,11 @@ const EditingTaskId = mapRenderFnArgs(
     isEditingTask: task => task.id === editingTaskId,
   }),
 )(createStringValue(null))
+
+const EditTaskStore = adopt({
+  taskId: <Value initial={null} />,
+  eid: <EditingTaskId />,
+})
 
 const tasksContainerClass = style(
   //
@@ -50,8 +63,10 @@ export function TaskList({ title, tasks, ...otherProps }) {
           {title}
         </PoseDiv>
       </PoseGroup>
-      <EditingTaskId
-        children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
+      <EditTaskStore
+        children={({
+          eid: { isEditingTask, getTaskKey, setEditingTaskId },
+        }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
