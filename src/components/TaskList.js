@@ -49,8 +49,12 @@ export function TaskList({ title, tasks }: Props) {
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
-                <PoseDiv key={task.id}>
-                  <TransitionGroup key={task.id} component={null}>
+                <PoseDiv
+                  //
+                  // key={getTaskKey(task)}
+                  key={task.id}
+                >
+                  <TransitionGroup component={null}>
                     <Fade key={getTaskKey(task)}>
                       {isEditingTask(task) ? (
                         <InlineEditTask
