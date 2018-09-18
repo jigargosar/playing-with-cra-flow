@@ -1,7 +1,7 @@
 import * as React from 'react'
 import FocusTrapReact from 'focus-trap-react'
 import Component from '@reach/component-component'
-import { head, mergeDeepRight, omit, tail } from 'ramda'
+import { head, mergeDeepRight, omit, tail, without } from 'ramda'
 
 import { createStore, Provider, Subscribe } from 'react-contextual'
 import { defaultProps } from 'recompose'
@@ -10,6 +10,10 @@ const stackStore = createStore({
   stack: [],
   push: item => ({ stack }) => ({ stack: [item, ...stack] }),
   pop: () => ({ stack }) => ({ stack: tail(stack) }),
+  remove: item => ({ stack }) => {
+    console.assert(stack.includes(item), `stack.includes(item)`)
+    return { stack: without(item)(stack) }
+  },
 })
 
 export const FocusTrapStackProvider = defaultProps({ store: stackStore })(
@@ -25,13 +29,14 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
         peek: () => head(stack),
       })}
     >
-      {({ push, pop, peek }) => (
+      {({ push, pop, peek, remove }) => (
         <Component
           getRefs={() => ({ trapRef: React.createRef() })}
           didMount={({ refs }) => push(refs)}
           willUnmount={({ refs }) => {
-            console.assert(peek() === refs)
-            pop()
+            // console.assert(peek() === refs)
+            // pop()
+            remove(refs)
           }}
           children={({ refs }) => (
             <FocusTrapReact
@@ -44,8 +49,8 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
                   returnFocusOnDeactivate: true,
                   // returnFocusOnDeactivate: false,
                   escapeDeactivates: true,
-                  onActivate: () => console.log('onActivate'),
-                  onDeactivate: () => console.log('onDeactivate'),
+                  // onActivate: () => console.log('onActivate'),
+                  // onDeactivate: () => console.log('onDeactivate'),
                 },
                 focusTrapOptions,
               )}
