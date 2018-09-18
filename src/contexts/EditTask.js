@@ -16,6 +16,8 @@ const EditTaskStore = adopt(
         : `not-editing-${task.id}`,
     isEditingTask: task => task.id === taskId.value,
     setEditingTaskId: taskId.set,
+    startEditingTask: task => taskId.set(task.id),
+    stopEditingTask: () => taskId.set(null),
   }),
 )
 
