@@ -1,7 +1,7 @@
 import { getTaskTags } from '../models/Task'
 import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
-import { CollectionConsumer, renderWithCollections } from './CollectionContext'
+import { CollectionConsumer } from './CollectionContext'
 import { content, flex, rem } from '../typestyle-exports'
 import { fg } from '../styles'
 import { intersperse } from 'ramda'
@@ -17,6 +17,7 @@ import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
+import { Adopt } from 'react-adopt'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -46,45 +47,49 @@ export function InlineEditTask({ dismissEditing, task, className }) {
         // onDeactivate: dismissEditing,
         clickOutsideDeactivates: true,
       }}
-      children={renderWithCollections(({ updateTask }) => (
-        <ObjectValue
-          defaultValue={task}
-          children={({ value: { title, category }, set }) => {
-            return (
-              <div className={style(verticallySpaced('1rem'))}>
-                <div
-                  className={style(horizontal, horizontallySpaced('0.3rem'))}
-                >
-                  <InputGroup
-                    className={style(flex1)}
-                    value={title}
-                    onChange={e => set('title', e.target.value)}
-                  />
-                  <HTMLSelect
-                    value={category}
-                    onChange={e => set('category', e.target.value)}
-                    options={categories}
-                  />
-                </div>
-                <div
-                  className={style(horizontal, horizontallySpaced('0.3rem'))}
-                >
-                  <Button
-                    onClick={() => {
-                      updateTask({ title, category }, task)
-                      dismissEditing()
-                    }}
-                  >
-                    Save
-                  </Button>
-                  <Button onClick={dismissEditing}>Cancel</Button>
-                </div>
+    >
+      <Adopt
+        mapper={{
+          c: <CollectionConsumer />,
+          et: <ObjectValue defaultValue={task} />,
+        }}
+        children={({
+          c: { updateTask },
+          et: {
+            value: { title, category },
+            set,
+          },
+        }) => {
+          return (
+            <div className={style(verticallySpaced('1rem'))}>
+              <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
+                <InputGroup
+                  className={style(flex1)}
+                  value={title}
+                  onChange={e => set('title', e.target.value)}
+                />
+                <HTMLSelect
+                  value={category}
+                  onChange={e => set('category', e.target.value)}
+                  options={categories}
+                />
               </div>
-            )
-          }}
-        />
-      ))}
-    />
+              <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
+                <Button
+                  onClick={() => {
+                    updateTask({ title, category }, task)
+                    dismissEditing()
+                  }}
+                >
+                  Save
+                </Button>
+                <Button onClick={dismissEditing}>Cancel</Button>
+              </div>
+            </div>
+          )
+        }}
+      />
+    </FocusTrap>
   )
 }
 
