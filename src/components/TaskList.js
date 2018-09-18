@@ -51,6 +51,16 @@ const fadeClasses = stylesheet({
   },
 })
 
+export const Fade = ({ ...otherProps }) => {
+  return (
+    <CSSTransition
+      classNames={fadeClasses}
+      timeout={duration}
+      {...otherProps}
+    />
+  )
+}
+
 const tasksContainerClass = style(
   //
   verticallySpaced(rem(1.5)),
@@ -71,32 +81,24 @@ export function TaskList({ title, tasks }: Props) {
             {tasks.map(task => (
               <TransitionGroup key={task.id} component={null}>
                 {!isEditingTask(task) && (
-                  <CSSTransition
-                    classNames={fadeClasses}
-                    key={getTaskKey(task)}
-                    timeout={duration}
-                  >
+                  <Fade key={getTaskKey(task)}>
                     <div>
                       <Task
                         task={task}
                         startEditing={() => setEditingTaskId(task.id)}
                       />
                     </div>
-                  </CSSTransition>
+                  </Fade>
                 )}
                 {isEditingTask(task) && (
-                  <CSSTransition
-                    classNames={fadeClasses}
-                    key={getTaskKey(task)}
-                    timeout={duration}
-                  >
+                  <Fade key={getTaskKey(task)}>
                     <div>
                       <InlineEditTask
                         dismissEditing={() => setEditingTaskId(null)}
                         task={task}
                       />
                     </div>
-                  </CSSTransition>
+                  </Fade>
                 )}
               </TransitionGroup>
             ))}
