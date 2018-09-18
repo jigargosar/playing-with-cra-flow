@@ -7,7 +7,6 @@ import type { TaskModel } from '../models/Task'
 import { createStringValue } from 'react-values'
 import { relative } from '../styles'
 import pose, { PoseGroup } from 'react-pose'
-import { tween } from 'popmotion'
 
 type Props = { title: string, tasks: TaskModel[] }
 
@@ -35,14 +34,12 @@ const tasksContainerClass = style(
 
 const PoseDiv = pose.div({
   enter: {
-    opacity: 0.99,
+    opacity: 1,
   },
   exit: {
-    opacity: 0.01,
+    opacity: 0,
   },
-  flip: {
-    transition: tween,
-  },
+  flip: {},
 })
 
 function renderTask(isEditingTask, task, setEditingTaskId) {
