@@ -31,7 +31,12 @@ export function TaskList({ title, tasks, ...otherProps }) {
         </PoseDiv>
       </PoseGroup>
       <EditTaskConsumer
-        children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
+        children={({
+          isEditingTask,
+          getTaskKey,
+          startEditingTask,
+          stopEditingTask,
+        }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
@@ -39,13 +44,13 @@ export function TaskList({ title, tasks, ...otherProps }) {
                   {isEditingTask(task) ? (
                     <InlineEditTask
                       task={task}
-                      dismissEditing={() => setEditingTaskId(null)}
+                      dismissEditing={() => stopEditingTask(task)}
                       {...otherProps}
                     />
                   ) : (
                     <TaskDisplayItem
                       task={task}
-                      startEditing={() => setEditingTaskId(task.id)}
+                      startEditing={() => startEditingTask(task)}
                       {...otherProps}
                     />
                   )}
