@@ -5,7 +5,7 @@ import { InlineEditTask, TaskDisplayItem } from './Task'
 import * as React from 'react'
 import { relative } from '../styles'
 import pose, { PoseGroup } from 'react-pose'
-import { EditTaskContext1 } from '../contexts/EditTask'
+import { EditTaskConsumer } from '../contexts/EditTask'
 
 const tasksContainerClass = style(verticallySpaced(rem(1.5)), relative)
 
@@ -30,7 +30,7 @@ export function TaskList({ title, tasks, ...otherProps }) {
           {title}
         </PoseDiv>
       </PoseGroup>
-      <EditTaskContext1
+      <EditTaskConsumer
         children={({ isEditingTask, getTaskKey, setEditingTaskId }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>

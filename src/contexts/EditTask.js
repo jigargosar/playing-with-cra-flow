@@ -2,7 +2,8 @@ import * as React from 'react'
 import { adopt } from 'react-adopt'
 import { Value } from 'react-powerplug'
 
-export const EditTaskContext = React.createContext({})
+const EditTaskContext = React.createContext({})
+export const EditTaskConsumer = EditTaskContext.Consumer
 
 const EditTaskStore = adopt(
   {
