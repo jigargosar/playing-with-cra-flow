@@ -16,7 +16,7 @@ import {
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
-import { Adopt } from 'react-adopt'
+import { adopt } from 'react-adopt'
 import { Input } from 'react-powerplug'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
@@ -39,6 +39,22 @@ function renderTags(task) {
   )
 }
 
+const ETS = adopt(
+  {
+    collections: <CollectionConsumer />,
+    title: ({ task, render }) => (
+      <Input initial={task.title} children={render} />
+    ),
+    category: ({ task, render }) => (
+      <Input initial={task.category} children={render} />
+    ),
+  },
+  ({ task, collections: { updateTask }, ...otherProps }) => ({
+    updateTask,
+    ...otherProps,
+  }),
+)
+
 export function InlineEditTask({ dismissEditing, task, className }) {
   return (
     <FocusTrap
@@ -48,13 +64,9 @@ export function InlineEditTask({ dismissEditing, task, className }) {
         clickOutsideDeactivates: true,
       }}
     >
-      <Adopt
-        mapper={{
-          collections: <CollectionConsumer />,
-          title: <Input initial={task.title} />,
-          category: <Input initial={task.category} />,
-        }}
-        children={({ collections: { updateTask }, title, category }) => {
+      <ETS
+        task={task}
+        children={({ updateTask, title, category }) => {
           return (
             <div className={style(verticallySpaced('1rem'))}>
               <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
