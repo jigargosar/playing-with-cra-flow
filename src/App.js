@@ -25,11 +25,7 @@ import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import { isAnyModalOpen } from './components/EditTaskDialog'
-import {
-  FocusTrap,
-  FocusTrapProvider,
-  FocusTrapStackProvider,
-} from './components/FocusTrapStack'
+import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrapStack'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -92,11 +88,7 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(
-  CollectionProvider,
-  FocusTrapProvider,
-  FocusTrapStackProvider,
-)
+const AllProviders = nest(CollectionProvider, FocusTrapStackProvider)
 
 const App = () => {
   const containerClass = style(

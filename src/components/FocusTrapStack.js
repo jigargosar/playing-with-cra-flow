@@ -12,35 +12,9 @@ const stackStore = createStore({
   pop: () => ({ stack }) => ({ stack: tail(stack) }),
 })
 
-export const App = () => (
-  <Provider store={stackStore}>
-    <Subscribe to={stackStore}>{props => <div>{props.text}</div>}</Subscribe>
-  </Provider>
-)
-
-export function createComponentContext(componentProps) {
-  const { Provider, Consumer } = React.createContext({})
-  const ComponentProvider = providerProps => (
-    <Component
-      children={componentChildProps => (
-        <Provider value={componentChildProps} {...providerProps} />
-      )}
-      {...componentProps}
-    />
-  )
-
-  return { Provider: ComponentProvider, Consumer }
-}
-
-const stackCtx = createComponentContext({
-  initialState: { stack: [] },
-})
-
-export const FocusTrapProvider = stackCtx.Provider
 export const FocusTrapStackProvider = defaultProps({ store: stackStore })(
   Provider,
 )
-// export const FocusTrapStackProvider = defaultProps({})('div')
 
 export function FocusTrap({ ...otherProps }) {
   return (
