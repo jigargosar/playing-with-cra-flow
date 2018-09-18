@@ -15,8 +15,8 @@ import {
 } from 'csstips/'
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { ObjectValue } from 'react-values'
-import FocusTrap from 'focus-trap-react'
 import { classes, style } from 'typestyle/'
+import { FocusTrap } from './FocusTrapStack'
 
 const fz = { sm: { fontSize: rem(0.8) }, xs: { fontSize: rem(0.7) } }
 
@@ -42,7 +42,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
   return (
     <FocusTrap
       className={className}
-      active={false}
+      // active={false}
       focusTrapOptions={{
         onDeactivate: dismissEditing,
         clickOutsideDeactivates: true,

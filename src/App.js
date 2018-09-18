@@ -24,8 +24,8 @@ import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
-import FocusTrap from 'focus-trap-react'
 import { isAnyModalOpen } from './components/EditTaskDialog'
+import { FocusTrap, FocusTrapProvider } from './components/FocusTrapStack'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -88,7 +88,7 @@ function renderMainRoutes() {
   )
 }
 
-const AllProviders = nest(CollectionProvider)
+const AllProviders = nest(CollectionProvider, FocusTrapProvider)
 
 const App = () => {
   const containerClass = style(
