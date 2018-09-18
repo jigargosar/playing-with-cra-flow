@@ -46,9 +46,8 @@ export function FocusTrap({ ...otherProps }) {
   return (
     <Subscribe
       to={stackStore}
-      select={({ stack, ...props }) => ({
-        stack,
-        ...props,
+      select={({ stack, ...otherProps }) => ({
+        ...otherProps,
         peek: () => head(stack),
       })}
     >
