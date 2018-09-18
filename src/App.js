@@ -24,7 +24,6 @@ import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
-import { isAnyModalOpen } from './components/EditTaskDialog'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrapStack'
 
 function FilteredTaskList({ pred, ...otherProps }) {
@@ -102,24 +101,20 @@ const App = () => {
 
   return (
     <AllProviders>
-      {isAnyModalOpen(anyOpen => (
-        <FocusTrap
-          paused={anyOpen}
-          tag={'div'}
-          className={containerClass}
-          focusTrapOptions={{
-            returnFocusOnDeactivate: false,
-            escapeDeactivates: false,
-            onActivate: () => console.log('onActivate'),
-            onDeactivate: () => console.log('onDeactivate'),
-          }}
-        >
-          <div className={sidebarClass}>
-            <Sidebar />
-          </div>
-          <div className={contentClass}>{renderMainRoutes()}</div>
-        </FocusTrap>
-      ))}
+      <FocusTrap
+        className={containerClass}
+        focusTrapOptions={{
+          returnFocusOnDeactivate: false,
+          escapeDeactivates: false,
+          onActivate: () => console.log('onActivate'),
+          onDeactivate: () => console.log('onDeactivate'),
+        }}
+      >
+        <div className={sidebarClass}>
+          <Sidebar />
+        </div>
+        <div className={contentClass}>{renderMainRoutes()}</div>
+      </FocusTrap>
     </AllProviders>
   )
 }

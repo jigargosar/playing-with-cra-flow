@@ -33,15 +33,13 @@ export function FocusTrap({ ...otherProps }) {
             console.assert(peek() === refs)
             pop()
           }}
-          children={({ refs }) => {
-            return (
-              <FocusTrapReact
-                paused={peek() !== refs}
-                ref={refs.trapRef}
-                {...omit(['paused', 'ref'])(otherProps)}
-              />
-            )
-          }}
+          children={({ refs }) => (
+            <FocusTrapReact
+              paused={peek() !== refs}
+              ref={refs.trapRef}
+              {...omit(['paused', 'ref'])(otherProps)}
+            />
+          )}
         />
       )}
     </Subscribe>
