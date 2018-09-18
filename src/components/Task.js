@@ -67,7 +67,7 @@ const TaskForm = adopt(
   },
 )
 
-export function InlineEditTask({ dismissEditing, task, className }) {
+export function InlineEditTask({ task, className }) {
   return (
     <FocusTrap
       className={className}

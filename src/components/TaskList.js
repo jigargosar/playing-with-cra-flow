@@ -31,22 +31,13 @@ export function TaskList({ title, tasks, ...otherProps }) {
         </PoseDiv>
       </PoseGroup>
       <EditTaskConsumer
-        children={({
-          isEditingTask,
-          getTaskKey,
-          startEditingTask,
-          stopEditingTask,
-        }) => (
+        children={({ isEditingTask, getTaskKey, startEditingTask }) => (
           <div className={tasksContainerClass}>
             <PoseGroup>
               {tasks.map(task => (
                 <PoseDiv key={getTaskKey(task)}>
                   {isEditingTask(task) ? (
-                    <InlineEditTask
-                      task={task}
-                      dismissEditing={() => stopEditingTask(task)}
-                      {...otherProps}
-                    />
+                    <InlineEditTask task={task} {...otherProps} />
                   ) : (
                     <TaskDisplayItem
                       task={task}
