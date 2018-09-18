@@ -28,10 +28,7 @@ export function FocusTrap({ ...otherProps }) {
       {({ push, pop, peek }) => (
         <Component
           getRefs={() => ({ trapRef: React.createRef() })}
-          didMount={({ refs }) => {
-            push(refs)
-          }}
-          didUpdate={() => {}}
+          didMount={({ refs }) => push(refs)}
           willUnmount={({ refs }) => {
             console.assert(peek() === refs)
             pop()
