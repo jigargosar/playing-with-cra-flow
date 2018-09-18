@@ -1,7 +1,17 @@
 import * as React from 'react'
 import FocusTrapReact from 'focus-trap-react'
 import Component from '@reach/component-component'
-import { head, identical, mergeDeepRight, omit, reject, tail } from 'ramda'
+import {
+  compose,
+  head,
+  identical,
+  lensProp,
+  mergeDeepRight,
+  omit,
+  over,
+  reject,
+  tail,
+} from 'ramda'
 
 import { createStore, Provider, Subscribe } from 'react-contextual'
 import { defaultProps } from 'recompose'
@@ -38,12 +48,19 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
           children={({ refs }) => {
             const paused = peek() !== refs
             console.log(`paused`, paused)
+
             return (
               <FocusTrapReact
                 paused={paused}
                 ref={refs.trapRef}
-                focusTrapOptions={mergeDeepRight(
-                  {
+                focusTrapOptions={compose(
+                  over(lensProp('onDeactivate'))(fn =>
+                    compose(
+                      () => remove(refs),
+                      fn,
+                    ),
+                  ),
+                  mergeDeepRight({
                     returnFocusOnDeactivate: true,
                     // returnFocusOnDeactivate: false,
                     escapeDeactivates: true,
@@ -51,9 +68,8 @@ export function FocusTrap({ focusTrapOptions = {}, ...otherProps }) {
                     // onDeactivate: () => console.log('onDeactivate'),
                     onActivate: noop,
                     onDeactivate: noop,
-                  },
-                  focusTrapOptions,
-                )}
+                  }),
+                )(focusTrapOptions)}
                 {...omit(['paused', 'ref', 'focusTrapOptions'])(otherProps)}
               />
             )

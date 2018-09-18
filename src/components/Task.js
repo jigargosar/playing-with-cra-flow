@@ -43,7 +43,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
     <FocusTrap
       className={className}
       focusTrapOptions={{
-        onDeactivate: dismissEditing,
+        // onDeactivate: dismissEditing,
         clickOutsideDeactivates: true,
       }}
       children={renderWithCollections(({ updateTask }) => (
