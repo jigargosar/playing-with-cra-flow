@@ -39,7 +39,7 @@ function renderTags(task) {
   )
 }
 
-const ETS = adopt(
+const TaskForm = adopt(
   {
     collections: <CollectionConsumer />,
     form: ({ task, render }) => <Form initial={task} children={render} />,
@@ -67,7 +67,7 @@ export function InlineEditTask({ dismissEditing, task, className }) {
         clickOutsideDeactivates: true,
       }}
     >
-      <ETS
+      <TaskForm
         task={task}
         children={({ input, save }) => {
           return (
