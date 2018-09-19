@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
 import { generateTagList } from '../models/Tag'
-import { generateTask, generateTaskList, setSomeTaskTags } from '../models/Task'
+import { generateTask, generateTaskList } from '../models/Task'
 import { update } from 'ramda'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
@@ -24,7 +24,7 @@ const Collections = ({ children }) => (
         return JSON.parse(state)
       } else {
         const tags = generateTagList()
-        const tasks = generateTaskList().map(setSomeTaskTags(tags))
+        const tasks = generateTaskList() /*.map(setSomeTaskTags(tags))*/
         return { tasks, tags }
       }
     }}
