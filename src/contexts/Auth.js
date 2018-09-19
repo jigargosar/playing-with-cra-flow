@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
 import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const fire = firebase
 const AuthStore = ({ children }) => {
@@ -18,8 +19,14 @@ const AuthStore = ({ children }) => {
       children={children}
       initialState={{
         app: fire.apps[0] || fire.initializeApp(config),
+        authStateKnown: false,
       }}
-      didMount={({ setState }) => {}}
+      didMount={({ state: { app }, setState }) => {
+        const disposer = app.auth().onAuthStateChanged(() => {
+          disposer()
+          setState({ authStateKnown: true })
+        })
+      }}
       willUnmount={({ state: { app } }) => {}}
     />
   )
