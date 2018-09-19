@@ -16,8 +16,9 @@ function setInitialAuthState(app, setState) {
 const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
   add: fn => list.push(once(fn)),
   disposeAll: () => {
+    console.log('disposing')
     list.list.forEach(call)
-    list.clear()
+    list.set([])
   },
 }))
 
@@ -43,7 +44,6 @@ const AuthStore = adopt({
           console.log(`state`, state)
         }}
         willUnmount={() => {
-          console.log('disposing')
           disposers.disposeAll()
         }}
       />
