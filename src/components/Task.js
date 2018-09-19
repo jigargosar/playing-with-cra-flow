@@ -109,12 +109,7 @@ export const TaskDisplayItem = ({
             <Button
               onClick={toggleDone}
               minimal
-              icon={
-                <Icon
-                  icon={isDone ? IconNames.UPDATED : IconNames.TICK}
-                  // color={gray(0.5).toString()}
-                />
-              }
+              icon={<Icon icon={isDone ? IconNames.UPDATED : IconNames.TICK} />}
             />
           )}
         />
