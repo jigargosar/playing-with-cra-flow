@@ -11,6 +11,7 @@ function setInitialAuthState(app, setState) {
 }
 
 const AuthStore = ({ children }) => {
+  const disposers = []
   return (
     <Component
       children={children}
@@ -22,11 +23,17 @@ const AuthStore = ({ children }) => {
         console.log(`state`, state)
         const { app } = state
         setInitialAuthState(app, setState)
+        const disposer = app
+          .auth()
+          .onAuthStateChanged(user => setState({ user }))
+        disposers.push(disposer)
       }}
       didUpdate={({ state }) => {
         console.log(`state`, state)
       }}
-      willUnmount={({ state: { app } }) => {}}
+      willUnmount={({ state: { app } }) => {
+        disposers.forEach(fn => fn())
+      }}
     />
   )
 }
