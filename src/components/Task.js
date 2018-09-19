@@ -3,16 +3,11 @@ import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
-import { fg } from '../styles'
+import { dfh, fg, hs, vs } from '../styles'
 import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
-import {
-  flex1,
-  horizontal,
-  horizontallySpaced,
-  verticallySpaced,
-} from 'csstips/'
+import { flex1, horizontal, horizontallySpaced } from 'csstips/'
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
@@ -75,20 +70,18 @@ export function InlineEditTask({ task, className }) {
     >
       <TaskForm
         task={task}
-        children={({ input, save, cancel }) => {
-          return (
-            <div className={style(verticallySpaced('1rem'))}>
-              <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
-                <InputGroup className={style(flex1)} {...input('title').bind} />
-                <HTMLSelect {...input('category').bind} options={categories} />
-              </div>
-              <div className={style(horizontal, horizontallySpaced('0.3rem'))}>
-                <Button onClick={save}>Save</Button>
-                <Button onClick={cancel}>Cancel</Button>
-              </div>
+        children={({ input, save, cancel }) => (
+          <div className={style(vs('1rem'))}>
+            <div className={style(dfh, hs('0.3rem'))}>
+              <InputGroup className={style(flex1)} {...input('title').bind} />
+              <HTMLSelect {...input('category').bind} options={categories} />
             </div>
-          )
-        }}
+            <div className={style(dfh, hs('0.3rem'))}>
+              <Button onClick={save}>Save</Button>
+              <Button onClick={cancel}>Cancel</Button>
+            </div>
+          </div>
+        )}
       />
     </FocusTrap>
   )

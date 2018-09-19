@@ -6,7 +6,16 @@ import {
   stylesheet,
 } from './typestyle-exports'
 import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx/'
-import { BoxUnit, fillParent, fontWeightNormal, height, width } from 'csstips/'
+import {
+  BoxUnit,
+  fillParent,
+  fontWeightNormal,
+  height,
+  horizontal,
+  horizontallySpaced,
+  verticallySpaced,
+  width,
+} from 'csstips/'
 import { mergeAll } from 'ramda'
 import { isString } from './ramda-exports'
 import { extend } from 'typestyle/'
@@ -240,3 +249,6 @@ export const hasHiddenChildren = {
     [`&:not(:hover) .${appearOnParentHoverClass}`]: { opacity: 0 },
   },
 }
+export const hs = horizontallySpaced
+export const vs = verticallySpaced
+export const dfh = horizontal
