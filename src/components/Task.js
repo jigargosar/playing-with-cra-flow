@@ -8,7 +8,9 @@ import { compose, intersperse, map, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import { flex1 } from 'csstips/'
-import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
+import { Button, HTMLSelect, Icon, InputGroup } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
+
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
@@ -80,8 +82,20 @@ export const TaskDisplayItem = ({
   className,
   category,
 }) => {
+  const isDone = task.done
   return (
     <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
+      <div>
+        <Button
+          minimal
+          icon={
+            <Icon
+              icon={isDone ? IconNames.UPDATED : IconNames.TICK}
+              // color={gray(0.5).toString()}
+            />
+          }
+        />
+      </div>
       <div className={style(flex)}>
         <div onClick={startEditing}>{task.title}</div>
         <div className={style(fz.xs, lhCopy)}>
