@@ -20,7 +20,7 @@ import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
-import { Button, Icon } from '@blueprintjs/core'
+import { Button, Icon, Intent } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
 function FilteredTaskList({ pred, ...otherProps }) {
@@ -114,11 +114,18 @@ const App = () => {
         </div>
         <div className={contentClass}>{renderMainRoutes()}</div>
         <div className={style(absolute, { right: 0, bottom: 0 })}>
-          <Button
-            minimal
-            icon={<Icon icon={IconNames.ADD} iconSize={32} />}
-            className={style(relative, { top: '-1rem', left: '-1rem' })}
-          />
+          <div
+            className={style(/*brPill, shadow, */ relative, {
+              top: '-1rem',
+              left: '-1rem',
+            })}
+          >
+            <Button
+              minimal
+              intent={Intent.PRIMARY}
+              icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+            />
+          </div>
         </div>
       </FocusTrap>
     </AllProviders>
