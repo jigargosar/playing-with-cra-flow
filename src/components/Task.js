@@ -4,16 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
 import { dfh, fg, hs, vs } from '../styles'
-import {
-  compose,
-  intersperse,
-  lensProp,
-  map,
-  not,
-  over,
-  partialRight,
-  pick,
-} from 'ramda'
+import { compose, intersperse, map, partialRight, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import { flex1 } from 'csstips/'
@@ -37,10 +28,9 @@ const TaskUpdater = adopt(
       props: { task },
       collections: { updateTask },
     } = props
-    const toggleDoneProp = over(lensProp('done'), not)
     return {
       updateTask: partialRight(updateTask, [task]),
-      toggleDone: () => updateTask(toggleDoneProp, task),
+      toggleDone: () => updateTask({ done: !task.done }, task),
     }
   },
 )
@@ -113,14 +103,20 @@ export const TaskDisplayItem = ({
   return (
     <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
       <div>
-        <Button
-          minimal
-          icon={
-            <Icon
-              icon={isDone ? IconNames.UPDATED : IconNames.TICK}
-              // color={gray(0.5).toString()}
+        <TaskUpdater
+          task={task}
+          children={({ toggleDone }) => (
+            <Button
+              onClick={toggleDone}
+              minimal
+              icon={
+                <Icon
+                  icon={isDone ? IconNames.UPDATED : IconNames.TICK}
+                  // color={gray(0.5).toString()}
+                />
+              }
             />
-          }
+          )}
         />
       </div>
       <div className={style(flex)}>

@@ -1,5 +1,3 @@
-// @flow
-
 import * as faker from 'faker'
 import Chance from 'chance'
 import type { Category } from './Category'
