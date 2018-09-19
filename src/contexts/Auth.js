@@ -14,7 +14,11 @@ function setInitialAuthState(app, setState) {
 }
 
 const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
-  add: fn => list.push(once(fn)),
+  add: fn => {
+    const onceFn = once(fn)
+    list.push(onceFn)
+    return onceFn
+  },
   disposeAll: () => {
     console.log('disposing')
     list.list.forEach(call)
@@ -35,10 +39,9 @@ const AuthStore = adopt({
         didMount={({ state, setState }) => {
           console.log(`state`, state)
           setInitialAuthState(app, setState)
-          const disposer = app
-            .auth()
-            .onAuthStateChanged(user => setState({ user }))
-          disposers.add(disposer)
+          disposers.add(
+            app.auth().onAuthStateChanged(user => setState({ user })),
+          )
         }}
         didUpdate={({ state }) => {
           console.log(`state`, state)
