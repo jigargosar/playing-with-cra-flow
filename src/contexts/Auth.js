@@ -4,6 +4,14 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const fire = firebase
+
+function setInitialAuthState(app, setState) {
+  const disposer = app.auth().onAuthStateChanged(() => {
+    disposer()
+    setState({ authStateKnown: true })
+  })
+}
+
 const AuthStore = ({ children }) => {
   const config = {
     apiKey: 'AIzaSyAve3E-llOy2_ly87mJMSvcWDG6Uqyq8PA',
@@ -24,10 +32,7 @@ const AuthStore = ({ children }) => {
       didMount={({ state, setState }) => {
         console.log(`state`, state)
         const { app } = state
-        const disposer = app.auth().onAuthStateChanged(() => {
-          disposer()
-          setState({ authStateKnown: true })
-        })
+        setInitialAuthState(app, setState)
       }}
       didUpdate={({ state }) => {
         console.log(`state`, state)
