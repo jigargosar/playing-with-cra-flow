@@ -1,9 +1,7 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 
-const fire = firebase
+import { initFireApp } from '../lib/fire'
 
 function setInitialAuthState(app, setState) {
   const disposer = app.auth().onAuthStateChanged(() => {
@@ -13,20 +11,11 @@ function setInitialAuthState(app, setState) {
 }
 
 const AuthStore = ({ children }) => {
-  const config = {
-    apiKey: 'AIzaSyAve3E-llOy2_ly87mJMSvcWDG6Uqyq8PA',
-    authDomain: 'not-now-142808.firebaseapp.com',
-    databaseURL: 'https://not-now-142808.firebaseio.com',
-    projectId: 'not-now-142808',
-    storageBucket: 'not-now-142808.appspot.com',
-    messagingSenderId: '476064436883',
-  }
-
   return (
     <Component
       children={children}
       initialState={{
-        app: fire.apps[0] || fire.initializeApp(config),
+        app: initFireApp(),
         authStateKnown: false,
       }}
       didMount={({ state, setState }) => {
