@@ -21,11 +21,16 @@ const AuthStore = ({ children }) => {
         app: fire.apps[0] || fire.initializeApp(config),
         authStateKnown: false,
       }}
-      didMount={({ state: { app }, setState }) => {
+      didMount={({ state, setState }) => {
+        console.log(`state`, state)
+        const { app } = state
         const disposer = app.auth().onAuthStateChanged(() => {
           disposer()
           setState({ authStateKnown: true })
         })
+      }}
+      didUpdate={({ state }) => {
+        console.log(`state`, state)
       }}
       willUnmount={({ state: { app } }) => {}}
     />
