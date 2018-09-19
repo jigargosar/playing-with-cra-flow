@@ -2,7 +2,16 @@ import * as faker from 'faker'
 import Chance from 'chance'
 import type { Category } from './Category'
 import { categories } from './Category'
-import { ascend, compose, filter, indexOf, prop, sortWith, times } from 'ramda'
+import {
+  ascend,
+  compose,
+  descend,
+  filter,
+  indexOf,
+  prop,
+  sortWith,
+  times,
+} from 'ramda'
 import type { Tag, TagCollection, TagId } from './Tag'
 import { findById } from './Collection'
 import Maybe from 'folktale/maybe'
@@ -51,7 +60,7 @@ export function getAllTasks(tasksCollection: TaskCollection): Task[] {
   return sortWith([
     //
     ascend(getCategoryIndexOfTask),
-    ascend(prop('createdAt')),
+    descend(prop('createdAt')),
     ascend(prop('title')),
   ])(tasksCollection)
 }

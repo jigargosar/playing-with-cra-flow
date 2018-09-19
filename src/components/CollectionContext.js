@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
 import { generateTagList } from '../models/Tag'
-import { generateTaskList, setSomeTaskTags } from '../models/Task'
+import { generateTask, generateTaskList, setSomeTaskTags } from '../models/Task'
 import { update } from 'ramda'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
@@ -40,6 +40,10 @@ const Collections = ({ children }) => (
         ...state,
         updateTask: (changes, task) => {
           setState(taskUpdater(changes, task))
+        },
+        addTask: () => {
+          const task = { ...generateTask(), category: 'InBasket' }
+          setState({ tasks: [task, ...state.tasks] })
         },
       })
     }}

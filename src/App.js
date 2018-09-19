@@ -4,6 +4,7 @@ import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
 import { Router } from './components/Router'
 import {
+  CollectionConsumer,
   CollectionProvider,
   renderWithCollections,
 } from './components/CollectionContext'
@@ -120,10 +121,15 @@ const App = () => {
               left: '-1rem',
             })}
           >
-            <Button
-              minimal
-              intent={Intent.PRIMARY}
-              icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+            <CollectionConsumer
+              children={({ addTask }) => (
+                <Button
+                  onClick={addTask}
+                  minimal
+                  intent={Intent.PRIMARY}
+                  icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+                />
+              )}
             />
           </div>
         </div>
