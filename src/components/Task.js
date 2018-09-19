@@ -7,7 +7,7 @@ import { dfh, fg, hs, vs } from '../styles'
 import { intersperse, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
-import { flex1, horizontal, horizontallySpaced } from 'csstips/'
+import { flex1 } from 'csstips/'
 import { Button, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import { classes, style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
@@ -93,9 +93,8 @@ export const TaskDisplayItem = ({
   className,
   category,
 }) => {
-  const rootClass = style(horizontal, horizontallySpaced('0.3rem'))
   return (
-    <div className={classes(rootClass, className)} tabIndex={0}>
+    <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
       <div className={style(flex)}>
         <div onClick={startEditing}>{task.title}</div>
         {renderTags(task)}
