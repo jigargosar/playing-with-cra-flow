@@ -35,6 +35,7 @@ const AuthStore = ({ children }) => {
       willUnmount={({ state: { app } }) => {
         console.log('disposing')
         disposers.forEach(call)
+        disposers.splice(0, disposers.length)
       }}
     />
   )
