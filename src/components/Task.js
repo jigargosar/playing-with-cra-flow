@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
 import { dfh, fg, hs, vs } from '../styles'
-import { intersperse, pick } from 'ramda'
+import { compose, intersperse, map, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import { flex1 } from 'csstips/'
@@ -14,25 +14,7 @@ import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
-import { fz } from '../theme'
-
-function renderTags(task) {
-  return (
-    <div className={style(fg(blackA(0.5)), fz.xs, { lineHeight: 1.5 })}>
-      <CollectionConsumer>
-        {({ tags }) =>
-          intersperse(', ')(
-            getTaskTags(task, tags).map(tag =>
-              tag
-                .map(tag => <LinkToTag key={tag.title} tag={tag} />)
-                .getOrElse('unknown tag'),
-            ),
-          )
-        }
-      </CollectionConsumer>
-    </div>
-  )
-}
+import { fz, lhCopy } from '../theme'
 
 const TaskForm = adopt(
   {
@@ -87,6 +69,11 @@ export function InlineEditTask({ task, className }) {
   )
 }
 
+const renderTag = tag =>
+  tag
+    .map(tag => <LinkToTag key={tag.title} tag={tag} />)
+    .getOrElse('unknown tag')
+
 export const TaskDisplayItem = ({
   task,
   startEditing,
@@ -97,7 +84,17 @@ export const TaskDisplayItem = ({
     <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
       <div className={style(flex)}>
         <div onClick={startEditing}>{task.title}</div>
-        {renderTags(task)}
+        <div className={style(fz.xs, lhCopy)}>
+          <CollectionConsumer
+            children={({ tags }) => {
+              const taskTags = getTaskTags(task, tags)
+              return compose(
+                intersperse(', '),
+                map(renderTag),
+              )(taskTags)
+            }}
+          />
+        </div>
       </div>
       {task.category !== category && (
         <div className={style(content)}>
