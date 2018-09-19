@@ -7,17 +7,11 @@ import {
   CollectionProvider,
   renderWithCollections,
 } from './components/CollectionContext'
-import {
-  flex,
-  horizontal,
-  padding,
-  scroll,
-  someChildWillScroll,
-} from 'csstips/lib'
+import { flex, padding, scroll, someChildWillScroll } from 'csstips/lib'
 import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
 import { style } from './typestyle-exports'
-import { bg, sizeViewport100 } from './styles'
+import { absolute, bg, dfh, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -26,6 +20,8 @@ import { gray, white } from './colors'
 import { allPass, T } from 'ramda'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
+import { Button, Icon } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -96,7 +92,7 @@ const AllProviders = nest(
 
 const App = () => {
   const containerClass = style(
-    horizontal,
+    dfh,
     someChildWillScroll,
     sizeViewport100,
     bg(gray(0.05)),
@@ -117,6 +113,13 @@ const App = () => {
           <Sidebar />
         </div>
         <div className={contentClass}>{renderMainRoutes()}</div>
+        <div className={style(absolute, { right: 0, bottom: 0 })}>
+          <Button
+            minimal
+            icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+            className={style(relative, { top: '-1rem', left: '-1rem' })}
+          />
+        </div>
       </FocusTrap>
     </AllProviders>
   )

@@ -22,6 +22,8 @@ import { extend } from 'typestyle/'
 
 export const relative = { position: 'relative' }
 export const absolute = { position: 'absolute' }
+export const sticky = { position: 'sticky' }
+export const fixed = { position: 'fixed' }
 
 export const ttu = { textTransform: 'uppercase' }
 export const ttc = { textTransform: 'capitalize' }
