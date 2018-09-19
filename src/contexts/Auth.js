@@ -2,6 +2,7 @@ import * as React from 'react'
 import Component from '@reach/component-component'
 
 import { initFireApp } from '../lib/fire'
+import { call } from 'ramda'
 
 function setInitialAuthState(app, setState) {
   const disposer = app.auth().onAuthStateChanged(() => {
@@ -32,7 +33,8 @@ const AuthStore = ({ children }) => {
         console.log(`state`, state)
       }}
       willUnmount={({ state: { app } }) => {
-        disposers.forEach(fn => fn())
+        console.log('disposing')
+        disposers.forEach(call)
       }}
     />
   )
