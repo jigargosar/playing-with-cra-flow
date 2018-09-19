@@ -3,6 +3,8 @@ import Component from '@reach/component-component'
 
 import { initFireApp } from '../lib/fire'
 import { call } from 'ramda'
+import { List } from 'react-powerplug'
+import { adopt } from 'react-adopt'
 
 function setInitialAuthState(app, setState) {
   const disposer = app.auth().onAuthStateChanged(() => {
@@ -11,11 +13,11 @@ function setInitialAuthState(app, setState) {
   })
 }
 
-const AuthStore = ({ children }) => {
-  const disposers = []
-  return (
+const AuthStore = adopt({
+  disposers: <List initial={[]} />,
+  fire: ({ disposers, render }) => (
     <Component
-      children={children}
+      children={render}
       initialState={{
         app: initFireApp(),
         authStateKnown: false,
@@ -35,11 +37,11 @@ const AuthStore = ({ children }) => {
       willUnmount={({ state: { app } }) => {
         console.log('disposing')
         disposers.forEach(call)
-        disposers.splice(0, disposers.length)
+        disposers.reset()
       }}
     />
-  )
-}
+  ),
+})
 
 const AuthContext = React.createContext({})
 
