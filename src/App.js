@@ -23,6 +23,7 @@ import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
 import { Button, Icon, Intent } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
+import { AuthProvider } from './contexts/Auth'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -89,6 +90,7 @@ const AllProviders = nest(
   CollectionProvider,
   FocusTrapStackProvider,
   EditTaskProvider,
+  AuthProvider,
 )
 
 const App = () => {

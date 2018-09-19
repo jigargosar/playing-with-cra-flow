@@ -55,6 +55,7 @@
     "csx": "^9.0.0",
     "debug": "^4.0.1",
     "faker": "^4.1.0",
+    "firebase": "^5.5.0",
     "focus-trap": "^3.0.0",
     "focus-trap-react": "^4.0.0",
     "folktale": "^2.3.0",
