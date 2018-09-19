@@ -15,32 +15,33 @@ function setInitialAuthState(app, setState) {
 
 const AuthStore = adopt({
   disposers: <List initial={[]} />,
-  fire: ({ disposers, render }) => (
-    <Component
-      children={render}
-      initialState={{
-        app: initFireApp(),
-        authStateKnown: false,
-      }}
-      didMount={({ state, setState }) => {
-        console.log(`state`, state)
-        const { app } = state
-        setInitialAuthState(app, setState)
-        const disposer = app
-          .auth()
-          .onAuthStateChanged(user => setState({ user }))
-        disposers.push(disposer)
-      }}
-      didUpdate={({ state }) => {
-        console.log(`state`, state)
-      }}
-      willUnmount={({ state: { app } }) => {
-        console.log('disposing')
-        disposers.forEach(call)
-        disposers.reset()
-      }}
-    />
-  ),
+  fire: ({ disposers, render }) => {
+    const app = initFireApp()
+    return (
+      <Component
+        children={render}
+        initialState={{
+          authStateKnown: false,
+        }}
+        didMount={({ state, setState }) => {
+          console.log(`state`, state)
+          setInitialAuthState(app, setState)
+          const disposer = app
+            .auth()
+            .onAuthStateChanged(user => setState({ user }))
+          disposers.push(disposer)
+        }}
+        didUpdate={({ state }) => {
+          console.log(`state`, state)
+        }}
+        willUnmount={() => {
+          console.log('disposing')
+          disposers.forEach(call)
+          disposers.reset()
+        }}
+      />
+    )
+  },
 })
 
 const AuthContext = React.createContext({})
