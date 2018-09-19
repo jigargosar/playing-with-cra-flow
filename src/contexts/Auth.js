@@ -2,7 +2,7 @@ import * as React from 'react'
 import Component from '@reach/component-component'
 
 import { initFireApp } from '../lib/fire'
-import { call } from 'ramda'
+import { call, once } from 'ramda'
 import { List } from 'react-powerplug'
 import { adopt } from 'react-adopt'
 
@@ -13,8 +13,16 @@ function setInitialAuthState(app, setState) {
   })
 }
 
+const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
+  add: fn => list.push(once(fn)),
+  disposeAll: () => {
+    list.list.forEach(call)
+    list.clear()
+  },
+}))
+
 const AuthStore = adopt({
-  disposers: <List initial={[]} />,
+  disposers: <Disposers />,
   fire: ({ disposers, render }) => {
     const app = initFireApp()
     return (
@@ -29,15 +37,14 @@ const AuthStore = adopt({
           const disposer = app
             .auth()
             .onAuthStateChanged(user => setState({ user }))
-          disposers.push(disposer)
+          disposers.add(disposer)
         }}
         didUpdate={({ state }) => {
           console.log(`state`, state)
         }}
         willUnmount={() => {
           console.log('disposing')
-          disposers.forEach(call)
-          disposers.reset()
+          disposers.disposeAll()
         }}
       />
     )
