@@ -122,6 +122,8 @@ const App = () => {
               children={({ authState, match }) =>
                 match({
                   signedIn: () => 'Signed In',
+                  signedOut: () => 'Signed Out',
+                  unknown: () => 'Loading...',
                 })
               }
             />
