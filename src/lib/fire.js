@@ -3,8 +3,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { fromESObservable } from 'kefir'
 import { Observable } from 'rxjs'
-import { compose, isNil, map, path } from 'ramda'
-import { nullableToMaybe } from 'folktale/conversions'
+import { compose, isNil, path } from 'ramda'
 
 const fire = firebase
 
@@ -41,27 +40,19 @@ export const firestoreUserCollectionStream = (
   app = getOrCreateFirebaseApp(),
 ) => {
   return authStateStream(app)
-    .map(
-      compose(
-        mb => mb.getOrElse(null),
-        map(uid =>
-          compose(
-            fromESObservable,
-            cRef => Observable.create(observer => cRef.onSnapshot(observer)),
-            (uid, name) => app.firestore().collection(`/users/${uid}/${name}`),
-          )(uid, name),
-        ),
-        nullableToMaybe,
-        path(['user', 'uid']),
-      ),
-    )
+    .map(path(['user', 'uid']))
     .skipWhile(isNil)
-    .flatMap()
+    .map(uid =>
+      compose(
+        fromESObservable,
+        cRef => Observable.create(observer => cRef.onSnapshot(observer)),
+        (uid, name) => app.firestore().collection(`/users/${uid}/${name}`),
+      )(uid, name),
+    )
+    .flatMapLatest()
     .filterErrors(e => {
+      console.log(e)
       return false
-    })
-    .filterErrors(e => {
-      return true
     })
 }
 
