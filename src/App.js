@@ -10,7 +10,7 @@ import {
 } from './components/CollectionContext'
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
-import { findById } from './models/Collection'
+import { findById } from './folktale-helpers'
 import {
   absolute,
   bg,

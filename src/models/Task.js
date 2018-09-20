@@ -13,7 +13,7 @@ import {
   times,
 } from 'ramda'
 import type { Tag, TagId } from './Tag'
-import { findById } from './Collection'
+import { findById } from '../folktale-helpers'
 import nanoid from 'nanoid'
 
 export const chance = Chance()
