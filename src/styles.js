@@ -13,6 +13,7 @@ import {
   height,
   horizontal,
   horizontallySpaced,
+  vertical,
   verticallySpaced,
   width,
 } from 'csstips/'
@@ -254,3 +255,4 @@ export const hasHiddenChildren = {
 export const hs = horizontallySpaced
 export const vs = verticallySpaced
 export const dfh = horizontal
+export const dfv = vertical

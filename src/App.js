@@ -11,8 +11,7 @@ import {
 import { flex, padding, scroll, someChildWillScroll } from 'csstips/lib'
 import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
-import { style } from './typestyle-exports'
-import { absolute, bg, dfh, relative, sizeViewport100 } from './styles'
+import { absolute, bg, dfh, dfv, fg, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -25,6 +24,8 @@ import { Button, Icon, Intent } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from './contexts/Theme'
+import { style } from 'typestyle/'
+import { fz, primaryColor } from './theme'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -96,45 +97,50 @@ const AllProviders = nest(
 )
 
 const App = () => {
-  const containerClass = style(
-    dfh,
-    someChildWillScroll,
-    sizeViewport100,
-    bg(gray(0.05)),
-  )
-  const contentClass = style(flex, scroll)
-  const sidebarClass = style(scroll, { minWidth: 225 })
-
   return (
     <AllProviders>
       <FocusTrap
-        className={containerClass}
         focusTrapOptions={{
           returnFocusOnDeactivate: false,
           escapeDeactivates: false,
         }}
       >
-        <div className={sidebarClass}>
-          <Sidebar />
-        </div>
-        <div className={contentClass}>{renderMainRoutes()}</div>
-        <div className={style(absolute, { right: 0, bottom: 0 })}>
+        <div className={style(dfv, sizeViewport100, bg(gray(0.05)))}>
           <div
-            className={style(/*brPill, shadow, */ relative, {
-              top: '-1rem',
-              left: '-1rem',
-            })}
+            className={style(
+              bg(primaryColor),
+              fg(white),
+              fz.lg,
+              dfh,
+              padding('0.5rem'),
+            )}
           >
-            <CollectionConsumer
-              children={({ addTask }) => (
-                <Button
-                  onClick={addTask}
-                  minimal
-                  intent={Intent.PRIMARY}
-                  icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+            <div className={style()}>Da Flow</div>
+          </div>
+          <div className={style(flex, dfh, someChildWillScroll)}>
+            <div className={style(scroll, { minWidth: 225 })}>
+              <Sidebar />
+            </div>
+            <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
+            <div className={style(absolute, { right: 0, bottom: 0 })}>
+              <div
+                className={style(/*brPill, shadow, */ relative, {
+                  top: '-1rem',
+                  left: '-1rem',
+                })}
+              >
+                <CollectionConsumer
+                  children={({ addTask }) => (
+                    <Button
+                      onClick={addTask}
+                      minimal
+                      intent={Intent.PRIMARY}
+                      icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+                    />
+                  )}
                 />
-              )}
-            />
+              </div>
+            </div>
           </div>
         </div>
       </FocusTrap>
