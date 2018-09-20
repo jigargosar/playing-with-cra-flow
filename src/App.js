@@ -6,7 +6,6 @@ import { Router } from './components/Router'
 import {
   CollectionConsumer,
   CollectionProvider,
-  renderWithCollections,
 } from './components/CollectionContext'
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
@@ -36,11 +35,16 @@ import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
 import { Auth } from './contexts/Auth'
+import { TaskCollectionProvider } from './contexts/TaskCollection'
 
 function FilteredTaskList({ pred, ...otherProps }) {
-  return renderWithCollections(({ tasks }) => (
-    <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
-  ))
+  return (
+    <CollectionConsumer
+      children={({ tasks }) => (
+        <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+      )}
+    />
+  )
 }
 
 function CategoryTaskList({ category, ...otherProps }) {
@@ -55,19 +59,23 @@ function CategoryTaskList({ category, ...otherProps }) {
 }
 
 function TagTaskList({ tid, tagTitle, ...otherProps }) {
-  return renderWithCollections(({ tags }) =>
-    findById(tid)(tags)
-      .map(tag => (
-        <FilteredTaskList
-          title={`${tag.title}`}
-          pred={allPass([activePred, t => t.tagIds.includes(tid)])}
-          {...otherProps}
-        />
-      ))
-      .getOrElse(
-        <ErrorMessage
-        >{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>,
-      ),
+  return (
+    <CollectionConsumer>
+      {({ tags }) =>
+        findById(tid)(tags)
+          .map(tag => (
+            <FilteredTaskList
+              title={`${tag.title}`}
+              pred={allPass([activePred, t => t.tagIds.includes(tid)])}
+              {...otherProps}
+            />
+          ))
+          .getOrElse(
+            <ErrorMessage
+            >{`Tag "${tagTitle}" not found. (id:${tid})`}</ErrorMessage>,
+          )
+      }
+    </CollectionConsumer>
   )
 }
 
@@ -101,6 +109,7 @@ function renderMainRoutes() {
 const AllProviders = nest(
   CssBaseline,
   ThemeProvider,
+  TaskCollectionProvider,
   CollectionProvider,
   FocusTrapStackProvider,
   EditTaskProvider,
