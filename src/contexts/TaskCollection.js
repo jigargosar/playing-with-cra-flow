@@ -1,18 +1,14 @@
 import * as React from 'react'
 import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
-import { append, compose, map, pick } from 'ramda'
+import { __, append, compose, map, merge, pick, propEq, when } from 'ramda'
 import { defaultProps, toRenderProps, withHandlers } from 'recompose'
 import { withValue } from '../components/Value'
 
+const pickUserChanges = pick(['title', 'category', 'done'])
+
 const updateTask = tasks => (changes, { id }) =>
-  tasks.set(
-    map(
-      t =>
-        t.id === id
-          ? { ...t, ...pick(['title', 'category', 'done'])(changes) }
-          : t,
-    ),
-  )
+  tasks.set(map(when(propEq('id', id))(merge(__, pickUserChanges(changes)))))
+
 export const TaskCollection = toRenderProps(
   compose(
     defaultProps({ initial: loadOrGenerateTasks, onChange: saveTasks }),
