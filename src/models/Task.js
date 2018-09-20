@@ -53,7 +53,7 @@ export const loadOrGenerateTasks = () => {
 export const saveTasks = tasks =>
   localStorage.setItem('tasks', JSON.stringify(tasks))
 
-export const getCategoryIndexOfTask = ({ category }: Task): number =>
+export const getCategoryIndexOfTask = ({ category }) =>
   indexOf(category)(categories)
 
 export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {

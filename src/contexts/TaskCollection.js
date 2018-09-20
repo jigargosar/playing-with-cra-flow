@@ -19,7 +19,7 @@ export const TaskCollection = toRenderProps(
         updateTask(tasks)({ done: !task.done }, task),
       add: tasks => () => {
         const task = { ...generateTask(), category: 'InBasket' }
-        tasks.set(append(task))
+        tasks.set(append(merge(__, task)))
       },
     }),
   ),
