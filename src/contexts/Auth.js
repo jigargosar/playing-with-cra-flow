@@ -2,33 +2,38 @@ import * as React from 'react'
 import Component from '@reach/component-component'
 
 import { initFireApp } from '../lib/fire'
-import { call, once } from 'ramda'
+import { __, call, ifElse, lensProp, objOf, once, over } from 'ramda'
 import { List } from 'react-powerplug'
 import { adopt } from 'react-adopt'
 import { p } from '../promise'
+import { isFunction } from '../ramda-exports'
 
 export class Value extends React.Component {
-  state = this.props.value || null
   set = value => {
     return p((resolve, reject) => {
       try {
-        this.setState(value, () => resolve(this.state.value))
+        const newState = ifElse(
+          isFunction,
+          over(lensProp('value'), __),
+          objOf('value'),
+        )(value)
+        this.setState(newState, () => resolve(this.getChildFnProps()))
       } catch (e) {
         reject(e)
       }
     })
   }
 
-  render() {
-    return this.props.children({ value: this.state.value, set: this.set })
-  }
-}
+  state = { value: this.props.value, set: this.set }
 
-function setInitialAuthState(app, setState) {
-  const disposer = app.auth().onAuthStateChanged(() => {
-    disposer()
-    setState({ authStateKnown: true })
-  })
+  getChildFnProps() {
+    return this.state
+  }
+
+  render() {
+    console.log(`this.state,this.props`, this.state, this.props)
+    return this.props.children(this.getChildFnProps())
+  }
 }
 
 const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
@@ -46,23 +51,24 @@ const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
 
 const AuthStore = adopt({
   disposers: <Disposers />,
-  fire: ({ disposers, render }) => {
+  authStateKnown: <Value value={false} />,
+  fire: ({ disposers, authStateKnown, render }) => {
     const app = initFireApp()
     return (
       <Component
         children={render}
-        initialState={{
-          authStateKnown: false,
+        didMount={() => {
+          console.log(`state`, authStateKnown)
+          const disposer = app.auth().onAuthStateChanged(() => {
+            disposer()
+            authStateKnown.set(true)
+          })
+          // disposers.add(
+          //   app.auth().onAuthStateChanged(user => setState({ user })),
+          // )
         }}
-        didMount={({ state, setState }) => {
-          console.log(`state`, state)
-          setInitialAuthState(app, setState)
-          disposers.add(
-            app.auth().onAuthStateChanged(user => setState({ user })),
-          )
-        }}
-        didUpdate={({ state }) => {
-          console.log(`state`, state)
+        didUpdate={() => {
+          console.log(`state`, authStateKnown)
         }}
         willUnmount={() => {
           disposers.disposeAll()
