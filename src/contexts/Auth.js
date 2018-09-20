@@ -43,6 +43,10 @@ const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
   },
 }))
 
+function onAuthStateChanged(nextOrObserver, app) {
+  return app.auth().onAuthStateChanged(nextOrObserver)
+}
+
 const AuthStore = adopt({
   disposers: <Disposers />,
   authStateKnown: <Value value={false} />,
@@ -53,10 +57,11 @@ const AuthStore = adopt({
         children={render}
         didMount={() => {
           console.log(`state`, authStateKnown)
-          const disposer = app.auth().onAuthStateChanged(() => {
+          const nextOrObserver = () => {
             disposer()
             authStateKnown.set(true)
-          })
+          }
+          const disposer = onAuthStateChanged(nextOrObserver, app)
           // disposers.add(
           //   app.auth().onAuthStateChanged(user => setState({ user })),
           // )
