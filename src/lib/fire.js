@@ -20,8 +20,9 @@ export function getOrCreateFirebaseApp() {
 
 export const authStateStream = (app = getOrCreateFirebaseApp()) =>
   fromESObservable(Observable.create(o => app.auth().onAuthStateChanged(o)))
+    .map(user => ({ user }))
     .toProperty(() => ({ status: 'unknown', user: null }))
-    .map(user => ({ status: user ? 'signedIn' : 'signedOut', user }))
+    .map(({ user }) => ({ status: user ? 'signedIn' : 'signedOut', user }))
 
 export const signOut = () =>
   getOrCreateFirebaseApp()
