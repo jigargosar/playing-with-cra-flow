@@ -177,10 +177,10 @@ const App = () => {
                   left: '-1rem',
                 })}
               >
-                <CollectionConsumer
-                  children={({ addTask }) => (
+                <TaskCollectionConsumer
+                  children={tasks => (
                     <Button
-                      onClick={addTask}
+                      onClick={tasks.add}
                       minimal
                       intent={Intent.PRIMARY}
                       icon={<Icon icon={IconNames.ADD} iconSize={32} />}
