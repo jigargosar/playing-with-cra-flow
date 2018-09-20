@@ -3,7 +3,7 @@ import 'firebase/auth'
 
 const fire = firebase
 
-export function initFireApp() {
+export function getOrCreateFirebaseApp() {
   const config = {
     apiKey: 'AIzaSyAve3E-llOy2_ly87mJMSvcWDG6Uqyq8PA',
     authDomain: 'not-now-142808.firebaseapp.com',

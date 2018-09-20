@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
 
-import { initFireApp } from '../lib/fire'
+import { getOrCreateFirebaseApp } from '../lib/fire'
 import { __, ifElse, lensProp, objOf, over } from 'ramda'
 import { adopt } from 'react-adopt'
 import { p } from '../promise'
@@ -38,7 +38,7 @@ const authStateStream = app =>
 const AuthStore = adopt({
   authStateKnown: <Value value={false} />,
   fire: ({ disposers, authStateKnown, render }) => {
-    const app = initFireApp()
+    const app = getOrCreateFirebaseApp()
     return (
       <Component
         children={render}
