@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { authStateStream } from '../lib/fire'
+import { authStateStream, signIn, signOut } from '../lib/fire'
 import { __, ifElse, lensProp, objOf, over } from 'ramda'
 import { p } from '../promise'
 import { isFunction } from '../ramda-exports'
@@ -30,15 +30,15 @@ export class Value extends React.Component {
   }
 }
 
-export const Auth = componentFromStreamWithConfig(kefirConfig)(props$ => {
-  return fromESObservable(props$).combine(
+export const Auth = componentFromStreamWithConfig(kefirConfig)(props$ =>
+  fromESObservable(props$).combine(
     authStateStream(),
     ({ children }, authState) =>
       children({
         authState,
-        match: matcher => {
-          return matcher[authState.status](authState.user)
-        },
+        match: matcher => matcher[authState.status](authState.user),
+        signOut,
+        signIn,
       }),
-  )
-})
+  ),
+)

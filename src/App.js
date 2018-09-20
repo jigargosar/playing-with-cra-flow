@@ -11,7 +11,16 @@ import {
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
-import { absolute, bg, dfh, dfv, fg, relative, sizeViewport100 } from './styles'
+import {
+  absolute,
+  bg,
+  dfh,
+  dfv,
+  fg,
+  hs,
+  relative,
+  sizeViewport100,
+} from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -112,21 +121,35 @@ const App = () => {
               bg(primaryColor),
               fg(white),
               dfh,
+              hs('1rem'),
               center,
               padding('0.5rem'),
             )}
           >
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
-            <Auth
-              children={({ authState, match }) =>
-                match({
-                  signedIn: () => 'Signed In',
-                  signedOut: () => 'Signed Out',
-                  unknown: () => 'Loading...',
-                })
-              }
-            />
+            <div>
+              <Auth
+                children={({ authState, match }) =>
+                  match({
+                    signedIn: () => 'Signed In',
+                    signedOut: () => 'Signed Out',
+                    unknown: () => 'Loading...',
+                  })
+                }
+              />
+            </div>
+            <div>
+              <Auth
+                children={({ authState, match, signIn, signOut }) =>
+                  match({
+                    signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
+                    signedOut: () => <Button onClick={signIn}>Sign In</Button>,
+                    unknown: () => 'Loading...',
+                  })
+                }
+              />
+            </div>
           </div>
           <div className={style(flex, dfh, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>

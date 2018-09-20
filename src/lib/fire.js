@@ -22,3 +22,13 @@ export const authStateStream = (app = getOrCreateFirebaseApp()) =>
   fromESObservable(Observable.create(o => app.auth().onAuthStateChanged(o)))
     .toProperty(() => ({ status: 'unknown', user: null }))
     .map(user => ({ status: user ? 'signedIn' : 'signedOut', user }))
+
+export const signOut = () =>
+  getOrCreateFirebaseApp()
+    .auth()
+    .signOut()
+
+export const signIn = () => {
+  const auth = getOrCreateFirebaseApp().auth()
+  return auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+}
