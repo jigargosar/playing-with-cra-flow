@@ -6466,6 +6466,12 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
+kefir@^3.8.5:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/kefir/-/kefir-3.8.5.tgz#ce8d952707ea833d9d995a96b92daa744dea83ba"
+  dependencies:
+    symbol-observable "1.0.4"
+
 keycode@^2.1.9:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
@@ -9326,6 +9332,12 @@ rx-lite@*, rx-lite@^4.0.8:
 rxjs@^6.1.0:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.1.tgz#878a1a8c64b8a5da11dcf74b5033fe944cdafb84"
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@latest:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.2.tgz#6a688b16c4e6e980e62ea805ec30648e1c60907f"
   dependencies:
     tslib "^1.9.0"
 

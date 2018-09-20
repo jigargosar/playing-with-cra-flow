@@ -7,7 +7,7 @@ import { adopt } from 'react-adopt'
 import { p } from '../promise'
 import { isFunction } from '../ramda-exports'
 import { Observable } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { fromESObservable } from 'kefir'
 
 export class Value extends React.Component {
   set = value => {
@@ -30,9 +30,10 @@ export class Value extends React.Component {
     return this.props.children(this.state)
   }
 }
-
-const authStateObserver = app =>
-  Observable.create(o => app.auth().onAuthStateChanged(o))
+const authStateStream = app =>
+  fromESObservable(Observable.create(o => app.auth().onAuthStateChanged(o)))
+    .toProperty(() => ({ status: 'unknown', user: null }))
+    .map(user => ({ status: user ? 'signedIn' : 'signedOut', user }))
 
 const AuthStore = adopt({
   authStateKnown: <Value value={false} />,
@@ -42,10 +43,9 @@ const AuthStore = adopt({
       <Component
         children={render}
         didMount={async () => {
-          await authStateObserver(app)
-            .pipe(first())
-            .toPromise()
-          authStateKnown.set(true)
+          authStateStream(app)
+            .spy()
+            .observe(authStateKnown.set)
         }}
         didUpdate={() => {
           console.log(`didUpdate: authStateKnown`, authStateKnown)
