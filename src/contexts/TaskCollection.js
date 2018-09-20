@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { loadOrGenerateTasks, saveTasks } from '../models/Task'
-import { compose, map, pick } from 'ramda'
+import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
+import { append, compose, map, pick } from 'ramda'
 import { defaultProps, toRenderProps, withHandlers } from 'recompose'
 import { withValue } from '../components/Value'
 
@@ -21,6 +21,10 @@ export const TaskCollection = toRenderProps(
       update: updateTask,
       toggleDone: tasks => task =>
         updateTask(tasks)({ done: !task.done }, task),
+      add: tasks => () => {
+        const task = { ...generateTask(), category: 'InBasket' }
+        tasks.set(append(task))
+      },
     }),
   ),
 )
