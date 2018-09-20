@@ -24,7 +24,7 @@ const Collections = ({ children }) => (
         return JSON.parse(state)
       } else {
         const tags = generateTagList()
-        const tasks = generateTaskList() /*.map(setSomeTaskTags(tags))*/
+        const tasks = generateTaskList()
         return { tasks, tags }
       }
     }}
