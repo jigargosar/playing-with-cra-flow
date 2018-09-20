@@ -17,6 +17,7 @@ import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
 import { fz, lhCopy } from '../theme'
+import { TaskCollectionConsumer } from '../contexts/TaskCollection'
 
 const TaskUpdater = adopt(
   {
@@ -103,11 +104,10 @@ export const TaskDisplayItem = ({
   return (
     <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
       <div>
-        <TaskUpdater
-          task={task}
-          children={({ toggleDone }) => (
+        <TaskCollectionConsumer
+          children={tasks => (
             <Button
-              onClick={toggleDone}
+              onClick={() => tasks.toggleDone(task)}
               minimal
               icon={<Icon icon={isDone ? IconNames.UPDATED : IconNames.TICK} />}
             />
