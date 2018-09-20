@@ -8,7 +8,7 @@ import {
   CollectionProvider,
   renderWithCollections,
 } from './components/CollectionContext'
-import { flex, padding, scroll, someChildWillScroll } from 'csstips/lib'
+import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './models/Collection'
 import { absolute, bg, dfh, dfv, fg, relative, sizeViewport100 } from './styles'
@@ -26,6 +26,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
+import { AuthState } from './contexts/Auth'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -110,12 +111,20 @@ const App = () => {
             className={style(
               bg(primaryColor),
               fg(white),
-              fz.lg,
               dfh,
+              center,
               padding('0.5rem'),
             )}
           >
-            <div className={style()}>Da Flow</div>
+            <div className={style(fz.lg)}>Da Flow</div>
+            <div className={style(flex)} />
+            <AuthState
+              children={({ authState, match }) =>
+                match({
+                  signedIn: () => 'Signed In',
+                })
+              }
+            />
           </div>
           <div className={style(flex, dfh, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>

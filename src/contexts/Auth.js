@@ -33,6 +33,12 @@ export class Value extends React.Component {
 export const AuthState = componentFromStreamWithConfig(kefirConfig)(props$ => {
   return fromESObservable(props$).combine(
     authStateStream(),
-    ({ children }, authState) => children({ authState }),
+    ({ children }, authState) =>
+      children({
+        authState,
+        match: matcher => {
+          return matcher[authState.status](authState.user)
+        },
+      }),
   )
 })
