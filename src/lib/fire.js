@@ -31,5 +31,9 @@ export const signOut = () =>
 
 export const signIn = () => {
   const auth = getOrCreateFirebaseApp().auth()
-  return auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+  const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+  googleAuthProvider.setCustomParameters({
+    prompt: 'select_account',
+  })
+  return auth.signInWithRedirect(googleAuthProvider)
 }
