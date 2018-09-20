@@ -17,7 +17,7 @@ export class Value extends React.Component {
           over(lensProp('value'), __),
           objOf('value'),
         )(value)
-        this.setState(newState, () => resolve(this.getChildFnProps()))
+        this.setState(newState, () => resolve(this.state))
       } catch (e) {
         reject(e)
       }
@@ -25,14 +25,8 @@ export class Value extends React.Component {
   }
 
   state = { value: this.props.value, set: this.set }
-
-  getChildFnProps() {
-    return this.state
-  }
-
   render() {
-    console.log(`this.state,this.props`, this.state, this.props)
-    return this.props.children(this.getChildFnProps())
+    return this.props.children(this.state)
   }
 }
 
