@@ -9,14 +9,13 @@ import {
 import { p } from '../promise'
 import { isFunction } from '../ramda-exports'
 
-export const Value = toRenderProps(
-  compose(
-    withState('value', 'set', ({ initial }) => when(isFunction)(call)(initial)),
-    withPropsOnChange(['value'], ({ value, onChange }) => {
-      onChange && onChange(value)
-    }),
-    withHandlers({
-      set: ({ set }) => val => p(resolve => set(val, resolve)),
-    }),
-  ),
+export const withValue = compose(
+  withState('value', 'set', ({ initial }) => when(isFunction)(call)(initial)),
+  withPropsOnChange(['value'], ({ value, onChange }) => {
+    onChange && onChange(value)
+  }),
+  withHandlers({
+    set: ({ set }) => val => p(resolve => set(val, resolve)),
+  }),
 )
+export const Value = toRenderProps(withValue)
