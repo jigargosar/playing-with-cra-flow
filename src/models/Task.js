@@ -15,6 +15,7 @@ import {
 import type { Tag, TagCollection, TagId } from './Tag'
 import { findById } from './Collection'
 import Maybe from 'folktale/maybe'
+import nanoid from 'nanoid'
 
 export const chance = Chance()
 
@@ -29,14 +30,16 @@ export type Task = {|
 
 export type TaskModel = Task
 
-export const generateTask = (): Task => ({
+export const generateTask = () => ({
   // id: chance.n(chance.character, 4, { alpha: true }).join(''),
-  id: faker.random.alphaNumeric(4),
+  id: `task_${nanoid()}`,
   title: faker.random.words(),
   done: chance.weighted([true, false], [20, 80]),
   category: chance.pickone(categories),
   tagIds: [],
   createdAt: Date.now(),
+  modifiedAt: Date.now(),
+  dirty: true,
 })
 
 export function generateTaskList(count: number = 50): Task[] {

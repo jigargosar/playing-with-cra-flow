@@ -86,7 +86,8 @@
     "tachyons": "^4.11.1",
     "typeface-roboto": "^0.0.54",
     "typestyle": "^2.0.1",
-    "unique-selector": "^0.3.6"
+    "unique-selector": "^0.3.6",
+    "nanoid": "latest"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
