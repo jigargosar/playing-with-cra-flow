@@ -1,8 +1,5 @@
 // @flow
-import '@blueprintjs/icons/lib/css/blueprint-icons.css'
-import '@blueprintjs/core/lib/css/blueprint.css'
-// import 'bootstrap/dist/css/bootstrap-reboot.css'
-import '@reach/dialog/styles.css'
+import './index.css'
 import { setupGlobalStyles } from './styles'
 import registerServiceWorker from './registerServiceWorker'
 import { forceRenderStyles } from 'typestyle/lib'

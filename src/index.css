@@ -1,0 +1,4 @@
+@import './font-face.css';
+@import url('~@blueprintjs/icons/lib/css/blueprint-icons.css');
+@import url('~@blueprintjs/core/lib/css/blueprint.css');
+@import url('~@reach/dialog/styles.css');
