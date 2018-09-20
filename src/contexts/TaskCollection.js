@@ -18,7 +18,7 @@ export const TaskCollection = toRenderProps(
     defaultProps({ initial: loadOrGenerateTasks, onChange: saveTasks }),
     withValue,
     withHandlers({
-      updateTask,
+      update: updateTask,
       toggleDone: tasks => task =>
         updateTask(tasks)({ done: !task.done }, task),
     }),

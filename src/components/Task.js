@@ -35,7 +35,7 @@ const TaskForm = adopt(
     } = props
     return {
       save: () => {
-        tasks.updateTask(pick(['title', 'category'])(values), task)
+        tasks.update(pick(['title', 'category'])(values), task)
         actions.stopEditingTask()
       },
       cancel: () => actions.stopEditingTask(),
