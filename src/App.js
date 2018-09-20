@@ -23,7 +23,6 @@ import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
 import { Button, Icon, Intent } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
-import { AuthProvider } from './contexts/Auth'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from './contexts/Theme'
 
@@ -94,7 +93,6 @@ const AllProviders = nest(
   CollectionProvider,
   FocusTrapStackProvider,
   EditTaskProvider,
-  AuthProvider,
 )
 
 const App = () => {

@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { fromESObservable } from 'kefir'
+import { Observable } from 'rxjs'
 
 const fire = firebase
 
@@ -15,3 +17,8 @@ export function getOrCreateFirebaseApp() {
 
   return fire.apps[0] || fire.initializeApp(config)
 }
+
+export const authStateStream = (app = getOrCreateFirebaseApp()) =>
+  fromESObservable(Observable.create(o => app.auth().onAuthStateChanged(o)))
+    .toProperty(() => ({ status: 'unknown', user: null }))
+    .map(user => ({ status: user ? 'signedIn' : 'signedOut', user }))

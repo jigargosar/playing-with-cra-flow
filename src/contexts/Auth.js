@@ -1,13 +1,12 @@
 import * as React from 'react'
-import Component from '@reach/component-component'
 
-import { getOrCreateFirebaseApp } from '../lib/fire'
+import { authStateStream } from '../lib/fire'
 import { __, ifElse, lensProp, objOf, over } from 'ramda'
-import { adopt } from 'react-adopt'
 import { p } from '../promise'
 import { isFunction } from '../ramda-exports'
-import { Observable } from 'rxjs'
-import { fromESObservable } from 'kefir'
+import { componentFromStreamWithConfig } from 'recompose/'
+import { fromESObservable } from 'kefir/dist/kefir.esm'
+import kefirConfig from 'recompose/kefirObservableConfig'
 
 export class Value extends React.Component {
   set = value => {
@@ -30,42 +29,10 @@ export class Value extends React.Component {
     return this.props.children(this.state)
   }
 }
-const authStateStream = app =>
-  fromESObservable(Observable.create(o => app.auth().onAuthStateChanged(o)))
-    .toProperty(() => ({ status: 'unknown', user: null }))
-    .map(user => ({ status: user ? 'signedIn' : 'signedOut', user }))
 
-const AuthStore = adopt({
-  authStateKnown: <Value value={false} />,
-  fire: ({ disposers, authStateKnown, render }) => {
-    const app = getOrCreateFirebaseApp()
-    return (
-      <Component
-        children={render}
-        didMount={async () => {
-          authStateStream(app)
-            .spy()
-            .observe(authStateKnown.set)
-        }}
-        didUpdate={() => {
-          console.log(`didUpdate: authStateKnown`, authStateKnown)
-        }}
-        willUnmount={() => {
-          console.log(`willUnmount: authStateKnown`, authStateKnown)
-        }}
-      />
-    )
-  },
+export const AuthState = componentFromStreamWithConfig(kefirConfig)(props$ => {
+  return fromESObservable(props$).combine(
+    authStateStream(),
+    ({ children }, authState) => children({ authState }),
+  )
 })
-
-const AuthContext = React.createContext({})
-
-export const AuthProvider = ({ children }) => (
-  <AuthStore
-    children={props => (
-      <AuthContext.Provider value={props} children={children} />
-    )}
-  />
-)
-
-export const AuthConsumer = AuthContext.Consumer
