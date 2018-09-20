@@ -1,6 +1,6 @@
 import { nullableToMaybe } from 'folktale/conversions'
+import { curry } from 'ramda'
 
-export type Model = { id: string }
-export type Collection<Model> = Model[]
-
-export const findById = id => c => nullableToMaybe(c.find(m => m.id === id))
+export const findById = curry((id, c) =>
+  nullableToMaybe(c.find(m => m.id === id)),
+)
