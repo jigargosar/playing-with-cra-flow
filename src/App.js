@@ -36,6 +36,7 @@ import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
 import { Auth } from './contexts/Auth'
+import { Value } from './components/Value'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -127,6 +128,17 @@ const App = () => {
             )}
           >
             <div className={style(fz.lg)}>Da Flow</div>
+            <Value
+              value={'Da'}
+              children={title => (
+                <div
+                  onClick={() => title.set('Da Flow')}
+                  className={style(fz.lg)}
+                >
+                  {title.value}
+                </div>
+              )}
+            />
             <div className={style(flex)} />
             <div>
               <Auth
