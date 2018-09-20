@@ -55,7 +55,7 @@ export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
 }
 export type TaskCollection = Task[]
 
-export function getAllTasks(tasksCollection: TaskCollection): Task[] {
+export function getAllTasks(tasksCollection) {
   return sortWith([
     //
     ascend(getCategoryIndexOfTask),
@@ -64,27 +64,21 @@ export function getAllTasks(tasksCollection: TaskCollection): Task[] {
   ])(tasksCollection)
 }
 
-export const filterTasks = (
-  pred: Task => boolean,
-  tasksCollection: TaskCollection,
-) =>
+export const filterTasks = (pred, tasksCollection) =>
   compose(
     filter(pred),
     getAllTasks,
   )(tasksCollection)
 
-export function getActiveTasks(tasksCollection: TaskCollection): Task[] {
+export function getActiveTasks(tasksCollection) {
   return getAllTasks(tasksCollection).filter(task => !task.done)
 }
 
-export function getPendingCategoryTasks(
-  category: Category,
-  tasks: TaskCollection,
-) {
+export function getPendingCategoryTasks(category, tasks) {
   return getActiveTasks(tasks).filter(t => t.category === category)
 }
 
-export function getPendingTagTasks(tid: TagId, tasks: TaskCollection) {
+export function getPendingTagTasks(tid, tasks) {
   return getActiveTasks(tasks).filter(t => t.tagIds.includes(tid))
 }
 
