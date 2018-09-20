@@ -35,13 +35,16 @@ import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
 import { Auth } from './contexts/Auth'
-import { TaskCollectionProvider } from './contexts/TaskCollection'
+import {
+  TaskCollectionConsumer,
+  TaskCollectionProvider,
+} from './contexts/TaskCollection'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
-    <CollectionConsumer
-      children={({ tasks }) => (
-        <TaskList tasks={filterTasks(pred, tasks)} {...otherProps} />
+    <TaskCollectionConsumer
+      children={tasks => (
+        <TaskList tasks={filterTasks(pred, tasks.value)} {...otherProps} />
       )}
     />
   )
