@@ -43,8 +43,23 @@ const Disposers = adopt({ list: <List initial={[]} /> }, ({ list }) => ({
   },
 }))
 
-function onAuthStateChanged(nextOrObserver, app) {
-  return app.auth().onAuthStateChanged(nextOrObserver)
+const fetchAuthState = app => {
+  return p((resolve, reject) => {
+    try {
+      const disposer = app.auth().onAuthStateChanged(
+        user => {
+          resolve(user)
+          disposer()
+        },
+        e => {
+          reject(e)
+          disposer()
+        },
+      )
+    } catch (e) {
+      reject(e)
+    }
+  }).finally(a => console.warn('finally', a))
 }
 
 const AuthStore = adopt({
@@ -55,13 +70,11 @@ const AuthStore = adopt({
     return (
       <Component
         children={render}
-        didMount={() => {
+        didMount={async () => {
           console.log(`state`, authStateKnown)
-          const nextOrObserver = () => {
-            disposer()
-            authStateKnown.set(true)
-          }
-          const disposer = onAuthStateChanged(nextOrObserver, app)
+          await fetchAuthState(app)
+          authStateKnown.set(true)
+
           // disposers.add(
           //   app.auth().onAuthStateChanged(user => setState({ user })),
           // )
