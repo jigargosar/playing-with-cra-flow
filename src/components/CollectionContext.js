@@ -4,7 +4,9 @@ import { generateTagList } from '../models/Tag'
 import { generateTask, generateTaskList } from '../models/Task'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
+
 export const CollectionConsumer = CollectionContext.Consumer
+
 const Collections = ({ children }) => (
   <Component
     getInitialState={() => {
