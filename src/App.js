@@ -26,7 +26,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
-import { AuthState } from './contexts/Auth'
+import { Auth } from './contexts/Auth'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -118,7 +118,7 @@ const App = () => {
           >
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
-            <AuthState
+            <Auth
               children={({ authState, match }) =>
                 match({
                   signedIn: () => 'Signed In',

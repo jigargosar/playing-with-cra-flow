@@ -30,7 +30,7 @@ export class Value extends React.Component {
   }
 }
 
-export const AuthState = componentFromStreamWithConfig(kefirConfig)(props$ => {
+export const Auth = componentFromStreamWithConfig(kefirConfig)(props$ => {
   return fromESObservable(props$).combine(
     authStateStream(),
     ({ children }, authState) =>
