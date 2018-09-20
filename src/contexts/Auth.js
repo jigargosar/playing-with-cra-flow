@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { authStateStream, signIn, signOut } from '../lib/fire'
 import { componentFromStreamWithConfig } from 'recompose/'
 import { fromESObservable } from 'kefir/dist/kefir.esm'
