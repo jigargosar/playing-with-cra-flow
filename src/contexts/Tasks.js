@@ -6,7 +6,7 @@ import { map, pick } from 'ramda'
 
 export const Tasks = adopt(
   {
-    tasks: <Value initial={loadOrGenerateTasks} />,
+    tasks: <Value initial={loadOrGenerateTasks} onChange={saveTasks} />,
   },
   ({ tasks }) => {
     return {

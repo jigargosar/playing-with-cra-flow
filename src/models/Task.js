@@ -50,6 +50,9 @@ export const loadOrGenerateTasks = () => {
   return stored ? JSON.parse(stored) : generateTaskList()
 }
 
+export const saveTasks = tasks =>
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
   indexOf(category)(categories)
 
