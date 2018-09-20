@@ -70,22 +70,6 @@ export const filterTasks = (pred, tasksCollection) =>
     getAllTasks,
   )(tasksCollection)
 
-export function getActiveTasks(tasksCollection) {
-  return getAllTasks(tasksCollection).filter(task => !task.done)
-}
-
-export function getPendingCategoryTasks(category, tasks) {
-  return getActiveTasks(tasks).filter(t => t.category === category)
-}
-
-export function getPendingTagTasks(tid, tasks) {
-  return getActiveTasks(tasks).filter(t => t.tagIds.includes(tid))
-}
-
-export function getDoneTasks(tasks: TaskCollection) {
-  return getAllTasks(tasks).filter(t => t.done)
-}
-
 export const getTaskTags = (task: Task, tags: TagCollection): Maybe =>
   task.tagIds.map(tid => findById(tid)(tags))
 
