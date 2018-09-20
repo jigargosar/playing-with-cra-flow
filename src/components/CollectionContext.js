@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Component from '@reach/component-component'
 import { generateTagList } from '../models/Tag'
-import { generateTask, generateTaskList } from '../models/Task'
 
 const CollectionContext = React.createContext({ tasks: [], tags: [] })
 
@@ -16,8 +15,7 @@ const Collections = ({ children }) => (
         return JSON.parse(state)
       } else {
         const tags = generateTagList()
-        const tasks = generateTaskList()
-        return { tasks, tags }
+        return { tags }
       }
     }}
     didUpdate={({ state }) => {
@@ -27,13 +25,9 @@ const Collections = ({ children }) => (
       localStorage.setItem('collections', JSON.stringify(state))
     }}
   >
-    {({ state, setState }) => {
+    {({ state }) => {
       return children({
         ...state,
-        addTask: () => {
-          const task = { ...generateTask(), category: 'InBasket' }
-          setState({ tasks: [task, ...state.tasks] })
-        },
       })
     }}
   </Component>
