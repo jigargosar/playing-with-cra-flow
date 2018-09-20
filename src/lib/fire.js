@@ -3,6 +3,8 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { fromESObservable } from 'kefir'
 import { Observable } from 'rxjs'
+import { compose, map, path } from 'ramda'
+import { nullableToMaybe } from 'folktale/conversions'
 
 const fire = firebase
 
@@ -33,6 +35,25 @@ export const authStateStream = (app = getOrCreateFirebaseApp()) =>
     .map(user => ({ user }))
     .toProperty(() => ({ status: 'unknown', user: null }))
     .map(({ user }) => ({ status: user ? 'signedIn' : 'signedOut', user }))
+
+export const firestoreUserCollectionStream = (
+  name,
+  app = getOrCreateFirebaseApp(),
+) => {
+  return authStateStream(app).map(
+    compose(
+      map(uid =>
+        compose(
+          fromESObservable,
+          cRef => Observable.create(observer => cRef.onSnapshot(observer)),
+          (uid, name) => app.firestore().path(`/users/${uid}/${name}`),
+        )(uid, name),
+      ),
+      nullableToMaybe,
+      path(['user', 'uid']),
+    ),
+  )
+}
 
 export const signOut = () =>
   getOrCreateFirebaseApp()
