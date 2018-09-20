@@ -45,6 +45,11 @@ export function generateTaskList(count: number = 50): Task[] {
   return times(generateTask, count)
 }
 
+export const loadOrGenerateTasks = () => {
+  const stored = localStorage.getItem('tasks')
+  return stored ? JSON.parse(stored) : generateTaskList()
+}
+
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
   indexOf(category)(categories)
 
