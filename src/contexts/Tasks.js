@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { adopt } from 'react-adopt'
 import { Value } from '../components/Value'
-import { loadOrGenerateTasks } from '../models/Task'
+import { loadOrGenerateTasks, saveTasks } from '../models/Task'
 import { map, pick } from 'ramda'
 
 export const Tasks = adopt(
