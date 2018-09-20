@@ -8,17 +8,19 @@ export const TaskCollection = adopt(
   {
     tasks: <Value initial={loadOrGenerateTasks} onChange={saveTasks} />,
   },
-  ({ tasks }) => ({
-    value: tasks.value,
-    updateTask: (changes, { id }) =>
-      tasks.set(
-        map(t => {
-          return t.id === id
-            ? { ...t, ...pick(['title', 'category'])(changes) }
-            : t
-        }),
-      ),
-  }),
+  ({ tasks }) => {
+    return {
+      value: tasks.value,
+      updateTask: (changes, { id }) =>
+        tasks.set(
+          map(t => {
+            return t.id === id
+              ? { ...t, ...pick(['title', 'category'])(changes) }
+              : t
+          }),
+        ),
+    }
+  },
 )
 
 const Context = React.createContext()

@@ -1,5 +1,5 @@
 // import * as React from 'react'
-import { compose, prop } from 'ramda'
+import { call, compose, when } from 'ramda'
 import {
   toRenderProps,
   withHandlers,
@@ -7,10 +7,11 @@ import {
   withState,
 } from 'recompose'
 import { p } from '../promise'
+import { isFunction } from '../ramda-exports'
 
 export const Value = toRenderProps(
   compose(
-    withState('value', 'set', prop('initial')),
+    withState('value', 'set', ({ initial }) => when(isFunction)(call)(initial)),
     withPropsOnChange(['value'], ({ value, onChange }) => {
       onChange && onChange(value)
     }),
