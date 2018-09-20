@@ -57,17 +57,26 @@ export const firestoreUserCollectionStream = (
     )
     .skipWhile(isNil)
     .flatMap()
+    .filterErrors(e => {
+      return false
+    })
+    .filterErrors(e => {
+      return true
+    })
 }
 
-firestoreUserCollectionStream('todos').filterErrors(e => {
-  console.log(`e`, e)
-  return true
-})
+firestoreUserCollectionStream('todos').observe(
+  console.log,
+  e => console.warn('error', e),
+  args => console.warn('end', ...args),
+)
 
-export const signOut = () =>
-  getOrCreateFirebaseApp()
+export const signOut = () => {
+  const pp = getOrCreateFirebaseApp()
     .auth()
     .signOut()
+  return pp.catch(e => console.warn(e))
+}
 
 export const signIn = () => {
   const auth = getOrCreateFirebaseApp().auth()
@@ -75,5 +84,6 @@ export const signIn = () => {
   googleAuthProvider.setCustomParameters({
     prompt: 'select_account',
   })
-  return auth.signInWithRedirect(googleAuthProvider)
+  // return auth.signInWithRedirect(googleAuthProvider)
+  return auth.signInWithPopup(googleAuthProvider)
 }
