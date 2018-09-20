@@ -49,10 +49,6 @@ export function generateTaskList(count: number = 50): Task[] {
 export const getCategoryIndexOfTask = ({ category }: Task): number =>
   indexOf(category)(categories)
 
-export const setTaskCategory = (category: Category, task: Task): Task => {
-  return { ...task, category }
-}
-
 export const setSomeTaskTags = (tags: Tag[]) => (task: Task): Task => {
   const someTags: Tag[] = chance.pickset(tags, 5)
   return { ...task, tagIds: someTags.map(tag => tag.id) }
