@@ -5,6 +5,24 @@ import { initFireApp } from '../lib/fire'
 import { call, once } from 'ramda'
 import { List } from 'react-powerplug'
 import { adopt } from 'react-adopt'
+import { p } from '../promise'
+
+export class Value extends React.Component {
+  state = this.props.value || null
+  set = value => {
+    return p((resolve, reject) => {
+      try {
+        this.setState(value, () => resolve(this.state.value))
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  render() {
+    return this.props.children({ value: this.state.value, set: this.set })
+  }
+}
 
 function setInitialAuthState(app, setState) {
   const disposer = app.auth().onAuthStateChanged(() => {
