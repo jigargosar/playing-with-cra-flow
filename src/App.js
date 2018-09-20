@@ -24,6 +24,8 @@ import { EditTaskProvider } from './contexts/EditTask'
 import { Button, Icon, Intent } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import { AuthProvider } from './contexts/Auth'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from './contexts/Theme'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return renderWithCollections(({ tasks }) => (
@@ -87,6 +89,8 @@ function renderMainRoutes() {
 }
 
 const AllProviders = nest(
+  CssBaseline,
+  ThemeProvider,
   CollectionProvider,
   FocusTrapStackProvider,
   EditTaskProvider,
