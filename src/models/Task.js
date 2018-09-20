@@ -3,6 +3,7 @@ import Chance from 'chance'
 import type { Category } from './Category'
 import { categories } from './Category'
 import {
+  __,
   ascend,
   compose,
   descend,
@@ -69,8 +70,7 @@ export const filterTasks = (pred, tasksCollection) =>
     getAllTasks,
   )(tasksCollection)
 
-export const getTaskTags = (task, tags) =>
-  task.tagIds.map(tid => findById(tid)(tags))
+export const getTaskTags = (task, tags) => task.tagIds.map(findById(__)(tags))
 
-export const donePred = (t: Task) => t.done
-export const activePred = (t: Task) => !t.done
+export const donePred = t => t.done
+export const activePred = t => !t.done
