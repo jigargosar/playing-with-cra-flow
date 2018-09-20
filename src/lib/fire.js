@@ -16,7 +16,16 @@ export function getOrCreateFirebaseApp() {
     messagingSenderId: '476064436883',
   }
 
-  return fire.apps[0] || fire.initializeApp(config)
+  function createApp() {
+    const app = fire.initializeApp(config)
+    const firestore = firebase.firestore()
+    firestore.settings({
+      timestampsInSnapshots: true,
+    })
+    return app
+  }
+
+  return fire.apps[0] || createApp()
 }
 
 export const authStateStream = (app = getOrCreateFirebaseApp()) =>
