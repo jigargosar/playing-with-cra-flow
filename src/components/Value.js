@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { p } from '../promise'
 import { __, ifElse, lensProp, objOf, over } from 'ramda'
-import { isFunction } from 'ramda-adjunct/'
+import { isFunction } from 'ramda-adjunct'
 
 export class Value extends React.Component {
   set = value => {
