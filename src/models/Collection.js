@@ -1,6 +1,6 @@
 import { nullableToMaybe } from 'folktale/conversions'
-import { curry } from 'ramda'
+import { curry, propEq } from 'ramda'
 
 export const findById = curry((id, c) =>
-  nullableToMaybe(c.find(m => m.id === id)),
+  nullableToMaybe(c.find(propEq('id', id))),
 )
