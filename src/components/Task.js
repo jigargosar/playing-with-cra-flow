@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
 import { dfh, fg, hs, vs } from '../styles'
-import { compose, intersperse, map, partialRight, pick } from 'ramda'
+import { compose, intersperse, map, pick } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import { flex1 } from 'csstips/'
@@ -18,23 +18,6 @@ import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
 import { fz, lhCopy } from '../theme'
 import { TaskCollectionConsumer } from '../contexts/TaskCollection'
-
-const TaskUpdater = adopt(
-  {
-    collections: <CollectionConsumer />,
-    props: ({ task, render }) => render({ task }),
-  },
-  props => {
-    const {
-      props: { task },
-      collections: { updateTask },
-    } = props
-    return {
-      updateTask: partialRight(updateTask, [task]),
-      toggleDone: () => updateTask({ done: !task.done }, task),
-    }
-  },
-)
 
 const TaskForm = adopt(
   {
