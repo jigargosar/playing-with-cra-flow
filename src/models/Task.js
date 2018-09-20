@@ -12,9 +12,8 @@ import {
   sortWith,
   times,
 } from 'ramda'
-import type { Tag, TagCollection, TagId } from './Tag'
+import type { Tag, TagId } from './Tag'
 import { findById } from './Collection'
-import Maybe from 'folktale/maybe'
 import nanoid from 'nanoid'
 
 export const chance = Chance()
@@ -70,7 +69,7 @@ export const filterTasks = (pred, tasksCollection) =>
     getAllTasks,
   )(tasksCollection)
 
-export const getTaskTags = (task: Task, tags: TagCollection): Maybe =>
+export const getTaskTags = (task, tags) =>
   task.tagIds.map(tid => findById(tid)(tags))
 
 export const donePred = (t: Task) => t.done
