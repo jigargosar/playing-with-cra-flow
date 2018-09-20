@@ -1,13 +1,15 @@
 import { nullableToMaybe } from 'folktale/conversions'
+import Maybe from 'folktale/maybe'
 import { clamp, compose, curry, find, propEq } from 'ramda'
 
-export const atIndex = (idx: number, list: []) => nullableToMaybe(list[idx])
-export const atClampedIndex = (idx: number, list: []) => {
+export const atIndex = curry((idx, list) => nullableToMaybe(list[idx]))
+
+export const atClampedIndex = curry((idx, list) => {
   if (list.length === 0) {
-    return nullableToMaybe(null)
+    return Maybe.Nothing
   }
   return atIndex(clamp(0, list.length - 1, idx), list)
-}
+})
 export const findById = curry((id, c) =>
   compose(
     nullableToMaybe,
