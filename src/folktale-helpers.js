@@ -5,11 +5,11 @@ import { clamp, compose, curry, find, propEq } from 'ramda'
 export const atIndex = curry((idx, list) => nullableToMaybe(list[idx]))
 
 export const atClampedIndex = curry((idx, list) => {
-  if (list.length === 0) {
-    return Maybe.Nothing
-  }
-  return atIndex(clamp(0, list.length - 1, idx), list)
+  return list.length === 0
+    ? Maybe.Nothing
+    : atIndex(clamp(0, list.length - 1, idx), list)
 })
+
 export const findById = curry((id, c) =>
   compose(
     nullableToMaybe,
