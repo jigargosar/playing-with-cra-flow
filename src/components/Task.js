@@ -22,20 +22,20 @@ import { TaskCollectionConsumer } from '../contexts/TaskCollection'
 const TaskForm = adopt(
   {
     actions: <EditTaskConsumer />,
-    collections: <CollectionConsumer />,
+    tasks: <TaskCollectionConsumer />,
     form: ({ task, render }) => <Form initial={task} children={render} />,
     props: ({ task, render }) => render({ task }),
   },
   props => {
     const {
       props: { task },
-      collections: { updateTask },
       form: { input, values },
       actions,
+      tasks,
     } = props
     return {
       save: () => {
-        updateTask(pick(['title', 'category'])(values), task)
+        tasks.updateTask(pick(['title', 'category'])(values), task)
         actions.stopEditingTask()
       },
       cancel: () => actions.stopEditingTask(),
