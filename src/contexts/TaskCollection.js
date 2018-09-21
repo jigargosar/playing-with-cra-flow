@@ -1,6 +1,6 @@
 import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
 import { compose as proppy, onChange, withHandlers, withState } from 'proppy'
-import { append, map, pick, prop, propEq, tap, when } from 'ramda'
+import { append, map, pick, propEq, tap, when } from 'ramda'
 import { mergeRight } from '../ramda-exports'
 import * as React from 'react'
 import { attach } from 'proppy-react'
@@ -18,7 +18,6 @@ export const TaskCollection = proppy(
         ),
       ),
   }),
-  withHandlers({ update: prop('updateTask') }),
   withHandlers({
     toggleDone: ({ updateTask }) => task =>
       updateTask({ done: !task.done }, task),
