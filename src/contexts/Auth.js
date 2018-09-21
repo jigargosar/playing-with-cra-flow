@@ -15,4 +15,6 @@ const AuthFactory = proppy(
     match: ({ status, user }) => matcher => matcher[status](user),
   }),
 )
-export const Auth = attach(AuthFactory)(({ children, ...pp }) => children(pp))
+const RenderProps = ({ children, ...pp }) => children(pp)
+
+export const Auth = attach(AuthFactory)(RenderProps)
