@@ -28,7 +28,9 @@ export const TaskCollection = proppy(
         cref,
         unsub: cref.onSnapshot(sn => {
           console.log(`sn`, sn)
-          console.log(sn.docs.map(ds => ds.data()))
+          const allTasks = sn.docs.map(ds => ds.data())
+          console.log(allTasks)
+          cb({ allTasks })
         }),
       }
     }
