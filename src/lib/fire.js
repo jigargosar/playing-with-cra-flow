@@ -56,11 +56,11 @@ export const firestoreUserCollectionStream = (
     })
 }
 
-firestoreUserCollectionStream('todos').observe(
-  console.log,
-  e => console.warn('error', e),
-  args => console.warn('end', ...args),
-)
+// firestoreUserCollectionStream('todos').observe(
+//   console.log,
+//   e => console.warn('error', e),
+//   args => console.warn('end', ...args),
+// )
 
 export const signOut = () => {
   const pp = getOrCreateFirebaseApp()

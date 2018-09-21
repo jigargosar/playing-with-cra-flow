@@ -1,13 +1,37 @@
 import { filterTasks, generateTask } from '../models/Task'
-import { compose as proppy, withHandlers, withProps } from 'proppy'
+import {
+  compose as proppy,
+  onChange,
+  willDestroy,
+  withHandlers,
+  withProps,
+} from 'proppy'
 import { pick } from 'ramda'
 import * as React from 'react'
 import { attach } from 'proppy-react'
+import { AuthFactory } from './Auth'
+import { noop } from '../ramda-exports'
+import { getOrCreateFirebaseApp } from '../lib/fire'
 
 export const pickUserChanges = pick(['title', 'category', 'done'])
 
 export const TaskCollection = proppy(
-  withProps({ allTasks: [] }),
+  AuthFactory,
+  withProps({ allTasks: [], unsub: noop }),
+  onChange('user', ({ user, unsub }) => {
+    unsub()
+    if (user) {
+      const cref = getOrCreateFirebaseApp()
+        .firestore()
+        .collection(`users/${user.uid}/todos`)
+      return {
+        unsub: cref.onSnapshot(console.warn),
+      }
+    }
+  }),
+  willDestroy(({ unsub }) => {
+    unsub()
+  }),
   withHandlers({
     updateTask: () => () => {},
   }),
