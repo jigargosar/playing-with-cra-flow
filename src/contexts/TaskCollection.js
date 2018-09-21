@@ -49,4 +49,3 @@ export const TaskCollectionProvider = attach(TaskCollection)(
   ),
 )
 export const TaskCollectionConsumer = Context.Consumer
-// export const TaskCollectionConsumer = Context.Consumer
