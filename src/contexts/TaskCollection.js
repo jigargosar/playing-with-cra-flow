@@ -20,7 +20,8 @@ export const TaskCollection = proppy(
   }),
   withHandlers({ update: prop('updateTask') }),
   withHandlers({
-    toggleDone: ({ update }) => task => update({ done: !task.done }, task),
+    toggleDone: ({ updateTask }) => task =>
+      updateTask({ done: !task.done }, task),
     add: tasks => () => {
       const task = { ...generateTask(), category: 'InBasket' }
       tasks.over(append(task))
