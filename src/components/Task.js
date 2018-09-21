@@ -4,7 +4,7 @@ import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
 import { dfh, fg, hs, vs } from '../styles'
-import { compose, intersperse, map, pick } from 'ramda'
+import { compose, intersperse, map } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
 import { flex1 } from 'csstips/'
@@ -35,7 +35,7 @@ const TaskForm = adopt(
     } = props
     return {
       save: () => {
-        tasks.updateTask(pick(['title', 'category'])(values), task)
+        tasks.updateTask(values, task)
         actions.stopEditingTask()
       },
       cancel: () => actions.stopEditingTask(),
