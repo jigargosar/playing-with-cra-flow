@@ -18,7 +18,10 @@ export const pickUserChanges = pick(['title', 'category', 'done'])
 export const TaskCollection = proppy(
   AuthFactory,
   withProps({ allTasks: [], unsub: noop, cref: null }),
-  onChange('user', ({ user, unsub }, providers, cb) => {
+  onChange('user', ({ state, user, unsub }, providers, cb) => {
+    if (state === 'signedOut') {
+      return { allTasks: [] }
+    }
     unsub()
     if (user) {
       const cref = getOrCreateFirebaseApp()
@@ -33,15 +36,13 @@ export const TaskCollection = proppy(
           cb({ allTasks })
         }),
       }
-    } else {
-      return { allTasks: [] }
     }
   }),
   willDestroy(({ unsub }) => {
     unsub()
   }),
   withHandlers({
-    updateTask: () => () => {},
+    updateTask: () => (changes, task) => {},
   }),
   withHandlers({
     toggleDone: ({ updateTask }) => task =>
