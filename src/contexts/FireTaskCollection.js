@@ -33,6 +33,8 @@ export const TaskCollection = proppy(
           cb({ allTasks })
         }),
       }
+    } else {
+      return { allTasks: [] }
     }
   }),
   willDestroy(({ unsub }) => {
