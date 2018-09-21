@@ -17,15 +17,19 @@ export const pickUserChanges = pick(['title', 'category', 'done'])
 
 export const TaskCollection = proppy(
   AuthFactory,
-  withProps({ allTasks: [], unsub: noop }),
-  onChange('user', ({ user, unsub }) => {
+  withProps({ allTasks: [], unsub: noop, cref: null }),
+  onChange('user', ({ user, unsub }, providers, cb) => {
     unsub()
     if (user) {
       const cref = getOrCreateFirebaseApp()
         .firestore()
-        .collection(`users/${user.uid}/todos`)
+        .collection(`users/${user.uid}/tasks`)
       return {
-        unsub: cref.onSnapshot(console.warn),
+        cref,
+        unsub: cref.onSnapshot(sn => {
+          console.log(`sn`, sn)
+          console.log(sn.docs.map(ds => ds.data()))
+        }),
       }
     }
   }),
@@ -38,9 +42,10 @@ export const TaskCollection = proppy(
   withHandlers({
     toggleDone: ({ updateTask }) => task =>
       updateTask({ done: !task.done }, task),
-    add: () => () => {
+    add: ({ cref }) => () => {
+      if (!cref) return
       const task = { ...generateTask(), category: 'InBasket' }
-      return task
+      return cref.doc(task.id).set(task)
     },
     filterTasks: ({ allTasks }) => pred => filterTasks(pred)(allTasks),
   }),
