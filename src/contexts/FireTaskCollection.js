@@ -20,9 +20,9 @@ export const TaskCollection = proppy(
   withProps({ allTasks: [], unsub: noop, cref: null }),
   onChange('user', ({ state, user, unsub }, providers, cb) => {
     if (state === 'signedOut') {
+      unsub()
       return { allTasks: [] }
     }
-    unsub()
     if (user) {
       const cref = getOrCreateFirebaseApp()
         .firestore()
