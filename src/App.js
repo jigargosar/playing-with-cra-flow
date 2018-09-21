@@ -141,21 +141,11 @@ const App = () => {
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
             <div>
-              <Auth
-                children={({ authState, match }) =>
-                  match({
-                    signedIn: () => {
-                      return authState.user.displayName
-                    },
-                    signedOut: () => null,
-                    unknown: () => null,
-                  })
-                }
-              />
+              <Auth children={({ user }) => user && user.displayName} />
             </div>
             <div>
               <Auth
-                children={({ authState, match, signIn, signOut }) =>
+                children={({ match, signIn, signOut }) =>
                   match({
                     signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
                     signedOut: () => <Button onClick={signIn}>Sign In</Button>,
