@@ -17,4 +17,6 @@ const AuthFactory = proppy(
 )
 const RenderProps = ({ children, ...pp }) => children(pp)
 
-export const Auth = attach(AuthFactory)(RenderProps)
+const toRenderProps = hoc => hoc(RenderProps)
+
+export const Auth = toRenderProps(attach(AuthFactory))
