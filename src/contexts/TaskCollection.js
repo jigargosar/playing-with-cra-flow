@@ -1,5 +1,11 @@
 import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
-import { compose as proppy, onChange, withHandlers, withState } from 'proppy'
+import {
+  compose as proppy,
+  map as mapProps,
+  onChange,
+  withHandlers,
+  withState,
+} from 'proppy'
 import { append, map, pick, propEq, tap, when } from 'ramda'
 import { mergeRight } from '../ramda-exports'
 import * as React from 'react'
@@ -26,6 +32,7 @@ export const TaskCollection = proppy(
     },
   }),
   onChange('_tasks', ({ _tasks }) => ({ _tasks: tap(saveTasks)(_tasks) })),
+  mapProps(({ _tasks, ...other }) => ({ allTasks: _tasks, ...other })),
 )
 
 const Context = React.createContext()

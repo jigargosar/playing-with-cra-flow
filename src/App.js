@@ -43,8 +43,8 @@ import {
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
     <TaskCollectionConsumer
-      children={tasks => (
-        <TaskList tasks={filterTasks(pred, tasks.value)} {...otherProps} />
+      children={({ allTasks }) => (
+        <TaskList tasks={filterTasks(pred, allTasks)} {...otherProps} />
       )}
     />
   )
