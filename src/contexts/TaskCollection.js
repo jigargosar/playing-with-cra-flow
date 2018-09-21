@@ -46,17 +46,21 @@ import { attach } from 'proppy-react'
 const pickUserChanges = pick(['title', 'category', 'done'])
 
 const updateTask = tasks => (changes, { id }) =>
-  tasks.set(map(when(propEq('id', id))(mergeRight(pickUserChanges(changes)))))
+  tasks.set(
+    map(when(propEq('id', id))(mergeRight(pickUserChanges(changes))))(
+      tasks.value,
+    ),
+  )
 
 export const TaskCollection = proppy(
   withState('value', 'set', loadOrGenerateTasks()),
+  withHandlers({ over: ({ value, set }) => fn => set(fn(value)) }),
   withHandlers({
     update: updateTask,
     toggleDone: tasks => task => updateTask(tasks)({ done: !task.done }, task),
     add: tasks => () => {
-      debugger
       const task = { ...generateTask(), category: 'InBasket' }
-      tasks.set(append(mergeRight(task))(tasks.value))
+      tasks.over(append(task))
     },
   }),
   onChange(
