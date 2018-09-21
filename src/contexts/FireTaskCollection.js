@@ -18,7 +18,6 @@ export const pickUserChanges = pick(['title', 'category', 'done'])
 export const TaskCollection = proppy(
   AuthFactory,
   withProps({ allTasks: [], unsub: noop, cref: null }),
-  onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
   onChange('uid', ({ uid }) => ({
     cref: getOrCreateFirebaseApp()
       .firestore()
