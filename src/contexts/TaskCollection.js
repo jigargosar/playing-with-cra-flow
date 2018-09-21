@@ -11,13 +11,14 @@ export const TaskCollection = proppy(
   withState('value', 'set', loadOrGenerateTasks()),
   withHandlers({ over: ({ value, set }) => fn => set(fn(value)) }),
   withHandlers({
-    update: tasks => (changes, { id }) =>
+    updateTask: tasks => (changes, { id }) =>
       tasks.set(
         map(when(propEq('id', id))(mergeRight(pickUserChanges(changes))))(
           tasks.value,
         ),
       ),
   }),
+  withHandlers({ update: prop('updateTask') }),
   withHandlers({
     toggleDone: ({ update }) => task => update({ done: !task.done }, task),
     add: tasks => () => {
