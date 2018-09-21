@@ -1,8 +1,6 @@
-// @flow
 import './index.css'
 import App from './App'
 // import withPersist from 'hydux/lib/enhancers/persist'
-import { React } from 'hydux-react'
 import { setupGlobalStyles } from './styles'
 import { hmrSetup } from './hmr'
 import registerServiceWorker from './registerServiceWorker'
