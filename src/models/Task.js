@@ -5,6 +5,7 @@ import { categories } from './Category'
 import {
   ascend,
   compose,
+  curry,
   descend,
   filter,
   indexOf,
@@ -71,12 +72,12 @@ export function getAllTasks(tasksCollection) {
   ])(tasksCollection)
 }
 
-export const filterTasks = (pred, tasksCollection) =>
+export const filterTasks = curry((pred, tasksCollection) =>
   compose(
     filter(pred),
     getAllTasks,
-  )(tasksCollection)
-
+  )(tasksCollection),
+)
 export const getTaskTags = (task, tags) =>
   task.tagIds.map(tid => findById(tid)(tags))
 

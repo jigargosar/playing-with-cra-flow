@@ -1,4 +1,9 @@
-import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
+import {
+  filterTasks,
+  generateTask,
+  loadOrGenerateTasks,
+  saveTasks,
+} from '../models/Task'
 import {
   compose as proppy,
   map as mapProps,
@@ -30,6 +35,7 @@ export const TaskCollection = proppy(
       const task = { ...generateTask(), category: 'InBasket' }
       setTasks(append(task, _tasks))
     },
+    filterTasks: ({ _tasks }) => pred => filterTasks(pred)(_tasks),
   }),
   onChange('_tasks', ({ _tasks }) => ({ _tasks: tap(saveTasks)(_tasks) })),
   mapProps(({ _tasks, ...other }) => ({ allTasks: _tasks, ...other })),

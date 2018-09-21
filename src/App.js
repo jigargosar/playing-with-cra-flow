@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { activePred, donePred, filterTasks } from './models/Task'
+import { activePred, donePred } from './models/Task'
 import { Sidebar } from './components/Sidebar'
 import { TagList } from './components/TagList'
 import { Router } from './components/Router'
@@ -43,8 +43,8 @@ import {
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
     <TaskCollectionConsumer
-      children={({ allTasks }) => (
-        <TaskList tasks={filterTasks(pred, allTasks)} {...otherProps} />
+      children={({ filterTasks }) => (
+        <TaskList tasks={filterTasks(pred)} {...otherProps} />
       )}
     />
   )
