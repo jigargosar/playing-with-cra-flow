@@ -1,18 +1,33 @@
 // @flow
 import './index.css'
-import { setupGlobalStyles } from './styles'
-import registerServiceWorker from './registerServiceWorker'
-import { forceRenderStyles } from 'typestyle/lib'
-import { hmrSetup } from './hmr'
 import App from './App'
-import { renderRootApp } from './react-helpers'
+import hydux from 'hydux'
+// import withPersist from 'hydux/lib/enhancers/persist'
+import withReact, { React } from 'hydux-react'
+import { setupGlobalStyles } from './styles'
+import { hmrSetup } from './hmr'
 
 setupGlobalStyles()
-renderRootApp(App)
-  .then(forceRenderStyles)
-  .catch(console.error)
 
-registerServiceWorker()
+export default withReact(document.getElementById('root'), {
+  useComponent: true,
+})(hydux)({
+  init: () => ({
+    count: 1,
+  }),
+  actions: {
+    down: () => state => ({ count: state.count - 1 }),
+    up: () => state => ({ count: state.count + 1 }),
+  },
+  view: (state, actions) => <App state={state} actions={actions} />,
+})
+
+// setupGlobalStyles()
+// renderRootApp(App)
+//   .then(forceRenderStyles)
+//   .catch(console.error)
+//
+// registerServiceWorker()
 
 if (process.env.NODE_ENV === 'development') {
   hmrSetup(module)

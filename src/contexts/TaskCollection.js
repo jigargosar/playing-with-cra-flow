@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { generateTask, loadOrGenerateTasks, saveTasks } from '../models/Task'
-import { __, append, compose, map, merge, pick, propEq, when } from 'ramda'
+import { append, compose, map, pick, propEq, when } from 'ramda'
 import { defaultProps, toRenderProps, withHandlers } from 'recompose'
 import { withValue } from '../components/Value'
+import { mergeRight } from '../ramda-exports'
 
 const pickUserChanges = pick(['title', 'category', 'done'])
 
 const updateTask = tasks => (changes, { id }) =>
-  tasks.set(map(when(propEq('id', id))(merge(__, pickUserChanges(changes)))))
+  tasks.set(map(when(propEq('id', id))(mergeRight(pickUserChanges(changes)))))
 
 export const TaskCollection = toRenderProps(
   compose(
@@ -19,7 +20,7 @@ export const TaskCollection = toRenderProps(
         updateTask(tasks)({ done: !task.done }, task),
       add: tasks => () => {
         const task = { ...generateTask(), category: 'InBasket' }
-        tasks.set(append(merge(__, task)))
+        tasks.set(append(mergeRight(task)))
       },
     }),
   ),
