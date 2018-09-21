@@ -6,7 +6,7 @@ import {
   withHandlers,
   withProps,
 } from 'proppy'
-import { pick } from 'ramda'
+import { merge, pick } from 'ramda'
 import * as React from 'react'
 import { attach } from 'proppy-react'
 import { AuthFactory } from './Auth'
@@ -42,7 +42,11 @@ export const TaskCollection = proppy(
     unsub()
   }),
   withHandlers({
-    updateTask: () => (changes, task) => {},
+    updateTask: ({ cref }) => (changes, task) => {
+      if (cref) {
+        cref.doc(task.id).set(merge(task, pickUserChanges(changes)))
+      }
+    },
   }),
   withHandlers({
     toggleDone: ({ updateTask }) => task =>
