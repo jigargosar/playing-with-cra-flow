@@ -17,4 +17,8 @@ const AuthFactory = proppy(
   }),
 )
 
+const auth = AuthFactory()
+
+auth.subscribe(props => console.log(props))
+
 export const Auth = toRenderProps(attach(AuthFactory))
