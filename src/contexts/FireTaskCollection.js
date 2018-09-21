@@ -23,7 +23,7 @@ export const TaskCollection = proppy(
       .firestore()
       .collection(`users/${uid}/tasks`),
   })),
-  onChange('cref', ({ state, cref, unsub }, providers, cb) => {
+  onChange('cref', ({ cref, unsub }, providers, cb) => {
     unsub()
     if (cref) {
       return {
@@ -41,16 +41,13 @@ export const TaskCollection = proppy(
   }),
   withHandlers({
     updateTask: ({ cref }) => (changes, task) => {
-      if (cref) {
-        cref.doc(task.id).set(merge(task, pickUserChanges(changes)))
-      }
+      cref.doc(task.id).set(merge(task, pickUserChanges(changes)))
     },
   }),
   withHandlers({
     toggleDone: ({ updateTask }) => task =>
       updateTask({ done: !task.done }, task),
     add: ({ cref }) => () => {
-      if (!cref) return
       const task = { ...generateTask(), category: 'InBasket' }
       return cref.doc(task.id).set(task)
     },
