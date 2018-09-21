@@ -13,6 +13,11 @@ export const AuthFactory = proppy(
     signOut,
   }),
   emit(cb => {
+    const initialUser = getOrCreateFirebaseApp().auth().currentUser
+    cb({
+      status: initialUser ? 'signedIn' : 'unknown',
+      user: initialUser,
+    })
     return getOrCreateFirebaseApp()
       .auth()
       .onAuthStateChanged(user => {
