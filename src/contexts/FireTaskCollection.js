@@ -15,14 +15,6 @@ import { getOrCreateFirebaseApp } from '../lib/fire'
 
 export const pickUserChanges = pick(['title', 'category', 'done'])
 
-function tasksCref(user) {
-  if (!user) return null
-
-  return getOrCreateFirebaseApp()
-    .firestore()
-    .collection(`users/${user.uid}/tasks`)
-}
-
 export const TaskCollection = proppy(
   AuthFactory,
   withProps({ allTasks: [], unsub: noop, cref: null }),
