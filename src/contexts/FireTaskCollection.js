@@ -1,7 +1,6 @@
 import { filterTasks, generateTask } from '../models/Task'
 import {
   compose as proppy,
-  emit,
   onChange,
   willDestroy,
   withHandlers,
@@ -27,28 +26,25 @@ function tasksCref(user) {
 export const TaskCollection = proppy(
   AuthFactory,
   withProps({ allTasks: [], unsub: noop, cref: null }),
-  emit((cb, { user }) => {
-    cb({ cref: tasksCref(user) })
-  }),
-  onChange(
-    (p, n) => {
-      debugger
-      return p.cref !== n.cref
-    },
-    ({ state, cref, unsub }, providers, cb) => {
-      unsub()
-      if (cref) {
-        return {
-          unsub: cref.onSnapshot(sn => {
-            console.log(`sn`, sn)
-            const allTasks = sn.docs.map(ds => ds.data())
-            console.log(allTasks)
-            cb({ allTasks })
-          }),
-        }
+  onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
+  onChange('uid', ({ uid }) => ({
+    cref: getOrCreateFirebaseApp()
+      .firestore()
+      .collection(`users/${uid}/tasks`),
+  })),
+  onChange('cref', ({ state, cref, unsub }, providers, cb) => {
+    unsub()
+    if (cref) {
+      return {
+        unsub: cref.onSnapshot(sn => {
+          console.log(`sn`, sn)
+          const allTasks = sn.docs.map(ds => ds.data())
+          console.log(allTasks)
+          cb({ allTasks })
+        }),
       }
-    },
-  ),
+    }
+  }),
   willDestroy(({ unsub }) => {
     unsub()
   }),

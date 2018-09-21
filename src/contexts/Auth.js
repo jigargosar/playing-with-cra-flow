@@ -1,14 +1,18 @@
 import { getOrCreateFirebaseApp, signIn, signOut } from '../lib/fire'
-import { compose as proppy, emit, withHandlers, withProps } from 'proppy'
+import {
+  compose as proppy,
+  emit,
+  onChange,
+  withHandlers,
+  withProps,
+} from 'proppy'
 import { attach } from 'proppy-react'
 import { toRenderProps } from 'recompose'
 
-const initialUser = getOrCreateFirebaseApp().auth().currentUser
-
 export const AuthFactory = proppy(
   withProps({
-    status: initialUser ? 'signedIn' : 'unknown',
-    user: initialUser,
+    status: 'unknown',
+    user: null,
     signIn,
     signOut,
   }),
@@ -24,6 +28,7 @@ export const AuthFactory = proppy(
         cb({ status: user ? 'signedIn' : 'signedOut', user })
       })
   }),
+  onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
   withHandlers({
     match: ({ status, user }) => matcher => matcher[status](user),
   }),
