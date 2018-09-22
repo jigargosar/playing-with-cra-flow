@@ -1,14 +1,14 @@
 import React from 'react'
 
 import { storiesOf } from '@storybook/react'
-import HBox from '../lib/layout-components/HBox'
 import { cssRaw, style } from 'typestyle'
 import { margin, padding } from 'csstips'
-import { bg } from '../styles'
-import { blackA } from '../colors'
-import { mapIndexed } from '../ramda-exports'
-import VBox from '../lib/layout-components/VBox'
 import { hsla } from 'csx'
+import VBox from './VBox'
+import HBox from './HBox'
+import { blackA } from '../../colors'
+import { bg } from '../../styles'
+import { mapIndexed } from '../../ramda-exports'
 
 const demoDataList = ['foo', 'bar', 'bag', 'bong']
 
