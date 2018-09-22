@@ -16,13 +16,13 @@ export const AuthFactory = proppy(
     signIn,
     signOut,
   }),
-  emit(cb => {
-    return getOrCreateFirebaseApp()
+  emit(cb =>
+    getOrCreateFirebaseApp()
       .auth()
       .onAuthStateChanged(user => {
         cb({ status: user ? 'signedIn' : 'signedOut', user })
-      })
-  }),
+      }),
+  ),
   onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
   withHandlers({
     match: ({ status, user }) => matcher => matcher[status](user),
