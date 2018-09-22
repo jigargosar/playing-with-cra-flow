@@ -10,7 +10,7 @@ import { mapIndexed } from '../ramda-exports'
 import { map } from 'ramda'
 import { rem } from 'csx'
 
-const spacing = map(rem)([0, 0.25, 0.5, 1, 2, 4])
+const spacing = map(rem)({ none: 0, sm: 0.25, md: 0.5, lg: 1 })
 
 const DemoBlock = props => (
   <div
@@ -37,6 +37,6 @@ storiesOf('HBox', module)
   ))
   .add('with spacing', () => (
     <DemoContainer>
-      <HBox spacing={spacing[0]}>{demoContent}</HBox>
+      <HBox spacing={spacing.sm}>{demoContent}</HBox>
     </DemoContainer>
   ))
