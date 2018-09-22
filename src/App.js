@@ -112,6 +112,23 @@ const AllProviders = nest(
   EditTaskProvider,
 )
 
+function renderAddFAB() {
+  return (
+    <div className={style(relative, { top: -16, left: -16 })}>
+      <TaskCollectionConsumer
+        children={tasks => (
+          <Button
+            onClick={tasks.add}
+            minimal
+            intent={Intent.PRIMARY}
+            icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+          />
+        )}
+      />
+    </div>
+  )
+}
+
 const App = () => {
   return (
     <AllProviders>
@@ -148,18 +165,7 @@ const App = () => {
             </div>
             <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
             <div className={style(absolute, { right: 0, bottom: 0 })}>
-              <div className={style(relative, { top: -16, left: -16 })}>
-                <TaskCollectionConsumer
-                  children={tasks => (
-                    <Button
-                      onClick={tasks.add}
-                      minimal
-                      intent={Intent.PRIMARY}
-                      icon={<Icon icon={IconNames.ADD} iconSize={32} />}
-                    />
-                  )}
-                />
-              </div>
+              {renderAddFAB()}
             </div>
           </HBox>
         </VBox>
