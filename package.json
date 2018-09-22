@@ -30,6 +30,7 @@
     ]
   },
   "scripts": {
+    "dz": "nodemon -w yarn.lock -x docz dev",
     "go": "mdx-go docs",
     "deck": "mdx-deck deck.mdx",
     "flow-typed": "flow-typed install -i=dev",
