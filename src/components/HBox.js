@@ -14,13 +14,13 @@ export const P = proper(
   })),
 )
 
+const mapProps = ({ className, spacing = 0, ...otherProps }) => ({
+  className: classes(
+    style(horizontal, horizontallySpaced(rem(spacing))),
+    className,
+  ),
+  ...otherProps,
+})
 export default props => {
-  const mapProps = ({ className, spacing = 0, ...op }) => ({
-    className: classes(
-      style(horizontal, horizontallySpaced(rem(spacing))),
-      className,
-    ),
-    ...op,
-  })
   return <div {...mapProps(props)} />
 }
