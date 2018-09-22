@@ -10,7 +10,7 @@ import {
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './folktale-helpers'
-import { absolute, bg, dfh, fg, hs, relative, sizeViewport100 } from './styles'
+import { absolute, bg, fg, hs, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -121,11 +121,10 @@ const App = () => {
         }}
       >
         <VBox className={style(sizeViewport100, bg(gray(0.05)))}>
-          <div
+          <HBox
             className={style(
               bg(primaryColor),
               fg(white),
-              dfh,
               hs('1rem'),
               center,
               padding('0.5rem'),
@@ -147,7 +146,7 @@ const App = () => {
                 }
               />
             </div>
-          </div>
+          </HBox>
           <HBox className={style(flex, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>
               <Sidebar />
