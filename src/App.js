@@ -85,7 +85,7 @@ function NotFound() {
   return <ErrorMessage>404</ErrorMessage>
 }
 
-function renderMainRoutes() {
+function MainRoutes() {
   const routerClass = style(padding(rem(2), rem(1)), bg(white), {
     minHeight: '100%',
   })
@@ -113,19 +113,21 @@ const AllProviders = nest(
   AuthProvider,
 )
 
-function renderAddFAB() {
+function AddFAB() {
   return (
-    <div className={style(relative, { top: -16, left: -16 })}>
-      <TaskCollectionConsumer
-        children={tasks => (
-          <Button
-            onClick={tasks.add}
-            minimal
-            intent={Intent.PRIMARY}
-            icon={<Icon icon={IconNames.ADD} iconSize={32} />}
-          />
-        )}
-      />
+    <div className={style(absolute, { right: 0, bottom: 0 })}>
+      <div className={style(relative, { top: -16, left: -16 })}>
+        <TaskCollectionConsumer
+          children={tasks => (
+            <Button
+              onClick={tasks.add}
+              minimal
+              intent={Intent.PRIMARY}
+              icon={<Icon icon={IconNames.ADD} iconSize={32} />}
+            />
+          )}
+        />
+      </div>
     </div>
   )
 }
@@ -165,9 +167,11 @@ const App = () => {
             <div className={style(scroll, { minWidth: 200 })}>
               <Sidebar />
             </div>
-            <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
-            <div className={style(absolute, { right: 0, bottom: 0 })}>
-              {renderAddFAB()}
+            <div className={style(flex, scroll)}>
+              <MainRoutes />
+            </div>
+            <div>
+              <AddFAB />
             </div>
           </HBox>
         </VBox>
