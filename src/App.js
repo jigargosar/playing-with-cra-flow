@@ -31,6 +31,7 @@ import {
   TaskCollectionProvider,
 } from './contexts/TaskCollection'
 import VBox from './lib/layout-components/VBox'
+import HBox from './lib/layout-components/HBox'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
@@ -147,7 +148,7 @@ const App = () => {
               />
             </div>
           </div>
-          <div className={style(flex, dfh, someChildWillScroll)}>
+          <HBox className={style(flex, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>
               <Sidebar />
             </div>
@@ -171,7 +172,7 @@ const App = () => {
                 />
               </div>
             </div>
-          </div>
+          </HBox>
         </VBox>
       </FocusTrap>
     </AllProviders>
