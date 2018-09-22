@@ -20,11 +20,14 @@ const demoContent = mapIndexed((text, idx) => <Block key={idx}>{text}</Block>, [
   'bar',
 ])
 
+const DemoContainer = props => <div {...props} />
+
 storiesOf('HBox', module)
   //
   .add('without spacing', () => (
     <div className={style(bg(gray(0.1)))}>
       <HBox>{demoContent}</HBox>
+      <DemoContainer />
     </div>
   ))
   .add('with spacing', () => (
