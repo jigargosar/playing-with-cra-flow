@@ -4,17 +4,21 @@ import { storiesOf } from '@storybook/react'
 import HBox from '../components/HBox'
 import { style } from 'typestyle'
 import { padding } from 'csstips'
-import { map } from 'ramda'
 import { bg } from '../styles'
 import { gray } from '../colors'
+import { mapIndexed } from '../ramda-exports'
 
-const renderItem = text => (
-  <div className={style(padding('1rem'), { border: '1px solid black' })}>
-    {text}
-  </div>
+const Block = ({ className, ...op }) => (
+  <div
+    className={style(padding('1rem'), { border: '1px solid black' })}
+    {...op}
+  />
 )
 
-const demoContent = map(renderItem, ['foo', 'bar'])
+const demoContent = mapIndexed((text, idx) => <Block key={idx}>{text}</Block>, [
+  'foo',
+  'bar',
+])
 
 storiesOf('HBox', module)
   //
