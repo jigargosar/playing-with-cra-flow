@@ -7,10 +7,16 @@ import { padding } from 'csstips'
 import { bg } from '../styles'
 import { gray } from '../colors'
 import { mapIndexed } from '../ramda-exports'
+import VBox from '../components/VBox'
+import { hsla } from 'csx'
+
+const borderColor = `${hsla(80, 0.6, 0.6, 0.8).toString()}`
 
 const DemoBlock = props => (
   <div
-    className={style(padding('1rem'), { border: '1px solid black' })}
+    className={style(padding('1rem'), bg(borderColor), {
+      // border: `3px solid ${borderColor}`,
+    })}
     {...props}
   />
 )
@@ -34,5 +40,18 @@ storiesOf('HBox', module)
   .add('with spacing', () => (
     <DemoContainer>
       <HBox spacing={1}>{demoContent}</HBox>
+    </DemoContainer>
+  ))
+
+storiesOf('VBox', module)
+  //
+  .add('without spacing', () => (
+    <DemoContainer>
+      <VBox>{demoContent}</VBox>
+    </DemoContainer>
+  ))
+  .add('with spacing', () => (
+    <DemoContainer>
+      <VBox spacing={1}>{demoContent}</VBox>
     </DemoContainer>
   ))
