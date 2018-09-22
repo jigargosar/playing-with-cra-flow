@@ -145,16 +145,16 @@ const App = () => {
           >
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
-            <div>
-              <AuthConsumer children={({ user }) => user && user.displayName} />
-            </div>
+            <AuthConsumer
+              children={({ user }) => user && <div>user.displayName</div>}
+            />
             <div>
               <AuthConsumer
                 children={({ match, signIn, signOut }) =>
                   match({
                     signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
                     signedOut: () => <Button onClick={signIn}>Sign In</Button>,
-                    unknown: () => 'Loading...',
+                    unknown: () => <div>'Loading...'</div>,
                   })
                 }
               />
