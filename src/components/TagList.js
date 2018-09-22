@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { block, rem, style } from '../typestyle-exports'
 import { ttu } from '../styles'
 import { VBox16 } from '../lib/layout-components/Box'
 import { style } from 'typestyle'
 import { block } from 'csstips'
+import { rem } from 'csx'
 
 export function TagList() {
   const titleClass = style({
