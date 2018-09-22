@@ -2,17 +2,19 @@ import React from 'react'
 
 import { storiesOf } from '@storybook/react'
 import HBox from '../components/HBox'
-import { style } from 'typestyle'
-import { padding } from 'csstips'
+import { cssRaw, style } from 'typestyle'
+import { margin, padding } from 'csstips'
 import { bg } from '../styles'
 import { blackA } from '../colors'
 import { mapIndexed } from '../ramda-exports'
 import VBox from '../components/VBox'
 import { hsla } from 'csx'
 
+const demoDataList = ['foo', 'bar', 'bag', 'bong']
+
 const DemoBlock = props => {
   const color = `${hsla(
-    Math.floor((255 / 3) * props.idx),
+    Math.floor((255 / demoDataList.length) * props.idx),
     0.7,
     0.7,
     1,
@@ -27,17 +29,26 @@ const DemoBlock = props => {
   )
 }
 
+cssRaw`
+  html, body, #root{
+    height:100%;
+  }
+`
+
 const demoContent = mapIndexed(
   (text, idx) => (
     <DemoBlock idx={idx} key={idx}>
       {text}
     </DemoBlock>
   ),
-  ['foo', 'bar', 'bag'],
+  demoDataList,
 )
 
 const DemoContainer = props => (
-  <div className={style(bg(blackA(0.3)))} {...props} />
+  <div
+    className={style(margin('auto'), { width: '80vw' }, bg(blackA(0.3)))}
+    {...props}
+  />
 )
 
 storiesOf('HBox', module)
