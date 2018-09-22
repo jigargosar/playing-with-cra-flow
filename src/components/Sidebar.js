@@ -4,12 +4,13 @@ import * as React from 'react'
 import { categories } from '../models/Category'
 import { LinkTo } from './Router'
 import { LinkToCategory } from './Links'
-import { padding, rem, style, verticallySpaced } from '../typestyle-exports'
+import { padding, rem, style } from '../typestyle-exports'
 import { Divider } from '@blueprintjs/core'
+import { VBox16 } from '../lib/layout-components/Box'
 
 export function Sidebar() {
   return (
-    <div className={containerStyle}>
+    <VBox16 className={containerStyle}>
       {categories.map(category => (
         <LinkToCategory key={category} category={category} />
       ))}
@@ -18,11 +19,11 @@ export function Sidebar() {
       <Divider />
       <LinkTo to={'/all'}>All</LinkTo>
       <LinkTo to={'/done'}>Done</LinkTo>
-    </div>
+    </VBox16>
   )
 }
 
-const containerStyle = style(padding(rem(1)), verticallySpaced(rem(1)), {
+const containerStyle = style(padding(rem(1)), {
   $nest: {
     '> a': { display: 'block' },
   },
