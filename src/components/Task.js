@@ -3,7 +3,7 @@ import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
-import { dfh, fg, hs } from '../styles'
+import { fg } from '../styles'
 import { compose, intersperse, map } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
@@ -11,7 +11,7 @@ import { flex1 } from 'csstips/'
 import { Button, HTMLSelect, Icon, InputGroup } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-import { classes, style } from 'typestyle/'
+import { style } from 'typestyle/'
 import { FocusTrap } from './FocusTrap'
 import { adopt } from 'react-adopt'
 import { Form } from 'react-powerplug'
@@ -86,7 +86,7 @@ export const TaskDisplayItem = ({
 }) => {
   const isDone = task.done
   return (
-    <div className={classes(style(dfh, hs('0.3rem')), className)} tabIndex={0}>
+    <HBox8 className={className} tabIndex={0}>
       <div>
         <TaskCollectionConsumer
           children={tasks => (
@@ -122,6 +122,6 @@ export const TaskDisplayItem = ({
           }
         </div>
       )}
-    </div>
+    </HBox8>
   )
 }
