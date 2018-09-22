@@ -7,7 +7,7 @@ import {
   withHandlers,
   withProps,
 } from 'proppy'
-import { pathOr, pick } from 'ramda'
+import { compose, pathOr, pick } from 'ramda'
 import * as React from 'react'
 import { attach } from 'proppy-react'
 import { noop } from '../ramda-exports'
@@ -79,9 +79,10 @@ export const TaskCollection = proppy(
 
 const Context = React.createContext()
 
-export const TaskCollectionProvider = attach(TaskCollection)(
+export const TaskCollectionProvider = compose(attach(TaskCollection))(
   ({ children, ...otherProps }) => (
     <Context.Provider value={otherProps} children={children} />
   ),
 )
+
 export const TaskCollectionConsumer = Context.Consumer
