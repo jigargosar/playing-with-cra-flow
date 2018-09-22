@@ -10,16 +10,7 @@ import {
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './folktale-helpers'
-import {
-  absolute,
-  bg,
-  dfh,
-  dfv,
-  fg,
-  hs,
-  relative,
-  sizeViewport100,
-} from './styles'
+import { absolute, bg, dfh, fg, hs, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -39,6 +30,7 @@ import {
   TaskCollectionConsumer,
   TaskCollectionProvider,
 } from './contexts/TaskCollection'
+import VBox from './lib/layout-components/VBox'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
@@ -127,7 +119,7 @@ const App = () => {
           escapeDeactivates: false,
         }}
       >
-        <div className={style(dfv, sizeViewport100, bg(gray(0.05)))}>
+        <VBox className={style(sizeViewport100, bg(gray(0.05)))}>
           <div
             className={style(
               bg(primaryColor),
@@ -180,7 +172,7 @@ const App = () => {
               </div>
             </div>
           </div>
-        </div>
+        </VBox>
       </FocusTrap>
     </AllProviders>
   )
