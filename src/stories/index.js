@@ -5,29 +5,39 @@ import HBox from '../components/HBox'
 import { style } from 'typestyle'
 import { padding } from 'csstips'
 import { bg } from '../styles'
-import { gray } from '../colors'
+import { blackA } from '../colors'
 import { mapIndexed } from '../ramda-exports'
 import VBox from '../components/VBox'
 import { hsla } from 'csx'
 
-const borderColor = `${hsla(80, 0.6, 0.6, 0.8).toString()}`
-
-const DemoBlock = props => (
-  <div
-    className={style(padding('1rem'), bg(borderColor), {
-      // border: `3px solid ${borderColor}`,
-    })}
-    {...props}
-  />
-)
+const DemoBlock = props => {
+  const color = `${hsla(
+    Math.floor((255 / 3) * props.idx),
+    0.7,
+    0.7,
+    1,
+  ).toString()}`
+  return (
+    <div
+      className={style(padding('1rem'), bg(color), {
+        // border: `3px solid ${color}`,
+      })}
+      {...props}
+    />
+  )
+}
 
 const demoContent = mapIndexed(
-  (text, idx) => <DemoBlock key={idx}>{text}</DemoBlock>,
-  ['foo', 'bar'],
+  (text, idx) => (
+    <DemoBlock idx={idx} key={idx}>
+      {text}
+    </DemoBlock>
+  ),
+  ['foo', 'bar', 'bag'],
 )
 
 const DemoContainer = props => (
-  <div className={style(bg(gray(0.1)))} {...props} />
+  <div className={style(bg(blackA(0.3)))} {...props} />
 )
 
 storiesOf('HBox', module)
