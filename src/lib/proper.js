@@ -1,5 +1,4 @@
 import {
-  compose as proppy,
   compose as proper,
   create,
   map as mapProps,
@@ -7,6 +6,7 @@ import {
 } from 'proppy'
 import * as React from 'react'
 import { attach } from 'proppy-react'
+import { compose } from 'ramda'
 
 export { proper, mapProps, initialProps }
 
@@ -32,5 +32,7 @@ export const attachContext = factory => {
   }
 }
 
-export const properContext = (...factories) =>
-  attachContext(proppy(...factories))
+export const properContext = compose(
+  attachContext,
+  proper,
+)
