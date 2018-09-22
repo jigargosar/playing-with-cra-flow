@@ -2,10 +2,20 @@ import React from 'react'
 
 import { storiesOf } from '@storybook/react'
 import HBox from '../components/HBox'
+import { style } from 'typestyle'
+import { padding } from 'csstips'
+import { map } from 'ramda'
+import { bg } from '../styles'
+import { gray } from '../colors'
+
+const renderItem = text => (
+  <div className={style(padding('1rem'), { border: '1px solid black' })}>
+    {text}
+  </div>
+)
 
 storiesOf('HBox', module).add('basic', () => (
-  <HBox spacing={'1rem'}>
-    <div>foo</div>
-    <div>bar</div>
-  </HBox>
+  <div className={style(bg(gray(0.1)))}>
+    <HBox spacing={'1rem'}>{map(renderItem, ['foo', 'bar'])}</HBox>
+  </div>
 ))
