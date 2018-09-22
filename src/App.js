@@ -10,7 +10,7 @@ import {
 import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './folktale-helpers'
-import { absolute, bg, fg, hs, relative, sizeViewport100 } from './styles'
+import { absolute, bg, fg, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
 import { nest } from 'recompose'
 import { TaskList } from './components/TaskList'
@@ -32,6 +32,7 @@ import {
 } from './contexts/TaskCollection'
 import VBox from './lib/layout-components/VBox'
 import HBox from './lib/layout-components/HBox'
+import { HBox16 } from './lib/layout-components/Box'
 
 function FilteredTaskList({ pred, ...otherProps }) {
   return (
@@ -121,11 +122,10 @@ const App = () => {
         }}
       >
         <VBox className={style(sizeViewport100, bg(gray(0.05)))}>
-          <HBox
+          <HBox16
             className={style(
               bg(primaryColor),
               fg(white),
-              hs('1rem'),
               center,
               padding('0.5rem'),
             )}
@@ -146,7 +146,7 @@ const App = () => {
                 }
               />
             </div>
-          </HBox>
+          </HBox16>
           <HBox className={style(flex, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>
               <Sidebar />
