@@ -4,6 +4,8 @@ import {
   map as mapProps,
   withProps as initialProps,
 } from 'proppy'
+import * as React from 'react'
+import { attach } from 'proppy-react'
 
 export { proper, mapProps, initialProps }
 
@@ -17,4 +19,14 @@ export const withProps = mapperFn => {
       this.set(mapperFn(parentProps, this.providers))
     },
   })
+}
+
+export const attachContext = factory => {
+  const { Provider, Consumer } = React.createContext()
+  return {
+    Consumer,
+    Provider: attach(factory)(({ children, ...otherProps }) => (
+      <Provider value={otherProps} children={children} />
+    )),
+  }
 }

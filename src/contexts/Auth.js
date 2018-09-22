@@ -1,8 +1,8 @@
 import { getOrCreateFirebaseApp, signIn, signOut } from '../lib/fire'
 import { compose as proppy, emit, withHandlers, withProps } from 'proppy'
-import { attach } from 'proppy-react'
 import * as React from 'react'
 import { pathOr } from 'ramda'
+import { attachContext } from '../lib/proper'
 
 export const AuthFactory = proppy(
   withProps({
@@ -27,16 +27,6 @@ export const AuthFactory = proppy(
     match: ({ status, user }) => matcher => matcher[status](user),
   }),
 )
-
-export const attachContext = factory => {
-  const { Provider, Consumer } = React.createContext()
-  return {
-    Consumer,
-    Provider: attach(factory)(({ children, ...otherProps }) => (
-      <Provider value={otherProps} children={children} />
-    )),
-  }
-}
 
 export const { Provider: AuthProvider, Consumer: AuthConsumer } = attachContext(
   AuthFactory,
