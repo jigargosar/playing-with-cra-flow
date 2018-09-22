@@ -150,8 +150,8 @@ const App = () => {
             <div className={style(absolute, { right: 0, bottom: 0 })}>
               <div
                 className={style(relative, {
-                  top: '-1rem',
-                  left: '-1rem',
+                  top: -16,
+                  left: -16,
                 })}
               >
                 <TaskCollectionConsumer
