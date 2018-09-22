@@ -60,7 +60,7 @@ storiesOf('Layout/HBox', module)
   ))
   .add('with spacing', () => (
     <DemoContainer>
-      <HBox spacing={1}>{demoContent}</HBox>
+      <HBox spacing={16}>{demoContent}</HBox>
     </DemoContainer>
   ))
 
@@ -73,6 +73,6 @@ storiesOf('Layout/VBox', module)
   ))
   .add('with spacing', () => (
     <DemoContainer>
-      <VBox spacing={1}>{demoContent}</VBox>
+      <VBox spacing={16}>{demoContent}</VBox>
     </DemoContainer>
   ))
