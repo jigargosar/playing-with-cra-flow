@@ -8,8 +8,8 @@ import {
 import { ColorHelper, hsla, viewHeight, viewWidth } from 'csx'
 import { BoxUnit, fillParent, fontWeightNormal, height, width } from 'csstips'
 import { mergeAll } from 'ramda'
-import { isString } from './ramda-exports'
 import { extend } from 'typestyle/'
+import { isString } from './ramda-exports'
 
 export const relative = { position: 'relative' }
 export const absolute = { position: 'absolute' }
