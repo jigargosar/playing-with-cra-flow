@@ -28,12 +28,16 @@ export const AuthFactory = proppy(
   }),
 )
 
-const { Provider, Consumer } = React.createContext()
+export const attachContext = factory => {
+  const { Provider, Consumer } = React.createContext()
+  return {
+    Consumer,
+    Provider: attach(factory)(({ children, ...otherProps }) => (
+      <Provider value={otherProps} children={children} />
+    )),
+  }
+}
 
-export const AuthProvider = attach(AuthFactory)(
-  ({ children, ...otherProps }) => (
-    <Provider value={otherProps} children={children} />
-  ),
+export const { Provider: AuthProvider, Consumer: AuthConsumer } = attachContext(
+  AuthFactory,
 )
-
-export const AuthConsumer = Consumer
