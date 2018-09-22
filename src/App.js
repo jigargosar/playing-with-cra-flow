@@ -143,7 +143,7 @@ const App = () => {
             </div>
           </HBox16>
           <HBox center={false} className={style(flex, someChildWillScroll)}>
-            <div className={style(scroll, { minWidth: 225 })}>
+            <div className={style(scroll, { minWidth: 200 })}>
               <Sidebar />
             </div>
             <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
