@@ -1,4 +1,5 @@
 import {
+  compose as proppy,
   compose as proper,
   create,
   map as mapProps,
@@ -30,3 +31,6 @@ export const attachContext = factory => {
     )),
   }
 }
+
+export const properContext = (...factories) =>
+  attachContext(proppy(...factories))
