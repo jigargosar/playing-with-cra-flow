@@ -146,7 +146,7 @@ const App = () => {
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
             <AuthConsumer
-              children={({ user }) => user && <div>user.displayName</div>}
+              children={({ user }) => user && <div>{user.displayName}</div>}
             />
             <div>
               <AuthConsumer
