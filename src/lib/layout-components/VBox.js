@@ -4,9 +4,9 @@ import { rem } from 'csx'
 import { createComponentFromMapper } from './createComponentFromMapper'
 
 export default createComponentFromMapper(
-  ({ className, spacing = 0, ...otherProps }) => ({
+  ({ className, spacing = null, ...otherProps }) => ({
     className: classes(
-      style(vertical, verticallySpaced(rem(spacing))),
+      style(vertical, spacing && verticallySpaced(rem(spacing))),
       className,
     ),
     ...otherProps,
