@@ -7,10 +7,6 @@ import { padding } from 'csstips'
 import { bg } from '../styles'
 import { gray } from '../colors'
 import { mapIndexed } from '../ramda-exports'
-import { map } from 'ramda'
-import { rem } from 'csx'
-
-const spacing = map(rem)({ none: 0, sm: 0.25, md: 0.5, lg: 1 })
 
 const DemoBlock = props => (
   <div
@@ -37,6 +33,6 @@ storiesOf('HBox', module)
   ))
   .add('with spacing', () => (
     <DemoContainer>
-      <HBox spacing={spacing.lg}>{demoContent}</HBox>
+      <HBox spacing={1}>{demoContent}</HBox>
     </DemoContainer>
   ))
