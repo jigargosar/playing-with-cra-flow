@@ -1,11 +1,5 @@
 import { getOrCreateFirebaseApp, signIn, signOut } from '../lib/fire'
-import {
-  compose as proppy,
-  emit,
-  onChange,
-  withHandlers,
-  withProps,
-} from 'proppy'
+import { compose as proppy, emit, withHandlers, withProps } from 'proppy'
 import { attach } from 'proppy-react'
 import * as React from 'react'
 import { pathOr } from 'ramda'
@@ -29,7 +23,6 @@ export const AuthFactory = proppy(
         })
       }),
   ),
-  onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
   withHandlers({
     match: ({ status, user }) => matcher => matcher[status](user),
   }),
