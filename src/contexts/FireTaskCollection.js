@@ -38,9 +38,7 @@ export const TaskCollection = proppy(
         }
       : { cref }
   }),
-  willDestroy(({ unsub }) => {
-    unsub()
-  }),
+  willDestroy(({ unsub }) => unsub()),
   withHandlers({
     updateTask: ({ cref }) => (changes, task) => {
       cref.doc(task.id).update(pickUserChanges(changes))
