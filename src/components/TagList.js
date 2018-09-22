@@ -10,10 +10,9 @@ import { rem } from 'csx'
 export function TagList() {
   const titleClass = style({
     fontSize: rem(1.5),
-    marginBottom: rem(1),
   })
   return (
-    <div>
+    <VBox16>
       <div className={titleClass}>Tags</div>
       <CollectionConsumer>
         {({ tags }) => (
@@ -24,6 +23,6 @@ export function TagList() {
           </VBox16>
         )}
       </CollectionConsumer>
-    </div>
+    </VBox16>
   )
 }
