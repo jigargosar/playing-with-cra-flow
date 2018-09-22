@@ -149,7 +149,7 @@ const App = () => {
             <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
             <div className={style(absolute, { right: 0, bottom: 0 })}>
               <div
-                className={style(/*brPill, shadow, */ relative, {
+                className={style(relative, {
                   top: '-1rem',
                   left: '-1rem',
                 })}
