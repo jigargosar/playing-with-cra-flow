@@ -1,10 +1,10 @@
 import { getOrCreateFirebaseApp, signIn, signOut } from '../lib/fire'
-import { emit, withHandlers, withProps } from 'proppy'
+import { emit, withHandlers } from 'proppy'
 import { pathOr } from 'ramda'
-import { properContext } from '../lib/proper'
+import { initialProps, properContext } from '../lib/proper'
 
 export const { Provider: AuthProvider, Consumer: AuthConsumer } = properContext(
-  withProps({
+  initialProps({
     status: 'unknown',
     user: null,
     uid: null,
