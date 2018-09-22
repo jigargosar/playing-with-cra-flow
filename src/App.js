@@ -16,7 +16,7 @@ import { fromRenderProps, nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
-import { allPass, compose, identity, T } from 'ramda'
+import { allPass, identity, T } from 'ramda'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
 import { Button, Icon, Intent } from '@blueprintjs/core'
@@ -130,26 +130,19 @@ function renderAddFAB() {
   )
 }
 
-export const AppHeader = compose(fromRenderProps(AuthConsumer, identity))(
-  function AppHeader(props) {
-    console.log(`props`, props)
+export const AppHeader = fromRenderProps(AuthConsumer, identity)(
+  function AppHeader({ user, match, signIn, signOut }) {
     return (
-      <HBox16 className={style(bg(primaryColor), fg(white), padding('0.5rem'))}>
+      <HBox16 className={style(bg(primaryColor), fg(white), padding(8))}>
         <div className={style(fz.lg)}>Da Flow</div>
         <div className={style(flex)} />
-        <AuthConsumer
-          children={({ user }) => user && <div>{user.displayName}</div>}
-        />
+        {user && <div>{user.displayName}</div>}
         <div>
-          <AuthConsumer
-            children={({ match, signIn, signOut }) =>
-              match({
-                signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
-                signedOut: () => <Button onClick={signIn}>Sign In</Button>,
-                unknown: () => <div>'Loading...'</div>,
-              })
-            }
-          />
+          {match({
+            signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
+            signedOut: () => <Button onClick={signIn}>Sign In</Button>,
+            unknown: () => <div>'Loading...'</div>,
+          })}
         </div>
       </HBox16>
     )
