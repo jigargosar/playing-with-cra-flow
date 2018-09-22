@@ -21,6 +21,5 @@ const mapProps = ({ className, spacing = 0, ...otherProps }) => ({
   ),
   ...otherProps,
 })
-export default props => {
-  return <div {...mapProps(props)} />
-}
+
+export default ({ is: Comp = 'div', props }) => <Comp {...mapProps(props)} />
