@@ -11,7 +11,6 @@ import {
   fillParent,
   fontWeightNormal,
   height,
-  horizontal,
   horizontallySpaced,
   vertical,
   verticallySpaced,
@@ -254,5 +253,4 @@ export const hasHiddenChildren = {
 }
 export const hs = horizontallySpaced
 export const vs = verticallySpaced
-export const dfh = horizontal
 export const dfv = vertical
