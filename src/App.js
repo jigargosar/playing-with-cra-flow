@@ -25,7 +25,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from './contexts/Theme'
 import { style } from 'typestyle/'
 import { fz, primaryColor } from './theme'
-import { Auth } from './contexts/Auth'
+import { AuthConsumer, AuthProvider } from './contexts/Auth'
 import {
   TaskCollectionConsumer,
   TaskCollectionProvider,
@@ -110,6 +110,7 @@ const AllProviders = nest(
   CollectionProvider,
   FocusTrapStackProvider,
   EditTaskProvider,
+  AuthProvider,
 )
 
 function renderAddFAB() {
@@ -145,10 +146,10 @@ const App = () => {
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
             <div>
-              <Auth children={({ user }) => user && user.displayName} />
+              <AuthProvider children={({ user }) => user && user.displayName} />
             </div>
             <div>
-              <Auth
+              <AuthConsumer
                 children={({ match, signIn, signOut }) =>
                   match({
                     signedIn: () => <Button onClick={signOut}>Sign Out</Button>,

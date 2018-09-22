@@ -7,7 +7,7 @@ import {
   withProps,
 } from 'proppy'
 import { attach } from 'proppy-react'
-import { toRenderProps } from 'recompose'
+import * as React from 'react'
 
 export const AuthFactory = proppy(
   withProps({
@@ -30,4 +30,12 @@ export const AuthFactory = proppy(
   }),
 )
 
-export const Auth = toRenderProps(attach(AuthFactory))
+const { Provider, Consumer } = React.createContext()
+
+export const AuthProvider = attach(AuthFactory)(
+  ({ children, ...otherProps }) => (
+    <Provider value={otherProps} children={children} />
+  ),
+)
+
+export const AuthConsumer = Consumer
