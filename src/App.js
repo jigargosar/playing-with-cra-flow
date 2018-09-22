@@ -12,11 +12,11 @@ import { rem } from 'csx/lib'
 import { findById } from './folktale-helpers'
 import { absolute, bg, fg, relative, sizeViewport100 } from './styles'
 import { Redirect } from '@reach/router'
-import { nest } from 'recompose'
+import { fromRenderProps, nest } from 'recompose'
 import { TaskList } from './components/TaskList'
 import { ErrorMessage } from './components/ErrorMessage'
 import { gray, white } from './colors'
-import { allPass, T } from 'ramda'
+import { allPass, compose, identity, T } from 'ramda'
 import { FocusTrap, FocusTrapStackProvider } from './components/FocusTrap'
 import { EditTaskProvider } from './contexts/EditTask'
 import { Button, Icon, Intent } from '@blueprintjs/core'
@@ -130,29 +130,31 @@ function renderAddFAB() {
   )
 }
 
-export const AppHeader = function AppHeader() {
-  return (
-    <HBox16 className={style(bg(primaryColor), fg(white), padding('0.5rem'))}>
-      <div className={style(fz.lg)}>Da Flow</div>
-      <div className={style(flex)} />
-      <AuthConsumer
-        children={({ user }) => user && <div>{user.displayName}</div>}
-      />
-      <div>
+export const AppHeader = compose(fromRenderProps(AuthConsumer, identity))(
+  function AppHeader(props) {
+    console.log(`props`, props)
+    return (
+      <HBox16 className={style(bg(primaryColor), fg(white), padding('0.5rem'))}>
+        <div className={style(fz.lg)}>Da Flow</div>
+        <div className={style(flex)} />
         <AuthConsumer
-          children={({ match, signIn, signOut }) =>
-            match({
-              signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
-              signedOut: () => <Button onClick={signIn}>Sign In</Button>,
-              unknown: () => <div>'Loading...'</div>,
-            })
-          }
+          children={({ user }) => user && <div>{user.displayName}</div>}
         />
-      </div>
-    </HBox16>
-  )
-}
-
+        <div>
+          <AuthConsumer
+            children={({ match, signIn, signOut }) =>
+              match({
+                signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
+                signedOut: () => <Button onClick={signIn}>Sign In</Button>,
+                unknown: () => <div>'Loading...'</div>,
+              })
+            }
+          />
+        </div>
+      </HBox16>
+    )
+  },
+)
 const App = () => {
   return (
     <AllProviders>

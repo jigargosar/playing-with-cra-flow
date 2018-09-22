@@ -8,6 +8,7 @@ import {
 } from 'proppy'
 import { attach } from 'proppy-react'
 import * as React from 'react'
+import { pathOr } from 'ramda'
 
 export const AuthFactory = proppy(
   withProps({
@@ -21,7 +22,11 @@ export const AuthFactory = proppy(
     getOrCreateFirebaseApp()
       .auth()
       .onAuthStateChanged(user => {
-        cb({ status: user ? 'signedIn' : 'signedOut', user })
+        cb({
+          status: user ? 'signedIn' : 'signedOut',
+          user,
+          uid: pathOr(null, ['uid'])(user),
+        })
       }),
   ),
   onChange('user', ({ user }) => ({ uid: user ? user.uid : null })),
