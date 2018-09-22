@@ -97,6 +97,7 @@
   },
   "devDependencies": {
     "@firebase/app-types": "^0.3.2",
+    "@mdx-js/tag": "^0.15.0",
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/addon-links": "^3.4.10",
     "@storybook/addons": "^3.4.10",
@@ -112,6 +113,7 @@
     "mdx-go": "^1.1.10",
     "nodemon": "^1.18.4",
     "prettier": "^1.14.2",
+    "react-live": "^1.11.0",
     "react-scripts": "1.1.5",
     "testcafe": "^0.22.0"
   }
