@@ -1,13 +1,11 @@
 import { style } from 'typestyle/'
 import { rem } from 'csx/'
-import { verticallySpaced } from 'csstips/'
 import { InlineEditTask, TaskDisplayItem } from './Task'
 import * as React from 'react'
 import { relative } from '../styles'
 import pose, { PoseGroup } from 'react-pose'
 import { EditTaskConsumer } from '../contexts/EditTask'
-
-const tasksContainerClass = style(verticallySpaced(rem(1.5)), relative)
+import { VBox16 } from '../lib/layout-components/Box'
 
 const PoseDiv = pose.div({
   enter: {
@@ -32,7 +30,7 @@ export function TaskList({ title, tasks, ...otherProps }) {
       </PoseGroup>
       <EditTaskConsumer
         children={({ isEditingTask, getTaskKey, startEditingTask }) => (
-          <div className={tasksContainerClass}>
+          <VBox16 className={style(relative)}>
             <PoseGroup>
               {tasks.map(task => (
                 <PoseDiv key={getTaskKey(task)}>
@@ -48,7 +46,7 @@ export function TaskList({ title, tasks, ...otherProps }) {
                 </PoseDiv>
               ))}
             </PoseGroup>
-          </div>
+          </VBox16>
         )}
       />
     </div>
