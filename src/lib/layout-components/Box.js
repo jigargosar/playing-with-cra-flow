@@ -1,5 +1,6 @@
 import { classes, style } from 'typestyle'
 import {
+  center,
   horizontal,
   horizontallySpaced,
   vertical,
@@ -9,10 +10,10 @@ import { createComponentFromMapper } from './createComponentFromMapper'
 import { defaultProps } from 'recompose'
 
 export const HBox = createComponentFromMapper(
-  ({ className, spacing = null, ...otherProps }) => ({
+  ({ className, spacing = null, center: c = true, ...otherProps }) => ({
     className: classes(
       className,
-      style(horizontal, spacing && horizontallySpaced(spacing)),
+      style(horizontal, spacing && horizontallySpaced(spacing), c && center),
     ),
     ...otherProps,
   }),

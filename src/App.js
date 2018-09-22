@@ -7,7 +7,7 @@ import {
   CollectionConsumer,
   CollectionProvider,
 } from './components/CollectionContext'
-import { center, flex, padding, scroll, someChildWillScroll } from 'csstips/'
+import { flex, padding, scroll, someChildWillScroll } from 'csstips/'
 import { rem } from 'csx/lib'
 import { findById } from './folktale-helpers'
 import { absolute, bg, fg, relative, sizeViewport100 } from './styles'
@@ -123,12 +123,7 @@ const App = () => {
       >
         <VBox className={style(sizeViewport100, bg(gray(0.05)))}>
           <HBox16
-            className={style(
-              bg(primaryColor),
-              fg(white),
-              center,
-              padding('0.5rem'),
-            )}
+            className={style(bg(primaryColor), fg(white), padding('0.5rem'))}
           >
             <div className={style(fz.lg)}>Da Flow</div>
             <div className={style(flex)} />
@@ -147,7 +142,7 @@ const App = () => {
               />
             </div>
           </HBox16>
-          <HBox className={style(flex, someChildWillScroll)}>
+          <HBox center={false} className={style(flex, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 225 })}>
               <Sidebar />
             </div>
