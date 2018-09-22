@@ -8,12 +8,15 @@ import { block } from 'csstips'
 import { rem } from 'csx'
 
 export function TagList() {
-  const titleClass = style({
-    fontSize: rem(1.5),
-  })
   return (
     <VBox16>
-      <div className={titleClass}>Tags</div>
+      <div
+        className={style({
+          fontSize: rem(1.5),
+        })}
+      >
+        Tags
+      </div>
       <CollectionConsumer>
         {({ tags }) => (
           <VBox16>
