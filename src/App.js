@@ -103,16 +103,6 @@ function MainRoutes() {
   )
 }
 
-const AllProviders = nest(
-  CssBaseline,
-  ThemeProvider,
-  TaskCollectionProvider,
-  CollectionProvider,
-  FocusTrapStackProvider,
-  EditTaskProvider,
-  AuthProvider,
-)
-
 function AddFAB() {
   return (
     <div className={style(absolute, { right: 0, bottom: 0 })}>
@@ -151,6 +141,16 @@ export const AppHeader = fromRenderProps(AuthConsumer, identity)(
   },
 )
 const App = () => {
+  const AllProviders = nest(
+    CssBaseline,
+    ThemeProvider,
+    TaskCollectionProvider,
+    CollectionProvider,
+    FocusTrapStackProvider,
+    EditTaskProvider,
+    AuthProvider,
+  )
+
   return (
     <AllProviders>
       <FocusTrap
