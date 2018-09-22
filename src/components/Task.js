@@ -3,7 +3,7 @@ import * as React from 'react'
 import { LinkToCategory, LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
 import { content, flex } from '../typestyle-exports'
-import { dfh, fg, hs, vs } from '../styles'
+import { dfh, fg, hs } from '../styles'
 import { compose, intersperse, map } from 'ramda'
 import { blackA } from '../colors'
 import { categories } from '../models/Category'
@@ -18,7 +18,7 @@ import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
 import { fz, lhCopy } from '../theme'
 import { TaskCollectionConsumer } from '../contexts/TaskCollection'
-import { HBox8 } from '../lib/layout-components/Box'
+import { HBox8, VBox16 } from '../lib/layout-components/Box'
 
 const TaskForm = adopt(
   {
@@ -57,7 +57,7 @@ export function InlineEditTask({ task, className }) {
       <TaskForm
         task={task}
         children={({ input, save, cancel }) => (
-          <div className={style(vs('1rem'))}>
+          <VBox16>
             <HBox8>
               <InputGroup className={style(flex1)} {...input('title').bind} />
               <HTMLSelect {...input('category').bind} options={categories} />
@@ -66,7 +66,7 @@ export function InlineEditTask({ task, className }) {
               <Button onClick={save}>Save</Button>
               <Button onClick={cancel}>Cancel</Button>
             </HBox8>
-          </div>
+          </VBox16>
         )}
       />
     </FocusTrap>
