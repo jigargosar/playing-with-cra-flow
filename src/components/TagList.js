@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { LinkToTag } from './Links'
 import { CollectionConsumer } from './CollectionContext'
-import { block, rem, style, verticallySpaced } from '../typestyle-exports'
+import { block, rem, style } from '../typestyle-exports'
 import { ttu } from '../styles'
-
-const listClass = style(verticallySpaced(rem(1)))
-const linkClass = style(ttu, block)
+import { VBox16 } from '../lib/layout-components/Box'
+import { style } from 'typestyle'
+import { block } from 'csstips'
 
 export function TagList() {
   const titleClass = style({
@@ -17,11 +17,11 @@ export function TagList() {
       <div className={titleClass}>Tags</div>
       <CollectionConsumer>
         {({ tags }) => (
-          <div className={listClass}>
+          <VBox16>
             {tags.map(tag => (
-              <LinkToTag key={tag.id} className={linkClass} tag={tag} />
+              <LinkToTag key={tag.id} className={style(ttu, block)} tag={tag} />
             ))}
-          </div>
+          </VBox16>
         )}
       </CollectionConsumer>
     </div>
