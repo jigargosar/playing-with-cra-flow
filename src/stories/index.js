@@ -37,6 +37,6 @@ storiesOf('HBox', module)
   ))
   .add('with spacing', () => (
     <DemoContainer>
-      <HBox spacing={spacing.sm}>{demoContent}</HBox>
+      <HBox spacing={spacing.lg}>{demoContent}</HBox>
     </DemoContainer>
   ))
