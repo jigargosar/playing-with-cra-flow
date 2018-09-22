@@ -18,6 +18,7 @@ import { Form } from 'react-powerplug'
 import { EditTaskConsumer } from '../contexts/EditTask'
 import { fz, lhCopy } from '../theme'
 import { TaskCollectionConsumer } from '../contexts/TaskCollection'
+import { HBox8 } from '../lib/layout-components/Box'
 
 const TaskForm = adopt(
   {
@@ -57,14 +58,14 @@ export function InlineEditTask({ task, className }) {
         task={task}
         children={({ input, save, cancel }) => (
           <div className={style(vs('1rem'))}>
-            <div className={style(dfh, hs('0.3rem'))}>
+            <HBox8>
               <InputGroup className={style(flex1)} {...input('title').bind} />
               <HTMLSelect {...input('category').bind} options={categories} />
-            </div>
-            <div className={style(dfh, hs('0.3rem'))}>
+            </HBox8>
+            <HBox8>
               <Button onClick={save}>Save</Button>
               <Button onClick={cancel}>Cancel</Button>
-            </div>
+            </HBox8>
           </div>
         )}
       />
