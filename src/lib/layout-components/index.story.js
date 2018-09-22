@@ -51,7 +51,7 @@ const DemoContainer = props => (
   />
 )
 
-storiesOf('HBox', module)
+storiesOf('Layout Components|HBox', module)
   //
   .add('without spacing', () => (
     <DemoContainer>
@@ -64,7 +64,7 @@ storiesOf('HBox', module)
     </DemoContainer>
   ))
 
-storiesOf('VBox', module)
+storiesOf('Layout Components|VBox', module)
   //
   .add('without spacing', () => (
     <DemoContainer>
