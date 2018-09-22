@@ -13,6 +13,7 @@ export const AuthFactory = proppy(
   withProps({
     status: 'unknown',
     user: null,
+    uid: null,
     signIn,
     signOut,
   }),
