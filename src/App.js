@@ -144,11 +144,11 @@ const App = () => {
   const AllProviders = nest(
     CssBaseline,
     ThemeProvider,
+    AuthProvider,
     TaskCollectionProvider,
     CollectionProvider,
     FocusTrapStackProvider,
     EditTaskProvider,
-    AuthProvider,
   )
 
   return (
