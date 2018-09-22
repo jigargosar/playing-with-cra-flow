@@ -16,8 +16,15 @@ const renderItem = text => (
 
 const demoContent = map(renderItem, ['foo', 'bar'])
 
-storiesOf('HBox', module).add('basic', () => (
-  <div className={style(bg(gray(0.1)))}>
-    <HBox spacing={'1rem'}>{demoContent}</HBox>
-  </div>
-))
+storiesOf('HBox', module)
+  //
+  .add('without spacing', () => (
+    <div className={style(bg(gray(0.1)))}>
+      <HBox>{demoContent}</HBox>
+    </div>
+  ))
+  .add('with spacing', () => (
+    <div className={style(bg(gray(0.1)))}>
+      <HBox spacing={'1rem'}>{demoContent}</HBox>
+    </div>
+  ))
