@@ -130,6 +130,29 @@ function renderAddFAB() {
   )
 }
 
+export const AppHeader = function AppHeader() {
+  return (
+    <HBox16 className={style(bg(primaryColor), fg(white), padding('0.5rem'))}>
+      <div className={style(fz.lg)}>Da Flow</div>
+      <div className={style(flex)} />
+      <AuthConsumer
+        children={({ user }) => user && <div>{user.displayName}</div>}
+      />
+      <div>
+        <AuthConsumer
+          children={({ match, signIn, signOut }) =>
+            match({
+              signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
+              signedOut: () => <Button onClick={signIn}>Sign In</Button>,
+              unknown: () => <div>'Loading...'</div>,
+            })
+          }
+        />
+      </div>
+    </HBox16>
+  )
+}
+
 const App = () => {
   return (
     <AllProviders>
@@ -140,26 +163,9 @@ const App = () => {
         }}
       >
         <VBox className={style(sizeViewport100, bg(gray(0.05)))}>
-          <HBox16
-            className={style(bg(primaryColor), fg(white), padding('0.5rem'))}
-          >
-            <div className={style(fz.lg)}>Da Flow</div>
-            <div className={style(flex)} />
-            <AuthConsumer
-              children={({ user }) => user && <div>{user.displayName}</div>}
-            />
-            <div>
-              <AuthConsumer
-                children={({ match, signIn, signOut }) =>
-                  match({
-                    signedIn: () => <Button onClick={signOut}>Sign Out</Button>,
-                    signedOut: () => <Button onClick={signIn}>Sign In</Button>,
-                    unknown: () => <div>'Loading...'</div>,
-                  })
-                }
-              />
-            </div>
-          </HBox16>
+          <div>
+            <AppHeader />
+          </div>
           <HBox center={false} className={style(flex, someChildWillScroll)}>
             <div className={style(scroll, { minWidth: 200 })}>
               <Sidebar />
