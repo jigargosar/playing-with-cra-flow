@@ -148,12 +148,7 @@ const App = () => {
             </div>
             <div className={style(flex, scroll)}>{renderMainRoutes()}</div>
             <div className={style(absolute, { right: 0, bottom: 0 })}>
-              <div
-                className={style(relative, {
-                  top: -16,
-                  left: -16,
-                })}
-              >
+              <div className={style(relative, { top: -16, left: -16 })}>
                 <TaskCollectionConsumer
                   children={tasks => (
                     <Button
