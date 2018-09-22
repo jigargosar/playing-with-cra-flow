@@ -7,6 +7,9 @@ import { padding } from 'csstips'
 import { bg } from '../styles'
 import { gray } from '../colors'
 import { mapIndexed } from '../ramda-exports'
+import { modularScale } from 'polished'
+
+console.log(`modularScale`, modularScale(1.5))
 
 const DemoBlock = props => (
   <div
