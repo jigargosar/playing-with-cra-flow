@@ -15,10 +15,8 @@ import { AuthConsumer } from './Auth'
 import { getOrCreateFirebaseApp } from '../lib/fire'
 import { mapProps, proper } from '../lib/proper'
 
-export const pickUserChanges = pick(['title', 'category', 'done'])
-
-export const TaskCollection = proppy(
-  withProps({ allTasks: [], unsub: noop, cref: null }),
+export const TaskQuery = proper(
+  withProps({ tasks: [], unsub: noop }),
   onChange('uid', ({ uid, unsub }, providers, cb) => {
     unsub()
     const cref = uid
@@ -29,15 +27,32 @@ export const TaskCollection = proppy(
 
     return cref
       ? {
-          cref,
-          unsub: cref.onSnapshot(sn => {
+          unsub: cref.where('done', '==', false).onSnapshot(sn => {
             console.debug(`task sn`, sn)
             const allTasks = sn.docs.map(ds => ds.data())
             console.log(`allTasks.length`, allTasks.length)
             cb({ allTasks })
           }),
         }
-      : { cref }
+      : {}
+  }),
+  willDestroy(({ unsub }) => unsub()),
+)
+
+export const pickUserChanges = pick(['title', 'category', 'done'])
+
+export const TaskCollection = proppy(
+  TaskQuery,
+  withProps({ allTasks: [], unsub: noop, cref: null }),
+  onChange('uid', ({ uid, unsub }) => {
+    unsub()
+    return uid
+      ? {
+          cref: getOrCreateFirebaseApp()
+            .firestore()
+            .collection(`users/${uid}/tasks`),
+        }
+      : null
   }),
   willDestroy(({ unsub }) => unsub()),
   withHandlers({
