@@ -13,6 +13,7 @@ import { noop } from '../ramda-exports'
 import { fromRenderProps } from 'recompose'
 import { AuthConsumer } from './Auth'
 import { getOrCreateFirebaseApp } from '../lib/fire'
+import { mapProps, proper } from '../lib/proper'
 
 export const pickUserChanges = pick(['title', 'category', 'done'])
 
@@ -59,9 +60,12 @@ const Context = React.createContext()
 
 export const TaskCollectionProvider = compose(
   fromRenderProps(AuthConsumer, identity),
-  attach(TaskCollection),
-)(({ children, ...otherProps }) => (
-  <Context.Provider value={otherProps} children={children} />
-))
+  attach(
+    proper(
+      TaskCollection,
+      mapProps(({ children, ...value }) => ({ children, value })),
+    ),
+  ),
+)(Context.Provider)
 
 export const TaskCollectionConsumer = Context.Consumer
