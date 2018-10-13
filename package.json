@@ -7,15 +7,15 @@
       "./node_modules/babel-register"
     ]
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "prettier": {
     "trailingComma": "all",
     "arrowParens": "avoid",
     "singleQuote": true,
     "semi": false,
     "printWidth": 80
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "husky": {
     "hooks": {
